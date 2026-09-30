@@ -225,8 +225,9 @@ function drawUI(ctx, W, H, t) {
   // hero
   ctx.fillStyle = '#f2f2ee';
   ctx.font = `800 58px ${DISPLAY}`;
-  ctx.fillText('BUILD', 44, 210);
-  ctx.fillText('FAST.', 44, 276);
+  const bg = document.documentElement.lang === 'bg';
+  ctx.fillText(bg ? 'ТВОЯТ' : 'YOUR', 44, 210);
+  ctx.fillText(bg ? 'САЙТ.' : 'WEBSITE.', 44, 276);
   ctx.fillStyle = s + '0.25)';
   rr(ctx, 44, 316, 330, 12, 6); ctx.fill();
   rr(ctx, 44, 340, 250, 12, 6); ctx.fill();

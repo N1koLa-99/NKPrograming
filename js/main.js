@@ -85,7 +85,16 @@ function splitWords(el) {
         const frag = document.createDocumentFragment();
         n.textContent.split(/(\s+)/).forEach((part) => {
           if (!part) return;
-          if (/^\s+$/.test(part)) frag.appendChild(document.createTextNode(' '));
+          // punctuation right after an element (…</em>:) stays glued to its last word, so it can't wrap alone
+          const prev = n.previousSibling;
+          const glue = !frag.childNodes.length && /^[:;,.!?…]+$/.test(part) && prev && prev.nodeType === 1 && prev.querySelector('.word:last-child');
+          if (glue) {
+            const p = document.createElement('span');
+            p.className = 'punct';
+            p.textContent = part;
+            glue.appendChild(p);
+          }
+          else if (/^\s+$/.test(part)) frag.appendChild(document.createTextNode(' '));
           else {
             const w = document.createElement('span');
             w.className = 'word';
@@ -164,7 +173,6 @@ let workRevealed = false;
 function renderCards() {
   const track = $('.work__track');
   const html = PROJECTS.map((p, i) => {
-    const num = String(i + 1).padStart(2, '0');
     const live = !!p.url;
     const tag = live ? 'a' : 'div';
     const attrs = live ? `href="${p.url}" target="_blank" rel="noopener" data-cursor="view"` : '';
@@ -181,7 +189,6 @@ function renderCards() {
             ${live ? `<span class="card__visit mono">${t('work.visit')} ↗</span>` : ''}
           </div>
           <div class="card__meta">
-            <span class="card__num mono">${num}</span>
             <h3 class="card__title">${p.name}</h3>
             <span class="card__go">${live ? '↗' : '·'}</span>
           </div>
@@ -200,7 +207,6 @@ function renderCards() {
           </div>
         </div>
         <div class="card__meta">
-          <span class="card__num mono">+</span>
           <h3 class="card__title">${t('nav.cta')}</h3>
           <span class="card__go">↗</span>
         </div>
@@ -208,8 +214,7 @@ function renderCards() {
     </article>`;
 
   track.innerHTML = html + cta;
-  $('.work__total').textContent = String(PROJECTS.length).padStart(2, '0');
-  $('.work__count').textContent = `(${String(PROJECTS.length).padStart(2, '0')})`;
+  $('.work__total').textContent = String(PROJECTS.length);
 
   if (!workRevealed && !reduce) gsap.set($$('.card', track), { opacity: 0, y: 120, rotate: 2 });
   bindTilt();
@@ -251,7 +256,7 @@ function buildAbout() {
 }
 
 /* ---------------- testimonials ---------------- */
-const pad2 = (n) => String(n).padStart(2, '0');
+const pad2 = (n) => String(n);
 function renderTesti() {
   const track = $('.testi__track');
   track.innerHTML = TESTIMONIALS.map((x, i) => {
@@ -596,7 +601,7 @@ function runLoader() {
     const loader = $('.loader');
     const heroBrand = $('.hero__brand'), heroLine = $('.hero__brand-line');
     const H = window.innerHeight;
-    const D = reduce ? 0.8 : 2.4;
+    const D = reduce ? 0.8 : 1.8;
 
     // clone the hero wordmark → loader ends pixel-exact where the hero begins
     const r = heroLine.getBoundingClientRect();
@@ -767,9 +772,9 @@ function heroMobileTarget() {
   const bottom = $('.hero__brand').getBoundingClientRect().top + window.scrollY + 16;
   const gap = bottom - top;
   if (gap < H * 0.2) return { ...BLOB.hero.m, opacity: 0.2 };
-  const cy = top + gap / 2;
+  const cy = top + gap * 0.58; // a touch below the middle of the free space
   const scale = Math.min(0.62, 0.5 * (gap / (H * 0.42)));
-  return { x: 0.12, y: 1 - (2 * cy) / H, scale, opacity: 1, spread: 0.95, rot: 0 };
+  return { x: 0, y: 1 - (2 * cy) / H, scale, opacity: 1, spread: 0.95, rot: 0 };
 }
 
 function initScroll() {
@@ -852,8 +857,13 @@ function initScroll() {
       yPercent: 0, duration: 1.5, ease: 'expo.out', stagger: 0.12,
       scrollTrigger: { trigger: '.contact__title', start: 'top 88%' },
     });
-    gsap.fromTo('.contact__cta', { scale: 0, rotate: -90 }, {
-      scale: 1, rotate: 0, duration: 1.4, ease: 'expo.out',
+    // the form card rises in, then its fields follow one by one
+    gsap.fromTo('.cform', { y: 90, opacity: 0, rotate: 2.5, transformOrigin: '100% 100%' }, {
+      y: 0, opacity: 1, rotate: 0, duration: 1.5, ease: 'expo.out',
+      scrollTrigger: { trigger: '.contact__row', start: 'top 92%' },
+    });
+    gsap.fromTo('.cform__head > *, .cform__f, .cform__foot > *', { y: 28, opacity: 0 }, {
+      y: 0, opacity: 1, duration: 1.1, ease: 'expo.out', stagger: 0.07, delay: 0.25, clearProps: 'transform',
       scrollTrigger: { trigger: '.contact__row', start: 'top 92%' },
     });
   } else {
@@ -879,7 +889,7 @@ function initScroll() {
         onUpdate: (s) => {
           bar.style.transform = `scaleX(${s.progress})`;
           const idx = Math.min(PROJECTS.length, Math.floor(s.progress * PROJECTS.length) + 1);
-          cur.textContent = String(idx).padStart(2, '0');
+          cur.textContent = String(idx);
         },
       },
     });
@@ -899,7 +909,7 @@ function initScroll() {
     const max = track.scrollWidth - track.clientWidth;
     const p = max > 0 ? track.scrollLeft / max : 0;
     $('.work__bar i').style.transform = `scaleX(${p})`;
-    $('.work__cur').textContent = String(Math.min(PROJECTS.length, Math.round(p * (PROJECTS.length - 1)) + 1)).padStart(2, '0');
+    $('.work__cur').textContent = String(Math.min(PROJECTS.length, Math.round(p * (PROJECTS.length - 1)) + 1));
   }, { passive: true });
 
   // phones: floating CTA bar — after the hero, gone once contact is on screen
@@ -985,8 +995,9 @@ function initMarquee() {
 }
 
 /* ---------------- process: a line drawn by scroll ----------------
-   The dots are laid out by CSS (zigzag on desktop, a column on
-   phones); the path is rebuilt from their centres. Its head
+   The dots are laid out by CSS (zigzag on every screen; on phones
+   the line also runs down beside each step before crossing over);
+   the path is rebuilt from their centres. Its head
    follows a fixed line on the screen, so the line always reaches
    the next point exactly when you scroll to it.                 */
 function initProcessPath() {
@@ -995,7 +1006,8 @@ function initProcessPath() {
   const runner = $('.process__runner', wrap);
   const steps = $$('[data-step]', wrap);
   const HEAD = 0.62; // where on the screen the line's head sits
-  let pts = [], cum = [], total = 0;
+  const wide = window.matchMedia('(min-width: 901px)');
+  let pts = [], stepY = [], cum = [], total = 0;
 
   const typeIn = (step) => {
     if (step.dataset.typed) return;
@@ -1013,9 +1025,14 @@ function initProcessPath() {
   const build = () => {
     const box = wrap.getBoundingClientRect();
     svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
-    pts = steps.map((st) => {
+    pts = []; stepY = [];
+    steps.forEach((st) => {
       const r = $('.step__dot', st).getBoundingClientRect();
-      return [r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top];
+      const x = r.left + r.width / 2 - box.left, y = r.top + r.height / 2 - box.top;
+      pts.push([x, y]);
+      stepY.push(y);
+      // phones: the line first runs straight down beside the step's text, then crosses over
+      if (!wide.matches) pts.push([x, Math.max(y + 1, st.getBoundingClientRect().bottom - box.top)]);
     });
     const d = pts.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ');
     base.setAttribute('d', d);
@@ -1048,7 +1065,7 @@ function initProcessPath() {
       runner.style.transform = `translate(${p.x}px, ${p.y}px)`;
     }
     steps.forEach((st, i) => {
-      const on = y >= pts[i][1] - 1;
+      const on = y >= stepY[i] - 1;
       st.classList.toggle('is-on', on);
       if (on) typeIn(st);
     });
@@ -1065,6 +1082,69 @@ function initProcessPath() {
   build();
 }
 
+/* ---------------- contact form ----------------
+   No backend: the form posts to Formspree, which forwards it to the
+   account's inbox. The visitor's email (if given) becomes the reply-to.
+   FORM_ID is the last part of the form's endpoint: formspree.io/f/<id> */
+const FORM_ID = 'mnpnrqpb';
+function initContactForm() {
+  const form = $('.cform');
+  if (!form) return;
+  const msg = $('.cform__msg', form), btn = $('.cform__send', form), done = $('.cform__done', form);
+  const say = (key, cls) => { msg.textContent = key ? t(key) : ''; msg.className = `cform__msg${cls ? ` ${cls}` : ''}`; };
+  const field = (name) => form.elements[name];
+  const mark = (name, bad) => field(name).closest('.cform__f').classList.toggle('is-bad', bad);
+
+  form.addEventListener('input', (e) => { const f = e.target.closest('.cform__f'); if (f) f.classList.remove('is-bad'); });
+  $('.cform__again', form).addEventListener('click', () => {
+    form.classList.remove('is-sent');
+    done.setAttribute('aria-hidden', 'true');
+  });
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (field('_honey').value) return; // bots fill the hidden field
+    const v = Object.fromEntries(['name', 'phone', 'email', 'message'].map((k) => [k, field(k).value.trim()]));
+    // name + message + one way to reach the person are required; whatever is filled in must look right
+    const digits = v.phone.replace(/\D/g, '');
+    const noContact = !v.phone && !v.email;
+    const bad = {
+      name: v.name.length < 2,
+      phone: noContact || (!!v.phone && (!/^\+?[\d\s().-]+$/.test(v.phone) || digits.length < 7 || digits.length > 15)),
+      email: noContact || (!!v.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email)),
+      message: v.message.length < 10,
+    };
+    Object.entries(bad).forEach(([k, b]) => mark(k, b));
+    const first = noContact ? 'contact' : Object.keys(bad).find((k) => bad[k]);
+    if (bad.name) { say('form.e.name', 'is-err'); field('name').focus(); return; }
+    if (first) { say(`form.e.${first}`, 'is-err'); field(first === 'contact' ? 'phone' : first).focus(); return; }
+
+    btn.disabled = true;
+    say('form.hint');
+    try {
+      const body = { name: v.name, phone: v.phone || '—', message: v.message, _subject: `NK Programming — ${v.name}` };
+      if (v.email) body.email = v.email;
+      const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) {
+        const out = await res.json().catch(() => ({}));
+        throw new Error((out.errors && out.errors.map((x) => x.message).join(', ')) || res.status);
+      }
+      form.reset();
+      say('form.hint');
+      form.classList.add('is-sent');
+      done.setAttribute('aria-hidden', 'false');
+    } catch (err) {
+      console.error('contact form:', err);
+      say('form.err', 'is-err');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+}
+
 /* ---------------- boot ---------------- */
 async function boot() {
   // hero title → chars (name is the same in both languages)
@@ -1079,6 +1159,7 @@ async function boot() {
   initScramble();
   initMarquee();
   initTestiNav();
+  initContactForm();
   initProximity();
   initLiveType();
 
