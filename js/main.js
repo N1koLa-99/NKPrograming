@@ -646,6 +646,16 @@ function runLoader() {
       gsap.to(el, { x: `+=${dir * fs * 1.6}`, duration: D + 2, ease: 'none', delay: 1.6 });
     });
 
+    // where the wordmark lands: desktop → down onto the hero wordmark;
+    // phones (that one is hidden there) → up, shrinking into the name in the top bar
+    const landing = () => {
+      const navName = $('.nav__logo .mono');
+      if (getComputedStyle(heroBrand).position !== 'absolute' || !navName) return { y: r.top, duration: 1.2, ease: 'expo.inOut' };
+      const n = navName.getBoundingClientRect();
+      const s = parseFloat(getComputedStyle(navName).fontSize) / fs;
+      return { x: n.left, y: n.top + (n.height - r.height * s) / 2, scale: s, transformOrigin: '0 0', duration: 1.2, ease: 'expo.inOut' };
+    };
+
     const countEl = $('.loader__count'), mods = $('.loader__mods'), task = $('.loader__task b');
     const st = { p: 0 };
     let lastEnc = 0, lastLit = -1;
@@ -687,7 +697,7 @@ function runLoader() {
       .to(rows.filter((x) => x.idx < 0).map((x) => x.el), { yPercent: -180, opacity: 0, duration: 0.8, ease: 'expo.in', stagger: 0.035 }, D + 0.05)
       .to(rows.filter((x) => x.idx > 0).map((x) => x.el), { yPercent: 180, opacity: 0, duration: 0.8, ease: 'expo.in', stagger: 0.035 }, D + 0.05)
       .to(['.loader__top', '.loader__bottom'], { opacity: 0, duration: 0.4, ease: 'power2.in' }, D + 0.05)
-      .to(lb, { y: r.top, duration: 1.2, ease: 'expo.inOut' }, D + 0.55)
+      .to(lb, landing(), D + 0.55)
       .to('.loader__bg', { opacity: 0, duration: 1, ease: 'power2.inOut' }, D + 0.75)
       .add(resolve, D + 1.05)
       .add(() => {
@@ -769,11 +779,14 @@ const BLOB = {
 function heroMobileTarget() {
   const H = window.innerHeight;
   const top = $('.hero__ctas').getBoundingClientRect().bottom + window.scrollY;
-  const bottom = $('.hero__brand').getBoundingClientRect().top + window.scrollY + 16;
+  // on phones the big wordmark is out of the flow, so the stack gets everything down to the bottom bar
+  const brand = $('.hero__brand');
+  const floor = getComputedStyle(brand).position === 'absolute' ? $('.hero__bottom') : brand;
+  const bottom = floor.getBoundingClientRect().top + window.scrollY + 16;
   const gap = bottom - top;
   if (gap < H * 0.2) return { ...BLOB.hero.m, opacity: 0.2 };
-  const cy = top + gap * 0.58; // a touch below the middle of the free space
-  const scale = Math.min(0.62, 0.5 * (gap / (H * 0.42)));
+  const cy = top + gap * 0.54; // a touch below the middle of the free space
+  const scale = Math.min(0.8, 0.56 * (gap / (H * 0.42)));
   return { x: 0, y: 1 - (2 * cy) / H, scale, opacity: 1, spread: 0.95, rot: 0 };
 }
 

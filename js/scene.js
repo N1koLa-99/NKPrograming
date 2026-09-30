@@ -373,6 +373,8 @@ export function createScene(canvas, opts = {}) {
     const tex = new THREE.CanvasTexture(c);
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.anisotropy = maxAniso;
+    // phones: no mipmaps — every canvas upload would rebuild the whole chain, and the stack is drawn near 1:1 anyway
+    if (isMobile) { tex.generateMipmaps = false; tex.minFilter = THREE.LinearFilter; }
     const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, side: THREE.DoubleSide });
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(PW, PH), mat);
     mesh.rotation.x = -Math.PI / 2;
@@ -383,15 +385,24 @@ export function createScene(canvas, opts = {}) {
     edge.renderOrder = i;
     const g = new THREE.Group();
     g.add(mesh, edge);
+    // phones: a dark sheet under the top layer, so the UI reads cleanly instead of three layers showing through it
+    let under = null;
+    if (isMobile && i === 3) {
+      under = new THREE.Mesh(new THREE.PlaneGeometry(PW, PH), new THREE.MeshBasicMaterial({ color: 0x0c0c0c, transparent: true, depthWrite: false, side: THREE.DoubleSide }));
+      under.rotation.x = -Math.PI / 2;
+      under.position.y = -0.004;
+      under.renderOrder = 2.5;
+      g.add(under);
+    }
     tilt.add(g);
     const st = { offset: i * 3.7 };
-    return { g, ctx, tex, mat, edgeMat, draw, st };
+    return { g, ctx, tex, mat, edgeMat, draw, st, under };
   });
 
   /* ---------- connectors + packets ---------- */
   const anchors = [
     [-PW / 2, -PH / 2], [PW / 2, -PH / 2], [PW / 2, PH / 2], [-PW / 2, PH / 2],
-    [-0.9, 0.25], [0.6, -0.45], [1.1, 0.5],
+    ...(isMobile ? [] : [[-0.9, 0.25], [0.6, -0.45], [1.1, 0.5]]), // phones keep just the four corner posts
   ];
   const conPos = new Float32Array(anchors.length * 6);
   const conGeo = new THREE.BufferGeometry();
@@ -400,7 +411,7 @@ export function createScene(canvas, opts = {}) {
   const connectors = new THREE.LineSegments(conGeo, conMat);
   tilt.add(connectors);
 
-  const PK = 18;
+  const PK = isMobile ? 8 : 18;
   const pkPos = new Float32Array(PK * 3);
   const pkData = Array.from({ length: PK }, (_, i) => ({ a: i % anchors.length, p: Math.random(), v: 0.18 + Math.random() * 0.22 }));
   const pkGeo = new THREE.BufferGeometry();
@@ -416,7 +427,7 @@ export function createScene(canvas, opts = {}) {
   tilt.add(packets);
 
   /* ---------- floating code glyphs ---------- */
-  const GN = isMobile ? 260 : 620;
+  const GN = isMobile ? 120 : 620;
   const gPos = new Float32Array(GN * 3), gSeed = new Float32Array(GN), gGlyph = new Float32Array(GN);
   for (let i = 0; i < GN; i++) {
     gPos[i * 3] = (Math.random() - 0.5) * 22;
@@ -503,7 +514,8 @@ export function createScene(canvas, opts = {}) {
   const halfH = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
   const easeOut = (x) => 1 - Math.pow(1 - x, 3);
-  let texTick = 0, texIdx = 0;
+  let texTick = 0, texIdx = 0, lastSY = 0;
+  const DIM = [0.4, 0.5, 0.65, 1];
 
   function tick(now) {
     raf = 0;
@@ -570,17 +582,23 @@ export function createScene(canvas, opts = {}) {
       const y = (i - 1.5) * spread + Math.sin(t * 0.8 + i * 0.9) * 0.03;
       L.g.position.set(0, y - (1 - r) * 2.5, 0);
       L.g.rotation.y = (1 - r) * 0.9;
-      L.mat.opacity = r * state.opacity;
-      L.edgeMat.opacity = (i === 3 ? 0.9 : 0.35) * r * state.opacity;
+      const dim = isMobile ? DIM[i] : 1; // phones: the lower layers step back, the UI on top leads
+      L.mat.opacity = r * state.opacity * dim;
+      if (L.under) L.under.material.opacity = 0.9 * r * state.opacity;
+      L.edgeMat.opacity = (i === 3 ? 0.9 : 0.35) * r * state.opacity * dim;
     });
 
     // canvas textures: one layer per step, round-robin (each upload regenerates mipmaps,
     // so four of them in one frame is the most expensive thing in the scene);
     // skipped while the stack is too faint to read
+    // never while the page is scrolling: a canvas redraw + upload in a scroll frame is what makes it stutter
     texTick += dt;
-    if (texTick > (isMobile || tier > 1 ? 1 / 24 : 1 / 48) && onScreen && state.opacity * state.reveal > 0.22) {
+    const scrolling = Math.abs(window.scrollY - lastSY) > 1;
+    lastSY = window.scrollY;
+    if (!scrolling && texTick > (isMobile || tier > 1 ? 1 / 24 : 1 / 48) && onScreen && state.opacity * state.reveal > 0.22) {
       texTick = 0;
-      const L = layers[texIdx];
+      // phones animate only the top layer (the rest sit dimmed under it) — so it runs at the full rate
+      const L = layers[isMobile ? 3 : texIdx];
       texIdx = (texIdx + 1) % layers.length;
       L.draw(L.ctx, t, L.st);
       L.tex.needsUpdate = true;

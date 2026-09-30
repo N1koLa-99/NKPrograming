@@ -189,6 +189,9 @@ ul { list-style: none; }
 .nav__logo svg { width: 36px; }
 .nav__logo path { stroke: var(--nfg); stroke-width: 9; stroke-linecap: square; transition: stroke .5s; }
 .nav__logo .mono { font-size: .625rem; line-height: 1.3; color: var(--nfg); transition: color .5s; }
+.nav__logo .mono b { font-weight: inherit; }
+.nav__logo .mono i { font-style: normal; }
+.nav__logo .mono em { display: none; font-style: normal; }
 
 .nav__links { display: flex; gap: .25rem; }
 .nav__links a {
@@ -955,7 +958,20 @@ section { position: relative; }
   .nav { grid-template-columns: 1fr auto; }
   .nav__links, .nav .btn { display: none; }
   .burger { display: block; }
-  .nav__logo .mono { display: none; }
+  /* phones: the wordmark moves up here (the big one at the bottom of the hero makes room for the 3D stack) */
+  .nav__logo svg { display: none; }
+  /* same look as the loader wordmark: solid NK, outlined PROGRAMMING, blinking accent caret */
+  .nav__logo .mono { font-family: var(--f-brand); font-weight: 800; font-size: 1.25rem; letter-spacing: -.04em; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+  /* stroke under, fill on top in the page colour: only the outer edge shows, no overlapping letter contours */
+  .nav__logo .mono i { color: var(--bg); -webkit-text-stroke: 2px var(--nfg); paint-order: stroke fill; letter-spacing: .01em; }
+  .nav.is-light .nav__logo .mono i { color: var(--fg); }
+  .menu-open .nav .nav__logo .mono i { color: var(--bg); }
+  .nav__logo .mono em { display: inline; color: var(--accent); margin-left: .02em; animation: blink 1s steps(2) infinite; }
+  .nav.is-light .nav__logo .mono em { color: var(--nfg); }
+  .nav__logo .mono br { display: none; }
+  .hero__brand { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 5rem; width: auto; padding: 0; visibility: hidden !important; pointer-events: none; }
+  .hero { position: relative; }
+  .hero__bottom { margin-top: auto; }
 
   .hero__content { width: 100%; }
   .hero__headline { margin-top: 1.25rem; }
@@ -1195,3 +1211,9 @@ section { position: relative; }
 .lite .m-cta { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(20,20,20,.96); }
 .lite .process__runner { box-shadow: 0 0 0 .35rem rgba(204,255,0,.18); }
 .lite .card__media { will-change: auto; }
+
+/* phones: smooth scrolling first — no live blur or animated grain over the moving page */
+@media (max-width: 900px) {
+  .grain { animation: none; }
+  .m-cta { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(20,20,20,.96); }
+}
