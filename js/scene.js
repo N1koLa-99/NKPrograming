@@ -322,18 +322,29 @@ function glyphAtlas() {
 }
 
 /* ======================================================== */
-export function createScene(canvas) {
+export function createScene(canvas, opts = {}) {
+  const lite = !!opts.lite;
   let renderer;
   try {
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer = new THREE.WebGLRenderer({
+      canvas, alpha: true, powerPreference: 'high-performance',
+      // MSAA only where it is needed (1x screens) — on hi-dpi it just burns fill rate
+      antialias: !lite && window.devicePixelRatio < 1.5,
+      // no software rendering: without a real GPU the page is better off without the scene
+      failIfMajorPerformanceCaveat: true,
+    });
   } catch (e) { return null; }
   if (!renderer.getContext()) return null;
 
-  const isMobile = window.matchMedia('(max-width: 900px)').matches;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  const isMobile = lite || window.matchMedia('(max-width: 900px)').matches;
+  // quality tiers: the scene steps down by itself when the machine can't hold the frame rate
+  const maxPx = Math.min(window.devicePixelRatio, lite ? 1 : isMobile ? 1.5 : 1.75);
+  const TIERS = [...new Set([maxPx, Math.min(maxPx, 1.25), Math.min(maxPx, 1), 0.75])];
+  let tier = 0;
+  renderer.setPixelRatio(TIERS[0]);
+  renderer.setSize(window.innerWidth, window.innerHeight, false);
   renderer.setClearColor(0x000000, 0);
-  const maxAniso = renderer.capabilities.getMaxAnisotropy();
+  const maxAniso = Math.min(4, renderer.capabilities.getMaxAnisotropy());
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 100);
@@ -373,7 +384,7 @@ export function createScene(canvas) {
     g.add(mesh, edge);
     tilt.add(g);
     const st = { offset: i * 3.7 };
-    return { g, ctx, tex, mat, edgeMat, draw, st, animated: i !== 0 || true, last: -1 };
+    return { g, ctx, tex, mat, edgeMat, draw, st };
   });
 
   /* ---------- connectors + packets ---------- */
@@ -461,25 +472,70 @@ export function createScene(canvas) {
   }, { passive: true });
 
   function resize() {
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   }
   window.addEventListener('resize', resize);
 
-  const clock = new THREE.Clock();
-  let running = true;
-  document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) clock.getDelta(); });
+  function setTier(n) {
+    tier = n;
+    renderer.setPixelRatio(TIERS[tier]);
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    pkMat.uniforms.uPx.value = gMat.uniforms.uPx.value = TIERS[tier];
+  }
 
-  const halfH = () => Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
-  const halfW = () => halfH() * camera.aspect;
+  const clock = new THREE.Clock();
+  // started = the loader is gone; paused = the canvas is fully covered by an opaque section
+  let started = false, paused = false, raf = 0;
+  let slowN = 0, slowSum = 0, slowRuns = 0, skip = 90, lastNow = 0, frame = 0;
+  let dead = false, onScreen = true;
+  const active = () => started && !paused && !dead && !document.hidden;
+  const wake = () => {
+    if (raf || !active()) return;
+    clock.getDelta();
+    slowN = 0; slowSum = 0; lastNow = 0; skip = Math.max(skip, 10);
+    raf = requestAnimationFrame(tick);
+  };
+  document.addEventListener('visibilitychange', wake);
+
+  const halfH = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
   const clamp01 = (v) => Math.min(1, Math.max(0, v));
   const easeOut = (x) => 1 - Math.pow(1 - x, 3);
-  let texTick = 0;
+  let texTick = 0, texIdx = 0;
 
-  function tick() {
-    requestAnimationFrame(tick);
-    if (!running) return;
+  function tick(now) {
+    raf = 0;
+    if (!active()) return;
+    raf = requestAnimationFrame(tick);
+
+    // adaptive quality: average over ~1.5 s, step down a tier if we are under ~45 fps;
+    // if even the lowest tier crawls, the scene switches itself off
+    const fdt = lastNow ? (now - lastNow) / 1000 : 0;
+    lastNow = now;
+    if (skip > 0) skip--;
+    else if (fdt > 0 && fdt < 0.25) {
+      slowSum += fdt; slowN++;
+      if (slowN >= 90) {
+        const avg = slowSum / slowN;
+        slowN = 0; slowSum = 0;
+        if (avg > 1 / 45) {
+          if (tier < TIERS.length - 1) {
+            setTier(tier + 1); skip = 30;
+            if (opts.onLow) opts.onLow();
+          } else if (avg > 1 / 28 && ++slowRuns >= 2) {
+            dead = true;
+            cancelAnimationFrame(raf); raf = 0;
+            if (opts.onDead) opts.onDead();
+            return;
+          }
+        } else slowRuns = 0;
+      }
+    }
+
+    // once the stack has scrolled away only the slow glyph field is left — half rate is plenty
+    if (!onScreen && (frame++ & 1)) return;
+
     const dt = Math.min(clock.getDelta(), 0.05);
     const t = clock.elapsedTime;
 
@@ -494,7 +550,11 @@ export function createScene(canvas) {
     mouseS.lerp(mouse, 1 - Math.pow(0.04, dt));
 
     // placement
-    root.position.set(state.x * halfW(), state.y * halfH(), 0);
+    // pinned to the hero: moves up with the page instead of following the scroll
+    const sy = (window.scrollY / window.innerHeight) * 2;
+    onScreen = sy < 2.6;
+    tilt.visible = onScreen;
+    root.position.set(state.x * halfH * camera.aspect, (state.y + sy) * halfH, 0);
     root.scale.setScalar(Math.max(0.0001, state.scale));
     tilt.rotation.set(
       0.62 - mouseS.y * 0.14 + Math.sin(t * 0.35) * 0.02,
@@ -513,18 +573,24 @@ export function createScene(canvas) {
       L.edgeMat.opacity = (i === 3 ? 0.9 : 0.35) * r * state.opacity;
     });
 
-    // canvas textures (throttled)
+    // canvas textures: one layer per step, round-robin (each upload regenerates mipmaps,
+    // so four of them in one frame is the most expensive thing in the scene);
+    // skipped while the stack is too faint to read
     texTick += dt;
-    if (texTick > (isMobile ? 1 / 15 : 1 / 30)) {
+    if (texTick > (isMobile || tier > 1 ? 1 / 24 : 1 / 48) && onScreen && state.opacity * state.reveal > 0.22) {
       texTick = 0;
-      layers.forEach((L) => { L.draw(L.ctx, t, L.st); L.tex.needsUpdate = true; });
+      const L = layers[texIdx];
+      texIdx = (texIdx + 1) % layers.length;
+      L.draw(L.ctx, t, L.st);
+      L.tex.needsUpdate = true;
     }
 
     // connectors
     const yb = -1.5 * spread, yt = 1.5 * spread;
-    anchors.forEach(([ax, az], i) => {
-      conPos.set([ax, yb, az, ax, yt, az], i * 6);
-    });
+    for (let i = 0; i < anchors.length; i++) {
+      conPos[i * 6 + 1] = yb;
+      conPos[i * 6 + 4] = yt;
+    }
     conGeo.attributes.position.needsUpdate = true;
     conMat.opacity = 0.16 * state.opacity * clamp01(state.reveal * 1.5 - 0.5);
 
@@ -543,17 +609,24 @@ export function createScene(canvas) {
 
     gMat.uniforms.uTime.value = t;
     gMat.uniforms.uMouse.value.copy(mouseS);
-    gMat.uniforms.uOpacity.value = 0.5 + 0.5 * clamp01(state.reveal);
+    gMat.uniforms.uOpacity.value = clamp01(state.reveal * 4) * (0.5 + 0.5 * clamp01(state.reveal));
 
     renderer.render(scene, camera);
   }
 
   // make sure canvas text uses the real fonts once they arrive
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { gMat.uniforms.uAtlas.value = glyphAtlas(); });
-  tick();
+
+  // x/z of the connectors never change
+  anchors.forEach(([ax, az], i) => { conPos.set([ax, 0, az, ax, 0, az], i * 6); });
+  // warm up behind the loader (textures, shaders) — the render loop itself waits for start()
+  layers.forEach((L) => { L.draw(L.ctx, 0, L.st); L.tex.needsUpdate = true; });
+  renderer.compile(scene, camera);
 
   return {
     state,
+    start() { started = true; wake(); },
+    setPaused(v) { paused = v; wake(); },
     setTarget(tg) { Object.assign(target, tg); },
     kick(v) { state.energy = Math.min(1.2, Math.max(state.energy, v)); },
   };

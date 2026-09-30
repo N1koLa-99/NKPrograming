@@ -11,6 +11,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+// lite mode: older / weaker machines get the same site without the per-frame extras.
+// Picked up front from the hardware, and switched on later if the 3D scene can't hold its frame rate.
+// (?lite / ?full in the url force it either way)
+const qs = new URLSearchParams(location.search);
+const apple = /Mac|iPhone|iPad|iPod/.test(navigator.platform || '');
+let lite = qs.has('lite') || (!qs.has('full') && !apple && ((navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4));
+const goLite = () => { lite = true; document.documentElement.classList.add('lite'); };
+if (lite) goLite();
 const isMobile = () => window.innerWidth <= 900;
 
 /* ---------------- language ---------------- */
@@ -25,13 +34,20 @@ const t = (k) => (I18N[lang] && I18N[lang][k]) ?? I18N.en[k] ?? k;
 // loaded in parallel (three.js is ~660 KB) so the loader can start right away
 let scene = null;
 const scenePromise = import('./scene.js')
-  .then((m) => { scene = m.createScene($('#webgl')); })
+  .then((m) => {
+    scene = m.createScene($('#webgl'), {
+      lite,
+      onLow: goLite,
+      onDead: () => document.documentElement.classList.add('no-webgl'),
+    });
+  })
   .catch(() => {})
   .finally(() => { if (!scene) document.documentElement.classList.add('no-webgl'); });
 
 /* ---------------- smooth scroll ---------------- */
 let lenis = null;
-if (!reduce && typeof Lenis !== 'undefined') {
+// (native scrolling in lite mode: it stays smooth even when the main thread is busy)
+if (!reduce && !lite && typeof Lenis !== 'undefined') {
   lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenis.raf(time * 1000));
@@ -200,7 +216,7 @@ function renderCards() {
 }
 
 function bindTilt() {
-  if (!fine) return;
+  if (!fine || lite) return;
   $$('.card__media').forEach((m) => {
     const rx = gsap.quickTo(m, 'rotationX', { duration: 0.8, ease: 'power3.out' });
     const ry = gsap.quickTo(m, 'rotationY', { duration: 0.8, ease: 'power3.out' });
@@ -319,20 +335,26 @@ function fitBrand() {
   line.style.fontSize = `${(100 * box.clientWidth / w) * 0.995}px`;
 }
 function initProximity() {
-  if (!fine || reduce) return;
+  if (!fine || reduce || lite) return;
   const chars = $$('.hero__brand .char');
   let raf = 0, ex = -9999, ey = -9999;
+  const last = chars.map(() => 800);
   const run = () => {
     raf = 0;
-    chars.forEach((c) => {
-      const r = c.getBoundingClientRect();
+    // read everything first, then write — one layout per frame instead of one per letter
+    const rects = chars.map((c) => c.getBoundingClientRect());
+    chars.forEach((c, i) => {
+      const r = rects[i];
       const d = Math.hypot(ex - (r.left + r.width / 2), ey - (r.top + r.height / 2));
       const k = Math.max(0, 1 - d / (r.height * 1.8));
-      c.style.setProperty('--w', Math.round(800 - 650 * k * k));
+      const w = Math.round((800 - 650 * k * k) / 10) * 10;
+      if (w === last[i]) return;
+      last[i] = w;
+      c.style.setProperty('--w', w);
     });
   };
   window.addEventListener('pointermove', (e) => {
-    if (window.scrollY > window.innerHeight) return;
+    if (lite || window.scrollY > window.innerHeight) return;
     ex = e.clientX; ey = e.clientY;
     if (!raf) raf = requestAnimationFrame(run);
   }, { passive: true });
@@ -368,11 +390,14 @@ function initLiveType() {
     let raf = 0, ex = -9999, ey = -9999;
     const run = () => {
       raf = 0;
-      liveChars.forEach((c) => {
-        const r = c.getBoundingClientRect();
+      const rects = liveChars.map((c) => c.getBoundingClientRect());
+      liveChars.forEach((c, i) => {
+        const r = rects[i];
         const d = Math.hypot(ex - (r.left + r.width / 2), ey - (r.top + r.height / 2));
         const k = Math.max(0, 1 - d / (r.height * 2.4));
-        const e = k * k * (3 - 2 * k);
+        const e = Math.round(k * k * (3 - 2 * k) * 40) / 40;
+        if (c._e === e) return;
+        c._e = e;
         c.style.setProperty('--w', Math.round(400 + 450 * e));
         c.style.setProperty('--sl', (-12 * e).toFixed(1));
         c.style.setProperty('--cr', e > 0.5 ? 1 : 0);
@@ -381,7 +406,7 @@ function initLiveType() {
       });
     };
     window.addEventListener('pointermove', (e) => {
-      if (window.scrollY > window.innerHeight) return;
+      if (lite || window.scrollY > window.innerHeight) return;
       ex = e.clientX; ey = e.clientY;
       if (!raf) raf = requestAnimationFrame(run);
     }, { passive: true });
@@ -390,7 +415,7 @@ function initLiveType() {
     const t0 = performance.now();
     const loop = (now) => {
       requestAnimationFrame(loop);
-      if (window.scrollY > window.innerHeight) return;
+      if (lite || window.scrollY > window.innerHeight) return;
       const t = (now - t0) / 1000;
       liveChars.forEach((c, i) => {
         const k = Math.pow((Math.sin(t * 1.5 - i * 0.42) + 1) / 2, 4);
@@ -593,7 +618,7 @@ function runLoader() {
     const fs = parseFloat(heroLine.style.fontSize) || 100;
     const rowH = fs * 0.94;
     const rows = [];
-    const rowHTML = Array(5).fill('<b>NK</b> PROGRAMMING_').join('&nbsp;&nbsp;&nbsp;');
+    const rowHTML = Array(3).fill('<b>NK</b> PROGRAMMING_').join('&nbsp;&nbsp;&nbsp;');
     const mk = (top, idx) => {
       const el = document.createElement('div');
       el.className = 'wall-row';
@@ -716,7 +741,10 @@ function heroIntro() {
     gsap.set(['[data-hero-fade]', '.nav'], { opacity: 1 });
   }
   tl.add(startRotator, reduce ? 0 : 0.7);
-  if (scene) gsap.to(scene.state, { reveal: 1, duration: reduce ? 0.01 : 2.6, ease: 'expo.out' });
+  if (scene) {
+    scene.start();
+    gsap.to(scene.state, { reveal: 1, duration: reduce ? 0.01 : 2.6, ease: 'expo.out' });
+  }
   return tl;
 }
 
@@ -782,7 +810,7 @@ function initScroll() {
     gsap.to(['.hero__content', '.hero__bottom'], { y: -90, opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '60% top' } });
 
     // variable-font weight grows as section titles come in
-    $$('[data-wght], .contact__title').forEach((el) => {
+    if (!lite) $$('[data-wght], .contact__title').forEach((el) => {
       gsap.fromTo(el, { '--w': 140, '--sl': -12, '--sh': 0 }, { '--w': 800, '--sl': 0, '--sh': 100, ease: 'none', scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 45%', scrub: true } });
     });
 
@@ -803,13 +831,13 @@ function initScroll() {
     });
 
     // work panel expands (ends full-bleed right as the section pins)
-    gsap.fromTo('.work', { '--inset': '5vw', '--radius': '48px' }, {
+    if (!lite) gsap.fromTo('.work', { '--inset': '5vw', '--radius': '48px' }, {
       '--inset': '0vw', '--radius': '0px', ease: 'none',
       scrollTrigger: { trigger: '.work', start: 'top bottom', end: 'top top', scrub: true },
     });
 
     // services panel expands
-    gsap.fromTo('.services', { '--inset': '5vw', '--radius': '48px' }, {
+    if (!lite) gsap.fromTo('.services', { '--inset': '5vw', '--radius': '48px' }, {
       '--inset': '0vw', '--radius': '0px', ease: 'none',
       scrollTrigger: { trigger: '.services', start: 'top bottom', end: 'top 15%', scrub: true },
     });
@@ -879,6 +907,7 @@ function initScroll() {
   ScrollTrigger.create({
     start: 0, end: 'max',
     onUpdate: (self) => {
+      if (!isMobile()) return;
       const y = self.scroll();
       const heroEnd = $('.hero').offsetHeight * 0.7;
       const contactTop = $('#contact').getBoundingClientRect().top;
@@ -906,20 +935,23 @@ function initScroll() {
     toggleClass: { targets: '.nav', className: 'is-light' },
   });
 
-  // 3D targets per section (created after the pin so positions include pin spacing)
+  // the 3D stack lives in the hero and scrolls away with it (the scene offsets it by the scroll position)
   if (scene) {
-    $$('[data-blob]').forEach((sec) => {
-      const key = sec.dataset.blob;
-      ScrollTrigger.create({
-        trigger: sec, start: 'top 55%', end: 'bottom 55%',
-        onToggle: (self) => {
-          if (!self.isActive) return;
-          scene.setTarget(isMobile() ? (key === 'hero' ? heroMobileTarget() : BLOB[key].m) : BLOB[key].d);
-          scene.kick(0.5);
-        },
-      });
+    const place = () => scene.setTarget(isMobile() ? heroMobileTarget() : BLOB.hero.d);
+    place();
+    window.addEventListener('resize', place);
+    // the light panels are opaque — while one fills the screen there is nothing to render
+    const covers = $$('.work, .services');
+    ScrollTrigger.create({
+      start: 0, end: 'max',
+      onUpdate: () => {
+        const H = window.innerHeight;
+        scene.setPaused(covers.some((s) => {
+          const r = s.getBoundingClientRect();
+          return r.top <= 1 && r.bottom >= H - 1;
+        }));
+      },
     });
-    scene.setTarget(isMobile() ? heroMobileTarget() : BLOB.hero.d);
     if (lenis) lenis.on('scroll', (e) => scene.kick(Math.min(1, Math.abs(e.velocity) / 35)));
   }
 }
@@ -930,8 +962,10 @@ function initMarquee() {
   const spans = $$('.marquee__row span');
   let x = 0, speed = 1, dir = 1, rowW = row.offsetWidth;
   window.addEventListener('resize', () => { rowW = row.offsetWidth; });
-  let lean = 0;
+  let lean = 0, leanSet = 0, visible = true;
+  new IntersectionObserver((en) => { visible = en[0].isIntersecting; }).observe(track.parentElement);
   gsap.ticker.add((_, dt) => {
+    if (!visible) return;
     const v = lenis ? lenis.velocity : 0;
     if (Math.abs(v) > 0.1) dir = v > 0 ? 1 : -1;
     const target = 1 + Math.min(Math.abs(v) * 0.35, 9);
@@ -943,7 +977,9 @@ function initMarquee() {
     if (!reduce) {
       const tgt = -Math.min(12, Math.abs(v) * 0.9);
       lean += (tgt - lean) * 0.12;
-      track.style.setProperty('--mq-sl', lean.toFixed(2));
+      // slant is a font axis → every change re-lays-out the whole row; only touch it in whole steps
+      const q = Math.round(lean);
+      if (q !== leanSet) { leanSet = q; track.style.setProperty('--mq-sl', q); }
     }
   });
 }
