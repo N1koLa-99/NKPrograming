@@ -27,7 +27,7 @@ const store = {
   get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
   set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* ignore */ } },
 };
-let lang = store.get('nk-lang') || ((navigator.language || '').toLowerCase().startsWith('bg') ? 'bg' : 'en');
+let lang = 'bg'; // the site always opens in Bulgarian; EN is one tap away in the nav
 const t = (k) => (I18N[lang] && I18N[lang][k]) ?? I18N.en[k] ?? k;
 
 /* ---------------- 3D ---------------- */
