@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NK Programming — Nikola Klimentov, fullstack developer</title>
+  <meta name="description" content="NK Programming — Nikola Klimentov, fullstack developer from Bulgaria. Websites, online shops and custom systems, from the database to the last pixel.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="NK Programming — Nikola Klimentov">
+  <meta property="og:description" content="Websites, online shops and custom systems — from the database to the last pixel.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preload" href="assets/fonts/martian-mono-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/geologica-latin-full-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="modulepreload" href="assets/vendor/three.module.min.js">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="importmap">
+    { "imports": { "three": "./assets/vendor/three.module.min.js" } }
+  </script>
+</head>
+<body class="is-loading">
+
+  <!-- ================= LOADER ================= -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__bg"></div>
+    <div class="loader__wall"></div>
+    <div class="loader__brand"></div>
+    <div class="loader__top mono">
+      <span>NK Programming</span>
+      <span class="loader__task"><i></i><b>init</b></span>
+      <span>Portfolio · 2026</span>
+    </div>
+    <div class="loader__bottom">
+      <span class="loader__count">000</span>
+      <div class="loader__meta mono">
+        <span class="loader__file">~/nk-programming</span>
+        <div class="loader__bar"><i></i></div>
+        <span class="loader__mods">0 / 128 modules</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FX ================= -->
+  <canvas id="webgl" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><i></i></div>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav">
+    <a href="#top" class="nav__logo" data-scroll-to aria-label="NK Programming — home">
+      <svg viewBox="0 0 160 110" fill="none" aria-hidden="true"><path d="M8 102 V8 L68 102 V8 M94 8 V102 M94 64 L152 8 M114 46 L154 102"/></svg>
+      <span class="mono">NK<br>Programming</span>
+    </a>
+
+    <nav class="nav__links mono" aria-label="Main">
+      <a href="#about" data-scroll-to data-scramble data-nav="about" data-i18n="nav.about">About</a>
+      <a href="#work" data-scroll-to data-scramble data-nav="work" data-i18n="nav.work">Work</a>
+      <a href="#process" data-scroll-to data-scramble data-nav="process" data-i18n="nav.process">Process</a>
+      <a href="#services" data-scroll-to data-scramble data-nav="services" data-i18n="nav.services">Services</a>
+      <a href="#faq" data-scroll-to data-scramble data-nav="faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" data-scroll-to data-scramble data-nav="contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+
+    <div class="nav__right">
+      <div class="lang mono" role="group" aria-label="Language">
+        <button type="button" data-lang="en" class="is-active">EN</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" data-lang="bg">BG</button>
+      </div>
+      <a href="#contact" class="btn btn--accent btn--sm" data-scroll-to data-magnetic>
+        <span class="btn__txt" data-i18n="nav.cta">Let's talk</span>
+        <span class="btn__arrow" aria-hidden="true">↗</span>
+      </a>
+      <button class="burger" type="button" aria-label="Menu"><i></i><i></i></button>
+    </div>
+  </header>
+
+  <div class="menu" aria-hidden="true">
+    <nav class="menu__links">
+      <a href="#about" data-scroll-to><span class="mono">01</span><b data-i18n="nav.about">About</b></a>
+      <a href="#work" data-scroll-to><span class="mono">02</span><b data-i18n="nav.work">Work</b></a>
+      <a href="#process" data-scroll-to><span class="mono">03</span><b data-i18n="nav.process">Process</b></a>
+      <a href="#services" data-scroll-to><span class="mono">04</span><b data-i18n="nav.services">Services</b></a>
+      <a href="#faq" data-scroll-to><span class="mono">05</span><b data-i18n="nav.faq">FAQ</b></a>
+      <a href="#contact" data-scroll-to><span class="mono">06</span><b data-i18n="nav.contact">Contact</b></a>
+    </nav>
+    <div class="menu__foot">
+      <div class="menu__row mono">
+        <span class="hero__status"><i class="dot"></i><span data-i18n="hero.status">Available for new projects</span></span>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="en" class="is-active">EN</button>
+          <span aria-hidden="true">/</span>
+          <button type="button" data-lang="bg">BG</button>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn--accent menu__cta" data-scroll-to>
+        <span class="btn__txt" data-i18n="hero.cta2">Start a project</span><span class="btn__arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="menu__mail mono" href="mailto:nikola.klimentow@gmail.com">nikola.klimentow@gmail.com</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="top" data-blob="hero">
+      <div class="hero__content">
+        <p class="hero__kicker mono" data-hero-fade>
+          <span class="tok-c">//</span><span data-i18n="hero.kicker">fullstack developer &amp; freelancer</span>
+        </p>
+
+        <h2 class="hero__headline" data-hero-fade>
+          <span class="hl hl--dim" data-i18n="hero.l1">You bring the idea.</span>
+          <span class="hl"><span data-i18n="hero.l2">I build the</span> <span class="rot-line"><span class="rot"><span class="rot__sel" aria-hidden="true"></span><span class="rot__txt">website</span></span><span class="rot__caret" aria-hidden="true"></span></span></span>
+        </h2>
+
+        <p class="hero__desc" data-hero-fade data-i18n="hero.desc">Websites, online shops and custom systems — designed, coded and launched by one person. From the database to the last pixel.</p>
+
+        <div class="hero__ctas" data-hero-fade>
+          <a href="#work" class="btn btn--accent" data-scroll-to data-magnetic>
+            <span class="btn__txt" data-i18n="hero.cta1">See the work</span><span class="btn__arrow" aria-hidden="true">↗</span>
+          </a>
+          <a href="#contact" class="btn btn--ghost" data-scroll-to data-magnetic>
+            <span class="btn__txt" data-i18n="hero.cta2">Start a project</span>
+          </a>
+        </div>
+      </div>
+
+      <h1 class="hero__brand" aria-label="NK Programming">
+        <span class="hero__brand-line"><span class="hb-solid" data-split>NK</span><span class="hb-gap"> </span><span class="hb-tail"><span class="hb-outline" data-split>PROGRAMMING</span><span class="hb-caret">_</span></span></span>
+      </h1>
+
+      <div class="hero__bottom mono" data-hero-fade>
+        <span data-i18n="hero.location">Veliko Tarnovo, BG</span>
+        <span class="hero__status"><i class="dot"></i><span data-i18n="hero.status">Available for new projects</span></span>
+        <span class="hero__scroll"><span data-i18n="hero.scroll">Scroll</span><i></i></span>
+        <span class="hero__stack">.NET · SQL · Azure · JS</span>
+      </div>
+    </section>
+
+    <!-- ================= MARQUEE ================= -->
+    <section class="marquee" aria-label="Tech stack">
+      <div class="marquee__track">
+        <div class="marquee__row">
+          <span>ASP.NET Core</span><em>✦</em><span>C#</span><em>✦</em><span>SQL Server</span><em>✦</em><span>Dapper</span><em>✦</em><span>Azure</span><em>✦</em><span>JavaScript</span><em>✦</em><span>WordPress</span><em>✦</em><span>WooCommerce</span><em>✦</em><span>HTML / CSS</span><em>✦</em><span>SEO</span><em>✦</em>
+        </div>
+        <div class="marquee__row" aria-hidden="true">
+          <span>ASP.NET Core</span><em>✦</em><span>C#</span><em>✦</em><span>SQL Server</span><em>✦</em><span>Dapper</span><em>✦</em><span>Azure</span><em>✦</em><span>JavaScript</span><em>✦</em><span>WordPress</span><em>✦</em><span>WooCommerce</span><em>✦</em><span>HTML / CSS</span><em>✦</em><span>SEO</span><em>✦</em>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="about section" id="about" data-blob="about">
+      <div class="section-label mono" data-reveal><span class="sl-num">01</span><span class="sl-line"></span><span data-i18n="about.label">About</span></div>
+      <p class="about__text" data-i18n="about.text">Good websites aren't magic. They're <em>a thousand small decisions</em> made right — from the query that loads in 12 ms to the button that feels good to press.</p>
+
+      <div class="stats">
+        <div class="stat" data-reveal>
+          <b><span data-count="2">0</span><sup>+</sup></b>
+          <span class="mono" data-i18n="about.s1">Years in production</span>
+        </div>
+        <div class="stat" data-reveal>
+          <b><span data-count="6">0</span></b>
+          <span class="mono" data-i18n="about.s2">Projects shipped</span>
+        </div>
+        <div class="stat" data-reveal>
+          <b><span data-count="1">0</span></b>
+          <span class="mono" data-i18n="about.s3">Own marketplace, built from zero</span>
+        </div>
+        <div class="stat" data-reveal>
+          <b><span data-count="4">0</span></b>
+          <span class="mono" data-i18n="about.s4">Layers I cover — DB, API, UI, Cloud</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WORK ================= -->
+    <section class="work" id="work" data-blob="work">
+      <div class="sec-head">
+        <div>
+          <div class="section-label mono" data-reveal><span class="sl-num">02</span><span class="sl-line"></span><span data-i18n="work.label">Selected work</span></div>
+          <h2 class="big-title" data-reveal><span data-wght data-i18n="work.title">Work</span><sup class="mono work__count">(06)</sup></h2>
+        </div>
+        <div class="work__progress mono" aria-hidden="true">
+          <span class="work__cur">01</span>
+          <span class="work__bar"><i></i></span>
+          <span class="work__total">06</span>
+        </div>
+      </div>
+      <p class="work__hint mono" aria-hidden="true"><span data-i18n="work.hint">Swipe</span> <i>→</i></p>
+      <div class="work__viewport">
+        <div class="work__track"><!-- rendered by js --></div>
+      </div>
+    </section>
+
+    <!-- ================= PROCESS ================= -->
+    <section class="process section" id="process" data-blob="process">
+      <div class="sec-head">
+        <div>
+          <div class="section-label mono" data-reveal><span class="sl-num">03</span><span class="sl-line"></span><span data-i18n="proc.label">How we work</span></div>
+          <h2 class="big-title" data-reveal><span data-wght data-i18n="proc.title">Process</span></h2>
+        </div>
+        <p class="sec-head__aside" data-reveal data-i18n="proc.aside"></p>
+      </div>
+      <div class="process__path">
+        <svg class="process__svg" aria-hidden="true"><path class="pp-base" d=""/><path class="pp-line" d=""/></svg>
+        <span class="process__runner" aria-hidden="true"></span>
+        <ol class="process__list">
+          <li class="step" data-step>
+            <span class="step__dot"></span>
+            <div class="step__body">
+              <span class="step__num mono">01</span>
+              <h3 class="step__title" data-i18n="proc.1.t"></h3>
+              <p class="step__desc" data-i18n="proc.1.d"></p>
+              <span class="step__out mono" data-i18n="proc.1.o"></span>
+            </div>
+          </li>
+          <li class="step" data-step>
+            <span class="step__dot"></span>
+            <div class="step__body">
+              <span class="step__num mono">02</span>
+              <h3 class="step__title" data-i18n="proc.2.t"></h3>
+              <p class="step__desc" data-i18n="proc.2.d"></p>
+              <span class="step__out mono" data-i18n="proc.2.o"></span>
+            </div>
+          </li>
+          <li class="step" data-step>
+            <span class="step__dot"></span>
+            <div class="step__body">
+              <span class="step__num mono">03</span>
+              <h3 class="step__title" data-i18n="proc.3.t"></h3>
+              <p class="step__desc" data-i18n="proc.3.d"></p>
+              <span class="step__out mono" data-i18n="proc.3.o"></span>
+            </div>
+          </li>
+          <li class="step" data-step>
+            <span class="step__dot"></span>
+            <div class="step__body">
+              <span class="step__num mono">04</span>
+              <h3 class="step__title" data-i18n="proc.4.t"></h3>
+              <p class="step__desc" data-i18n="proc.4.d"></p>
+              <span class="step__out mono" data-i18n="proc.4.o"></span>
+            </div>
+          </li>
+          <li class="step" data-step>
+            <span class="step__dot"></span>
+            <div class="step__body">
+              <span class="step__num mono">05</span>
+              <h3 class="step__title" data-i18n="proc.5.t"></h3>
+              <p class="step__desc" data-i18n="proc.5.d"></p>
+              <span class="step__out mono" data-i18n="proc.5.o"></span>
+            </div>
+          </li>
+          <li class="step" data-step>
+            <span class="step__dot"></span>
+            <div class="step__body">
+              <span class="step__num mono">06</span>
+              <h3 class="step__title" data-i18n="proc.6.t"></h3>
+              <p class="step__desc" data-i18n="proc.6.d"></p>
+              <span class="step__out mono" data-i18n="proc.6.o"></span>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+    <section class="services section" id="services" data-blob="services">
+      <div class="sec-head">
+        <div>
+          <div class="section-label mono" data-reveal><span class="sl-num">04</span><span class="sl-line"></span><span data-i18n="services.label">What I do</span></div>
+          <h2 class="big-title" data-reveal><span data-wght data-i18n="services.title">Services</span></h2>
+        </div>
+        <p class="sec-head__aside" data-reveal data-i18n="services.aside">One developer, the whole stack. No hand-offs, no lost details.</p>
+      </div>
+      <ul class="services__list">
+        <li class="svc" data-svc>
+          <span class="svc__num mono">01</span>
+          <h3 class="svc__title" data-i18n="svc.1.t">Web apps</h3>
+          <p class="svc__desc" data-i18n="svc.1.d"></p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="svc" data-svc>
+          <span class="svc__num mono">02</span>
+          <h3 class="svc__title" data-i18n="svc.2.t">Websites</h3>
+          <p class="svc__desc" data-i18n="svc.2.d"></p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="svc" data-svc>
+          <span class="svc__num mono">03</span>
+          <h3 class="svc__title" data-i18n="svc.3.t">E-commerce</h3>
+          <p class="svc__desc" data-i18n="svc.3.d"></p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="svc" data-svc>
+          <span class="svc__num mono">04</span>
+          <h3 class="svc__title" data-i18n="svc.4.t">Cloud</h3>
+          <p class="svc__desc" data-i18n="svc.4.d"></p>
+          <span class="svc__arrow" aria-hidden="true">→</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section class="testi section" id="testimonials" data-blob="testi">
+      <div class="sec-head">
+        <div>
+          <div class="section-label mono" data-reveal><span class="sl-num">05</span><span class="sl-line"></span><span data-i18n="testi.label">Kind words</span></div>
+          <h2 class="big-title" data-reveal><span data-wght data-i18n="testi.title">Clients</span></h2>
+        </div>
+        <div class="testi__nav" data-reveal>
+          <button type="button" class="round-btn" data-testi="-1" aria-label="Previous">←</button>
+          <button type="button" class="round-btn" data-testi="1" aria-label="Next">→</button>
+        </div>
+      </div>
+      <div class="testi__track"><!-- rendered by js --></div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="faq section" id="faq" data-blob="faq">
+      <div class="faq__side">
+        <div class="section-label mono" data-reveal><span class="sl-num">06</span><span class="sl-line"></span><span data-i18n="faq.label">Questions</span></div>
+        <h2 class="big-title" data-reveal><span data-wght>FAQ</span></h2>
+        <p class="faq__note" data-reveal data-i18n="faq.note"></p>
+      </div>
+      <div class="faq__list"><!-- rendered by js --></div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="contact section" id="contact" data-blob="contact">
+      <div class="section-label mono" data-reveal><span class="sl-num">07</span><span class="sl-line"></span><span data-i18n="contact.label">Contact</span></div>
+
+      <h2 class="contact__title" data-wght>
+        <span class="mask"><span data-i18n="contact.t1">Let's build</span></span>
+        <span class="mask"><span class="contact__accent" data-i18n="contact.t2">something.</span></span>
+      </h2>
+
+      <div class="contact__row">
+        <div class="contact__info">
+          <p class="contact__sub" data-reveal data-i18n="contact.sub"></p>
+          <a href="mailto:nikola.klimentow@gmail.com" class="contact__mail" data-reveal>nikola.klimentow@gmail.com</a>
+        </div>
+        <a href="mailto:nikola.klimentow@gmail.com" class="contact__cta" data-magnetic>
+          <span class="contact__cta-inner">
+            <span data-i18n="contact.btn">Write me</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18 L18 6 M8 6 H18 V16"/></svg>
+          </span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= MOBILE CTA BAR ================= -->
+  <a href="#contact" class="m-cta" data-scroll-to aria-label="Contact">
+    <span class="m-cta__status"><i class="dot"></i><span data-i18n="mcta.status">Available now</span></span>
+    <span class="m-cta__btn mono"><span data-i18n="nav.cta">Let's talk</span> ↗</span>
+  </a>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer mono">
+    <span>© <span class="year">2026</span> NK Programming</span>
+    <span class="footer__time"><span data-i18n="footer.time">Local time</span> <b class="clock">00:00</b> <span class="tz">GMT+3</span></span>
+    <div class="footer__socials"><!-- rendered by js if set --></div>
+    <a href="#top" data-scroll-to data-scramble class="footer__top" data-i18n="footer.top">Back to top ↑</a>
+  </footer>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

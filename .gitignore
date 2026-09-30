@@ -1,0 +1,6 @@
+.DS_Store
+.claude/
+.vscode/
+
+# Оригинални скрийншоти (сайтът ползва оптимизираните в assets/projects/)
+/*.png
