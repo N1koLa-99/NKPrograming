@@ -1,7 +1,7 @@
 /* =========================================================
    NK Programming — interactions & motion
    ========================================================= */
-import { PROJECTS, I18N, SOCIALS, TESTIMONIALS, FAQ } from './data.js';
+import { PROJECTS, I18N, SOCIALS, FAQ } from './data.js';
 
 const $ = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
@@ -168,6 +168,60 @@ function pattern(type) {
   return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${s}</svg>`;
 }
 
+/* Construction-site overlay for projects still being built (`soon: true`). */
+function building() {
+  const Y = '#ffc21a', D = '#141414';
+  return `
+    <div class="card__build" aria-hidden="true">
+      <div class="build__sign"><span><b>${t('work.soon')}</b><small>${t('work.building')}</small></span></div>
+      <svg class="build__site" viewBox="24 0 576 256" preserveAspectRatio="xMidYMax meet">
+        <!-- crane -->
+        <g class="build__crane">
+          <path d="M104 250 V44 M124 250 V44" stroke="${Y}" stroke-width="4"/>
+          ${Array.from({ length: 10 }, (_, i) => `<path d="M104 ${250 - i * 20.6} L124 ${229.4 - i * 20.6}" stroke="${Y}" stroke-width="2"/>`).join('')}
+          <path d="M40 44 H330 M40 30 H330 M114 8 V44" stroke="${Y}" stroke-width="4"/>
+          ${Array.from({ length: 14 }, (_, i) => `<path d="M${40 + i * 20.7} 44 L${60.7 + i * 20.7} 30" stroke="${Y}" stroke-width="2"/>`).join('')}
+          <path d="M114 8 L40 30 M114 8 L330 30" stroke="${Y}" stroke-width="1.5"/>
+          <rect x="44" y="44" width="34" height="26" fill="#3a3a3a"/>
+          <rect x="128" y="50" width="22" height="18" rx="2" fill="${Y}"/>
+          <rect x="132" y="54" width="12" height="9" fill="${D}"/>
+          <g class="build__trolley">
+            <rect x="214" y="44" width="20" height="8" fill="${Y}"/>
+            <g class="build__load">
+              <path d="M224 52 V150" stroke="#cfcfca" stroke-width="1.5"/>
+              <path d="M224 150 l-30 14 M224 150 l30 14" stroke="#cfcfca" stroke-width="1.5"/>
+              <rect x="186" y="164" width="76" height="12" fill="#e2572b"/>
+              <path d="M196 164 v12 M214 164 v12 M234 164 v12 M252 164 v12" stroke="${D}" stroke-width="1.5"/>
+            </g>
+          </g>
+        </g>
+        <!-- excavator -->
+        <g class="build__digger">
+          <g class="build__arm">
+            <path d="M430 196 L372 128 L328 182" stroke="${Y}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M418 186 L380 150" stroke="#3a3a3a" stroke-width="4" stroke-linecap="round"/>
+            <g class="build__bucket">
+              <path d="M328 182 l-18 4 l2 24 l26 -2 z" fill="${Y}"/>
+              <path d="M312 210 l-4 6 M320 210 l-3 6 M330 209 l-2 6" stroke="${Y}" stroke-width="3"/>
+            </g>
+          </g>
+          <path d="M420 180 h52 l18 22 v26 h-70 z" fill="${Y}"/>
+          <path d="M446 186 h22 l14 16 h-36 z" fill="${D}" opacity=".85"/>
+          <rect x="488" y="196" width="26" height="32" rx="3" fill="#e0a812"/>
+          <rect x="404" y="228" width="124" height="24" rx="12" fill="#2a2a2a"/>
+          ${[418, 442, 466, 490, 514].map(x => `<circle cx="${x}" cy="240" r="7" fill="#555"/>`).join('')}
+        </g>
+        <!-- dirt pile + cones -->
+        <path d="M250 252 q30 -34 64 -6 q16 -14 30 6 z" fill="#4a3a2a"/>
+        <circle class="build__dirt" cx="316" cy="214" r="3" fill="#6b5640"/>
+        <circle class="build__dirt build__dirt--2" cx="324" cy="212" r="2.5" fill="#6b5640"/>
+        ${[548, 576].map(x => `<path d="M${x} 252 l10 -30 l10 30 z" fill="#ff6a1a"/><path d="M${x + 5} 237 h10" stroke="#fff" stroke-width="4"/>`).join('')}
+        <path d="M0 252 H600" stroke="rgba(242,242,238,.4)" stroke-width="2"/>
+      </svg>
+      <div class="build__tape"></div>
+    </div>`;
+}
+
 let workRevealed = false;
 
 function renderCards() {
@@ -185,6 +239,7 @@ function renderCards() {
           <div class="card__media">
             <div class="card__browser"><i></i><i></i><i></i><span>${p.domain}</span></div>
             <div class="card__cover">${cover}</div>
+            ${p.soon ? building() : ''}
             <div class="card__glow"></div>
             ${live ? `<span class="card__visit mono">${t('work.visit')} ↗</span>` : ''}
           </div>
@@ -192,7 +247,7 @@ function renderCards() {
             <h3 class="card__title">${p.name}</h3>
             <span class="card__go">${live ? '↗' : '·'}</span>
           </div>
-          ${live ? '' : `<div class="card__info mono"><span class="card__soon">● ${t('work.soon')}</span></div>`}
+          ${p.soon ? `<div class="card__info mono"><span class="card__soon">● ${t('work.soon')}</span></div>` : ''}
         </${tag}>
       </article>`;
   }).join('');
@@ -255,52 +310,8 @@ function buildAbout() {
   });
 }
 
-/* ---------------- testimonials ---------------- */
-const pad2 = (n) => String(n);
-function renderTesti() {
-  const track = $('.testi__track');
-  track.innerHTML = TESTIMONIALS.map((x, i) => {
-    const q = (x.quote && (x.quote[lang] || x.quote.en)) || '';
-    const who = x.name || x.company;
-    const initials = who.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
-    const sub = x.name ? `${x.role[lang]} · ${x.company}` : x.role[lang];
-    return `
-      <figure class="tcard${q ? '' : ' tcard--soon'}">
-        <div class="tcard__top"><span class="tcard__mark">“</span><span class="mono tcard__num">${pad2(i + 1)} / ${pad2(TESTIMONIALS.length)}</span></div>
-        <blockquote>${q || `<span class="tcard__soon">${t('testi.soon')}</span><span class="tcard__caret"></span>`}</blockquote>
-        <figcaption>
-          <span class="tcard__av">${initials}</span>
-          <span class="tcard__who"><b>${who}</b><span class="mono">${sub}</span></span>
-          ${x.url ? `<a class="tcard__link mono" href="${x.url}" target="_blank" rel="noopener">↗</a>` : ''}
-        </figcaption>
-      </figure>`;
-  }).join('');
-}
-function initTestiNav() {
-  const track = $('.testi__track');
-  $$('[data-testi]').forEach((b) => b.addEventListener('click', () => {
-    const card = $('.tcard', track);
-    const step = card ? card.offsetWidth + 24 : 400;
-    track.scrollBy({ left: +b.dataset.testi * step, behavior: 'smooth' });
-  }));
-  // drag to scroll (mouse)
-  let down = false, sx = 0, sl = 0, moved = false;
-  track.addEventListener('pointerdown', (e) => {
-    if (e.pointerType !== 'mouse') return;
-    down = true; moved = false; sx = e.clientX; sl = track.scrollLeft;
-    track.classList.add('is-drag');
-  });
-  window.addEventListener('pointermove', (e) => {
-    if (!down) return;
-    const dx = e.clientX - sx;
-    if (Math.abs(dx) > 3) moved = true;
-    track.scrollLeft = sl - dx;
-  });
-  window.addEventListener('pointerup', () => { down = false; track.classList.remove('is-drag'); });
-  track.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
-}
-
 /* ---------------- faq ---------------- */
+const pad2 = (n) => String(n);
 function renderFaq() {
   $('.faq__list').innerHTML = FAQ.map((f, i) => `
     <div class="faq__item">
@@ -416,14 +427,22 @@ function initLiveType() {
       if (!raf) raf = requestAnimationFrame(run);
     }, { passive: true });
   } else {
-    // touch: a slow wave of weight + slant runs through the line
+    // touch: a slow wave of weight + slant runs through the line.
+    // Font-axis changes re-lay-out the text, so it runs at ~30 fps with no CSS transition
+    // (a transition would interpolate — and re-lay-out — on every frame anyway)
+    // and only touches letters whose value actually moved
+    $('.hl--dim').classList.add('is-wave');
     const t0 = performance.now();
+    let lastT = 0;
     const loop = (now) => {
       requestAnimationFrame(loop);
-      if (lite || window.scrollY > window.innerHeight) return;
+      if (lite || now - lastT < 32 || window.scrollY > window.innerHeight) return;
+      lastT = now;
       const t = (now - t0) / 1000;
       liveChars.forEach((c, i) => {
-        const k = Math.pow((Math.sin(t * 1.5 - i * 0.42) + 1) / 2, 4);
+        const k = Math.round(Math.pow((Math.sin(t * 1.5 - i * 0.42) + 1) / 2, 4) * 40) / 40;
+        if (c._k === k) return;
+        c._k = k;
         c.style.setProperty('--w', Math.round(400 + 420 * k));
         c.style.setProperty('--sl', (-11 * k).toFixed(1));
         c.style.setProperty('--sh', Math.round(30 + 70 * k));
@@ -447,7 +466,6 @@ function applyLang(l) {
   $$('.lang button').forEach((b) => b.classList.toggle('is-active', b.dataset.lang === l));
   const words = t('loader');
   renderCards();
-  renderTesti();
   renderFaq();
   if ($('.hl--dim .lch') || booted) liveChars = splitLive();
   if (booted) {
@@ -827,14 +845,28 @@ function initScroll() {
     gsap.to('.hb-outline', { xPercent: 6, ease: 'none', scrollTrigger: heroST });
     gsap.to(['.hero__content', '.hero__bottom'], { y: -90, opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '60% top' } });
 
-    // variable-font weight grows as section titles come in
+    // variable-font weight grows as section titles come in.
+    // Every axis change re-lays-out the title, so the values move in small steps
+    // (~35 per title over the whole range) instead of on every scrolled pixel.
     if (!lite) $$('[data-wght], .contact__title').forEach((el) => {
-      gsap.fromTo(el, { '--w': 140, '--sl': -12, '--sh': 0 }, { '--w': 800, '--sl': 0, '--sh': 100, ease: 'none', scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 45%', scrub: true } });
+      const o = { w: 140, sl: -12, sh: 0 };
+      let last = '';
+      const apply = () => {
+        const w = Math.round(o.w / 20) * 20, sl = Math.round(o.sl), sh = Math.round(o.sh / 10) * 10;
+        const key = `${w}|${sl}|${sh}`;
+        if (key === last) return;
+        last = key;
+        el.style.setProperty('--w', w);
+        el.style.setProperty('--sl', sl);
+        el.style.setProperty('--sh', sh);
+      };
+      apply();
+      gsap.to(o, { w: 800, sl: 0, sh: 100, ease: 'none', onUpdate: apply, scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 45%', scrub: true } });
     });
 
-    // testimonials + faq entrances
-    gsap.set('.tcard, .faq__item', { opacity: 0, y: 60 });
-    ScrollTrigger.batch('.tcard, .faq__item', {
+    // faq entrances
+    gsap.set('.faq__item', { opacity: 0, y: 60 });
+    ScrollTrigger.batch('.faq__item', {
       start: 'top 92%', once: true,
       onEnter: (b) => gsap.to(b, { opacity: 1, y: 0, duration: 1.1, ease: 'expo.out', stagger: 0.07 }),
     });
@@ -848,16 +880,26 @@ function initScroll() {
       });
     });
 
-    // work panel expands (ends full-bleed right as the section pins)
-    if (!lite) gsap.fromTo('.work', { '--inset': '5vw', '--radius': '48px' }, {
-      '--inset': '0vw', '--radius': '0px', ease: 'none',
-      scrollTrigger: { trigger: '.work', start: 'top bottom', end: 'top top', scrub: true },
-    });
-
-    // services panel expands
-    if (!lite) gsap.fromTo('.services', { '--inset': '5vw', '--radius': '48px' }, {
-      '--inset': '0vw', '--radius': '0px', ease: 'none',
-      scrollTrigger: { trigger: '.services', start: 'top bottom', end: 'top 15%', scrub: true },
+    // light panels expand to full-bleed. A clip-path change repaints the whole panel,
+    // so it is desktop-only (on a phone the 5vw inset is barely visible anyway)
+    // and stepped to whole pixels, so idle scroll frames repaint nothing
+    const expand = (sel, end) => {
+      const el = $(sel), o = { k: 1 };
+      let last = -1;
+      const apply = () => {
+        const inset = Math.round(o.k * window.innerWidth * 0.05);
+        if (inset === last) return;
+        last = inset;
+        el.style.setProperty('--inset', `${inset}px`);
+        el.style.setProperty('--radius', `${Math.round(o.k * 48)}px`);
+      };
+      apply();
+      const tw = gsap.to(o, { k: 0, ease: 'none', onUpdate: apply, scrollTrigger: { trigger: el, start: 'top bottom', end, scrub: true } });
+      return () => { tw.scrollTrigger.kill(); tw.kill(); el.style.removeProperty('--inset'); el.style.removeProperty('--radius'); };
+    };
+    if (!lite) gsap.matchMedia().add('(min-width: 901px)', () => {
+      const off = [expand('.work', 'top top'), expand('.services', 'top 15%')];
+      return () => off.forEach((f) => f());
     });
     ScrollTrigger.batch('[data-svc]', {
       start: 'top 88%', once: true,
@@ -925,6 +967,24 @@ function initScroll() {
     $('.work__cur').textContent = String(Math.min(PROJECTS.length, Math.round(p * (PROJECTS.length - 1)) + 1));
   }, { passive: true });
 
+  // positions the per-frame scroll handlers need — measured once per refresh, never inside a scroll frame
+  // (reading layout right after other handlers wrote styles forces a synchronous re-layout every frame)
+  const docTop = (el) => el.getBoundingClientRect().top + window.scrollY;
+  const pos = { heroEnd: 0, contact: 0, covers: [] };
+  const coverEls = $$('.work, .services');
+  const measure = () => {
+    pos.heroEnd = $('.hero').offsetHeight * 0.7;
+    pos.contact = docTop($('#contact'));
+    pos.covers = coverEls.map((s) => {
+      // a pinned panel lives inside its pin-spacer, which holds the whole pinned scroll distance
+      const el = s.parentElement.classList.contains('pin-spacer') ? s.parentElement : s;
+      const top = docTop(el);
+      return [top, top + el.offsetHeight];
+    });
+  };
+  ScrollTrigger.addEventListener('refresh', measure);
+  measure();
+
   // phones: floating CTA bar — after the hero, gone once contact is on screen
   const mcta = $('.m-cta');
   ScrollTrigger.create({
@@ -932,9 +992,7 @@ function initScroll() {
     onUpdate: (self) => {
       if (!isMobile()) return;
       const y = self.scroll();
-      const heroEnd = $('.hero').offsetHeight * 0.7;
-      const contactTop = $('#contact').getBoundingClientRect().top;
-      mcta.classList.toggle('is-on', y > heroEnd && contactTop > window.innerHeight * 0.75);
+      mcta.classList.toggle('is-on', y > pos.heroEnd && pos.contact - y > window.innerHeight * 0.75);
     },
   });
 
@@ -964,15 +1022,11 @@ function initScroll() {
     place();
     window.addEventListener('resize', place);
     // the light panels are opaque — while one fills the screen there is nothing to render
-    const covers = $$('.work, .services');
     ScrollTrigger.create({
       start: 0, end: 'max',
-      onUpdate: () => {
-        const H = window.innerHeight;
-        scene.setPaused(covers.some((s) => {
-          const r = s.getBoundingClientRect();
-          return r.top <= 1 && r.bottom >= H - 1;
-        }));
+      onUpdate: (self) => {
+        const y = self.scroll(), H = window.innerHeight;
+        scene.setPaused(pos.covers.some(([top, bottom]) => top <= y + 1 && bottom >= y + H - 1));
       },
     });
     if (lenis) lenis.on('scroll', (e) => scene.kick(Math.min(1, Math.abs(e.velocity) / 35)));
@@ -1020,7 +1074,7 @@ function initProcessPath() {
   const steps = $$('[data-step]', wrap);
   const HEAD = 0.62; // where on the screen the line's head sits
   const wide = window.matchMedia('(min-width: 901px)');
-  let pts = [], stepY = [], cum = [], total = 0;
+  let pts = [], stepY = [], cum = [], total = 0, wrapTop = 0;
 
   const typeIn = (step) => {
     if (step.dataset.typed) return;
@@ -1037,6 +1091,7 @@ function initProcessPath() {
 
   const build = () => {
     const box = wrap.getBoundingClientRect();
+    wrapTop = box.top + window.scrollY;
     svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
     pts = []; stepY = [];
     steps.forEach((st) => {
@@ -1066,16 +1121,25 @@ function initProcessPath() {
     return total;
   };
 
+  // the path is straight segments, so the point at a length is a plain lerp (no SVG geometry query per frame)
+  const pointAt = (len) => {
+    let i = 1;
+    while (i < pts.length - 1 && cum[i] < len) i++;
+    const f = (len - cum[i - 1]) / ((cum[i] - cum[i - 1]) || 1);
+    return [pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * f, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * f];
+  };
+
+  // scroll frames only use positions cached in build() — no layout reads here
   const update = () => {
     if (!pts.length) return;
-    const y = reduce ? Infinity : window.innerHeight * HEAD - wrap.getBoundingClientRect().top;
+    const y = reduce ? Infinity : window.innerHeight * HEAD - (wrapTop - window.scrollY);
     const len = lengthAt(y);
     line.style.strokeDashoffset = total - len;
     const live = len > 0 && len < total;
     runner.classList.toggle('is-live', live);
     if (live) {
-      const p = line.getPointAtLength(len);
-      runner.style.transform = `translate(${p.x}px, ${p.y}px)`;
+      const [px, py] = pointAt(len);
+      runner.style.transform = `translate(${px}px, ${py}px)`;
     }
     steps.forEach((st, i) => {
       const on = y >= stepY[i] - 1;
@@ -1171,7 +1235,6 @@ async function boot() {
   initMagnetic();
   initScramble();
   initMarquee();
-  initTestiNav();
   initContactForm();
   initProximity();
   initLiveType();

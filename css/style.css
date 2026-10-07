@@ -571,6 +571,56 @@ section { position: relative; }
 .card__info { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-top: .875rem; color: var(--muted); }
 .card__soon { color: var(--accent); white-space: nowrap; }
 
+/* ---- under construction (`soon: true`) ---- */
+.card__build {
+  position: absolute; inset: 2rem 0 0; z-index: 2; pointer-events: none; overflow: hidden;
+  background: linear-gradient(to bottom, rgba(10,10,10,.2), rgba(10,10,10,.45) 60%, rgba(10,10,10,.8));
+}
+.build__site {
+  position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;
+  filter: drop-shadow(0 0 1px rgba(0,0,0,.9)) drop-shadow(0 6px 14px rgba(0,0,0,.55));
+}
+.build__sign {
+  position: absolute; top: 9%; right: 5%; z-index: 1; transform-origin: 50% 0;
+  padding: 4px; border-radius: .5rem;
+  background: repeating-linear-gradient(-45deg, #ffc21a 0 8px, #141414 8px 16px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+  animation: build-sign 3.2s ease-in-out infinite;
+}
+.build__sign span {
+  display: grid; gap: .2rem; padding: .45rem .8rem; border-radius: .25rem; background: #141414; text-align: center; white-space: nowrap;
+}
+.build__sign b {
+  color: #ffc21a; font-family: var(--f-display); font-weight: 800; text-transform: uppercase; letter-spacing: .02em;
+  font-size: clamp(.8125rem, .55rem + .7vw, 1.25rem); line-height: 1;
+}
+.build__sign small {
+  color: rgba(242,242,238,.75); font-family: var(--f-mono); text-transform: uppercase; letter-spacing: .08em;
+  font-size: clamp(.5rem, .4rem + .25vw, .6875rem);
+}
+.build__tape {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
+  background: repeating-linear-gradient(-45deg, #ffc21a 0 12px, #141414 12px 24px);
+  background-size: 34px 8px; animation: build-tape 1.2s linear infinite;
+}
+.build__site g { transform-box: view-box; }
+.build__trolley { animation: build-trolley 7s ease-in-out infinite; }
+.build__load { transform-origin: 224px 52px; animation: build-swing 3.5s ease-in-out infinite; }
+.build__arm { transform-origin: 430px 196px; animation: build-dig 3s ease-in-out infinite; }
+.build__bucket { transform-origin: 328px 182px; animation: build-scoop 3s ease-in-out infinite; }
+.build__dirt { opacity: 0; animation: build-dirt 3s ease-in infinite; }
+.build__dirt--2 { animation-delay: .15s; }
+@keyframes build-sign { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(1.5deg); } }
+@keyframes build-tape { to { background-position: 34px 0; } }
+@keyframes build-trolley { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(80px); } }
+@keyframes build-swing { 0%, 100% { transform: rotate(3deg); } 50% { transform: rotate(-3deg); } }
+@keyframes build-dig { 0%, 100% { transform: rotate(0); } 45%, 55% { transform: rotate(-14deg); } }
+@keyframes build-scoop { 0%, 100% { transform: rotate(0); } 45%, 55% { transform: rotate(28deg); } }
+@keyframes build-dirt { 0%, 55% { opacity: 0; transform: translate(0, 0); } 60% { opacity: 1; } 100% { opacity: 0; transform: translate(-14px, 30px); } }
+@media (prefers-reduced-motion: reduce) {
+  .card__build *, .build__sign { animation: none !important; }
+}
+
 .card--cta .card__media { display: grid; place-items: center; text-align: center; background: var(--accent); color: var(--ink); box-shadow: none; }
 .card--cta .card__cta-t { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.75rem, 1rem + 2vw, 3rem); line-height: .95; letter-spacing: -.035em; }
 .card--cta .card__cta-a {
@@ -735,6 +785,8 @@ section { position: relative; }
    --------------------------------------------------------- */
 .faq { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); border-top: 1px solid var(--line); }
 .faq__side { grid-column: 1 / 5; position: sticky; top: calc(var(--nav-h) + 1.5rem); align-self: start; }
+/* "Често задавани въпроси" is long — fit it in the narrow side column */
+:lang(bg) .faq .big-title { font-size: min(var(--t-h2), 4.4vw); line-height: .95; }
 .faq__note { margin-top: 2rem; color: var(--fg-2); max-width: 20rem; }
 .faq__note a {
   color: var(--fg); padding-bottom: 2px;
@@ -990,6 +1042,7 @@ section { position: relative; }
 
   .faq__side, .faq__list { grid-column: 1 / 13; }
   .faq__side { position: static; margin-bottom: 2.5rem; }
+  :lang(bg) .faq .big-title { font-size: min(var(--t-h2), 11vw); }
   .faq__q { grid-template-columns: 2.25rem minmax(0, 1fr) 2.5rem; padding: 1.375rem 0; }
   .faq__a p { padding: 0 0 1.5rem 3.25rem; }
 
@@ -1197,6 +1250,7 @@ section { position: relative; }
   transition: font-variation-settings .5s var(--ease), color .5s var(--ease);
 }
 .hl--dim .lch.is-hot { color: var(--fg); }
+.hl--dim.is-wave .lch { transition: color .5s var(--ease); } /* touch wave: driven per frame from js */
 
 /* marquee leans with scroll speed */
 .marquee__row span { font-variation-settings: "wght" 300, "slnt" var(--mq-sl, 0), "CRSV" 1, "SHRP" 50; }

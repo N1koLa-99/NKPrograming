@@ -14,6 +14,9 @@
   <link rel="preload" href="assets/fonts/martian-mono-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/geologica-latin-full-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- the site opens in Bulgarian: the Cyrillic halves are needed for the first screen too -->
+  <link rel="preload" href="assets/fonts/geologica-cyrillic-full-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jetbrains-mono-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="modulepreload" href="assets/vendor/three.module.min.js">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/style.css">
@@ -286,26 +289,11 @@
       </ul>
     </section>
 
-    <!-- ================= TESTIMONIALS ================= -->
-    <section class="testi section" id="testimonials" data-blob="testi">
-      <div class="sec-head">
-        <div>
-          <div class="section-label mono" data-reveal><span class="sl-num">5</span><span class="sl-line"></span><span data-i18n="testi.label">Kind words</span></div>
-          <h2 class="big-title" data-reveal><span data-wght data-i18n="testi.title">Clients</span></h2>
-        </div>
-        <div class="testi__nav" data-reveal>
-          <button type="button" class="round-btn" data-testi="-1" aria-label="Previous">←</button>
-          <button type="button" class="round-btn" data-testi="1" aria-label="Next">→</button>
-        </div>
-      </div>
-      <div class="testi__track"><!-- rendered by js --></div>
-    </section>
-
     <!-- ================= FAQ ================= -->
     <section class="faq section" id="faq" data-blob="faq">
       <div class="faq__side">
-        <div class="section-label mono" data-reveal><span class="sl-num">6</span><span class="sl-line"></span><span data-i18n="faq.label">Questions</span></div>
-        <h2 class="big-title" data-reveal><span data-wght>FAQ</span></h2>
+        <div class="section-label mono" data-reveal><span class="sl-num">5</span><span class="sl-line"></span><span data-i18n="faq.label">Questions</span></div>
+        <h2 class="big-title" data-reveal><span data-wght data-i18n="faq.title">FAQ</span></h2>
         <p class="faq__note" data-reveal data-i18n="faq.note"></p>
       </div>
       <div class="faq__list"><!-- rendered by js --></div>
@@ -313,7 +301,7 @@
 
     <!-- ================= CONTACT ================= -->
     <section class="contact section" id="contact" data-blob="contact">
-      <div class="section-label mono" data-reveal><span class="sl-num">7</span><span class="sl-line"></span><span data-i18n="contact.label">Contact</span></div>
+      <div class="section-label mono" data-reveal><span class="sl-num">6</span><span class="sl-line"></span><span data-i18n="contact.label">Contact</span></div>
 
       <h2 class="contact__title" data-wght>
         <span class="mask"><span data-i18n="contact.t1">Let's build</span></span>

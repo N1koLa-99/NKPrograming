@@ -69,8 +69,22 @@ function rr(ctx, x, y, w, h, r) {
   ctx.arcTo(x, y, x + w, y, r);
   ctx.closePath();
 }
+// the panel chrome (background, dotted grid, header) never changes — it is drawn once
+// into an offscreen canvas and then just copied, instead of ~550 fillRects per redraw
+const chrome = new Map();
 function frame(ctx, W, H, num, title, meta) {
+  let c = chrome.get(title);
+  if (!c) {
+    c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    drawChrome(c.getContext('2d'), W, H, num, title, meta);
+    chrome.set(title, c);
+  }
   ctx.clearRect(0, 0, W, H);
+  ctx.drawImage(c, 0, 0, W, H);
+  ctx.textBaseline = 'middle';
+}
+function drawChrome(ctx, W, H, num, title, meta) {
   ctx.fillStyle = 'rgba(12,12,12,0.78)';
   rr(ctx, 0, 0, W, H, 18);
   ctx.fill();
@@ -497,10 +511,22 @@ export function createScene(canvas, opts = {}) {
     pkMat.uniforms.uPx.value = gMat.uniforms.uPx.value = TIERS[tier];
   }
 
+  // low = weak machine (picked up front, or the frame rate dropped): 30 fps, only the top
+  // layer keeps animating (and less often), a sparser glyph field, no mipmap rebuilds
+  let low = false;
+  function setLow() {
+    if (low) return;
+    low = true;
+    gGeo.setDrawRange(0, Math.min(GN, 140));
+    pkGeo.setDrawRange(0, Math.min(PK, 8));
+    layers.forEach((L) => { L.tex.generateMipmaps = false; L.tex.minFilter = THREE.LinearFilter; L.tex.needsUpdate = true; });
+  }
+  if (lite) setLow();
+
   const clock = new THREE.Clock();
   // started = the loader is gone; paused = the canvas is fully covered by an opaque section
   let started = false, paused = false, raf = 0;
-  let slowN = 0, slowSum = 0, slowRuns = 0, skip = 90, lastNow = 0, frame = 0;
+  let slowN = 0, slowSum = 0, slowRuns = 0, skip = 45, lastNow = 0, frame = 0;
   let dead = false, onScreen = true;
   const active = () => started && !paused && !dead && !document.hidden;
   const wake = () => {
@@ -522,19 +548,21 @@ export function createScene(canvas, opts = {}) {
     if (!active()) return;
     raf = requestAnimationFrame(tick);
 
-    // adaptive quality: average over ~1.5 s, step down a tier if we are under ~45 fps;
-    // if even the lowest tier crawls, the scene switches itself off
+    // adaptive quality: average over ~1 s, step down a tier if we are under ~45 fps;
+    // if even the lowest tier crawls, the scene switches itself off.
+    // (measured on every rAF, also the ones skipped by the 30 fps cap — so it reads the real headroom)
     const fdt = lastNow ? (now - lastNow) / 1000 : 0;
     lastNow = now;
     if (skip > 0) skip--;
     else if (fdt > 0 && fdt < 0.25) {
       slowSum += fdt; slowN++;
-      if (slowN >= 90) {
+      if (slowN >= 60) {
         const avg = slowSum / slowN;
         slowN = 0; slowSum = 0;
         if (avg > 1 / 45) {
           if (tier < TIERS.length - 1) {
             setTier(tier + 1); skip = 30;
+            setLow();
             if (opts.onLow) opts.onLow();
           } else if (avg > 1 / 28 && ++slowRuns >= 2) {
             dead = true;
@@ -546,8 +574,10 @@ export function createScene(canvas, opts = {}) {
       }
     }
 
-    // once the stack has scrolled away only the slow glyph field is left — half rate is plenty
-    if (!onScreen && (frame++ & 1)) return;
+    // weak machines run at half rate; once the stack has scrolled away only the slow
+    // glyph field is left behind the page — a third of the rate is plenty there
+    frame++;
+    if (!onScreen ? frame % 3 : low && frame & 1) return;
 
     const dt = Math.min(clock.getDelta(), 0.05);
     const t = clock.elapsedTime;
@@ -595,10 +625,11 @@ export function createScene(canvas, opts = {}) {
     texTick += dt;
     const scrolling = Math.abs(window.scrollY - lastSY) > 1;
     lastSY = window.scrollY;
-    if (!scrolling && texTick > (isMobile || tier > 1 ? 1 / 24 : 1 / 48) && onScreen && state.opacity * state.reveal > 0.22) {
+    const texRate = low ? 1 / 12 : isMobile || tier > 1 ? 1 / 24 : 1 / 48;
+    if (!scrolling && texTick > texRate && onScreen && state.opacity * state.reveal > 0.22) {
       texTick = 0;
-      // phones animate only the top layer (the rest sit dimmed under it) — so it runs at the full rate
-      const L = layers[isMobile ? 3 : texIdx];
+      // phones + weak machines animate only the top layer (the rest stay as last drawn)
+      const L = layers[isMobile || low ? 3 : texIdx];
       texIdx = (texIdx + 1) % layers.length;
       L.draw(L.ctx, t, L.st);
       L.tex.needsUpdate = true;
@@ -634,7 +665,11 @@ export function createScene(canvas, opts = {}) {
   }
 
   // make sure canvas text uses the real fonts once they arrive
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { gMat.uniforms.uAtlas.value = glyphAtlas(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => {
+    gMat.uniforms.uAtlas.value = glyphAtlas();
+    chrome.clear();
+    layers.forEach((L) => { L.draw(L.ctx, clock.elapsedTime, L.st); L.tex.needsUpdate = true; });
+  });
 
   // x/z of the connectors never change
   anchors.forEach(([ax, az], i) => { conPos.set([ax, 0, az, ax, 0, az], i * 6); });
