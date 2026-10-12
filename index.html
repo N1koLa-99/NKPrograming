@@ -14,13 +14,9 @@
   <link rel="preload" href="assets/fonts/martian-mono-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/geologica-latin-full-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="modulepreload" href="assets/vendor/three.module.min.js">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/style.css">
 
-  <script type="importmap">
-    { "imports": { "three": "./assets/vendor/three.module.min.js" } }
-  </script>
 </head>
 <body class="is-loading">
 
@@ -45,7 +41,6 @@
   </div>
 
   <!-- ================= FX ================= -->
-  <canvas id="webgl" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
   <div class="progress" aria-hidden="true"><i></i></div>
 
@@ -112,10 +107,10 @@
           <span class="tok-c">//</span><span data-i18n="hero.kicker">fullstack developer &amp; freelancer</span>
         </p>
 
-        <h2 class="hero__headline" data-hero-fade>
+        <h1 class="hero__headline" data-hero-fade>
           <span class="hl hl--dim" data-i18n="hero.l1">You bring the idea.</span>
           <span class="hl"><span data-i18n="hero.l2">I build the</span> <span class="rot-line"><span class="rot"><span class="rot__sel" aria-hidden="true"></span><span class="rot__txt">website</span></span><span class="rot__caret" aria-hidden="true"></span></span></span>
-        </h2>
+        </h1>
 
         <p class="hero__desc" data-hero-fade data-i18n="hero.desc">Websites, online shops and custom systems — designed, coded and launched by one person. From the database to the last pixel.</p>
 
@@ -129,9 +124,9 @@
         </div>
       </div>
 
-      <h1 class="hero__brand" aria-label="NK Programming">
+      <div class="hero__brand" aria-hidden="true">
         <span class="hero__brand-line"><span class="hb-solid" data-split>NK</span><span class="hb-gap"> </span><span class="hb-tail"><span class="hb-outline" data-split>PROGRAMMING</span><span class="hb-caret">_</span></span></span>
-      </h1>
+      </div>
 
       <div class="hero__bottom mono" data-hero-fade>
         <span data-i18n="hero.location">Veliko Tarnovo, BG</span>
@@ -169,7 +164,7 @@
         <div class="work__progress mono" aria-hidden="true">
           <span class="work__cur">1</span>
           <span class="work__bar"><i></i></span>
-          <span class="work__total">6</span>
+          <span class="work__total">8</span>
         </div>
       </div>
       <p class="work__hint mono" aria-hidden="true"><span data-i18n="work.hint">Swipe</span> <i>→</i></p>

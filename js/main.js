@@ -2,6 +2,7 @@
    NK Programming — interactions & motion
    ========================================================= */
 import { PROJECTS, I18N, SOCIALS, TESTIMONIALS, FAQ } from './data.js';
+import { createStack } from './stack.js';
 
 const $ = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
@@ -13,8 +14,7 @@ const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 // lite mode: older / weaker machines get the same site without the per-frame extras.
-// Picked up front from the hardware, and switched on later if the 3D scene can't hold its frame rate.
-// (?lite / ?full in the url force it either way)
+// Picked up front from the hardware. (?lite / ?full in the url force it either way)
 const qs = new URLSearchParams(location.search);
 const apple = /Mac|iPhone|iPad|iPod/.test(navigator.platform || '');
 let lite = qs.has('lite') || (!qs.has('full') && !apple && ((navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4));
@@ -30,19 +30,9 @@ const store = {
 let lang = 'bg'; // the site always opens in Bulgarian; EN is one tap away in the nav
 const t = (k) => (I18N[lang] && I18N[lang][k]) ?? I18N.en[k] ?? k;
 
-/* ---------------- 3D ---------------- */
-// loaded in parallel (three.js is ~660 KB) so the loader can start right away
-let scene = null;
-const scenePromise = import('./scene.js')
-  .then((m) => {
-    scene = m.createScene($('#webgl'), {
-      lite,
-      onLow: goLite,
-      onDead: () => document.documentElement.classList.add('no-webgl'),
-    });
-  })
-  .catch(() => {})
-  .finally(() => { if (!scene) document.documentElement.classList.add('no-webgl'); });
+/* ---------------- hero visual ---------------- */
+// the exploded-website stack is plain CSS 3D (js/stack.js), built right away so it is ready behind the loader
+let stack = null;
 
 /* ---------------- smooth scroll ---------------- */
 let lenis = null;
@@ -164,6 +154,38 @@ function pattern(type) {
       s += `<line x1="46" y1="32" x2="46" y2="${H}" ${st}/><line x1="354" y1="32" x2="354" y2="${H}" ${st}/>`;
       s += `<path d="M46 188 H262" ${ac}/><circle cx="262" cy="188" r="4.5" fill="#ccff00"/>`;
       break;
+    case 'build': {
+      // under construction: a tower crane lifts a browser window, an excavator digs beside it
+      const ln = 'stroke="rgba(242,242,238,.42)" fill="none" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"';
+      for (let x = 20; x < W; x += 20) s += `<line x1="${x}" y1="60" x2="${x}" y2="236" ${st} stroke-dasharray="1 5"/>`;
+      // crane: mast, jib, counter-jib, ties
+      let lat = '';
+      for (let y = 236; y > 106; y -= 13) lat += `M290 ${y} L306 ${y - 13} `;
+      for (let x = 150; x + 12 <= 380; x += 12) lat += `M${x} 106 L${x + 6} 96 L${x + 12} 106 `;
+      s += `<path d="M290 236 V106 M306 236 V106 M150 96 H380 M150 106 H380 M150 96 V106 ${lat}" ${ln}/>`;
+      s += `<path d="M160 96 L298 70 L378 96 M298 70 V96" ${ln}/>`;
+      s += `<rect x="352" y="106" width="26" height="16" rx="1.5" ${ln}/><rect x="306" y="106" width="16" height="14" rx="1.5" ${ln}/>`;
+      // trolley + swaying hook with the page being built
+      s += `<rect x="189" y="106" width="14" height="5" rx="1" fill="rgba(242,242,238,.42)"/>`;
+      s += `<g class="bld-hook"><path d="M196 111 V150" ${ac}/>`;
+      s += `<path d="M196 150 L178 158 M196 150 L214 158" ${ac}/>`;
+      s += `<rect x="170" y="158" width="52" height="34" rx="3" ${ac}/><path d="M170 166 H222" ${ac}/>`;
+      s += `<circle cx="175" cy="162" r="1.3" fill="#ccff00"/><circle cx="180" cy="162" r="1.3" fill="#ccff00"/><circle cx="185" cy="162" r="1.3" fill="#ccff00"/>`;
+      s += `<path d="M176 173 H200 M176 179 H212 M176 185 H192" stroke="rgba(204,255,0,.55)" stroke-width="1.4" stroke-linecap="round"/></g>`;
+      // excavator
+      s += `<rect x="36" y="222" width="86" height="14" rx="7" ${ln}/>`;
+      for (const cx of [45, 62, 79, 96, 113]) s += `<circle cx="${cx}" cy="229" r="3" ${ln}/>`;
+      s += `<path d="M44 222 V200 H112 V222 M52 200 V178 H76 L84 200" ${ln}/><path d="M57 183 H72 L77 196 H57 Z" stroke="rgba(204,255,0,.5)" fill="none" stroke-width="1.2"/>`;
+      s += `<g class="bld-arm"><path d="M104 204 L138 162 L160 200" ${ln} stroke-width="2.4"/>`;
+      s += `<path d="M160 200 L176 206 L170 222 L154 214 Z" ${ln}/></g>`;
+      s += `<path d="M150 236 Q172 214 196 236" ${st}/>`;
+      // ground + hazard tape
+      s += `<line x1="0" y1="236" x2="${W}" y2="236" stroke="rgba(242,242,238,.42)"/>`;
+      let tape = '';
+      for (let x = -12; x < W; x += 16) tape += `M${x} 248 L${x + 8} 238 H${x + 16} L${x + 8} 248 Z `;
+      s += `<rect x="0" y="238" width="${W}" height="10" fill="#141414"/><path d="${tape}" fill="#ccff00"/>`;
+      break;
+    }
   }
   return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${s}</svg>`;
 }
@@ -178,7 +200,7 @@ function renderCards() {
     const attrs = live ? `href="${p.url}" target="_blank" rel="noopener" data-cursor="view"` : '';
     const cover = p.image
       ? `<img src="${p.image}" alt="${p.name} — ${p.domain}" loading="lazy" decoding="async">`
-      : `${pattern(p.pattern)}<span class="card__initials">${p.initials}</span>`;
+      : `${pattern(p.pattern)}${p.initials ? `<span class="card__initials">${p.initials}</span>` : ''}`;
     return `
       <article class="card" style="--ar:${p.ratio || 2.1}">
         <${tag} class="card__link" ${attrs}>
@@ -338,31 +360,6 @@ function fitBrand() {
   const w = stacked ? Math.max($('.hb-solid').offsetWidth, $('.hb-tail').offsetWidth) : line.scrollWidth;
   if (!w) return;
   line.style.fontSize = `${(100 * box.clientWidth / w) * 0.995}px`;
-}
-function initProximity() {
-  if (!fine || reduce || lite) return;
-  const chars = $$('.hero__brand .char');
-  let raf = 0, ex = -9999, ey = -9999;
-  const last = chars.map(() => 800);
-  const run = () => {
-    raf = 0;
-    // read everything first, then write — one layout per frame instead of one per letter
-    const rects = chars.map((c) => c.getBoundingClientRect());
-    chars.forEach((c, i) => {
-      const r = rects[i];
-      const d = Math.hypot(ex - (r.left + r.width / 2), ey - (r.top + r.height / 2));
-      const k = Math.max(0, 1 - d / (r.height * 1.8));
-      const w = Math.round((800 - 650 * k * k) / 10) * 10;
-      if (w === last[i]) return;
-      last[i] = w;
-      c.style.setProperty('--w', w);
-    });
-  };
-  window.addEventListener('pointermove', (e) => {
-    if (lite || window.scrollY > window.innerHeight) return;
-    ex = e.clientX; ey = e.clientY;
-    if (!raf) raf = requestAnimationFrame(run);
-  }, { passive: true });
 }
 const SCR = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}<>/#$*+=';
 function scrambleChars(chars, delay = 0) {
@@ -591,8 +588,8 @@ function initClock() {
 /* ---------------- loader ----------------
    A wall of ghost "NK PROGRAMMING" rows fills the screen,
    the wordmark in the middle decodes as the build runs,
-   the wall flies apart and the wordmark glides down into
-   the exact spot it lives in the hero.                     */
+   the wall flies apart and the wordmark glides up into
+   the logo in the top bar.                                 */
 const TASKS = ['resolving packages', 'compiling c#', 'migrating database', 'bundling assets', 'rendering ui', 'deploying to azure', 'ready'];
 const ENC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+=/<>{}';
 
@@ -646,11 +643,15 @@ function runLoader() {
       gsap.to(el, { x: `+=${dir * fs * 1.6}`, duration: D + 2, ease: 'none', delay: 1.6 });
     });
 
-    // where the wordmark lands: desktop → down onto the hero wordmark;
-    // phones (that one is hidden there) → up, shrinking into the name in the top bar
+    // where the wordmark lands: up, shrinking into the logo in the top bar
+    // (phones: right onto the "NK PROGRAMMING_" name there; desktop: into the NK mark, fading as it arrives)
     const landing = () => {
       const navName = $('.nav__logo .mono');
-      if (getComputedStyle(heroBrand).position !== 'absolute' || !navName) return { y: r.top, duration: 1.2, ease: 'expo.inOut' };
+      if (!isMobile()) {
+        const n = $('.nav__logo').getBoundingClientRect();
+        const s = n.height / r.height;
+        return { x: n.left, y: n.top, scale: s, opacity: 0, transformOrigin: '0 0', duration: 1.2, ease: 'expo.inOut' };
+      }
       const n = navName.getBoundingClientRect();
       const s = parseFloat(getComputedStyle(navName).fontSize) / fs;
       return { x: n.left, y: n.top + (n.height - r.height * s) / 2, scale: s, transformOrigin: '0 0', duration: 1.2, ease: 'expo.inOut' };
@@ -756,40 +757,11 @@ function heroIntro() {
     gsap.set(['[data-hero-fade]', '.nav'], { opacity: 1 });
   }
   tl.add(startRotator, reduce ? 0 : 0.7);
-  if (scene) {
-    scene.start();
-    gsap.to(scene.state, { reveal: 1, duration: reduce ? 0.01 : 2.6, ease: 'expo.out' });
-  }
+  if (stack) stack.reveal();
   return tl;
 }
 
 /* ---------------- scroll scenes ---------------- */
-const BLOB = {
-  hero:     { d: { x: 0.36, y: 0.14, scale: 0.78, opacity: 1, spread: 1.05, rot: 0 },     m: { x: 0.1, y: 0.02, scale: 0.5, opacity: 0.55, spread: 0.95, rot: 0 } },
-  about:    { d: { x: -0.66, y: -0.28, scale: 0.5, opacity: 0.7, spread: 0.12, rot: 0.9 }, m: { x: 0.45, y: 0.55, scale: 0.35, opacity: 0.3, spread: 0.12, rot: 0.9 } },
-  work:     { d: { x: 0.55, y: 0.82, scale: 0.45, opacity: 0.18, spread: 0.35, rot: 1.6 }, m: { x: 0.6, y: 0.7, scale: 0.35, opacity: 0.15, spread: 0.3, rot: 1.6 } },
-  process:  { d: { x: 0.62, y: -0.5, scale: 0.42, opacity: 0.35, spread: 0.6, rot: 1.9 },  m: { x: 0.55, y: -0.6, scale: 0.3, opacity: 0.18, spread: 0.5, rot: 1.9 } },
-  services: { d: { x: -0.55, y: 0, scale: 0.7, opacity: 0.6, spread: 0.5, rot: 2.2 },     m: { x: 0, y: 0, scale: 0.5, opacity: 0.3, spread: 0.4, rot: 2.2 } },
-  testi:    { d: { x: 0.6, y: -0.7, scale: 0.45, opacity: 0.25, spread: 0.45, rot: 2.6 },  m: { x: 0.5, y: -0.7, scale: 0.3, opacity: 0.15, spread: 0.4, rot: 2.6 } },
-  faq:      { d: { x: -0.7, y: -0.55, scale: 0.42, opacity: 0.55, spread: 0.7, rot: 2.9 }, m: { x: 0.55, y: 0.7, scale: 0.3, opacity: 0.2, spread: 0.5, rot: 2.9 } },
-  contact:  { d: { x: 0.68, y: 0.32, scale: 0.5, opacity: 0.85, spread: 0.9, rot: 3.1 },   m: { x: 0.5, y: 0.72, scale: 0.32, opacity: 0.28, spread: 0.7, rot: 3.1 } },
-};
-
-// on phones the stack lives in the free space between the buttons and the wordmark
-function heroMobileTarget() {
-  const H = window.innerHeight;
-  const top = $('.hero__ctas').getBoundingClientRect().bottom + window.scrollY;
-  // on phones the big wordmark is out of the flow, so the stack gets everything down to the bottom bar
-  const brand = $('.hero__brand');
-  const floor = getComputedStyle(brand).position === 'absolute' ? $('.hero__bottom') : brand;
-  const bottom = floor.getBoundingClientRect().top + window.scrollY + 16;
-  const gap = bottom - top;
-  if (gap < H * 0.2) return { ...BLOB.hero.m, opacity: 0.2 };
-  const cy = top + gap * 0.54; // a touch below the middle of the free space
-  const scale = Math.min(0.8, 0.56 * (gap / (H * 0.42)));
-  return { x: 0, y: 1 - (2 * cy) / H, scale, opacity: 1, spread: 0.95, rot: 0 };
-}
-
 function initScroll() {
   // generic reveals
   if (reduce) {
@@ -822,9 +794,6 @@ function initScroll() {
   if (!reduce) {
     // hero parallax out
     const heroST = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
-    gsap.to('.hero__brand', { yPercent: -45, ease: 'none', scrollTrigger: heroST });
-    gsap.to('.hb-solid', { xPercent: -12, ease: 'none', scrollTrigger: heroST });
-    gsap.to('.hb-outline', { xPercent: 6, ease: 'none', scrollTrigger: heroST });
     gsap.to(['.hero__content', '.hero__bottom'], { y: -90, opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '60% top' } });
 
     // variable-font weight grows as section titles come in
@@ -957,26 +926,6 @@ function initScroll() {
     trigger: '.work', start: 'top 40px', end: 'bottom 40px',
     toggleClass: { targets: '.nav', className: 'is-light' },
   });
-
-  // the 3D stack lives in the hero and scrolls away with it (the scene offsets it by the scroll position)
-  if (scene) {
-    const place = () => scene.setTarget(isMobile() ? heroMobileTarget() : BLOB.hero.d);
-    place();
-    window.addEventListener('resize', place);
-    // the light panels are opaque — while one fills the screen there is nothing to render
-    const covers = $$('.work, .services');
-    ScrollTrigger.create({
-      start: 0, end: 'max',
-      onUpdate: () => {
-        const H = window.innerHeight;
-        scene.setPaused(covers.some((s) => {
-          const r = s.getBoundingClientRect();
-          return r.top <= 1 && r.bottom >= H - 1;
-        }));
-      },
-    });
-    if (lenis) lenis.on('scroll', (e) => scene.kick(Math.min(1, Math.abs(e.velocity) / 35)));
-  }
 }
 
 /* ---------------- marquee ---------------- */
@@ -1167,13 +1116,13 @@ async function boot() {
   if (!reduce) gsap.set('.nav', { opacity: 0 });
   renderSocials();
   applyLang(lang);
+  try { stack = createStack($('.hero'), { before: $('.hero__brand'), lite, reduce }); } catch (e) { stack = null; }
   initClock();
   initMagnetic();
   initScramble();
   initMarquee();
   initTestiNav();
   initContactForm();
-  initProximity();
   initLiveType();
 
   window.scrollTo(0, 0);
@@ -1183,7 +1132,6 @@ async function boot() {
   fitBrand();
   window.addEventListener('resize', fitBrand);
   await runLoader();
-  await scenePromise;
 
   buildAbout();
   initScroll();
