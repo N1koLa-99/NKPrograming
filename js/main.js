@@ -1,7 +1,7 @@
 /* =========================================================
    NK Programming — interactions & motion
    ========================================================= */
-import { PROJECTS, I18N, SOCIALS, FAQ } from './data.js';
+import { PROJECTS, I18N, SOCIALS, FAQ, PRICING } from './data.js';
 import { createStack } from './stack.js';
 
 const $ = (s, c = document) => c.querySelector(s);
@@ -231,13 +231,15 @@ function renderCards() {
             <div class="card__cover">${cover}</div>
             ${p.soon ? building() : ''}
             <div class="card__glow"></div>
-            ${live ? `<span class="card__visit mono">${t('work.visit')} ↗</span>` : ''}
+            ${live ? `<span class="card__visit mono">${t(p.concept ? 'work.see' : 'work.visit')} ↗</span>` : ''}
           </div>
           <div class="card__meta">
             <h3 class="card__title">${p.name}</h3>
             <span class="card__go">${live ? '↗' : '·'}</span>
           </div>
-          ${p.soon ? `<div class="card__info mono"><span class="card__soon">● ${t('work.soon')}</span></div>` : ''}
+          ${p.soon ? `<div class="card__info mono"><span class="card__soon">● ${t('work.soon')}</span></div>`
+            : p.concept ? `<div class="card__info mono"><span class="card__badge card__badge--concept">${t('work.concept')}</span></div>`
+            : live ? `<div class="card__info mono"><span class="card__badge card__badge--live"><i></i>${t('work.live')}</span></div>` : ''}
         </${tag}>
       </article>`;
   }).join('');
@@ -300,8 +302,42 @@ function buildAbout() {
   });
 }
 
+/* ---------------- pricing ---------------- */
+const pad2 = (n) => String(n).padStart(2, '0');
+function renderPricing() {
+  // "50–150" → two counters that run up when the card scrolls in
+  const price = (v) => v.split('–').map((n) => `<span data-to="${n}">${n}</span>`).join('<span class="plan__dash" aria-label="–"></span>');
+  $('.pricing__list').innerHTML = PRICING.map((p, i) => {
+    const items = p.items[lang];
+    return `
+    <li class="plan${p.featured ? ' plan--featured' : ''}" data-plan>
+      <span class="plan__glow" aria-hidden="true"></span>
+      <div class="plan__top">
+        <span class="plan__n mono">${pad2(i + 1)} / ${pad2(PRICING.length)}</span>
+        ${p.featured ? `<span class="plan__tag mono">${t('price.pop')}</span>` : ''}
+      </div>
+      <h3 class="plan__name">${p.name[lang]}</h3>
+      <p class="plan__for">${p.for[lang]}</p>
+      <div class="plan__price">${p.price
+        ? `<span class="plan__cur">€</span><span class="plan__amt">${price(p.price)}</span>`
+        : `<span class="plan__ask">${t('price.ask')}</span>`}</div>
+      <span class="plan__inc mono">${t(p.examples ? 'price.eg' : 'price.more')}</span>
+      <ul class="plan__list">${items.map((x) => `<li>${x}</li>`).join('')}</ul>
+      <a href="#contact" class="btn ${p.featured ? 'btn--ink' : 'btn--ghost'} plan__cta" data-scroll-to>
+        <span class="btn__txt">${t('price.cta')}</span><span class="btn__arrow" aria-hidden="true">↗</span>
+      </a>
+    </li>`;
+  }).join('');
+}
+// cursor spotlight on the cards
+document.addEventListener('pointermove', (e) => {
+  const c = e.target.closest && e.target.closest('.plan');
+  if (!c) return;
+  const r = c.getBoundingClientRect();
+  c.style.setProperty('--mx', `${e.clientX - r.left}px`);
+  c.style.setProperty('--my', `${e.clientY - r.top}px`);
+});
 /* ---------------- faq ---------------- */
-const pad2 = (n) => String(n);
 function renderFaq() {
   $('.faq__list').innerHTML = FAQ.map((f, i) => `
     <div class="faq__item">
@@ -431,6 +467,7 @@ function applyLang(l) {
   $$('.lang button').forEach((b) => b.classList.toggle('is-active', b.dataset.lang === l));
   const words = t('loader');
   renderCards();
+  renderPricing();
   renderFaq();
   if ($('.hl--dim .lch') || booted) liveChars = splitLive();
   if (booted) {
@@ -585,6 +622,7 @@ function runLoader() {
     const heroBrand = $('.hero__brand'), heroLine = $('.hero__brand-line');
     const H = window.innerHeight;
     const D = reduce ? 0.8 : 1.8;
+    const SPEED = 2; // whole intro plays this many times faster (count 0→100 ≈ 0.9s)
 
     // clone the hero wordmark → loader ends pixel-exact where the hero begins
     const r = heroLine.getBoundingClientRect();
@@ -625,8 +663,8 @@ function runLoader() {
     const maxIdx = rows.reduce((m, x) => Math.max(m, Math.abs(x.idx)), 1);
     rows.forEach(({ el, dir }) => {
       const x0 = -Math.random() * fs * 5;
-      gsap.fromTo(el, { x: x0 + dir * fs * 3, opacity: 0 }, { x: x0, opacity: 1, duration: 1.6, ease: 'expo.out', delay: 0.05 + Math.random() * 0.25 });
-      gsap.to(el, { x: `+=${dir * fs * 1.6}`, duration: D + 2, ease: 'none', delay: 1.6 });
+      gsap.fromTo(el, { x: x0 + dir * fs * 3, opacity: 0 }, { x: x0, opacity: 1, duration: 1.6 / SPEED, ease: 'expo.out', delay: (0.05 + Math.random() * 0.25) / SPEED });
+      gsap.to(el, { x: `+=${dir * fs * 1.6}`, duration: (D + 2) / SPEED, ease: 'none', delay: 1.6 / SPEED });
     });
 
     // where the wordmark lands: up, shrinking into the logo in the top bar
@@ -647,7 +685,7 @@ function runLoader() {
     const st = { p: 0 };
     let lastEnc = 0, lastLit = -1;
 
-    const tl = gsap.timeline();
+    const tl = gsap.timeline().timeScale(SPEED);
     tl.fromTo(['.loader__top', '.loader__bottom'], { opacity: 0, y: (i) => (i ? 20 : -20) }, { opacity: 1, y: 0, duration: 1, ease: 'expo.out' }, 0)
       .fromTo(chars, { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.025 }, 0.1)
       .to(st, {
@@ -780,7 +818,7 @@ function initScroll() {
   if (!reduce) {
     // hero parallax out
     const heroST = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
-    gsap.to(['.hero__content', '.hero__bottom'], { y: -90, opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '60% top' } });
+    gsap.to('.hero__content', { y: -90, opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '60% top' } });
 
     // variable-font weight grows as section titles come in.
     // Every axis change re-lays-out the title, so the values move in small steps
@@ -800,6 +838,23 @@ function initScroll() {
       apply();
       gsap.to(o, { w: 800, sl: 0, sh: 100, ease: 'none', onUpdate: apply, scrollTrigger: { trigger: el, start: 'top 98%', end: 'top 45%', scrub: true } });
     });
+
+    // pricing: the cards rise in a fan, then the prices count up
+    ScrollTrigger.batch('[data-plan]', {
+      start: 'top 90%', once: true,
+      onEnter: (b) => b.forEach((card, i) => {
+        const k = [...card.parentElement.children].indexOf(card), d = i * 0.12;
+        gsap.fromTo(card, { y: 140, rotate: (k - 1) * 4, opacity: 0 },
+          { y: 0, rotate: 0, opacity: 1, duration: 1.5, ease: 'expo.out', delay: d, clearProps: 'transform,rotate' });
+        gsap.fromTo(card.querySelectorAll('.plan__top, .plan__name, .plan__for, .plan__price, .plan__inc, .plan__list li, .plan__cta'), { y: 24, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1, ease: 'expo.out', stagger: 0.045, delay: d + 0.25, clearProps: 'transform' });
+        card.querySelectorAll('[data-to]').forEach((el) => {
+          const o = { v: 0 }, to = +el.dataset.to;
+          gsap.to(o, { v: to, duration: 1.6, ease: 'power3.out', delay: d + 0.35, onUpdate: () => { el.textContent = Math.round(o.v); } });
+        });
+      }),
+    });
+    gsap.set('[data-plan]', { opacity: 0 });
 
     // faq entrances
     gsap.set('.faq__item', { opacity: 0, y: 60 });
@@ -835,7 +890,7 @@ function initScroll() {
       return () => { tw.scrollTrigger.kill(); tw.kill(); el.style.removeProperty('--inset'); el.style.removeProperty('--radius'); };
     };
     if (!lite) gsap.matchMedia().add('(min-width: 901px)', () => {
-      const off = [expand('.work', 'top top'), expand('.services', 'top 15%')];
+      const off = [expand('.work', 'top top'), expand('.services', 'top 15%'), expand('.faq', 'top 15%')];
       return () => off.forEach((f) => f());
     });
     ScrollTrigger.batch('[data-svc]', {
@@ -943,6 +998,10 @@ function initScroll() {
   });
   ScrollTrigger.create({
     trigger: '.work', start: 'top 40px', end: 'bottom 40px',
+    toggleClass: { targets: '.nav', className: 'is-light' },
+  });
+  ScrollTrigger.create({
+    trigger: '.faq', start: 'top 40px', end: 'bottom 40px',
     toggleClass: { targets: '.nav', className: 'is-light' },
   });
 }

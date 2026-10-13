@@ -4,6 +4,8 @@
    (e.g. 'assets/projects/moto-zona.jpg') to replace the
    generated cover with a real screenshot. `ratio` is the
    screenshot's width / height, so it is shown uncropped.
+   `concept: true` = practice / concept work, not a live client
+   site: the card says so instead of "Live".
    ========================================================= */
 
 export const SOCIALS = [
@@ -41,6 +43,7 @@ export const PROJECTS = [
     name: 'SwimWithSmile',
     domain: 'swimwithsmile.netlify.app',
     url: 'https://swimwithsmile.netlify.app',
+    concept: true,
     image: 'assets/projects/swim-with-smile.jpg',
     ratio: 1600 / 897,
     initials: 'SW',
@@ -53,6 +56,7 @@ export const PROJECTS = [
     name: 'Пчеличка',
     domain: 'pchelichkaa.netlify.app',
     url: 'https://pchelichkaa.netlify.app',
+    concept: true,
     image: 'assets/projects/pchelichka.jpg',
     ratio: 1600 / 812,
     initials: 'Пч',
@@ -87,8 +91,8 @@ export const PROJECTS = [
   },
   {
     name: 'PK Lokomotiv GO',
-    domain: 'pk-lokomotiv-go',
-    url: '',
+    domain: 'pklokomotivgo.com',
+    url: 'https://pklokomotivgo.com',
     image: 'assets/projects/pk-lokomotiv-go.jpg',
     ratio: 1600 / 822,
     initials: 'PK',
@@ -109,6 +113,44 @@ export const PROJECTS = [
     cat: { en: 'Flower & gift e-shop', bg: 'Онлайн магазин за цветя' },
     role: { en: 'WordPress · WooCommerce', bg: 'WordPress · WooCommerce' },
     tags: ['WooCommerce', 'PHP', 'JS'],
+  },
+];
+
+/* ---------------------------------------------------------
+   PRICING — example starting prices in EUR, edit freely.
+   `price: ''` shows "on request". `featured: true` = accent card.
+   `items` are listed under "What's included"; `examples: true`
+   labels them as examples (custom work has no fixed list).
+   --------------------------------------------------------- */
+export const PRICING = [
+  {
+    name: { en: 'One-page site', bg: 'Сайт на една страница' },
+    price: '50–150',
+    for: { en: 'Restaurants, cafés, salons, craftsmen', bg: 'Ресторанти, кафенета, салони, майстори' },
+    items: {
+      en: ['Menu or services', 'Location, map &amp; opening hours', 'Looks great on phones', 'What sets you apart', 'Phone &amp; contact buttons', 'Basic SEO'],
+      bg: ['Меню или услуги', 'Адрес, карта и работно време', 'Изглежда отлично на телефон', 'С какво се отличавате', 'Бутони за телефон и контакт', 'Базово SEO'],
+    },
+  },
+  {
+    name: { en: 'Business website', bg: 'Бизнес сайт' },
+    price: '150–350',
+    featured: true,
+    for: { en: 'Up to 5 pages, no database', bg: 'До 5 страници, без база данни' },
+    items: {
+      en: ['Everything in plan 1', 'Up to 5 separate pages', 'Contact form', 'Gallery, about, services, contact', 'SEO for every page', 'Google Maps &amp; social links'],
+      bg: ['Всичко от пакет 1', 'До 5 отделни страници', 'Форма за контакт', 'Галерия, за нас, услуги, контакт', 'SEO за всяка страница', 'Google Maps и социални мрежи'],
+    },
+  },
+  {
+    name: { en: 'Shop or platform', bg: 'Магазин или платформа' },
+    price: '',
+    for: { en: 'Everything your business needs — built to order', bg: 'Всичко, от което бизнесът ти има нужда — по поръчка' },
+    examples: true,
+    items: {
+      en: ['Online shop with cart &amp; payments', 'Admin panel for your content', 'Bookings, accounts, listings', 'Database &amp; integrations', 'Any feature you have in mind', 'Grows with the business'],
+      bg: ['Онлайн магазин с количка и плащане', 'Админ панел за съдържанието', 'Резервации, профили, обяви', 'База данни и интеграции', 'Всяка функция, която си представяш', 'Расте заедно с бизнеса'],
+    },
   },
 ];
 
@@ -134,8 +176,8 @@ export const FAQ = [
   },
   {
     q: { en: 'How much does it cost?', bg: 'Колко струва?' },
-    a: { en: "It depends on what you need. Tell me about the project and I'll send you a clear offer — what's included, how long it takes, no hidden extras.",
-         bg: 'Зависи какво ти трябва. Разкажи ми за проекта и ще ти пратя ясна оферта — какво влиза, колко време отнема, без скрити екстри.' },
+    a: { en: "A one-page site starts from €50, a business website of up to 5 pages from €150 — see the prices above. Tell me about the project and I'll send you a clear offer — what's included, how long it takes, no hidden extras.",
+         bg: 'Сайт на една страница започва от 50 €, бизнес сайт до 5 страници — от 150 €. Виж цените по-горе. Разкажи ми за проекта и ще ти пратя ясна оферта — какво влиза, колко време отнема, без скрити екстри.' },
   },
   {
     q: { en: 'Do you handle domain and hosting?', bg: 'Поемаш ли домейн и хостинг?' },
@@ -152,11 +194,6 @@ export const FAQ = [
     a: { en: "I don't disappear. Fixes, updates, new features — we agree on support that fits you.",
          bg: 'Не изчезвам. Поправки, ъпдейти, нови функции — договаряме поддръжка, която ти пасва.' },
   },
-  {
-    q: { en: 'Do you work with clients abroad?', bg: 'Работиш ли с клиенти от чужбина?' },
-    a: { en: 'Yes. Everything works remotely — calls, shared designs, live previews. In English or Bulgarian.',
-         bg: 'Да. Всичко става дистанционно — разговори, споделени дизайни, live преглед. На български или английски.' },
-  },
 ];
 
 export const I18N = {
@@ -167,15 +204,13 @@ export const I18N = {
     'nav.contact': 'Contact',
     'nav.cta': "Let's talk",
     'hero.kicker': 'fullstack developer &amp; freelancer',
+    'hero.status': 'Available for new projects',
     'hero.title': 'Websites, systems &amp; apps — <em>built right.</em>',
     'hero.desc': 'Websites, online shops and custom systems — designed, coded and launched by one person. From the database to the last pixel.',
     'hero.cta1': 'See the work',
     'hero.cta2': 'Start a project',
-    'hero.status': 'Available for new projects',
-    'hero.location': 'Veliko Tarnovo, BG',
-    'hero.scroll': 'Scroll',
     'about.label': 'About',
-    'about.text': "I build websites that <em>work for your business</em>: they load fast, look good on every device and bring in real value and real orders.<span class='about__more'>I handle the whole process — from the first conversation to going live and the support after. You have one point of contact who knows your project from start to finish.</span>",
+    'about.text': "I build websites that <em>work for your business</em>: they load fast, look good on every device and bring in <em>real value and real orders</em>.<span class='about__more'>I handle <em>the whole process</em> — from the first conversation to going live and the support after. You have <em>one point of contact</em> who knows your project from start to finish.</span>",
     'about.s1': 'Years in production',
     'about.s2': 'Projects shipped',
     'about.s3': 'Own marketplace, built from zero',
@@ -184,6 +219,9 @@ export const I18N = {
     'work.visit': 'Visit',
     'work.soon': 'Coming soon',
     'work.building': 'Store under construction',
+    'work.live': 'Live',
+    'work.concept': 'Concept project',
+    'work.see': 'See the concept',
     'work.hint': 'Swipe',
     'mcta.status': 'Available for projects',
     'work.cta': 'Your project<br>next?',
@@ -213,11 +251,23 @@ export const I18N = {
     'svc.1.t': 'Web apps',
     'svc.1.d': 'Custom platforms on .NET and SQL Server — accounts, dashboards, listings, APIs. Built to handle real traffic.',
     'svc.2.t': 'Websites',
-    'svc.2.d': 'Fast, sharp business sites that look great on every screen and actually show up on Google.',
+    'svc.2.d': 'Fast, sharp business sites that look great on every screen.',
     'svc.3.t': 'E-commerce',
     'svc.3.d': 'Online shops with cart, payments and orders. WooCommerce or fully custom — whatever fits the business.',
     'svc.4.t': 'Cloud',
     'svc.4.d': 'Azure hosting, domains, SSL, CI/CD. Set up once, done right, forgotten about.',
+    'nav.pricing': 'Pricing',
+    'price.label': 'Prices',
+    'price.title': 'Pricing',
+    'price.aside': 'Example prices — the exact amount we agree on together.',
+    'price.ask': 'On request',
+    'price.pop': 'Most popular',
+    'price.cta': 'Ask for an offer',
+    'price.more': "What's included",
+    'price.eg': 'For example',
+    'price.more.t': 'Not sure which one fits?',
+    'price.more.d': 'Tell me what the business needs — I will suggest the right option and send an exact price.',
+    'price.more.b': 'Ask me',
     'testi.label': 'Kind words',
     'testi.title': 'Clients',
     'testi.soon': 'Review on the way',
@@ -252,15 +302,13 @@ export const I18N = {
     'nav.contact': 'Контакт',
     'nav.cta': 'Пиши ми',
     'hero.kicker': 'fullstack разработчик и фрийлансър',
+    'hero.status': 'Свободен за нови проекти',
     'hero.title': 'Сайтове, системи и приложения — <em>направени както трябва.</em>',
     'hero.desc': 'Сайтове, онлайн магазини и системи по поръчка — проектирани, написани и пуснати от един човек. От базата данни до последния пиксел.',
     'hero.cta1': 'Виж проектите',
     'hero.cta2': 'Започни проект',
-    'hero.status': 'Свободен за нови проекти',
-    'hero.location': 'Велико Търново, BG',
-    'hero.scroll': 'Надолу',
     'about.label': 'За мен',
-    'about.text': 'Създавам сайтове, които <em>работят за бизнеса ти</em>: зареждат бързо, изглеждат добре на всяко устройство и носят стойност и реални поръчки.<span class="about__more">Поемам целия процес — от първия разговор до пускането онлайн и поддръжката след това. Имаш един човек за контакт, който познава проекта ти от началото до края.</span>',
+    'about.text': 'Създавам сайтове, които <em>работят за бизнеса ти</em>: зареждат бързо, изглеждат добре на всяко устройство и носят <em>стойност и реални поръчки</em>.<span class="about__more">Поемам <em>целия процес</em> — от първия разговор до пускането онлайн и поддръжката след това. Имаш <em>един човек за контакт</em>, който познава проекта ти от началото до края.</span>',
     'about.s1': 'Години реален опит',
     'about.s2': 'Пуснати проекта',
     'about.s3': 'Собствен маркетплейс, от нулата',
@@ -269,6 +317,9 @@ export const I18N = {
     'work.visit': 'Виж',
     'work.soon': 'Очаквайте скоро',
     'work.building': 'Магазинът се строи',
+    'work.live': 'Онлайн',
+    'work.concept': 'Концептуален проект',
+    'work.see': 'Виж концепцията',
     'work.hint': 'Плъзни',
     'mcta.status': 'Свободен за проекти',
     'work.cta': 'Твоят проект<br>е следващ?',
@@ -298,16 +349,28 @@ export const I18N = {
     'svc.1.t': 'Уеб приложения',
     'svc.1.d': 'Платформи по поръчка на .NET и SQL Server — профили, админ панели, обяви, API. Издържат на реален трафик.',
     'svc.2.t': 'Сайтове',
-    'svc.2.d': 'Бързи и изчистени бизнес сайтове, които стоят страхотно на всеки екран и реално се намират в Google.',
+    'svc.2.d': 'Бързи и изчистени бизнес сайтове, които стоят страхотно на всеки екран.',
     'svc.3.t': 'Магазини',
     'svc.3.d': 'Онлайн магазини с количка, плащане и поръчки. С WooCommerce или изцяло по поръчка — каквото пасва на бизнеса.',
     'svc.4.t': 'Cloud',
     'svc.4.d': 'Хостинг в Azure, домейни, SSL, CI/CD. Настройва се веднъж, както трябва, и забравяш за него.',
+    'nav.pricing': 'Цени',
+    'price.label': 'Колко струва',
+    'price.title': 'Цени',
+    'price.aside': 'Примерни цени — точната сума уточняваме заедно.',
+    'price.ask': 'По оферта',
+    'price.pop': 'Най-търсен',
+    'price.cta': 'Поискай оферта',
+    'price.more': 'Какво включва',
+    'price.eg': 'Например',
+    'price.more.t': 'Не знаеш кое ти трябва?',
+    'price.more.d': 'Разкажи ми какво ти трябва за бизнеса — ще ти предложа правилния вариант и точна цена.',
+    'price.more.b': 'Питай ме',
     'testi.label': 'Добри думи',
     'testi.title': 'Клиенти',
     'testi.soon': 'Отзивът идва скоро',
-    'faq.label': 'Въпроси',
-    'faq.title': 'Често задавани въпроси',
+    'faq.label': 'Често задавани',
+    'faq.title': 'Въпроси',
     'faq.note': 'Не намери въпроса си? <a href="#contact" data-scroll-to>Питай ме директно →</a>',
     'contact.label': 'Контакт',
     'contact.t1': 'Да направим',
