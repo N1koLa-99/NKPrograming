@@ -9,6 +9,16 @@ const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
 document.documentElement.classList.add('js');
 gsap.registerPlugin(ScrollTrigger);
+// phone toolbars (Chrome / Safari) slide in and out while scrolling and change the viewport height.
+// Nothing on the page depends on that height changing, so ignore it instead of re-laying out.
+ScrollTrigger.config({ ignoreMobileResize: true });
+// a viewport height that ignores the toolbars: refreshed only when the width changes
+let vh = window.innerHeight;
+const onWidthResize = (fn) => {
+  let w = window.innerWidth;
+  window.addEventListener('resize', () => { if (window.innerWidth !== w) vh = window.innerHeight; });
+  window.addEventListener('resize', () => { if (window.innerWidth === w) return; w = window.innerWidth; fn(); });
+};
 
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -329,6 +339,26 @@ function renderPricing() {
     </li>`;
   }).join('');
 }
+// phones: the cards scroll sideways, starting on the middle (most popular) one
+function initPricingCarousel() {
+  const list = $('.pricing__list'), dots = $('.pricing__dots');
+  const cards = $$('.plan', list);
+  dots.innerHTML = cards.map(() => '<i></i>').join('');
+  const centre = (card, smooth) => list.scrollTo({ left: card.offsetLeft - (list.clientWidth - card.offsetWidth) / 2, behavior: smooth ? 'smooth' : 'auto' });
+  const mark = () => {
+    const mid = list.scrollLeft + list.clientWidth / 2;
+    let best = 0;
+    cards.forEach((c, i) => { if (Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid) < Math.abs(cards[best].offsetLeft + cards[best].offsetWidth / 2 - mid)) best = i; });
+    $$('i', dots).forEach((d, i) => d.classList.toggle('is-on', i === best));
+  };
+  const start = () => { if (!isMobile()) return; const f = cards.find((c) => c.classList.contains('plan--featured')) || cards[0]; centre(f, false); mark(); };
+  list.onscroll = mark;
+  $$('i', dots).forEach((d, i) => { d.onclick = () => centre(cards[i], true); });
+  start();
+  return start;
+}
+let recentrePricing = () => {};
+
 // cursor spotlight on the cards
 document.addEventListener('pointermove', (e) => {
   const c = e.target.closest && e.target.closest('.plan');
@@ -468,6 +498,7 @@ function applyLang(l) {
   const words = t('loader');
   renderCards();
   renderPricing();
+  recentrePricing = initPricingCarousel();
   renderFaq();
   if ($('.hl--dim .lch') || booted) liveChars = splitLive();
   if (booted) {
@@ -977,7 +1008,7 @@ function initScroll() {
     onUpdate: (self) => {
       if (!isMobile()) return;
       const y = self.scroll();
-      mcta.classList.toggle('is-on', y > pos.heroEnd && pos.contact - y > window.innerHeight * 0.75);
+      mcta.classList.toggle('is-on', y > pos.heroEnd && pos.contact - y > vh * 0.75);
     },
   });
 
@@ -1011,7 +1042,7 @@ function initMarquee() {
   const track = $('.marquee__track'), row = $('.marquee__row');
   const spans = $$('.marquee__row span');
   let x = 0, speed = 1, dir = 1, rowW = row.offsetWidth;
-  window.addEventListener('resize', () => { rowW = row.offsetWidth; });
+  onWidthResize(() => { rowW = row.offsetWidth; });
   let lean = 0, leanSet = 0, visible = true;
   new IntersectionObserver((en) => { visible = en[0].isIntersecting; }).observe(track.parentElement);
   gsap.ticker.add((_, dt) => {
@@ -1105,7 +1136,7 @@ function initProcessPath() {
   // scroll frames only use positions cached in build() — no layout reads here
   const update = () => {
     if (!pts.length) return;
-    const y = reduce ? Infinity : window.innerHeight * HEAD - (wrapTop - window.scrollY);
+    const y = reduce ? Infinity : vh * HEAD - (wrapTop - window.scrollY);
     const len = lengthAt(y);
     line.style.strokeDashoffset = total - len;
     const live = len > 0 && len < total;
@@ -1217,7 +1248,8 @@ async function boot() {
 
   await Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise((r) => setTimeout(r, 600))]);
   fitBrand();
-  window.addEventListener('resize', fitBrand);
+  onWidthResize(fitBrand);
+  onWidthResize(() => recentrePricing());
   await runLoader();
 
   buildAbout();

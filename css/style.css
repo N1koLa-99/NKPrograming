@@ -49,7 +49,7 @@
    Base
    --------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scrollbar-gutter: stable; touch-action: manipulation; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
@@ -70,7 +70,7 @@ body {
 /* line breaks: no lonely word at the end of a paragraph, headings split into even lines */
 p, li, blockquote, .svc__desc, .step__desc, .plan__for { text-wrap: pretty; }
 h2, h3, .big-title, .faq__qt, .plan__name, .cform__title, .card__title { text-wrap: balance; }
-body.is-loading { overflow: hidden; height: 100vh; }
+body.is-loading { overflow: hidden; height: 100vh; height: 100svh; }
 ::selection { background: var(--accent); color: var(--ink); }
 
 a { color: inherit; text-decoration: none; }
@@ -320,7 +320,7 @@ section { position: relative; }
   position: relative;
   min-height: 100vh; min-height: 100svh;
   display: flex; flex-direction: column;
-  padding: calc(var(--nav-h) + clamp(2rem, 1rem + 4vh, 5rem)) var(--gutter) 1.75rem;
+  padding: calc(var(--nav-h) + clamp(2rem, 1rem + 4svh, 5rem)) var(--gutter) 1.75rem;
   overflow: hidden;
 }
 .hero__content {
@@ -516,9 +516,9 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
 }
 .stack-glyphs .is-acc { color: rgba(204,255,0,calc(var(--a) + .2)); }
 @keyframes glyph-up {
-  0% { transform: translateY(18vh); opacity: 0; }
+  0% { transform: translateY(18svh); opacity: 0; }
   15%, 85% { opacity: 1; }
-  100% { transform: translateY(-18vh); opacity: 0; }
+  100% { transform: translateY(-18svh); opacity: 0; }
 }
 /* asleep while the hero is off screen; calmer on weaker machines */
 .stack.is-paused *, .hero:has(.stack.is-paused) .stack-glyphs span { animation-play-state: paused !important; }
@@ -579,7 +579,7 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
 /* ---------------------------------------------------------
    Work
    --------------------------------------------------------- */
-.work { padding-top: var(--section); min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+.work { padding-top: var(--section); min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; overflow: hidden; }
 .work .sec-head { padding: 0 var(--gutter); margin-bottom: 0; }
 .work__progress { display: flex; align-items: center; gap: .875rem; color: var(--muted); padding-bottom: .75rem; }
 .work__cur { color: var(--fg); font-variant-numeric: tabular-nums; }
@@ -796,7 +796,7 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
 
 /* desktop: points zigzag left/right, joined by long straight diagonals through the middle */
 @media (min-width: 901px) {
-  .process__list { gap: clamp(10rem, 42vh, 26rem); padding-bottom: 2rem; }
+  .process__list { gap: clamp(10rem, 42svh, 26rem); padding-bottom: 2rem; }
   .step__dot { top: .5rem; left: 36%; }
   .step:nth-child(even) .step__dot { left: 64%; }
   .step__body { width: 32%; padding: 0; align-items: flex-end; text-align: right; }
@@ -807,7 +807,7 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
 /* phones / tablets: the same zigzag — the line runs down beside each step as a rail,
    then crosses the whole screen in a long diagonal to the next one on the other side */
 @media (max-width: 900px) {
-  .process__list { gap: clamp(9rem, 30vh, 17rem); padding-bottom: 1rem; }
+  .process__list { gap: clamp(9rem, 30svh, 17rem); padding-bottom: 1rem; }
   .step:nth-child(even) .step__dot { left: calc(100% - 6px); }
   .step__body { gap: .75rem; padding: 0 0 .5rem clamp(1.75rem, 8vw, 3rem); }
   .step:nth-child(even) .step__body { padding: 0 clamp(1.75rem, 8vw, 3rem) .5rem 0; align-items: flex-end; text-align: right; }
@@ -816,7 +816,7 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
   .pp-line { stroke-width: 2.5; }
 }
 @media (max-width: 374px) {
-  .process__list { gap: clamp(7rem, 26vh, 11rem); }
+  .process__list { gap: clamp(7rem, 26svh, 11rem); }
   .step__body { padding-left: 1.5rem; }
   .step:nth-child(even) .step__body { padding-right: 1.5rem; }
 }
@@ -1008,6 +1008,7 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
   .plan:hover .plan__name { --sl: -12; --cr: 1; }
 }
 
+.pricing__dots { display: none; }
 .pricing__more {
   display: flex; align-items: center; justify-content: space-between; gap: 2rem;
   margin-top: clamp(1.5rem, 1rem + 1vw, 2.25rem); padding: 1rem 1rem 1rem 1.75rem;
@@ -1021,10 +1022,25 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
   .plan__price { font-size: clamp(2.25rem, 1rem + 3vw, 3.25rem); }
 }
 @media (max-width: 900px) {
-  .pricing__list { grid-template-columns: minmax(0, 1fr); padding-top: 0; }
-  .plan--featured { translate: none; }
-  .plan__name { margin-top: 1.75rem; }
-  .plan__for, .plan__name { min-height: 0; }
+  /* phones: a sideways carousel that snaps each card to the centre */
+  .pricing__list {
+    display: flex; gap: .75rem; align-items: stretch;
+    margin: 0 calc(var(--gutter) * -1); padding: .5rem var(--gutter) 1.75rem;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .pricing__list::-webkit-scrollbar { display: none; }
+  .plan { flex: 0 0 min(78vw, 19rem); scroll-snap-align: center; scroll-snap-stop: always; padding: 1.375rem; border-radius: 1.25rem; }
+  .plan--featured { translate: none; box-shadow: 0 24px 50px -24px rgba(204,255,0,.4); }
+  .plan__name { margin-top: 1.25rem; font-size: 1.25rem; min-height: 2.08em; }
+  .plan__for { font-size: .875rem; min-height: 3em; }
+  .plan__price { font-size: 2.5rem; margin: 1rem 0; padding-bottom: 1rem; }
+  .plan__list { font-size: .875rem; gap: .5rem; margin-top: .875rem; margin-bottom: 1.25rem; }
+  .plan__list li { padding-left: 1.625rem; }
+  .plan__cta { height: 2.875rem; }
+  .pricing__dots { display: flex; justify-content: center; gap: .5rem; margin-top: .25rem; }
+  .pricing__dots i { width: .5rem; height: .5rem; border-radius: 100px; background: var(--line-2); transition: width .5s var(--ease), background-color .5s var(--ease); cursor: pointer; }
+  .pricing__dots i.is-on { width: 1.5rem; background: var(--accent); }
   .pricing__more { flex-direction: column; align-items: flex-start; border-radius: 1.25rem; padding: 1.5rem; gap: 1.25rem; }
 }
 
@@ -1084,7 +1100,7 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
 /* ---------------------------------------------------------
    Contact
    --------------------------------------------------------- */
-.contact { min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 4rem; }
+.contact { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; padding-bottom: 4rem; }
 .contact__title {
   margin-top: auto;
   font-family: var(--f-display); font-weight: 800; text-transform: uppercase;
@@ -1250,8 +1266,8 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
    --------------------------------------------------------- */
 /* pinned carousel: the whole section must fit one screen, so cards scale with its height */
 @media (min-width: 901px) {
-  .work { padding-top: clamp(5rem, 11vh, 9rem); }
-  .work__viewport { padding: clamp(1.25rem, 3vh, 2.5rem) 0 clamp(2.5rem, 7vh, 5rem); }
+  .work { padding-top: clamp(5rem, 11svh, 9rem); }
+  .work__viewport { padding: clamp(1.25rem, 3svh, 2.5rem) 0 clamp(2.5rem, 7svh, 5rem); }
   .card {
     --mh: min(clamp(15rem, 8rem + 16vw, 28rem), max(14rem, calc(100svh - 26rem)));
     width: calc((var(--mh) - 2rem) * var(--ar, 2.1));
@@ -1380,7 +1396,7 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
   .menu__links b { font-size: clamp(2.25rem, 11vw, 3.25rem); }
 
   /* hero */
-  .hero { padding-top: calc(var(--nav-h) + env(safe-area-inset-top) + clamp(1.5rem, 5vh, 3rem)); padding-bottom: calc(1.25rem + env(safe-area-inset-bottom)); }
+  .hero { padding-top: calc(var(--nav-h) + env(safe-area-inset-top) + clamp(1.5rem, 5svh, 3rem)); padding-bottom: calc(1.25rem + env(safe-area-inset-bottom)); }
   .hero__kicker { font-size: .75rem; }
   .hl { white-space: normal; }
   .rot-line { display: block; }

@@ -189,7 +189,9 @@ export function createStack(host, opts = {}) {
     el.style.setProperty('--k', (Math.max(160, w) / LW).toFixed(4));
   }
   fit();
-  window.addEventListener('resize', fit);
+  // width only — the phone toolbars changing the height must not rescale the visual
+  let fitW = window.innerWidth;
+  window.addEventListener('resize', () => { if (window.innerWidth !== fitW) { fitW = window.innerWidth; fit(); } });
 
   /* ---------- typing: the two code layers write themselves (desktop only) ---------- */
   const typers = phone() || lite || reduce ? [] : [1, 2].map((n, j) => {
