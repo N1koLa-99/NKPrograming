@@ -1047,6 +1047,27 @@ function initScroll() {
     });
   });
 
+  // touch: Safari (and Chrome) tint their toolbars — and Safari's fade at the bottom — from the page colour.
+  // Follow whichever section sits at the bottom edge of the screen, so the fade is light over the light panels.
+  if (touch) {
+    const meta = $('meta[name="theme-color"]'), root = document.documentElement;
+    let on = false;
+    const set = (v) => {
+      if (v === on) return;
+      on = v;
+      root.classList.toggle('edge-light', v);
+      if (meta) meta.setAttribute('content', v ? '#f2f2ee' : '#0a0a0a');
+    };
+    const light = $$('.work, .services, .faq');
+    ScrollTrigger.create({
+      start: 0, end: 'max',
+      onUpdate: () => {
+        const y = vh - 2; // a hair above the bottom edge
+        set(light.some((el) => { const r = el.getBoundingClientRect(); return r.top <= y && r.bottom >= y; }));
+      },
+    });
+  }
+
   // nav colour over the light sections
   ScrollTrigger.create({
     trigger: '.services', start: 'top 40px', end: 'bottom 40px',

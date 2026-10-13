@@ -1545,6 +1545,12 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
    Same design, without the things that cost a repaint per frame.
    --------------------------------------------------------- */
 .lite .grain { display: none; }
+/* touch: every dark section paints its own background, so the page colour underneath can follow the
+   section at the bottom edge (Safari tints its toolbar and bottom fade from it) — see main.js */
+@media (hover: none) and (pointer: coarse) {
+  .hero, .marquee, .about, .process, .pricing, .contact, .footer { background-color: var(--bg); }
+  html.edge-light, html.edge-light body { background-color: var(--fg); }
+}
 /* touch devices: decorative loops hold still while a finger is scrolling the page */
 .is-scrolling .stack *, .is-scrolling .stack-glyphs span, .is-scrolling .dot::after, .is-scrolling .plan__tag::before { animation-play-state: paused !important; }
 .lite .nav, .lite .m-cta, .lite .progress { will-change: transform; }
