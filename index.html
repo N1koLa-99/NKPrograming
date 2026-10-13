@@ -6,6 +6,21 @@
   <title>NK Programming — Nikola Klimentov, fullstack developer</title>
   <meta name="description" content="NK Programming — Nikola Klimentov, fullstack developer from Bulgaria. Websites, online shops and custom systems, from the database to the last pixel.">
   <meta name="theme-color" content="#0a0a0a">
+  <script>
+    /* one fixed screen height (--app-h) taken when the page opens. The phone toolbars sliding in and out
+       never change it, so nothing on the page rescales; only a real width change (rotating) updates it */
+    (function () {
+      var r = document.documentElement, land = null, w = 0;
+      function lock() {
+        var l = innerWidth > innerHeight;
+        // phones: only a turn of the device counts; desktops: any real width change
+        if (land === l && (matchMedia('(pointer: coarse)').matches || Math.abs(innerWidth - w) < 60)) return;
+        land = l; w = innerWidth;
+        r.style.setProperty('--app-h', innerHeight + 'px');
+      }
+      lock(); addEventListener('resize', lock);
+    })();
+  </script>
   <meta property="og:title" content="NK Programming — Nikola Klimentov">
   <meta property="og:description" content="Websites, online shops and custom systems — from the database to the last pixel.">
   <meta property="og:type" content="website">

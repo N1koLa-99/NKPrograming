@@ -14,10 +14,15 @@ gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ ignoreMobileResize: true });
 // a viewport height that ignores the toolbars: refreshed only when the width changes
 let vh = window.innerHeight;
+const coarse = window.matchMedia('(pointer: coarse)').matches;
+// phones: react only when the device turns; desktops: on a real width change
 const onWidthResize = (fn) => {
-  let w = window.innerWidth;
-  window.addEventListener('resize', () => { if (window.innerWidth !== w) vh = window.innerHeight; });
-  window.addEventListener('resize', () => { if (window.innerWidth === w) return; w = window.innerWidth; fn(); });
+  let w = window.innerWidth, land = w > window.innerHeight;
+  window.addEventListener('resize', () => {
+    const l = window.innerWidth > window.innerHeight;
+    if (l === land && (coarse || Math.abs(window.innerWidth - w) < 60)) return;
+    land = l; w = window.innerWidth; vh = window.innerHeight; fn();
+  });
 };
 
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

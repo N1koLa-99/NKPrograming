@@ -190,8 +190,13 @@ export function createStack(host, opts = {}) {
   }
   fit();
   // width only — the phone toolbars changing the height must not rescale the visual
-  let fitW = window.innerWidth;
-  window.addEventListener('resize', () => { if (window.innerWidth !== fitW) { fitW = window.innerWidth; fit(); } });
+  let fitW = window.innerWidth, fitL = fitW > window.innerHeight;
+  const coarse = window.matchMedia('(pointer: coarse)').matches;
+  window.addEventListener('resize', () => {
+    const l = window.innerWidth > window.innerHeight;
+    if (l === fitL && (coarse || Math.abs(window.innerWidth - fitW) < 60)) return;
+    fitL = l; fitW = window.innerWidth; fit();
+  });
 
   /* ---------- typing: the two code layers write themselves (desktop only) ---------- */
   const typers = phone() || lite || reduce ? [] : [1, 2].map((n, j) => {
