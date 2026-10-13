@@ -32,10 +32,27 @@ const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 // Picked up front from the hardware. (?lite / ?full in the url force it either way)
 const qs = new URLSearchParams(location.search);
 const apple = /Mac|iPhone|iPad|iPod/.test(navigator.platform || '');
-let lite = qs.has('lite') || (!qs.has('full') && !apple && ((navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4));
+// in-app browsers (the Google app, Facebook, Instagram…) are the weakest of all: always lite
+const inApp = /\bGSA\/|FBAN|FBAV|Instagram|Line\/|; wv\)/.test(navigator.userAgent);
+const weak = qs.has('lite') || (!qs.has('full') && (inApp || (!apple && ((navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4))));
+// phones and tablets scroll natively; the scroll-linked extras (font-axis scrubs, the grain, blurred glass) are what
+// makes them stutter — so every touch device gets the lite build. It looks the same, it just does less per frame.
+const touch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+let lite = weak || (touch && !qs.has('full'));
 const goLite = () => { lite = true; document.documentElement.classList.add('lite'); };
 if (lite) goLite();
 const isMobile = () => window.innerWidth <= 900;
+
+// while the page is being scrolled on a touch device, the decorative loops pause (html.is-scrolling)
+let scrolling = false;
+if (touch) {
+  let t = 0;
+  window.addEventListener('scroll', () => {
+    if (!scrolling) { scrolling = true; document.documentElement.classList.add('is-scrolling'); }
+    clearTimeout(t);
+    t = setTimeout(() => { scrolling = false; document.documentElement.classList.remove('is-scrolling'); }, 160);
+  }, { passive: true });
+}
 
 /* ---------------- language ---------------- */
 const store = {
@@ -472,7 +489,7 @@ function initLiveType() {
     let lastT = 0;
     const loop = (now) => {
       requestAnimationFrame(loop);
-      if (lite || now - lastT < 32 || window.scrollY > window.innerHeight) return;
+      if (weak || scrolling || now - lastT < 32 || window.scrollY > window.innerHeight) return;
       lastT = now;
       const t = (now - t0) / 1000;
       liveChars.forEach((c, i) => {
@@ -845,6 +862,9 @@ function initScroll() {
       const nav = $('.nav');
       if (document.body.classList.contains('menu-open')) return;
       nav.classList.toggle('is-scrolled', y > 40);
+      // touch: the bar stays put — sliding it in and out on every small change of direction is what
+      // made a slow scroll up shudder (it fights the browser's own toolbar coming back)
+      if (touch) { lastY = y; return; }
       if (y > 300 && y > lastY + 4) nav.classList.add('is-hidden');
       else if (y < lastY - 4 || y < 300) nav.classList.remove('is-hidden');
       lastY = y;
