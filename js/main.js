@@ -245,6 +245,7 @@ function building() {
 }
 
 let workRevealed = false;
+let flowWork = () => {};
 
 function renderCards() {
   const track = $('.work__track');
@@ -256,7 +257,7 @@ function renderCards() {
       ? `<img src="${p.image}" alt="${p.name} — ${p.domain}" loading="lazy" decoding="async">`
       : `${pattern(p.pattern)}${p.initials ? `<span class="card__initials">${p.initials}</span>` : ''}`;
     return `
-      <article class="card" style="--ar:${p.ratio || 2.1}">
+      <article class="card" style="--ar:${p.ratio || 2.1};--i:${i}">
         <${tag} class="card__link" ${attrs}>
           <div class="card__media">
             <div class="card__browser"><i></i><i></i><i></i><span>${p.domain}</span></div>
@@ -266,9 +267,11 @@ function renderCards() {
             ${live ? `<span class="card__visit mono">${t(p.concept ? 'work.see' : 'work.visit')} ↗</span>` : ''}
           </div>
           <div class="card__meta">
+            <span class="card__idx mono">${String(i + 1).padStart(2, '0')}<em>/${String(PROJECTS.length).padStart(2, '0')}</em></span>
             <h3 class="card__title">${p.name}</h3>
             <span class="card__go">${live ? '↗' : '·'}</span>
           </div>
+          <p class="card__cat">${p.cat[lang]}</p>
           ${p.soon ? `<div class="card__info mono"><span class="card__soon">● ${t('work.soon')}</span></div>`
             : p.concept ? `<div class="card__info mono"><span class="card__badge card__badge--concept">${t('work.concept')}</span></div>`
             : live ? `<div class="card__info mono"><span class="card__badge card__badge--live"><i></i>${t('work.live')}</span></div>` : ''}
@@ -277,7 +280,7 @@ function renderCards() {
   }).join('');
 
   const cta = `
-    <article class="card card--cta" style="--ar:1.15">
+    <article class="card card--cta" style="--ar:1.15;--i:${PROJECTS.length}">
       <a class="card__link" href="#contact" data-scroll-to>
         <div class="card__media">
           <div>
@@ -297,6 +300,7 @@ function renderCards() {
 
   if (!workRevealed && !reduce) gsap.set($$('.card', track), { opacity: 0, y: 120, rotate: 2 });
   bindTilt();
+  flowWork();
 }
 
 function bindTilt() {
@@ -999,21 +1003,43 @@ function initScroll() {
     ScrollTrigger.create({ trigger: '.work', start: 'top 70%', once: true, onEnter: revealCards });
   });
   mm.add('(max-width: 900px)', () => {
-    ScrollTrigger.create({ trigger: '.work__track', start: 'top 85%', once: true, onEnter: revealCards });
+    workRevealed = true;
+    gsap.set('.work__track .card', { opacity: 1, y: 0, rotate: 0 });
+    if (reduce) return;
+    ScrollTrigger.batch('.work__track .card', {
+      start: 'top 92%', once: true,
+      onEnter: (b) => b.forEach((c) => {
+        gsap.fromTo(c.querySelector('.card__media'), { clipPath: 'inset(12% 6% 12% 6% round 1rem)', scale: 1.06 },
+          { clipPath: 'inset(0% 0% 0% 0% round 1rem)', scale: 1, duration: 1.3, ease: 'expo.out', clearProps: 'clipPath,transform' });
+        gsap.fromTo(c.querySelectorAll('.card__meta, .card__cat, .card__info'), { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 1, ease: 'expo.out', stagger: 0.06, delay: 0.2, clearProps: 'transform' });
+      }),
+    });
   });
   if (reduce) { workRevealed = true; gsap.set('.work__track .card', { opacity: 1, y: 0, rotate: 0 }); }
 
   initProcessPath();
 
-  // phones: swipe progress for the work carousel
-  const track = $('.work__track');
-  track.addEventListener('scroll', () => {
-    if (!isMobile()) return;
-    const max = track.scrollWidth - track.clientWidth;
-    const p = max > 0 ? track.scrollLeft / max : 0;
-    $('.work__bar i').style.transform = `scaleX(${p})`;
-    $('.work__cur').textContent = String(Math.min(PROJECTS.length, Math.round(p * (PROJECTS.length - 1)) + 1));
-  }, { passive: true });
+  // phones: the projects stack — each card sticks under the bar and the next one slides over it,
+  // while the one underneath settles back (scale only, scrubbed by the scroll)
+  let stackTweens = [];
+  const stack = () => {
+    stackTweens.forEach((t) => { t.scrollTrigger && t.scrollTrigger.kill(); t.kill(); });
+    stackTweens = [];
+    if (!isMobile() || reduce) return;
+    const cards = $$('.work__track .card');
+    cards.forEach((c, i) => {
+      const next = cards[i + 1];
+      if (!next) return;
+      stackTweens.push(gsap.to(c.firstElementChild, {
+        scale: 0.92, ease: 'none', transformOrigin: '50% 0%',
+        scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 30%', scrub: true },
+      }));
+    });
+  };
+  flowWork = () => { stack(); ScrollTrigger.refresh(); };
+  onWidthResize(stack);
+  stack();
 
   // positions the per-frame scroll handlers need — measured once per refresh, never inside a scroll frame
   // (reading layout right after other handlers wrote styles forces a synchronous re-layout every frame)

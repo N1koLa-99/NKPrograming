@@ -51,6 +51,9 @@
    --------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scrollbar-gutter: stable; touch-action: manipulation; }
+/* the page itself never scrolls sideways (only the projects and prices carousels do) */
+html, body { overflow-x: clip; overscroll-behavior-x: none; }
+main { overflow-x: clip; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
@@ -626,8 +629,20 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
 .work .card:hover .card__go { background: var(--ink); color: var(--accent); }
 .work .card__info { color: #7a7a74; }
 .work .card__soon { color: var(--ink); }
-.work .card__badge--live { color: var(--ink); box-shadow: inset 0 0 0 1px rgba(10,10,10,.18); }
-.work .card__badge--live i { background: #3fae2a; box-shadow: 0 0 0 3px rgba(63,174,42,.18); }
+/* "Online": a solid green pill with a live, pulsing dot — it should read at a glance */
+.work .card__badge--live {
+  color: #0f5a12; font-weight: 600; letter-spacing: .1em;
+  padding: .4375rem .75rem .4375rem .625rem;
+  background: #dff5d6; box-shadow: inset 0 0 0 1px rgba(46,160,42,.35);
+}
+.work .card__badge--live i {
+  position: relative; width: 8px; height: 8px; background: #22a51c; box-shadow: none;
+}
+.work .card__badge--live i::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; background: #22a51c;
+  animation: live-ping 1.8s var(--ease) infinite;
+}
+@keyframes live-ping { from { transform: scale(1); opacity: .6; } to { transform: scale(2.6); opacity: 0; } }
 .work .card__badge--concept { color: #6d6d68; box-shadow: inset 0 0 0 1px rgba(10,10,10,.18); background-image: repeating-linear-gradient(-45deg, transparent 0 4px, rgba(10,10,10,.06) 4px 5px); }
 
 .work__viewport { flex: 1; display: flex; align-items: center; padding: 3rem 0 4rem; }
@@ -694,6 +709,7 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
   transition: background-color .5s var(--ease), color .5s, box-shadow .5s, transform .6s var(--ease);
 }
 .card:hover .card__go { background: var(--accent); color: var(--ink); box-shadow: none; transform: rotate(-45deg); }
+.card__idx, .card__cat { display: none; }
 .card__info { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-top: .875rem; color: var(--muted); }
 .card__soon { color: var(--accent); white-space: nowrap; }
 /* live client site vs. concept work: same weight, different look, so concepts read as deliberate, not lesser */
@@ -1422,29 +1438,42 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
   .stat b { font-size: clamp(3rem, 15vw, 4.5rem); }
   .stats { border-bottom: 1px solid var(--line); }
 
-  /* work → native swipe carousel */
+  /* work → stacked cards: full-width, the whole screenshot uncropped, each one slides over the last */
+  .work { overflow: visible; padding-bottom: clamp(3.5rem, 12vw, 5rem); }
   .work .sec-head { margin-bottom: 0; }
-  .work__progress { display: flex; padding-bottom: 0; }
-  .work__bar { width: 5rem; }
-  .work__hint {
-    display: flex; align-items: center; gap: .5rem;
-    padding: 1.75rem var(--gutter) 0; color: var(--muted);
+  .work__progress, .work__hint { display: none; }
+  .work__viewport { display: block; padding: 1.75rem calc(var(--gutter) - .5rem) 0; }
+  .work__track { flex-direction: column; width: auto; gap: 1.25rem; padding: 0; overflow: visible; transform: none !important; }
+  .card {
+    position: sticky; top: calc(var(--nav-h) + env(safe-area-inset-top) + .5rem + var(--i) * .5rem);
+    flex: none; width: 100%;
   }
-  .work__hint i { font-style: normal; color: var(--ink); animation: nudge 1.6s var(--ease-io) infinite; }
-  @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(.375rem); } }
-  .work__viewport { display: block; padding: 1rem 0 0; }
-  .work__track {
-    flex-direction: row; width: auto; gap: .875rem;
-    overflow-x: auto; overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
-    scrollbar-width: none; -webkit-overflow-scrolling: touch;
-    padding-bottom: .5rem;
+  .card__link {
+    display: block; padding: .5rem .5rem 1.25rem; border-radius: 1.5rem;
+    background: #fff; box-shadow: 0 -12px 40px -24px rgba(10,10,10,.35), 0 0 0 1px rgba(10,10,10,.06);
+    will-change: transform;
   }
-  .work__track::-webkit-scrollbar { display: none; }
-  .card { flex: 0 0 min(84vw, 26rem); width: auto; scroll-snap-align: start; }
-  .card__media { aspect-ratio: auto; height: calc(min(84vw, 26rem) / var(--ar, 2.1) + 2rem); }
+  /* the screenshot at its own proportions — nothing cropped, nothing zoomed */
+  .card__media { height: auto; aspect-ratio: var(--ar, 2.1); border-radius: 1.125rem; box-shadow: inset 0 0 0 1px rgba(10,10,10,.06); }
+  .card__browser, .card__visit, .card__glow { display: none; }
+  .card__cover img { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
   .card__initials { font-size: clamp(3rem, 16vw, 4.5rem); }
-  .work { padding-bottom: var(--section); }
+
+  .card__meta {
+    grid-template-columns: minmax(0, 1fr) auto; column-gap: 1rem; row-gap: .375rem; align-items: center;
+    padding: 1.125rem .75rem 0; border-bottom: 0;
+  }
+  .card__idx { display: block; grid-column: 1 / -1; color: #8a8a84; font-size: .6875rem; }
+  .card__idx em { font-style: normal; color: #b5b5ae; }
+  .card__title { font-size: clamp(1.625rem, 7.6vw, 2.125rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.02; }
+  .card__go { width: 3rem; height: 3rem; font-size: 1.0625rem; background: var(--ink); color: var(--accent); box-shadow: none; }
+  .card__cat { display: block; margin-top: .375rem; padding: 0 .75rem; color: #55554f; font-size: 1rem; line-height: 1.45; }
+  .card__info { padding: .875rem .75rem 0; }
+
+  /* the "your project next?" card closes the stack */
+  .card--cta .card__link { background: var(--accent); }
+  .card--cta .card__media { aspect-ratio: 1.6; background: transparent; }
+  .card--cta .card__go { background: var(--ink); color: var(--accent); }
 
   /* services */
   .svc { padding: 1.5rem 0; }
@@ -1552,7 +1581,7 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
   html.edge-light, html.edge-light body { background-color: var(--fg); }
 }
 /* touch devices: decorative loops hold still while a finger is scrolling the page */
-.is-scrolling .stack *, .is-scrolling .stack-glyphs span, .is-scrolling .dot::after, .is-scrolling .plan__tag::before { animation-play-state: paused !important; }
+.is-scrolling .stack *, .is-scrolling .stack-glyphs span, .is-scrolling .dot::after, .is-scrolling .card__badge--live i::after, .is-scrolling .plan__tag::before { animation-play-state: paused !important; }
 .lite .nav, .lite .m-cta, .lite .progress { will-change: transform; }
 .lite .card__browser { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(10,10,10,.92); }
 .lite .m-cta { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(20,20,20,.96); }
