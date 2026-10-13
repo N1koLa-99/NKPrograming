@@ -1665,3 +1665,8 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
   .menu { overscroll-behavior: contain; }
 }
 .menu-open { overflow: hidden; }
+
+/* phones: nothing follows the reader around — no floating contact bar, no scroll-progress line */
+@media (max-width: 900px) {
+  .m-cta, .progress { display: none !important; }
+}
