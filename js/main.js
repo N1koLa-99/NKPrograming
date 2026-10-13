@@ -1013,8 +1013,6 @@ function initScroll() {
     ScrollTrigger.batch('.work__track .card', {
       start: 'top 92%', once: true,
       onEnter: (b) => b.forEach((c) => {
-        gsap.fromTo(c.querySelector('.card__media'), { clipPath: 'inset(12% 6% 12% 6% round 1rem)' },
-          { clipPath: 'inset(0% 0% 0% 0% round 1rem)', duration: 1.3, ease: 'expo.out', clearProps: 'clipPath' });
         gsap.fromTo(c.querySelectorAll('.card__meta, .card__cat, .card__info'), { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 1, ease: 'expo.out', stagger: 0.06, delay: 0.2, clearProps: 'transform' });
       }),
@@ -1041,7 +1039,27 @@ function initScroll() {
       }));
     });
   };
-  flowWork = () => { stackCards(); ScrollTrigger.refresh(); };
+  // the project in view grows to full size, the rest settle back a little. Only a class flips when the
+  // current card changes — the size change itself is a short CSS transition, never a per-frame rescale.
+  let focusRaf = 0, focused = -1;
+  const focusCard = () => {
+    focusRaf = 0;
+    if (!isMobile()) return;
+    const cards = $$('.work__track .card');
+    let best = -1, bestV = 0;
+    cards.forEach((c, i) => {
+      const r = c.getBoundingClientRect();
+      const coverTop = cards[i + 1] ? cards[i + 1].getBoundingClientRect().top : Infinity;
+      const v = Math.min(r.bottom, coverTop, vh) - Math.max(r.top, 0); // the part of this card you actually see
+      if (v > bestV) { bestV = v; best = i; }
+    });
+    if (best === focused) return;
+    focused = best;
+    cards.forEach((c, i) => c.classList.toggle('is-focus', i === best));
+  };
+  window.addEventListener('scroll', () => { if (!focusRaf) focusRaf = requestAnimationFrame(focusCard); }, { passive: true });
+  flowWork = () => { stackCards(); focused = -1; focusCard(); ScrollTrigger.refresh(); };
+  focusCard();
   onWidthResize(stackCards);
   stackCards();
 

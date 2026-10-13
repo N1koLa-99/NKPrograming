@@ -1670,3 +1670,95 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
 @media (max-width: 900px) {
   .m-cta, .progress { display: none !important; }
 }
+
+/* phones: the project in view is full size, the others sit back a touch (one short transition per change) */
+@media (max-width: 900px) {
+  .work__track .card__link {
+    transform: scale(.88); transform-origin: 50% 0;
+    background: #e4e4df;
+    transition: transform .7s var(--ease), box-shadow .7s var(--ease), background-color .7s var(--ease);
+    will-change: transform; backface-visibility: hidden;
+  }
+  .work__track .card.is-focus .card__link {
+    transform: none; background: #fff;
+    box-shadow: 0 24px 60px -24px rgba(10,10,10,.45), 0 0 0 1px rgba(10,10,10,.06);
+  }
+}
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+  .work__track .card__link { transform: none; }
+}
+
+/* phones: the "your project next?" card keeps its lime, focused or not */
+@media (max-width: 900px) {
+  .work__track .card--cta .card__link, .work__track .card--cta.is-focus .card__link { background: var(--accent); }
+}
+
+/* =========================================================
+   PRICING — glass cards
+   Two soft light sources (lime + deep blue) glow behind the cards; the cards are
+   tinted glass over them, with a bright rim and a gloss streak. The glow is already
+   soft, so phones get the same look without a live blur (no scroll cost).
+   ========================================================= */
+.pricing { position: relative; isolation: isolate; overflow: hidden; }
+.pricing::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: -10%; right: -10%; top: 32%; bottom: 4%;
+  background:
+    radial-gradient(38% 46% at 50% 52%, rgba(204,255,0,.34), rgba(204,255,0,0) 70%),
+    radial-gradient(34% 50% at 16% 62%, rgba(40,90,255,.42), rgba(40,90,255,0) 72%),
+    radial-gradient(30% 44% at 86% 40%, rgba(64,120,255,.32), rgba(64,120,255,0) 72%);
+}
+
+.plan {
+  background:
+    linear-gradient(155deg, rgba(255,255,255,.13) 0%, rgba(255,255,255,.04) 38%, rgba(255,255,255,.02) 100%),
+    rgba(18,18,22,.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.28),           /* light on the top edge */
+    inset 1px 0 0 rgba(255,255,255,.06), inset -1px 0 0 rgba(255,255,255,.06),
+    inset 0 -1px 0 rgba(0,0,0,.35),
+    0 40px 80px -36px rgba(0,0,0,.85);
+}
+/* gloss: a diagonal streak of light across the top-left of the glass */
+.plan::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(118deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 22%, rgba(255,255,255,0) 40%);
+}
+.plan__price { border-bottom-color: rgba(255,255,255,.12); }
+
+/* the featured card: lime glass, lit from within */
+.plan--featured {
+  background:
+    linear-gradient(160deg, rgba(236,255,140,.96) 0%, rgba(204,255,0,.9) 45%, rgba(176,230,0,.88) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.85),
+    inset 0 0 0 1px rgba(255,255,255,.25),
+    inset 0 -14px 30px -18px rgba(60,90,0,.45),
+    0 40px 100px -28px rgba(204,255,0,.6),
+    0 0 0 1px rgba(204,255,0,.4);
+}
+.plan--featured::after { background: linear-gradient(118deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.12) 26%, rgba(255,255,255,0) 44%); }
+.plan--featured .plan__price { border-bottom-color: rgba(10,10,10,.14); }
+
+/* desktop: real frosted glass on top (the glow behind is blurred through the card) */
+@media (hover: hover) and (pointer: fine) {
+  .plan { -webkit-backdrop-filter: blur(22px) saturate(1.7); backdrop-filter: blur(22px) saturate(1.7); }
+  .plan:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.4), inset 0 0 0 1px rgba(204,255,0,.4),
+      0 50px 90px -36px rgba(0,0,0,.9), 0 0 60px -20px rgba(204,255,0,.35);
+  }
+  .plan--featured:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(255,255,255,.3),
+      0 50px 110px -26px rgba(204,255,0,.75), 0 0 0 1px rgba(204,255,0,.5);
+  }
+}
+@media (max-width: 900px) {
+  .pricing::before { top: 38%; bottom: 8%;
+    background:
+      radial-gradient(60% 34% at 50% 50%, rgba(204,255,0,.32), rgba(204,255,0,0) 70%),
+      radial-gradient(60% 40% at 0% 60%, rgba(40,90,255,.45), rgba(40,90,255,0) 72%),
+      radial-gradient(60% 40% at 100% 45%, rgba(64,120,255,.4), rgba(64,120,255,0) 72%); }
+  .plan--featured { box-shadow: inset 0 1px 0 rgba(255,255,255,.85), inset 0 0 0 1px rgba(255,255,255,.25), inset 0 -14px 30px -18px rgba(60,90,0,.45), 0 24px 60px -24px rgba(204,255,0,.55); }
+}
