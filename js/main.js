@@ -39,6 +39,7 @@ const weak = qs.has('lite') || (!qs.has('full') && (inApp || (!apple && ((naviga
 // makes them stutter — so every touch device gets the lite build. It looks the same, it just does less per frame.
 const touch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 let lite = weak || (touch && !qs.has('full'));
+if (weak) document.documentElement.classList.add('weak');
 const goLite = () => { lite = true; document.documentElement.classList.add('lite'); };
 if (lite) goLite();
 const isMobile = () => window.innerWidth <= 900;
@@ -637,12 +638,15 @@ document.addEventListener('click', (e) => {
 function closeMenu() {
   if (!document.body.classList.contains('menu-open')) return;
   document.body.classList.remove('menu-open');
+  $('.nav').style.top = '';
   $('.menu').setAttribute('aria-hidden', 'true');
   if (lenis) lenis.start();
 }
 $('.burger').addEventListener('click', () => {
   const open = !document.body.classList.contains('menu-open');
   if (!open) return closeMenu();
+  // phones: the bar lives at the top of the page; pin it exactly where it is while the menu is open
+  if (isMobile()) $('.nav').style.top = `${-window.scrollY}px`;
   document.body.classList.add('menu-open');
   $('.menu').setAttribute('aria-hidden', 'false');
   if (lenis) lenis.stop();
@@ -1009,8 +1013,8 @@ function initScroll() {
     ScrollTrigger.batch('.work__track .card', {
       start: 'top 92%', once: true,
       onEnter: (b) => b.forEach((c) => {
-        gsap.fromTo(c.querySelector('.card__media'), { clipPath: 'inset(12% 6% 12% 6% round 1rem)', scale: 1.06 },
-          { clipPath: 'inset(0% 0% 0% 0% round 1rem)', scale: 1, duration: 1.3, ease: 'expo.out', clearProps: 'clipPath,transform' });
+        gsap.fromTo(c.querySelector('.card__media'), { clipPath: 'inset(12% 6% 12% 6% round 1rem)' },
+          { clipPath: 'inset(0% 0% 0% 0% round 1rem)', duration: 1.3, ease: 'expo.out', clearProps: 'clipPath' });
         gsap.fromTo(c.querySelectorAll('.card__meta, .card__cat, .card__info'), { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 1, ease: 'expo.out', stagger: 0.06, delay: 0.2, clearProps: 'transform' });
       }),
@@ -1021,9 +1025,9 @@ function initScroll() {
   initProcessPath();
 
   // phones: the projects stack — each card sticks under the bar and the next one slides over it,
-  // while the one underneath settles back (scale only, scrubbed by the scroll)
+  // while the one underneath dims. Never scaled: rescaling a screenshot every frame makes it shimmer.
   let stackTweens = [];
-  const stack = () => {
+  const stackCards = () => {
     stackTweens.forEach((t) => { t.scrollTrigger && t.scrollTrigger.kill(); t.kill(); });
     stackTweens = [];
     if (!isMobile() || reduce) return;
@@ -1031,15 +1035,15 @@ function initScroll() {
     cards.forEach((c, i) => {
       const next = cards[i + 1];
       if (!next) return;
-      stackTweens.push(gsap.to(c.firstElementChild, {
-        scale: 0.92, ease: 'none', transformOrigin: '50% 0%',
-        scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 30%', scrub: true },
+      stackTweens.push(gsap.to(c, {
+        '--cover': 0.35, ease: 'none',
+        scrollTrigger: { trigger: next, start: 'top 45%', end: 'top 15%', scrub: true },
       }));
     });
   };
-  flowWork = () => { stack(); ScrollTrigger.refresh(); };
-  onWidthResize(stack);
-  stack();
+  flowWork = () => { stackCards(); ScrollTrigger.refresh(); };
+  onWidthResize(stackCards);
+  stackCards();
 
   // positions the per-frame scroll handlers need — measured once per refresh, never inside a scroll frame
   // (reading layout right after other handlers wrote styles forces a synchronous re-layout every frame)
