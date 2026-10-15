@@ -1199,6 +1199,25 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
 .cform .is-bad input, .cform .is-bad textarea { box-shadow: inset 0 0 0 1.5px var(--c-bad); animation: cshake .45s var(--ease); }
 .cform .is-bad > span { color: var(--c-bad); }
 @keyframes cshake { 0%, 100% { transform: none; } 25% { transform: translateX(-6px); } 60% { transform: translateX(5px); } 85% { transform: translateX(-2px); } }
+/* consent checkbox — same ink / accent language as the fields */
+.cform__consent {
+  position: relative; display: flex; align-items: flex-start; gap: .75rem; margin-top: 1rem; cursor: pointer;
+  color: var(--c-soft); font-size: .8125rem; line-height: 1.5;
+}
+.cform__consent input { position: absolute; opacity: 0; width: 1.25rem; height: 1.25rem; margin: 0; }
+.cform__box {
+  flex-shrink: 0; display: grid; place-items: center; width: 1.25rem; height: 1.25rem; margin-top: .0625rem; border-radius: .375rem;
+  background: var(--c-field); box-shadow: inset 0 0 0 1.5px rgba(10,10,10,.22);
+  transition: background-color .3s var(--ease), box-shadow .3s var(--ease);
+}
+.cform__box svg { width: .875rem; }
+.cform__box path { stroke: var(--accent); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 16; stroke-dashoffset: 16; transition: stroke-dashoffset .35s var(--ease); }
+.cform__consent input:checked + .cform__box { background: var(--c-ink); box-shadow: inset 0 0 0 1.5px var(--c-ink); }
+.cform__consent input:checked + .cform__box path { stroke-dashoffset: 0; }
+.cform__consent input:focus-visible + .cform__box { box-shadow: inset 0 0 0 1.5px var(--c-ink), 0 0 0 4px rgba(204,255,0,.55); }
+.cform__consent a { color: var(--c-ink); text-decoration: underline; text-underline-offset: .2em; }
+.cform__consent.is-bad { color: var(--c-bad); }
+.cform__consent.is-bad .cform__box { box-shadow: inset 0 0 0 1.5px var(--c-bad); animation: cshake .45s var(--ease); }
 .cform__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
 .cform__foot { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; margin-top: 1.5rem; }
@@ -1271,6 +1290,9 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
 .footer__socials { display: flex; gap: 1.5rem; }
 .footer__socials a, .footer__top { color: var(--fg); }
 .footer__top { justify-self: end; }
+.footer__copy { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; }
+.footer__copy a { color: var(--fg-2); transition: color .3s; }
+.footer__copy a:hover { color: var(--accent); }
 
 /* ---------------------------------------------------------
    Initial states (JS enhances)

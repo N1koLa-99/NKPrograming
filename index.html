@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>NK Programming — Nikola Klimentov, fullstack developer</title>
-  <meta name="description" content="NK Programming — Nikola Klimentov, fullstack developer from Bulgaria. Websites, online shops and custom systems, from the database to the last pixel.">
+  <title>NK Programming — Никола Климентов, fullstack разработчик</title>
+  <meta name="description" content="NK Programming — сайтове, онлайн магазини и системи по поръчка. Проектирани, написани и пуснати от един човек — от базата данни до последния пиксел.">
   <meta name="theme-color" content="#0a0a0a">
   <script>
     /* one fixed screen height (--app-h) taken when the page opens. The phone toolbars sliding in and out
@@ -21,9 +21,18 @@
       lock(); addEventListener('resize', lock);
     })();
   </script>
-  <meta property="og:title" content="NK Programming — Nikola Klimentov">
-  <meta property="og:description" content="Websites, online shops and custom systems — from the database to the last pixel.">
+  <meta property="og:title" content="NK Programming — Ти даваш идеята. Аз създавам сайта.">
+  <meta property="og:description" content="Сайтове, онлайн магазини и системи по поръчка — от базата данни до последния пиксел.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nkprograming.netlify.app/">
+  <meta property="og:site_name" content="NK Programming">
+  <meta property="og:locale" content="bg_BG">
+  <meta property="og:image" content="https://nkprograming.netlify.app/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NK Programming — Ти даваш идеята. Аз създавам сайта.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://nkprograming.netlify.app/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
   <link rel="preload" href="assets/fonts/martian-mono-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -359,6 +368,11 @@
               <span data-i18n="form.msg">What do you need?</span>
             </label>
           </div>
+          <label class="cform__consent">
+            <input type="checkbox" name="consent" required>
+            <i class="cform__box" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 L6.5 11.5 L12.5 4.5"/></svg></i>
+            <span data-i18n="form.consent">Съгласен съм данните ми да бъдат използвани, за да получа отговор на запитването. <a href="privacy.html" target="_blank" rel="noopener">Поверителност</a></span>
+          </label>
           <input type="text" name="_honey" class="cform__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="cform__foot">
             <p class="cform__msg" role="status" aria-live="polite" data-i18n="form.hint">Ideally fill in all the fields.</p>
@@ -385,7 +399,11 @@
 
   <!-- ================= FOOTER ================= -->
   <footer class="footer mono">
-    <span>© <span class="year">2026</span> NK Programming</span>
+    <div class="footer__copy">
+      <span>© <span class="year">2026</span> NK Programming</span>
+      <a href="privacy.html" data-i18n="footer.privacy">Поверителност</a>
+      <a href="terms.html" data-i18n="footer.terms">Общи условия</a>
+    </div>
     <span class="footer__time"><span data-i18n="footer.time">Local time</span> <b class="clock">00:00</b> <span class="tz">GMT+3</span></span>
     <div class="footer__socials"><!-- rendered by js if set --></div>
     <a href="#top" data-scroll-to data-scramble class="footer__top" data-i18n="footer.top">Back to top ↑</a>

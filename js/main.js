@@ -973,7 +973,7 @@ function initScroll() {
       y: 0, opacity: 1, rotate: 0, duration: 1.5, ease: 'expo.out',
       scrollTrigger: { trigger: '.contact__row', start: 'top 92%' },
     });
-    gsap.fromTo('.cform__head > *, .cform__f, .cform__foot > *', { y: 28, opacity: 0 }, {
+    gsap.fromTo('.cform__head > *, .cform__f, .cform__consent, .cform__foot > *', { y: 28, opacity: 0 }, {
       y: 0, opacity: 1, duration: 1.1, ease: 'expo.out', stagger: 0.07, delay: 0.25, clearProps: 'transform',
       scrollTrigger: { trigger: '.contact__row', start: 'top 92%' },
     });
@@ -1270,7 +1270,8 @@ function initContactForm() {
   const field = (name) => form.elements[name];
   const mark = (name, bad) => field(name).closest('.cform__f').classList.toggle('is-bad', bad);
 
-  form.addEventListener('input', (e) => { const f = e.target.closest('.cform__f'); if (f) f.classList.remove('is-bad'); });
+  form.addEventListener('input', (e) => { const f = e.target.closest('.cform__f, .cform__consent'); if (f) f.classList.remove('is-bad'); });
+  form.addEventListener('change', (e) => { const f = e.target.closest('.cform__consent'); if (f) f.classList.remove('is-bad'); });
   $('.cform__again', form).addEventListener('click', () => {
     form.classList.remove('is-sent');
     done.setAttribute('aria-hidden', 'true');
@@ -1292,11 +1293,14 @@ function initContactForm() {
     const first = noContact ? 'contact' : Object.keys(bad).find((k) => bad[k]);
     if (bad.name) { say('form.e.name', 'is-err'); field('name').focus(); return; }
     if (first) { say(`form.e.${first}`, 'is-err'); field(first === 'contact' ? 'phone' : first).focus(); return; }
+    // GDPR: the visitor has to agree before the details are sent
+    const consentBox = field('consent');
+    if (!consentBox.checked) { consentBox.closest('.cform__consent').classList.add('is-bad'); say('form.e.consent', 'is-err'); consentBox.focus(); return; }
 
     btn.disabled = true;
     say('form.hint');
     try {
-      const body = { name: v.name, phone: v.phone || '—', message: v.message, _subject: `NK Programming — ${v.name}` };
+      const body = { name: v.name, phone: v.phone || '—', message: v.message, consent: 'yes', _subject: `NK Programming — ${v.name}` };
       if (v.email) body.email = v.email;
       const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
         method: 'POST',
