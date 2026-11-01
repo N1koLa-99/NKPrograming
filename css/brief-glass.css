@@ -626,3 +626,42 @@ details.wrev .wrev__list { margin: 0 1.25rem 1.25rem; }
 /* "Твоят избор" is open by default on the last step — space under the last row (the margin used to collapse out of <details>) */
 details.wrev .wrev__list { margin-bottom: 0; padding-bottom: 1.25rem; }
 @media (max-width: 600px) { details.wrev .wrev__list { padding-bottom: 1rem; } }
+
+/* ===== phone: business — one card per row (icon · name + short line · tick) ===== */
+@media (max-width: 600px) {
+  .opts.opts--biz { grid-template-columns: 1fr; gap: .5rem; }
+  .opt--tile .opt__body { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: .875rem; row-gap: .125rem;
+    align-items: center; min-height: 4.25rem; height: auto; padding: .75rem 1rem .75rem .75rem; }
+  .opt--tile .opt__ico { grid-row: 1 / span 2; width: 2.75rem; height: 2.75rem; }
+  .opt--tile .opt__t { grid-column: 2; align-self: end; font-size: 1rem; }
+  .opt--tile .opt__d { grid-column: 2; align-self: start; display: block; font-size: .8125rem; line-height: 1.35; }
+  .opt--tile .opt__body::before { position: static; grid-column: 3; grid-row: 1 / span 2; }
+}
+
+/* ===== goals: easier to read — the "i" sits in its own column, so the text gets the full width ===== */
+.opts--goals .opt__body { grid-template-columns: 2.75rem minmax(0, 1fr) auto; padding-right: 1rem; }
+.opts--goals .opt__t { grid-column: 2; }
+.opts--goals .opt__d { grid-column: 2 / -1; color: rgba(242,242,238,.78); }   /* runs under the "i" too */
+.opts--goals .opt__info { position: static; grid-column: 3; grid-row: 1; align-self: start; }
+.opts--goals .opt__pop { grid-column: 1 / -1; }
+/* plain Cyrillic letters in the cards (т, д, г as in print), not the Bulgarian handwritten-style forms — easier to read at small size */
+.opts--goals .opt__t, .opts--goals .opt__d, .opts--goals .opt__pop { font-feature-settings: "locl" 0; }
+@media (max-width: 600px) {
+  .opts--goals { gap: .5rem; }
+  .opts--goals .opt__body { grid-template-columns: 2.5rem minmax(0, 1fr) auto; column-gap: .75rem; row-gap: .25rem; padding: .875rem .875rem .875rem .875rem; }
+  .opts--goals .opt__t { font-size: 1rem; line-height: 1.3; }
+  .opts--goals .opt__d { font-size: .9375rem; line-height: 1.45; }
+}
+@media (hover: none), (max-width: 600px) { .opts--goals .opt__pop { margin-right: 0; } }
+
+/* ===== goals on phones: more air — icon and "i" on top, then the title and the line under it on the full width ===== */
+@media (max-width: 600px) {
+  .opts--goals { gap: .75rem; }
+  .opts--goals .opt__body { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto; row-gap: 0; column-gap: .75rem;
+    padding: 1.125rem 1.125rem 1.25rem; }
+  .opts--goals .opt__ico { grid-column: 1; grid-row: 1; width: 2.5rem; height: 2.5rem; margin-bottom: .875rem; }
+  .opts--goals .opt__info { grid-column: 2; grid-row: 1; align-self: start; }
+  .opts--goals .opt__t { grid-column: 1 / -1; grid-row: 2; align-self: start; font-size: 1.0625rem; line-height: 1.3; }
+  .opts--goals .opt__d { grid-column: 1 / -1; grid-row: 3; margin-top: .375rem; font-size: .9375rem; line-height: 1.5; }
+  .opts--goals .opt__pop { grid-column: 1 / -1; grid-row: 4; margin-top: 1rem; }
+}
