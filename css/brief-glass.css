@@ -561,3 +561,64 @@ html:has(.wiz-page), .wiz-page { background: #000; }
   .wrev__edit { grid-column: 2; grid-row: 1; }
   .wrev__v { grid-column: 1 / -1; }
 }
+
+/* =========================================================
+   Mobile polish (Nov 2026) — short, clear, fits 360–430 px
+   ========================================================= */
+.legal-back { white-space: nowrap; }
+.wbar__k { white-space: nowrap; }
+.wiz__alt { text-transform: none; letter-spacing: 0; }
+
+/* "Твоят избор" — folded by default, opens on tap */
+details.wrev { margin-top: 1rem; padding: 0; }
+details.wrev[hidden] { display: none; }
+.wrev__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.125rem 1.25rem; cursor: pointer; list-style: none; }
+.wrev__head::-webkit-details-marker { display: none; }
+.wrev__head::after { content: ""; flex: none; width: .625rem; height: .625rem; margin-right: .25rem; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(45deg) translateY(-2px); transition: transform .3s var(--ease); }
+details.wrev[open] .wrev__head::after { transform: rotate(-135deg) translateY(-2px); }
+.wrev__head .wrev__t { font-size: 1.0625rem; }
+.wrev__head .wrev__s { margin: 0 0 0 auto; font-size: .875rem; color: var(--muted); }
+details.wrev .wrev__list { margin: 0 1.25rem 1.25rem; }
+.wsum + details.wrev { margin-top: 1rem; }
+
+/* recommendation chips may wrap instead of running out of the card */
+.wrec__chips i { white-space: normal; }
+
+@media (max-width: 600px) {
+  .wiz__head { margin-bottom: 1.5rem; }
+  .wpanel { padding: 1.25rem 1rem 1.25rem; }
+  .wq { font-size: clamp(1.5rem, 6.4vw, 1.875rem); }
+
+  /* business: 2 compact tiles per row — icon, name, tick */
+  .opts.opts--biz { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; margin-top: 1.5rem; }
+  .opt--tile .opt__body { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: .625rem;
+    position: relative; min-height: 0; height: 100%; padding: .875rem; text-align: left; }
+  .opt--tile .opt__ico { width: 2.5rem; height: 2.5rem; border-radius: .75rem; }
+  .opt--tile .opt__ico svg { width: 1.25rem; height: 1.25rem; }
+  .opt--tile .opt__t { font-size: .9375rem; line-height: 1.25; }
+  .opt--tile .opt__d { display: none; }
+  .opt--tile .opt__t { align-self: stretch; text-align: left; }
+  .opt--tile .opt__body::before { position: absolute; top: .875rem; right: .875rem; left: auto; bottom: auto; width: 1.25rem; height: 1.25rem; margin: 0; }
+
+  /* bottom bar on one line */
+  .wbar__in { gap: .75rem; }
+  .wbtn { padding: 0 1.125rem; }
+
+  .wrev__head { padding: 1rem; }
+  details.wrev .wrev__list { margin: 0 1rem 1rem; }
+  .wiz__alt { font-size: .8125rem; line-height: 1.7; }
+}
+@media (max-width: 380px) {
+  .legal-back span { display: none; }
+  .wq { font-size: 1.5rem; }
+  .opt--tile .opt__t { font-size: .875rem; }
+}
+/* the ticked sections are already visible above — don't repeat them in the card */
+.wrec__rows { display: none; }
+.wsug__btns, .wsug__go { flex-wrap: wrap; }
+/* after sending: hide the empty panel, only the "Получих го!" card stays */
+.wpanel:has(> .wform[hidden]) { display: none; }
+@media (max-width: 420px) {
+  .wbar__k > [data-l] { display: none !important; }     /* just "6 / 6" */
+  .wrev__head .wrev__s { display: none; }
+}
