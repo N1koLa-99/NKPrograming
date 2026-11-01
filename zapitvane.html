@@ -316,6 +316,14 @@
         <legend class="wq"><span data-l="bg">Как да се свържа с теб?</span><span data-l="en">How do I reach you?</span></legend>
 
 
+        <details class="wrev js-rev" open hidden>
+          <summary class="wrev__head">
+            <p class="wrev__t"><span data-l="bg">Твоят избор</span><span data-l="en">Your choices</span></p>
+            <p class="wrev__s"><span data-l="bg">Провери и промени, ако трябва</span><span data-l="en">Check and change if needed</span></p>
+          </summary>
+          <ul class="wrev__list"></ul>
+        </details>
+
         <div class="wsum">
           <p class="wsum__k mono"><span data-l="bg">Твоята ориентировъчна цена</span><span data-l="en">Your estimated price</span></p>
           <p class="wsum__v"><span class="js-sum wsum__sum">—</span> <span class="wsum__m js-mo"></span></p>
@@ -332,13 +340,6 @@
           <p class="wsum__copied" role="status" aria-live="polite" hidden><span data-l="bg">✓ Копирано. Във Viber: задръж → „Постави“ → прати.</span><span data-l="en">✓ Copied. In Viber: long-press → "Paste" → send.</span></p>
         </div>
 
-        <details class="wrev js-rev" hidden>
-          <summary class="wrev__head">
-            <p class="wrev__t"><span data-l="bg">Твоят избор</span><span data-l="en">Your choices</span></p>
-            <p class="wrev__s"><span data-l="bg">Виж или промени</span><span data-l="en">View or change</span></p>
-          </summary>
-          <ul class="wrev__list"></ul>
-        </details>
 
         <div class="wgrid">
           <label class="wf"><span><span data-l="bg">Име *</span><span data-l="en">Name *</span></span><input type="text" name="name" maxlength="200" autocomplete="name"></label>
@@ -789,23 +790,37 @@
         });
       }
 
-      /* ---------- the price appears only on the last step: a short "calculating", then it counts up ---------- */
-      var revealT, revealRaf;
+      /* ---------- the price appears only on the last step, and only once they scroll down to it:
+         first "Твоят избор" (the summary), then — when the price card is on screen — a short "calculating" and it counts up ---------- */
+      var revealT, revealW, revealRaf, revealIO;
       function reveal() {
         var card = $('.wsum'), el = $('.wsum__sum'), e = estimate();
-        clearTimeout(revealT); cancelAnimationFrame(revealRaf);
+        clearTimeout(revealT); clearTimeout(revealW); cancelAnimationFrame(revealRaf);
+        if (revealIO) { revealIO.disconnect(); revealIO = null; }
         render();
-        if (e.none || e.quote || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        card.classList.add('is-calc');
-        revealT = setTimeout(function () {
-          card.classList.remove('is-calc');
-          var t0 = performance.now(), D = 900;
-          (function tick(now) {
-            var k = Math.min(1, (now - t0) / D), q = 1 - Math.pow(1 - k, 3);
-            el.textContent = fmt(Math.round(e.min * q / 10) * 10, Math.round(e.max * q / 10) * 10);
-            if (k < 1) revealRaf = requestAnimationFrame(tick); else el.textContent = e.sum;
-          })(t0);
-        }, 1300);
+        card.classList.remove('is-calc');
+        if (e.none || e.quote) return;
+        card.classList.add('is-calc');                    /* hidden until it's on screen */
+        var start = function () {
+          if (matchMedia('(prefers-reduced-motion: reduce)').matches) { card.classList.remove('is-calc'); return; }
+          revealT = setTimeout(function () {
+            card.classList.remove('is-calc');
+            var e2 = estimate(), t0 = performance.now(), D = 900;
+            (function tick(now) {
+              var k = Math.min(1, (now - t0) / D), q = 1 - Math.pow(1 - k, 3);
+              el.textContent = fmt(Math.round(e2.min * q / 10) * 10, Math.round(e2.max * q / 10) * 10);
+              if (k < 1) revealRaf = requestAnimationFrame(tick); else el.textContent = e2.sum;
+            })(t0);
+          }, 1300);
+        };
+        if (!('IntersectionObserver' in window)) return start();
+        /* counts as "scrolled to it" when the card's top reaches the upper 60% of the screen
+           (so with a short summary it doesn't open on its own, at the very bottom) */
+        revealIO = new IntersectionObserver(function (en) {
+          if (!en[0].isIntersecting) return;
+          revealIO.disconnect(); revealIO = null; start();
+        }, { rootMargin: '0px 0px -40% 0px', threshold: 0 });
+        revealW = setTimeout(function () { if (revealIO) revealIO.observe(card); }, 800);   /* after the scroll up to the step */
       }
 
       /* =========================================================

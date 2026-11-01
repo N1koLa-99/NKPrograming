@@ -622,3 +622,7 @@ details.wrev .wrev__list { margin: 0 1.25rem 1.25rem; }
   .wbar__k > [data-l] { display: none !important; }     /* just "6 / 6" */
   .wrev__head .wrev__s { display: none; }
 }
+
+/* "Твоят избор" is open by default on the last step — space under the last row (the margin used to collapse out of <details>) */
+details.wrev .wrev__list { margin-bottom: 0; padding-bottom: 1.25rem; }
+@media (max-width: 600px) { details.wrev .wrev__list { padding-bottom: 1rem; } }
