@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="bg"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../css/fonts.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--fg:#f2f2ee;--mut:#8a8a84;--ac:#ccff00;--ink:#0a0a0a}
+html,body{background:var(--bg)}
+body{font-family:"Geologica",sans-serif;color:var(--fg);overflow:hidden}
+.ad{position:relative;width:var(--w);height:var(--h);overflow:hidden;background:
+ radial-gradient(60% 50% at 75% 80%,rgba(204,255,0,.16),transparent 70%),
+ radial-gradient(40% 30% at 10% 0%,rgba(204,255,0,.06),transparent 70%),var(--bg)}
+.ad::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(242,242,238,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(242,242,238,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(80% 70% at 60% 60%,#000,transparent)}
+.brand{position:absolute;left:var(--pad);top:var(--pad);display:flex;align-items:center;gap:22px}
+.brand svg{width:96px;height:66px;stroke:var(--ac);stroke-width:9;fill:none}
+.brand span{font-family:"Martian Mono";font-size:26px;line-height:1.1;letter-spacing:.02em}
+.brand i{font-style:normal;color:var(--ac)}
+.tag{position:absolute;right:var(--pad);top:calc(var(--pad) + 14px);font-family:"JetBrains Mono";font-size:26px;color:var(--mut);display:flex;align-items:center;gap:14px}
+.tag b{width:14px;height:14px;border-radius:50%;background:var(--ac);box-shadow:0 0 18px var(--ac)}
+h1{position:absolute;left:var(--pad);top:var(--h1top);font-weight:800;font-size:var(--h1);line-height:.98;letter-spacing:-.045em;width:var(--h1w)}
+h1 em{font-style:normal;color:var(--ac)}
+h1 s{text-decoration:none;color:#5a5a56}
+.sub{position:absolute;left:var(--pad);top:var(--subtop);font-size:var(--sub);line-height:1.35;color:#c8c8c2;width:var(--subw)}
+.sub b{color:var(--fg);font-weight:600}
+/* calculator card */
+.card{position:absolute;left:var(--cx);top:var(--cy);width:var(--cw);transform:rotate(var(--rot));transform-origin:0 0;border-radius:44px;background:#f4f4f0;color:var(--ink);padding:52px 56px 56px;box-shadow:0 60px 120px rgba(0,0,0,.6),0 0 0 2px rgba(204,255,0,.5),0 0 90px rgba(204,255,0,.18)}
+.k{font-family:"JetBrains Mono";font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,10,10,.55)}
+.chips{display:flex;flex-wrap:wrap;gap:14px;margin:26px 0 34px}
+.chips span{font-size:26px;font-weight:500;padding:12px 22px;border-radius:999px;background:#0a0a0a;color:#f2f2ee}
+.chips span:before{content:"✓ ";color:var(--ac)}
+.price{white-space:nowrap;font-weight:800;font-size:var(--price);letter-spacing:-.045em;line-height:1;margin-top:12px}
+.price small{display:block;margin-top:10px;font-family:"JetBrains Mono";font-weight:400;font-size:28px;letter-spacing:0;color:rgba(10,10,10,.55)}
+.rows{margin-top:30px;border-top:2px solid rgba(10,10,10,.1)}
+.rows p{display:flex;justify-content:space-between;font-size:27px;padding:18px 0;border-bottom:2px solid rgba(10,10,10,.08)}
+.rows i{font-style:normal;font-family:"JetBrains Mono";color:rgba(10,10,10,.6)}
+.cta{position:absolute;left:var(--pad);top:var(--ctatop);display:flex;align-items:center;gap:30px;background:var(--ac);color:var(--ink);font-weight:700;font-size:var(--cta);padding:var(--ctap);border-radius:999px;box-shadow:0 0 70px rgba(204,255,0,.35)}
+.cta b{display:grid;place-items:center;width:calc(var(--cta)*1.9);height:calc(var(--cta)*1.9);border-radius:50%;background:var(--ink);color:var(--ac);font-size:var(--cta)}
+.sticker{position:absolute;left:var(--sx);top:var(--sy);width:var(--ss);height:var(--ss);border-radius:50%;background:var(--ac);color:var(--ink);display:grid;place-items:center;text-align:center;transform:rotate(-12deg);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.sticker div{font-weight:600;font-size:calc(var(--ss)*.12);line-height:1}
+.sticker strong{display:block;font-weight:800;font-size:calc(var(--ss)*.3);letter-spacing:-.05em;line-height:.95}
+/* formats */
+.sq .card{padding:40px 44px 44px;border-radius:38px}.sq .chips span{font-size:22px;padding:10px 18px}.sq .chips{gap:10px;margin:20px 0 24px}.sq .rows p{font-size:23px;padding:14px 0}.sq .k{font-size:20px}.sq .price small{display:block;margin-top:10px;font-size:24px}
+.sq{--w:1080px;--h:1080px;--pad:72px;--h1top:200px;--h1:104px;--h1w:900px;--subtop:440px;--sub:34px;--subw:460px;--cx:560px;--cy:500px;--cw:470px;--rot:-4deg;--price:68px;--ctatop:900px;--cta:32px;--ctap:22px 22px 22px 44px;--sx:390px;--sy:660px;--ss:180px}
+.st{--w:1080px;--h:1920px;--pad:80px;--h1top:300px;--h1:132px;--h1w:920px;--subtop:740px;--sub:42px;--subw:860px;--cx:150px;--cy:950px;--cw:800px;--rot:-3deg;--price:110px;--ctatop:1730px;--cta:46px;--ctap:28px 28px 28px 56px;--sx:760px;--sy:880px;--ss:250px}
+.st .card{padding:64px 70px 70px}.st .chips span{font-size:32px}.st .rows p{font-size:33px}.st .k{font-size:28px}
+.fd{--w:1200px;--h:628px;--pad:56px;--h1top:140px;--h1:66px;--h1w:620px;--subtop:300px;--sub:25px;--subw:520px;--cx:700px;--cy:70px;--cw:470px;--rot:-4deg;--price:76px;--ctatop:440px;--cta:30px;--ctap:16px 16px 16px 36px;--sx:575px;--sy:400px;--ss:140px}.fd .tag{display:none}
+.fd .card{padding:38px 42px 40px;border-radius:34px}.fd .chips{margin:18px 0 22px;gap:10px}.fd .chips span{font-size:20px;padding:9px 16px}.fd .rows p{font-size:21px;padding:12px 0}.fd .k{font-size:18px}.fd .price small{display:block;margin-top:10px;font-size:22px}
+.fd .brand svg{width:70px;height:48px}.fd .brand span{font-size:20px}.fd .tag{font-size:20px}
+.bl{filter:blur(calc(var(--price)*.2));opacity:.85;user-select:none}
+.rows .bl{filter:blur(7px)}
+.price{position:relative}
+.pw{position:relative;display:inline-block}.q{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(8deg);width:calc(var(--price)*1.15);height:calc(var(--price)*1.15);border-radius:50%;background:var(--ink);color:var(--ac);display:grid;place-items:center;font-size:calc(var(--price)*.8);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+</style></head>
+<body>
+<div class="ad" id="ad">
+  <div class="brand"><svg viewBox="0 0 160 110"><path d="M8 102 V8 L68 102 V8 M94 8 V102 M94 64 L152 8 M114 46 L154 102"/></svg><span>NK<br>PROGRAMMING<i>_</i></span></div>
+  <div class="tag"><b></b>калкулатор</div>
+  <h1>Колко ще струва <em>твоят сайт?</em></h1>
+  <p class="sub">Отговори на <b>6 кратки въпроса</b> и виж цената веднага. Без обаждания, без чакане.</p>
+  <div class="card">
+    <p class="k">Ориентировъчна цена</p>
+    <div class="chips"><span>Бизнес сайт</span><span>Блог</span><span>Леки анимации</span><span>Текстове</span></div>
+    <p class="price"><span class="pw"><span class="bl">400–500 €</span><span class="q">?</span></span> <small class="bl">+ 10 €/мес</small></p>
+    <div class="rows"><p>Бизнес сайт<i class="bl">≈ 220 €</i></p><p>Блог / новини<i class="bl">≈ 70 €</i></p><p>Помощ с текстовете<i class="bl">≈ 90 €</i></p></div>
+  </div>
+  <div class="sticker"><div>сайт от<strong>50 €</strong></div></div>
+  <div class="cta">Сметни цената сам <b>→</b></div>
+</div>
+<script>document.getElementById('ad').className='ad '+(location.hash.slice(1)||'sq')</script>
+</body></html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>NK Programming — Никола Климентов, fullstack разработчик</title>
-  <meta name="description" content="NK Programming — сайтове, онлайн магазини и системи по поръчка. Проектирани, написани и пуснати от един човек — от базата данни до последния пиксел.">
+  <title>Изработка на сайт и онлайн магазин | NK Programming</title>
+  <meta name="description" content="Изработка на сайтове, онлайн магазини и платформи по поръчка за бизнеси от цяла България. Сайт от 50 €, поддръжка от 25 €/мес. Собствен дизайн, не шаблон. Виж цената за 2 минути.">
   <meta name="theme-color" content="#0a0a0a">
   <script>
     /* one fixed screen height (--app-h) taken when the page opens. The phone toolbars sliding in and out
@@ -44,6 +44,9 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/style.css">
 
+  <!-- seo:jsonld -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://nkprograming.netlify.app/#business","name":"NK Programming","url":"https://nkprograming.netlify.app/","email":"nikola.klimentow@gmail.com","image":"https://nkprograming.netlify.app/assets/og-image.jpg","logo":"https://nkprograming.netlify.app/assets/favicon.svg","description":"Изработка на сайтове, онлайн магазини и платформи по поръчка за бизнеси от цяла България. Сайт от 50 €, поддръжка от 25 €/мес. Собствен дизайн, не шаблон. Виж цената за 2 минути.","founder":{"@type":"Person","name":"Никола Климентов","jobTitle":"Fullstack разработчик"},"address":{"@type":"PostalAddress","addressLocality":"Горна Оряховица","addressRegion":"Велико Търново","addressCountry":"BG"},"areaServed":{"@type":"Country","name":"България"},"priceRange":"€€","knowsAbout":["Изработка на сайт","Онлайн магазин","WooCommerce","ASP.NET Core","SQL Server","Azure","SEO"]},{"@type":"WebSite","@id":"https://nkprograming.netlify.app/#site","url":"https://nkprograming.netlify.app/","name":"NK Programming","inLanguage":"bg","publisher":{"@id":"https://nkprograming.netlify.app/#business"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Колко време отнема един сайт?","acceptedAnswer":{"@type":"Answer","text":"Бизнес сайт обикновено отнема 2–4 седмици. По-големите платформи и онлайн магазини ги правим на етапи, така че всяка седмица виждаш реален напредък."}},{"@type":"Question","name":"Колко струва?","acceptedAnswer":{"@type":"Answer","text":"Сайт на една страница започва от 50 €, бизнес сайт до 5 страници — от 150 €. Виж цените по-горе. Виж цената за твоя случай за 2 минути в калкулатора — после ти пращам ясна оферта, без скрити екстри."}},{"@type":"Question","name":"Ползваш ли готови шаблони?","acceptedAnswer":{"@type":"Answer","text":"Не. Всеки сайт е със собствен дизайн, направен за твоя бизнес — затова не прилича на хиляди други сайтове. Заради това и цената зависи от това какво ти трябва, а калкулаторът показва точно за какво плащаш."}},{"@type":"Question","name":"Поемаш ли домейн и хостинг?","acceptedAnswer":{"@type":"Answer","text":"Да — настройвам домейн, SSL, хостинг и имейли или работя с това, което вече имаш. Домейнът и хостингът са на твое име и ги плащаш ти, така че сайтът си остава твой."}},{"@type":"Question","name":"Мога ли сам да променям съдържанието?","acceptedAnswer":{"@type":"Answer","text":"Да. Мога да ти направя админ панел или да използвам WordPress — сам сменяш текстове, снимки и продукти, без да викаш програмист."}},{"@type":"Question","name":"Как се плаща? Имаш ли фирма?","acceptedAnswer":{"@type":"Answer","text":"Работя като физическо лице — напълно законно, фирма не е нужна за това. Подписваме писмен договор, плащането е по банков път (обикновено аванс в началото и остатък при предаване), а доходът ми се декларира. Ако фирмата ти има нужда от конкретен документ, кажи предварително и ще намерим решение."}},{"@type":"Question","name":"Какво става след пускането?","acceptedAnswer":{"@type":"Answer","text":"Не изчезвам. Месечната поддръжка е 25 € за сайт, 35 € за сайт с онлайн записване и 55 € за магазин. В нея влизат архиви, обновления, следене дали сайтът работи, поправка на бъгове до 1 работен ден и дребни корекции по дизайна и текста. Нови страници, нови функции и качване на продукти не влизат — тях ги оценявам отделно. Хостингът и домейнът са на твое име и ги плащаш ти."}}]}]}</script>
+  <!-- /seo:jsonld -->
 </head>
 <body class="is-loading">
 
@@ -69,7 +72,6 @@
 
   <!-- ================= FX ================= -->
   <div class="grain" aria-hidden="true"></div>
-  <div class="progress" aria-hidden="true"><i></i></div>
 
   <!-- ================= NAV ================= -->
   <header class="nav">
@@ -79,13 +81,13 @@
     </a>
 
     <nav class="nav__links mono" aria-label="Main">
-      <a href="#about" data-scroll-to data-scramble data-nav="about" data-i18n="nav.about">About</a>
-      <a href="#work" data-scroll-to data-scramble data-nav="work" data-i18n="nav.work">Work</a>
-      <a href="#process" data-scroll-to data-scramble data-nav="process" data-i18n="nav.process">Process</a>
-      <a href="#services" data-scroll-to data-scramble data-nav="services" data-i18n="nav.services">Services</a>
-      <a href="#pricing" data-scroll-to data-scramble data-nav="pricing" data-i18n="nav.pricing">Pricing</a>
-      <a href="#faq" data-scroll-to data-scramble data-nav="faq" data-i18n="nav.faq">FAQ</a>
-      <a href="#contact" data-scroll-to data-scramble data-nav="contact" data-i18n="nav.contact">Contact</a>
+      <a href="#about" data-scroll-to data-scramble data-nav="about" data-i18n="nav.about">За мен</a>
+      <a href="#work" data-scroll-to data-scramble data-nav="work" data-i18n="nav.work">Проекти</a>
+      <a href="#process" data-scroll-to data-scramble data-nav="process" data-i18n="nav.process">Процес</a>
+      <a href="#services" data-scroll-to data-scramble data-nav="services" data-i18n="nav.services">Услуги</a>
+      <a href="#pricing" data-scroll-to data-scramble data-nav="pricing" data-i18n="nav.pricing">Цени</a>
+      <a href="#faq" data-scroll-to data-scramble data-nav="faq" data-i18n="nav.faq">Въпроси</a>
+      <a href="#contact" data-scroll-to data-scramble data-nav="contact" data-i18n="nav.contact">Контакт</a>
     </nav>
 
     <div class="nav__right">
@@ -95,7 +97,7 @@
         <button type="button" data-lang="bg">BG</button>
       </div>
       <a href="#contact" class="btn btn--accent btn--sm" data-scroll-to data-magnetic>
-        <span class="btn__txt" data-i18n="nav.cta">Let's talk</span>
+        <span class="btn__txt" data-i18n="nav.cta">Пиши ми</span>
         <span class="btn__arrow" aria-hidden="true">↗</span>
       </a>
       <button class="burger" type="button" aria-label="Menu"><i></i><i></i></button>
@@ -104,26 +106,27 @@
 
   <div class="menu" aria-hidden="true">
     <nav class="menu__links">
-      <a href="#about" data-scroll-to><span class="mono">1</span><b data-i18n="nav.about">About</b></a>
-      <a href="#work" data-scroll-to><span class="mono">2</span><b data-i18n="nav.work">Work</b></a>
-      <a href="#process" data-scroll-to><span class="mono">3</span><b data-i18n="nav.process">Process</b></a>
-      <a href="#services" data-scroll-to><span class="mono">4</span><b data-i18n="nav.services">Services</b></a>
-      <a href="#pricing" data-scroll-to><span class="mono">5</span><b data-i18n="nav.pricing">Pricing</b></a>
-      <a href="#faq" data-scroll-to><span class="mono">6</span><b data-i18n="nav.faq">FAQ</b></a>
-      <a href="#contact" data-scroll-to><span class="mono">7</span><b data-i18n="nav.contact">Contact</b></a>
+      <a href="#about" data-scroll-to><span class="mono">1</span><b data-i18n="nav.about">За мен</b></a>
+      <a href="#work" data-scroll-to><span class="mono">2</span><b data-i18n="nav.work">Проекти</b></a>
+      <a href="#process" data-scroll-to><span class="mono">3</span><b data-i18n="nav.process">Процес</b></a>
+      <a href="#services" data-scroll-to><span class="mono">4</span><b data-i18n="nav.services">Услуги</b></a>
+      <a href="#pricing" data-scroll-to><span class="mono">5</span><b data-i18n="nav.pricing">Цени</b></a>
+      <a href="#faq" data-scroll-to><span class="mono">6</span><b data-i18n="nav.faq">Въпроси</b></a>
+      <a href="#contact" data-scroll-to><span class="mono">7</span><b data-i18n="nav.contact">Контакт</b></a>
     </nav>
     <div class="menu__foot">
       <div class="menu__row mono">
-        <span class="hero__status"><i class="dot"></i><span data-i18n="hero.status">Available for new projects</span></span>
+        <span class="hero__status"><i class="dot"></i><span data-i18n="hero.status">Свободен за нови проекти</span></span>
         <div class="lang" role="group" aria-label="Language">
           <button type="button" data-lang="en" class="is-active">EN</button>
           <span aria-hidden="true">/</span>
           <button type="button" data-lang="bg">BG</button>
         </div>
       </div>
-      <a href="#contact" class="btn btn--accent menu__cta" data-scroll-to>
-        <span class="btn__txt" data-i18n="hero.cta2">Start a project</span><span class="btn__arrow" aria-hidden="true">↗</span>
+      <a href="zapitvane.html" class="btn btn--accent menu__cta">
+        <span class="btn__txt" data-i18n="hero.calc">Колко ще струва моят сайт?</span><span class="btn__arrow" aria-hidden="true">↗</span>
       </a>
+      <a class="menu__mail mono" href="viber://chat?number=%2B359893951260">Viber</a>
       <a class="menu__mail mono" href="mailto:nikola.klimentow@gmail.com">nikola.klimentow@gmail.com</a>
     </div>
   </div>
@@ -133,22 +136,22 @@
     <section class="hero" id="top" data-blob="hero">
       <div class="hero__content">
         <p class="hero__kicker mono" data-hero-fade>
-          <span class="tok-c">//</span><span data-i18n="hero.kicker">fullstack developer &amp; freelancer</span>
+          <span class="tok-c">//</span><span data-i18n="hero.kicker">fullstack разработчик и фрийлансър</span>
         </p>
 
         <h1 class="hero__headline" data-hero-fade>
-          <span class="hl hl--dim" data-i18n="hero.l1">You bring the idea</span>
-          <span class="hl"><span data-i18n="hero.l2">I build the</span> <span class="rot-line"><span class="rot"><span class="rot__sel" aria-hidden="true"></span><span class="rot__txt">website</span></span><span class="rot__caret" aria-hidden="true"></span></span></span>
+          <span class="hl hl--dim" data-i18n="hero.l1">Ти даваш идеята</span>
+          <span class="hl"><span data-i18n="hero.l2">Аз създавам</span> <span class="rot-line"><span class="rot"><span class="rot__sel" aria-hidden="true"></span><span class="rot__txt">website</span></span><span class="rot__caret" aria-hidden="true"></span></span></span>
         </h1>
 
-        <p class="hero__desc" data-hero-fade data-i18n="hero.desc">Websites, online shops and custom systems — designed, coded and launched by one person. From the database to the last pixel.</p>
+        <p class="hero__desc" data-hero-fade data-i18n="hero.desc">Сайтове, онлайн магазини и системи по поръчка — проектирани, написани и пуснати от един човек. От базата данни до последния пиксел.</p>
 
         <div class="hero__ctas" data-hero-fade>
-          <a href="#work" class="btn btn--accent" data-scroll-to data-magnetic>
-            <span class="btn__txt" data-i18n="hero.cta1">See the work</span><span class="btn__arrow" aria-hidden="true">↗</span>
+          <a href="zapitvane.html" class="btn btn--accent" data-magnetic>
+            <span class="btn__txt" data-i18n="hero.calc">Колко ще струва моят сайт?</span><span class="btn__arrow" aria-hidden="true">↗</span>
           </a>
-          <a href="#contact" class="btn btn--ghost" data-scroll-to data-magnetic>
-            <span class="btn__txt" data-i18n="hero.cta2">Start a project</span>
+          <a href="#work" class="btn btn--ghost" data-scroll-to data-magnetic>
+            <span class="btn__txt" data-i18n="hero.cta1">Виж проектите</span>
           </a>
         </div>
       </div>
@@ -172,16 +175,16 @@
 
     <!-- ================= ABOUT ================= -->
     <section class="about section" id="about" data-blob="about">
-      <div class="section-label mono" data-reveal><span class="sl-num">1</span><span class="sl-line"></span><span data-i18n="about.label">About</span></div>
-      <p class="about__text" data-i18n="about.text">I build websites that <em>work for your business</em>: they load fast, look good on every device and bring in real value and real orders.<span class="about__more">I handle the whole process — from the first conversation to going live and the support after. You have one point of contact who knows your project from start to finish.</span></p>
+      <div class="section-label mono" data-reveal><span class="sl-num">1</span><span class="sl-line"></span><span data-i18n="about.label">За мен</span></div>
+      <p class="about__text" data-i18n="about.text">Създавам сайтове, които <em>работят за бизнеса ти</em>: зареждат бързо, изглеждат добре на всяко устройство и носят <em>стойност и реални поръчки</em>.<span class="about__more">Поемам <em>целия процес</em> — от първия разговор до пускането онлайн и поддръжката след това. Имаш <em>един човек за контакт</em>, който познава проекта ти от началото до края.</span></p>
     </section>
 
     <!-- ================= WORK ================= -->
     <section class="work" id="work" data-blob="work">
       <div class="sec-head">
         <div>
-          <div class="section-label mono" data-reveal><span class="sl-num">2</span><span class="sl-line"></span><span data-i18n="work.label">Selected work</span></div>
-          <h2 class="big-title" data-reveal><span data-wght data-i18n="work.title">Work</span></h2>
+          <div class="section-label mono" data-reveal><span class="sl-num">2</span><span class="sl-line"></span><span data-i18n="work.label">Избрани проекти</span></div>
+          <h2 class="big-title" data-reveal><span data-wght data-i18n="work.title">Проекти</span></h2>
         </div>
         <div class="work__progress mono" aria-hidden="true">
           <span class="work__cur">1</span>
@@ -189,9 +192,167 @@
           <span class="work__total">8</span>
         </div>
       </div>
-      <p class="work__hint mono" aria-hidden="true"><span data-i18n="work.hint">Swipe</span> <i>→</i></p>
+      <p class="work__hint mono" aria-hidden="true"><span data-i18n="work.hint">Плъзни</span> <i>→</i></p>
       <div class="work__viewport">
-        <div class="work__track"><!-- rendered by js --></div>
+        <div class="work__track">
+      <article class="card" style="--ar:2.0100502512562812;--i:0">
+        <a class="card__link" href="https://atlanticdrive.bg" target="_blank" rel="noopener" data-cursor="view">
+          <div class="card__media">
+            <div class="card__browser"><i></i><i></i><i></i><span>atlanticdrive.bg</span></div>
+            <div class="card__cover"><img src="assets/projects/atlantic-drive.jpg" alt="Atlantic Drive — atlanticdrive.bg" loading="lazy" decoding="async"></div>
+            
+            <div class="card__glow"></div>
+            <span class="card__visit mono">Виж ↗</span>
+          </div>
+          <div class="card__meta">
+            <span class="card__idx mono">01<em>/08</em></span>
+            <h3 class="card__title">Atlantic Drive</h3>
+            <span class="card__go">↗</span>
+          </div>
+          <p class="card__cat">Платформа за автокъща</p>
+          <div class="card__info mono"><span class="card__badge card__badge--live"><i></i>Онлайн</span></div>
+        </a>
+      </article>
+      <article class="card" style="--ar:2.0671834625322996;--i:1">
+        <a class="card__link" href="https://beautyhousebg.com" target="_blank" rel="noopener" data-cursor="view">
+          <div class="card__media">
+            <div class="card__browser"><i></i><i></i><i></i><span>beautyhousebg.com</span></div>
+            <div class="card__cover"><img src="assets/projects/beauty-house.jpg" alt="Beauty House — beautyhousebg.com" loading="lazy" decoding="async"></div>
+            
+            <div class="card__glow"></div>
+            <span class="card__visit mono">Виж ↗</span>
+          </div>
+          <div class="card__meta">
+            <span class="card__idx mono">02<em>/08</em></span>
+            <h3 class="card__title">Beauty House</h3>
+            <span class="card__go">↗</span>
+          </div>
+          <p class="card__cat">Сайт за салон за красота</p>
+          <div class="card__info mono"><span class="card__badge card__badge--live"><i></i>Онлайн</span></div>
+        </a>
+      </article>
+      <article class="card" style="--ar:1.7837235228539576;--i:2">
+        <a class="card__link" href="https://swimwithsmile.netlify.app" target="_blank" rel="noopener" data-cursor="view">
+          <div class="card__media">
+            <div class="card__browser"><i></i><i></i><i></i><span>swimwithsmile.netlify.app</span></div>
+            <div class="card__cover"><img src="assets/projects/swim-with-smile.jpg" alt="SwimWithSmile — swimwithsmile.netlify.app" loading="lazy" decoding="async"></div>
+            
+            <div class="card__glow"></div>
+            <span class="card__visit mono">Виж концепцията ↗</span>
+          </div>
+          <div class="card__meta">
+            <span class="card__idx mono">03<em>/08</em></span>
+            <h3 class="card__title">SwimWithSmile</h3>
+            <span class="card__go">↗</span>
+          </div>
+          <p class="card__cat">Приложение за треньори по плуване</p>
+          <div class="card__info mono"><span class="card__badge card__badge--concept">Концептуален проект</span></div>
+        </a>
+      </article>
+      <article class="card" style="--ar:1.9704433497536946;--i:3">
+        <a class="card__link" href="https://pchelichkaa.netlify.app" target="_blank" rel="noopener" data-cursor="view">
+          <div class="card__media">
+            <div class="card__browser"><i></i><i></i><i></i><span>pchelichkaa.netlify.app</span></div>
+            <div class="card__cover"><img src="assets/projects/pchelichka.jpg" alt="Пчеличка — pchelichkaa.netlify.app" loading="lazy" decoding="async"></div>
+            
+            <div class="card__glow"></div>
+            <span class="card__visit mono">Виж концепцията ↗</span>
+          </div>
+          <div class="card__meta">
+            <span class="card__idx mono">04<em>/08</em></span>
+            <h3 class="card__title">Пчеличка</h3>
+            <span class="card__go">↗</span>
+          </div>
+          <p class="card__cat">Кафе-сладкарница с мед</p>
+          <div class="card__info mono"><span class="card__badge card__badge--concept">Концептуален проект</span></div>
+        </a>
+      </article>
+      <article class="card" style="--ar:2.030456852791878;--i:4">
+        <a class="card__link" href="https://stefanovi-cleaning.com" target="_blank" rel="noopener" data-cursor="view">
+          <div class="card__media">
+            <div class="card__browser"><i></i><i></i><i></i><span>stefanovi-cleaning.com</span></div>
+            <div class="card__cover"><img src="assets/projects/stefanovi-cleaning.jpg" alt="Stefanovi Cleaning — stefanovi-cleaning.com" loading="lazy" decoding="async"></div>
+            
+            <div class="card__glow"></div>
+            <span class="card__visit mono">Виж ↗</span>
+          </div>
+          <div class="card__meta">
+            <span class="card__idx mono">05<em>/08</em></span>
+            <h3 class="card__title">Stefanovi Cleaning</h3>
+            <span class="card__go">↗</span>
+          </div>
+          <p class="card__cat">Сайт за почистваща фирма</p>
+          <div class="card__info mono"><span class="card__badge card__badge--live"><i></i>Онлайн</span></div>
+        </a>
+      </article>
+      <article class="card" style="--ar:2.1080368906455864;--i:5">
+        <a class="card__link" href="https://moto-zona.com" target="_blank" rel="noopener" data-cursor="view">
+          <div class="card__media">
+            <div class="card__browser"><i></i><i></i><i></i><span>moto-zona.com</span></div>
+            <div class="card__cover"><img src="assets/projects/moto-zona.jpg" alt="moto-zona — moto-zona.com" loading="lazy" decoding="async"></div>
+            
+            <div class="card__glow"></div>
+            <span class="card__visit mono">Виж ↗</span>
+          </div>
+          <div class="card__meta">
+            <span class="card__idx mono">06<em>/08</em></span>
+            <h3 class="card__title">moto-zona</h3>
+            <span class="card__go">↗</span>
+          </div>
+          <p class="card__cat">Маркетплейс за мотори</p>
+          <div class="card__info mono"><span class="card__badge card__badge--live"><i></i>Онлайн</span></div>
+        </a>
+      </article>
+      <article class="card" style="--ar:1.9464720194647203;--i:6">
+        <a class="card__link" href="https://pklokomotivgo.com" target="_blank" rel="noopener" data-cursor="view">
+          <div class="card__media">
+            <div class="card__browser"><i></i><i></i><i></i><span>pklokomotivgo.com</span></div>
+            <div class="card__cover"><img src="assets/projects/pk-lokomotiv-go.jpg" alt="PK Lokomotiv GO — pklokomotivgo.com" loading="lazy" decoding="async"></div>
+            
+            <div class="card__glow"></div>
+            <span class="card__visit mono">Виж ↗</span>
+          </div>
+          <div class="card__meta">
+            <span class="card__idx mono">07<em>/08</em></span>
+            <h3 class="card__title">PK Lokomotiv GO</h3>
+            <span class="card__go">↗</span>
+          </div>
+          <p class="card__cat">Сайт за спортен клуб</p>
+          <div class="card__info mono"><span class="card__badge card__badge--live"><i></i>Онлайн</span></div>
+        </a>
+      </article>
+      <article class="card" style="--ar:1.9547872340425532;--i:7">
+        <a class="card__link" href="https://floreabg.com" target="_blank" rel="noopener" data-cursor="view">
+          <div class="card__media">
+            <div class="card__browser"><i></i><i></i><i></i><span>floreabg.com</span></div>
+            <div class="card__cover"><img src="assets/projects/florea.jpg" alt="Floréa — floreabg.com" loading="lazy" decoding="async"></div>
+            
+            <div class="card__glow"></div>
+            <span class="card__visit mono">Виж ↗</span>
+          </div>
+          <div class="card__meta">
+            <span class="card__idx mono">08<em>/08</em></span>
+            <h3 class="card__title">Floréa</h3>
+            <span class="card__go">↗</span>
+          </div>
+          <p class="card__cat">Онлайн магазин за цветя</p>
+          <div class="card__info mono"><span class="card__badge card__badge--live"><i></i>Онлайн</span></div>
+        </a>
+      </article>
+    <article class="card card--cta" style="--ar:1.15;--i:8">
+      <a class="card__link" href="zapitvane.html">
+        <div class="card__media">
+          <div>
+            <div class="card__cta-t">Твоят проект<br>е следващ?</div>
+            <span class="card__cta-a">→</span>
+          </div>
+        </div>
+        <div class="card__meta">
+          <h3 class="card__title">Пиши ми</h3>
+          <span class="card__go">↗</span>
+        </div>
+      </a>
+    </article></div>
       </div>
     </section>
 
@@ -199,10 +360,10 @@
     <section class="process section" id="process" data-blob="process">
       <div class="sec-head">
         <div>
-          <div class="section-label mono" data-reveal><span class="sl-num">3</span><span class="sl-line"></span><span data-i18n="proc.label">How we work</span></div>
-          <h2 class="big-title" data-reveal><span data-wght data-i18n="proc.title">Process</span></h2>
+          <div class="section-label mono" data-reveal><span class="sl-num">3</span><span class="sl-line"></span><span data-i18n="proc.label">Как работим</span></div>
+          <h2 class="big-title" data-reveal><span data-wght data-i18n="proc.title">Процес</span></h2>
         </div>
-        <p class="sec-head__aside" data-reveal data-i18n="proc.aside"></p>
+        <p class="sec-head__aside" data-reveal data-i18n="proc.aside">Без изненади. Знаеш какво се случва на всяка стъпка — от първия разговор до пускането.</p>
       </div>
       <div class="process__path">
         <svg class="process__svg" aria-hidden="true"><path class="pp-base" d=""/><path class="pp-line" d=""/></svg>
@@ -212,54 +373,54 @@
             <span class="step__dot"></span>
             <div class="step__body">
               <span class="step__num mono">1</span>
-              <h3 class="step__title" data-i18n="proc.1.t"></h3>
-              <p class="step__desc" data-i18n="proc.1.d"></p>
-              <span class="step__out mono" data-i18n="proc.1.o"></span>
+              <h3 class="step__title" data-i18n="proc.1.t">Разговор</h3>
+              <p class="step__desc" data-i18n="proc.1.d">Започваме с разговор: какъв е бизнесът ти, кои са клиентите ти и какво трябва да постигне сайтът. Уточняваме какво ще правим — и защо.</p>
+              <span class="step__out mono" data-i18n="proc.1.o">Цели и бриф</span>
             </div>
           </li>
           <li class="step" data-step>
             <span class="step__dot"></span>
             <div class="step__body">
               <span class="step__num mono">2</span>
-              <h3 class="step__title" data-i18n="proc.2.t"></h3>
-              <p class="step__desc" data-i18n="proc.2.d"></p>
-              <span class="step__out mono" data-i18n="proc.2.o"></span>
+              <h3 class="step__title" data-i18n="proc.2.t">План и оферта</h3>
+              <p class="step__desc" data-i18n="proc.2.d">Структура на страниците, функции, срокове и цена — всичко е ясно, преди да е написан и ред код.</p>
+              <span class="step__out mono" data-i18n="proc.2.o">Ясна оферта</span>
             </div>
           </li>
           <li class="step" data-step>
             <span class="step__dot"></span>
             <div class="step__body">
               <span class="step__num mono">3</span>
-              <h3 class="step__title" data-i18n="proc.3.t"></h3>
-              <p class="step__desc" data-i18n="proc.3.d"></p>
-              <span class="step__out mono" data-i18n="proc.3.o"></span>
+              <h3 class="step__title" data-i18n="proc.3.t">Дизайн</h3>
+              <p class="step__desc" data-i18n="proc.3.d">Правя дизайна на ключовите страници. Преглеждаш, коментираш и го донастройваме, докато стане точно както трябва.</p>
+              <span class="step__out mono" data-i18n="proc.3.o">Одобрен дизайн</span>
             </div>
           </li>
           <li class="step" data-step>
             <span class="step__dot"></span>
             <div class="step__body">
               <span class="step__num mono">4</span>
-              <h3 class="step__title" data-i18n="proc.4.t"></h3>
-              <p class="step__desc" data-i18n="proc.4.d"></p>
-              <span class="step__out mono" data-i18n="proc.4.o"></span>
+              <h3 class="step__title" data-i18n="proc.4.t">Разработка</h3>
+              <p class="step__desc" data-i18n="proc.4.d">Изграждам сайта — от базата данни до последния пиксел. Всяка седмица виждаш live преглед на напредъка.</p>
+              <span class="step__out mono" data-i18n="proc.4.o">Live преглед</span>
             </div>
           </li>
           <li class="step" data-step>
             <span class="step__dot"></span>
             <div class="step__body">
               <span class="step__num mono">5</span>
-              <h3 class="step__title" data-i18n="proc.5.t"></h3>
-              <p class="step__desc" data-i18n="proc.5.d"></p>
-              <span class="step__out mono" data-i18n="proc.5.o"></span>
+              <h3 class="step__title" data-i18n="proc.5.t">Тестове и пускане</h3>
+              <p class="step__desc" data-i18n="proc.5.d">Телефон и компютър, скорост, SEO, домейн и SSL — всичко е проверено. След това пускаме сайта.</p>
+              <span class="step__out mono" data-i18n="proc.5.o">Сайтът е онлайн</span>
             </div>
           </li>
           <li class="step" data-step>
             <span class="step__dot"></span>
             <div class="step__body">
               <span class="step__num mono">6</span>
-              <h3 class="step__title" data-i18n="proc.6.t"></h3>
-              <p class="step__desc" data-i18n="proc.6.d"></p>
-              <span class="step__out mono" data-i18n="proc.6.o"></span>
+              <h3 class="step__title" data-i18n="proc.6.t">Поддръжка</h3>
+              <p class="step__desc" data-i18n="proc.6.d">Не изчезвам след пускането. Поправки, ъпдейти и нови функции, когато бизнесът порасне.</p>
+              <span class="step__out mono" data-i18n="proc.6.o">Дългосрочен партньор</span>
             </div>
           </li>
         </ol>
@@ -270,35 +431,39 @@
     <section class="services section" id="services" data-blob="services">
       <div class="sec-head">
         <div>
-          <div class="section-label mono" data-reveal><span class="sl-num">4</span><span class="sl-line"></span><span data-i18n="services.label">What I do</span></div>
-          <h2 class="big-title" data-reveal><span data-wght data-i18n="services.title">Services</span></h2>
+          <div class="section-label mono" data-reveal><span class="sl-num">4</span><span class="sl-line"></span><span data-i18n="services.label">С какво се занимавам</span></div>
+          <h2 class="big-title" data-reveal><span data-wght data-i18n="services.title">Услуги</span></h2>
         </div>
-        <p class="sec-head__aside" data-reveal data-i18n="services.aside">One developer, the whole stack. No hand-offs, no lost details.</p>
+        <p class="sec-head__aside" data-reveal data-i18n="services.aside">Един разработчик, целият стек. Без прехвърляне между хора, без изгубени детайли.</p>
       </div>
       <ul class="services__list">
         <li class="svc" data-svc>
           <span class="svc__num mono">1</span>
-          <h3 class="svc__title" data-i18n="svc.1.t">Web apps</h3>
-          <p class="svc__desc" data-i18n="svc.1.d"></p>
+          <h3 class="svc__title" data-i18n="svc.1.t">Уеб приложения</h3>
+          <p class="svc__desc" data-i18n="svc.1.d">Платформи по поръчка на .NET и SQL Server — профили, админ панели, обяви, API. Издържат на реален трафик.</p>
           <span class="svc__arrow" aria-hidden="true">→</span>
+          <a class="svc__link" href="platforma-po-porachka/" aria-label="Уеб платформа по поръчка"></a>
         </li>
         <li class="svc" data-svc>
           <span class="svc__num mono">2</span>
-          <h3 class="svc__title" data-i18n="svc.2.t">Websites</h3>
-          <p class="svc__desc" data-i18n="svc.2.d"></p>
+          <h3 class="svc__title" data-i18n="svc.2.t">Сайтове</h3>
+          <p class="svc__desc" data-i18n="svc.2.d">Бързи и изчистени бизнес сайтове, които стоят страхотно на всеки екран.</p>
           <span class="svc__arrow" aria-hidden="true">→</span>
+          <a class="svc__link" href="izrabotka-na-sayt/" aria-label="Изработка на сайт"></a>
         </li>
         <li class="svc" data-svc>
           <span class="svc__num mono">3</span>
-          <h3 class="svc__title" data-i18n="svc.3.t">E-commerce</h3>
-          <p class="svc__desc" data-i18n="svc.3.d"></p>
+          <h3 class="svc__title" data-i18n="svc.3.t">Магазини</h3>
+          <p class="svc__desc" data-i18n="svc.3.d">Онлайн магазини с количка, плащане и поръчки. С WooCommerce или изцяло по поръчка — каквото пасва на бизнеса.</p>
           <span class="svc__arrow" aria-hidden="true">→</span>
+          <a class="svc__link" href="izrabotka-na-online-magazin/" aria-label="Изработка на онлайн магазин"></a>
         </li>
         <li class="svc" data-svc>
           <span class="svc__num mono">4</span>
           <h3 class="svc__title" data-i18n="svc.4.t">Cloud</h3>
-          <p class="svc__desc" data-i18n="svc.4.d"></p>
+          <p class="svc__desc" data-i18n="svc.4.d">Хостинг в Azure, домейни, SSL, CI/CD. Настройва се веднъж, както трябва, и забравяш за него.</p>
           <span class="svc__arrow" aria-hidden="true">→</span>
+          <a class="svc__link" href="poddrazhka-na-sayt/" aria-label="Поддръжка на сайт"></a>
         </li>
       </ul>
     </section>
@@ -307,17 +472,62 @@
     <section class="pricing section" id="pricing" data-blob="pricing">
       <div class="sec-head">
         <div>
-          <div class="section-label mono" data-reveal><span class="sl-num">5</span><span class="sl-line"></span><span data-i18n="price.label">Prices</span></div>
-          <h2 class="big-title" data-reveal><span data-wght data-i18n="price.title">Pricing</span></h2>
+          <div class="section-label mono" data-reveal><span class="sl-num">5</span><span class="sl-line"></span><span data-i18n="price.label">Колко струва</span></div>
+          <h2 class="big-title" data-reveal><span data-wght data-i18n="price.title">Цени</span></h2>
         </div>
-        <p class="sec-head__aside" data-reveal data-i18n="price.aside"></p>
+        <p class="sec-head__aside" data-reveal data-i18n="price.aside">Примерни цени — точната сума уточняваме заедно.</p>
       </div>
-      <ul class="pricing__list"><!-- rendered by js --></ul>
+      <ul class="pricing__list">
+    <li class="plan" data-plan>
+      <span class="plan__glow" aria-hidden="true"></span>
+      <div class="plan__top">
+        <span class="plan__n mono">01 / 03</span>
+        
+      </div>
+      <h3 class="plan__name">Сайт на една страница</h3>
+      <p class="plan__for">Ресторанти, кафенета, салони, майстори</p>
+      <div class="plan__price"><span class="plan__cur">€</span><span class="plan__amt"><span data-to="50">50</span><span class="plan__dash" aria-label="–"></span><span data-to="150">150</span></span></div>
+      <span class="plan__inc mono">Какво включва</span>
+      <ul class="plan__list"><li>Собствен дизайн — не шаблон</li><li>Меню или услуги</li><li>Адрес, карта и работно време</li><li>Изглежда отлично на телефон</li><li>С какво се отличавате</li><li>Бутони за телефон и контакт</li><li>Базово SEO</li></ul>
+      <a href="zapitvane.html?type=one" class="btn btn--ghost plan__cta">
+        <span class="btn__txt">Сметни точната цена</span><span class="btn__arrow" aria-hidden="true">↗</span>
+      </a>
+    </li>
+    <li class="plan plan--featured" data-plan>
+      <span class="plan__glow" aria-hidden="true"></span>
+      <div class="plan__top">
+        <span class="plan__n mono">02 / 03</span>
+        <span class="plan__tag mono">Най-търсен</span>
+      </div>
+      <h3 class="plan__name">Бизнес сайт</h3>
+      <p class="plan__for">До 5 страници, без база данни</p>
+      <div class="plan__price"><span class="plan__cur">€</span><span class="plan__amt"><span data-to="150">150</span><span class="plan__dash" aria-label="–"></span><span data-to="350">350</span></span></div>
+      <span class="plan__inc mono">Какво включва</span>
+      <ul class="plan__list"><li>Всичко от пакет 1</li><li>До 5 отделни страници</li><li>Форма за контакт</li><li>Галерия, за нас, услуги, контакт</li><li>SEO за всяка страница</li><li>Google Maps и социални мрежи</li></ul>
+      <a href="zapitvane.html?type=biz" class="btn btn--ink plan__cta">
+        <span class="btn__txt">Сметни точната цена</span><span class="btn__arrow" aria-hidden="true">↗</span>
+      </a>
+    </li>
+    <li class="plan" data-plan>
+      <span class="plan__glow" aria-hidden="true"></span>
+      <div class="plan__top">
+        <span class="plan__n mono">03 / 03</span>
+        
+      </div>
+      <h3 class="plan__name">Магазин или платформа</h3>
+      <p class="plan__for">Всичко, от което бизнесът ти има нужда — по поръчка</p>
+      <div class="plan__price"><span class="plan__ask">По оферта</span></div>
+      <span class="plan__inc mono">Например</span>
+      <ul class="plan__list"><li>Онлайн магазин с количка и плащане</li><li>Админ панел за съдържанието</li><li>Резервации, профили, обяви</li><li>База данни и интеграции</li><li>Всяка функция, която си представяш</li><li>Расте заедно с бизнеса</li></ul>
+      <a href="zapitvane.html" class="btn btn--ghost plan__cta">
+        <span class="btn__txt">Сметни точната цена</span><span class="btn__arrow" aria-hidden="true">↗</span>
+      </a>
+    </li></ul>
       <div class="pricing__dots" aria-hidden="true"><!-- phones: one dot per card --></div>
       <div class="pricing__more" data-reveal>
-        <p><b data-i18n="price.more.t">Not sure which one fits?</b> <span data-i18n="price.more.d"></span></p>
-        <a href="#contact" class="btn btn--ghost" data-scroll-to data-magnetic>
-          <span class="btn__txt" data-i18n="price.more.b">Ask me</span><span class="btn__arrow" aria-hidden="true">↗</span>
+        <p><b data-i18n="price.more.t">Не знаеш кое ти трябва?</b> <span data-i18n="price.more.d">Отговори на 6 кратки въпроса и виж цената веднага.</span></p>
+        <a href="zapitvane.html" class="btn btn--accent" data-magnetic>
+          <span class="btn__txt" data-i18n="price.more.b">Сметни цената за 2 мин</span><span class="btn__arrow" aria-hidden="true">↗</span>
         </a>
       </div>
     </section>
@@ -325,66 +535,126 @@
     <!-- ================= FAQ ================= -->
     <section class="faq section" id="faq" data-blob="faq">
       <div class="faq__side">
-        <div class="section-label mono" data-reveal><span class="sl-num">6</span><span class="sl-line"></span><span data-i18n="faq.label">Questions</span></div>
-        <h2 class="big-title" data-reveal><span data-wght data-i18n="faq.title">FAQ</span></h2>
-        <p class="faq__note" data-reveal data-i18n="faq.note"></p>
+        <div class="section-label mono" data-reveal><span class="sl-num">6</span><span class="sl-line"></span><span data-i18n="faq.label">Често задавани</span></div>
+        <h2 class="big-title" data-reveal><span data-wght data-i18n="faq.title">Въпроси</span></h2>
+        <p class="faq__note" data-reveal data-i18n="faq.note">Не намери въпроса си? <a href="#contact" data-scroll-to>Питай ме директно →</a></p>
       </div>
-      <div class="faq__list"><!-- rendered by js --></div>
+      <div class="faq__list">
+    <div class="faq__item">
+      <button type="button" class="faq__q" aria-expanded="false">
+        <span class="mono faq__n">01</span>
+        <span class="faq__qt">Колко време отнема един сайт?</span>
+        <span class="faq__icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq__a"><p>Бизнес сайт обикновено отнема 2–4 седмици. По-големите платформи и онлайн магазини ги правим на етапи, така че всяка седмица виждаш реален напредък.</p></div>
+    </div>
+    <div class="faq__item">
+      <button type="button" class="faq__q" aria-expanded="false">
+        <span class="mono faq__n">02</span>
+        <span class="faq__qt">Колко струва?</span>
+        <span class="faq__icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq__a"><p>Сайт на една страница започва от 50 €, бизнес сайт до 5 страници — от 150 €. Виж цените по-горе. Виж цената за твоя случай за 2 минути в <a href="zapitvane.html">калкулатора</a> — после ти пращам ясна оферта, без скрити екстри.</p></div>
+    </div>
+    <div class="faq__item">
+      <button type="button" class="faq__q" aria-expanded="false">
+        <span class="mono faq__n">03</span>
+        <span class="faq__qt">Ползваш ли готови шаблони?</span>
+        <span class="faq__icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq__a"><p>Не. Всеки сайт е със собствен дизайн, направен за твоя бизнес — затова не прилича на хиляди други сайтове. Заради това и цената зависи от това какво ти трябва, а калкулаторът показва точно за какво плащаш.</p></div>
+    </div>
+    <div class="faq__item">
+      <button type="button" class="faq__q" aria-expanded="false">
+        <span class="mono faq__n">04</span>
+        <span class="faq__qt">Поемаш ли домейн и хостинг?</span>
+        <span class="faq__icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq__a"><p>Да — настройвам домейн, SSL, хостинг и имейли или работя с това, което вече имаш. Домейнът и хостингът са на твое име и ги плащаш ти, така че сайтът си остава твой.</p></div>
+    </div>
+    <div class="faq__item">
+      <button type="button" class="faq__q" aria-expanded="false">
+        <span class="mono faq__n">05</span>
+        <span class="faq__qt">Мога ли сам да променям съдържанието?</span>
+        <span class="faq__icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq__a"><p>Да. Мога да ти направя админ панел или да използвам WordPress — сам сменяш текстове, снимки и продукти, без да викаш програмист.</p></div>
+    </div>
+    <div class="faq__item">
+      <button type="button" class="faq__q" aria-expanded="false">
+        <span class="mono faq__n">06</span>
+        <span class="faq__qt">Как се плаща? Имаш ли фирма?</span>
+        <span class="faq__icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq__a"><p>Работя като физическо лице — напълно законно, фирма не е нужна за това. Подписваме писмен договор, плащането е по банков път (обикновено аванс в началото и остатък при предаване), а доходът ми се декларира. Ако фирмата ти има нужда от конкретен документ, кажи предварително и ще намерим решение.</p></div>
+    </div>
+    <div class="faq__item">
+      <button type="button" class="faq__q" aria-expanded="false">
+        <span class="mono faq__n">07</span>
+        <span class="faq__qt">Какво става след пускането?</span>
+        <span class="faq__icon" aria-hidden="true"></span>
+      </button>
+      <div class="faq__a"><p>Не изчезвам. Месечната поддръжка е 25 € за сайт, 35 € за сайт с онлайн записване и 55 € за магазин. В нея влизат архиви, обновления, следене дали сайтът работи, поправка на бъгове до 1 работен ден и дребни корекции по дизайна и текста. Нови страници, нови функции и качване на продукти не влизат — тях ги оценявам отделно. Хостингът и домейнът са на твое име и ги плащаш ти.</p></div>
+    </div></div>
     </section>
 
     <!-- ================= CONTACT ================= -->
     <section class="contact section" id="contact" data-blob="contact">
-      <div class="section-label mono" data-reveal><span class="sl-num">7</span><span class="sl-line"></span><span data-i18n="contact.label">Contact</span></div>
+      <div class="section-label mono" data-reveal><span class="sl-num">7</span><span class="sl-line"></span><span data-i18n="contact.label">Контакт</span></div>
 
       <h2 class="contact__title" data-wght>
-        <span class="mask"><span data-i18n="contact.t1">Let's build</span></span>
-        <span class="mask"><span class="contact__accent" data-i18n="contact.t2">something.</span></span>
+        <span class="mask"><span data-i18n="contact.t1">Да направим</span></span>
+        <span class="mask"><span class="contact__accent" data-i18n="contact.t2">нещо яко.</span></span>
       </h2>
 
       <div class="contact__row">
         <div class="contact__info">
-          <p class="contact__sub" data-reveal data-i18n="contact.sub"></p>
+          <p class="contact__sub" data-reveal data-i18n="contact.sub">Имаш проект, идея или предложение? Пиши ми във Viber или на имейл — отговарям бързо.</p>
           <a href="mailto:nikola.klimentow@gmail.com" class="contact__mail" data-reveal>nikola.klimentow@gmail.com</a>
+          <div class="contact__phone" data-reveal>
+            <a href="viber://chat?number=%2B359893951260" class="contact__pill"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5c4.7 0 8.5 3.2 8.5 7.6s-3.8 7.6-8.5 7.6c-.9 0-1.8-.1-2.6-.4L5 20.5l.9-3.7A7.2 7.2 0 0 1 3.5 11.1C3.5 6.7 7.3 3.5 12 3.5Z"/><path d="M9.5 9.2c.3 1.9 1.4 3.4 3.3 4.3M12.5 7.7a2.6 2.6 0 0 1 2.3 2.3"/></svg><span>Viber</span></a>
+          </div>
+          <a href="zapitvane.html" class="contact__brief mono" data-reveal><span data-i18n="contact.brief">Колко ще струва сайтът ти? Сметни го за 2 минути</span> <i aria-hidden="true">↗</i></a>
         </div>
         <form class="cform" novalidate>
           <div class="cform__head">
-            <h3 class="cform__title" data-i18n="form.title">Tell me about your project</h3>
+            <h3 class="cform__title" data-i18n="form.title">Разкажи ми за проекта</h3>
           </div>
           <div class="cform__grid">
             <label class="cform__f">
               <input type="text" name="name" placeholder=" " autocomplete="name" required maxlength="80">
-              <span data-i18n="form.name">Name</span>
+              <span data-i18n="form.name">Име</span>
             </label>
             <label class="cform__f">
               <input type="tel" name="phone" placeholder=" " autocomplete="tel" inputmode="tel" maxlength="30">
-              <span data-i18n="form.phone">Phone</span>
+              <span data-i18n="form.phone">Телефон</span>
             </label>
             <label class="cform__f cform__f--wide">
               <input type="email" name="email" placeholder=" " autocomplete="email" inputmode="email" maxlength="120">
-              <span data-i18n="form.email">Email</span>
+              <span data-i18n="form.email">Имейл</span>
             </label>
             <label class="cform__f cform__f--wide">
               <textarea name="message" placeholder=" " rows="4" required maxlength="3000" data-lenis-prevent></textarea>
-              <span data-i18n="form.msg">What do you need?</span>
+              <span data-i18n="form.msg">Какво ти трябва?</span>
             </label>
           </div>
           <label class="cform__consent">
             <input type="checkbox" name="consent" required>
             <i class="cform__box" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 L6.5 11.5 L12.5 4.5"/></svg></i>
-            <span data-i18n="form.consent">Съгласен съм данните ми да бъдат използвани, за да получа отговор на запитването. <a href="privacy.html" target="_blank" rel="noopener">Поверителност</a></span>
+            <span data-i18n="form.consent">Съгласен съм данните ми да бъдат използвани само за отговор на запитването. <a href="privacy.html" target="_blank" rel="noopener">Поверителност</a></span>
           </label>
           <input type="text" name="_honey" class="cform__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="cform__foot">
-            <p class="cform__msg" role="status" aria-live="polite" data-i18n="form.hint">Ideally fill in all the fields.</p>
+            <p class="cform__msg" role="status" aria-live="polite" data-i18n="form.hint">Желателно е да попълниш всички полета.</p>
             <button type="submit" class="cform__send">
-              <span class="cform__send-t" data-i18n="form.send">Send</span>
+              <span class="cform__send-t" data-i18n="form.send">Изпрати</span>
               <span class="cform__send-a" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 18 L18 6 M8 6 H18 V16"/></svg></span>
             </button>
           </div>
           <div class="cform__done" aria-hidden="true">
             <svg class="cform__check" viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="32" cy="32" r="29"/><path d="M20 33 L29 42 L45 24"/></svg>
-            <p class="cform__done-t" data-i18n="form.ok">Thank you!</p>
-            <button type="button" class="cform__again" data-i18n="form.again">Send another</button>
+            <p class="cform__done-t" data-i18n="form.ok">Благодаря! Получих съобщението ти и ще се свържа с теб скоро.</p>
+            <button type="button" class="cform__again" data-i18n="form.again">Изпрати ново съобщение</button>
           </div>
         </form>
       </div>
@@ -392,21 +662,38 @@
   </main>
 
   <!-- ================= MOBILE CTA BAR ================= -->
-  <a href="#contact" class="m-cta" data-scroll-to aria-label="Contact">
-    <span class="m-cta__status"><i class="dot"></i><span data-i18n="mcta.status">Available now</span></span>
-    <span class="m-cta__btn mono"><span data-i18n="nav.cta">Let's talk</span><span class="m-cta__arrow" aria-hidden="true">↗</span></span>
+  <a href="zapitvane.html" class="m-cta" aria-label="Price calculator">
+    <span class="m-cta__status"><i class="dot"></i><span data-i18n="mcta.status">Колко ще струва сайтът ми?</span></span>
+    <span class="m-cta__btn mono"><span data-i18n="mcta.btn">Сметни цената</span><span class="m-cta__arrow" aria-hidden="true">↗</span></span>
   </a>
 
   <!-- ================= FOOTER ================= -->
+  <!-- seo:services -->
+  <nav class="seo-links" aria-label="Услуги">
+    <p class="seo-links__t mono">Услуги</p>
+    <ul>
+      <li><a href="izrabotka-na-sayt/">Изработка на сайт</a></li>
+      <li><a href="izrabotka-na-online-magazin/">Онлайн магазин</a></li>
+      <li><a href="platforma-po-porachka/">Платформа по поръчка</a></li>
+      <li><a href="poddrazhka-na-sayt/">Поддръжка на сайт</a></li>
+      <li><a href="sayt-za-salon-za-krasota/">Сайт за салон за красота</a></li>
+      <li><a href="sayt-za-avtokashta/">Сайт за автокъща</a></li>
+      <li><a href="sayt-za-pochistvashta-firma/">Сайт за почистваща фирма</a></li>
+      <li><a href="sayt-za-restorant-i-kafene/">Сайт за ресторант и кафене</a></li>
+      <li><a href="sayt-za-sporten-klub/">Сайт за спортен клуб</a></li>
+      <li><a href="zapitvane.html">Калкулатор за цена</a></li>
+    </ul>
+  </nav>
+  <!-- /seo:services -->
   <footer class="footer mono">
     <div class="footer__copy">
       <span>© <span class="year">2026</span> NK Programming</span>
       <a href="privacy.html" data-i18n="footer.privacy">Поверителност</a>
       <a href="terms.html" data-i18n="footer.terms">Общи условия</a>
     </div>
-    <span class="footer__time"><span data-i18n="footer.time">Local time</span> <b class="clock">00:00</b> <span class="tz">GMT+3</span></span>
+    <span class="footer__time"><span data-i18n="footer.time">Местно време</span> <b class="clock">00:00</b> <span class="tz">GMT+3</span></span>
     <div class="footer__socials"><!-- rendered by js if set --></div>
-    <a href="#top" data-scroll-to data-scramble class="footer__top" data-i18n="footer.top">Back to top ↑</a>
+    <a href="#top" data-scroll-to data-scramble class="footer__top" data-i18n="footer.top">Нагоре ↑</a>
   </footer>
 
   <script src="assets/vendor/gsap.min.js"></script>

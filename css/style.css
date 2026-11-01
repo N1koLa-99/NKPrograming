@@ -1145,6 +1145,12 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
   transform-origin: right; transition: transform .7s var(--ease);
 }
 .contact__mail:hover::after { transform: scaleX(0); }
+/* link to the detailed project brief (zapitvane.html) */
+.contact__brief { display: inline-flex; align-items: center; gap: .625rem; align-self: flex-start; padding: .875rem 1.375rem; border-radius: 100px;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--ink); font-size: .8125rem; font-weight: 500; transition: color .3s, border-color .3s, background-color .3s; }
+.contact__brief i { font-style: normal; color: var(--ink); transition: transform .4s var(--ease); }
+.contact__brief:hover { color: var(--accent); background: transparent; }
+.contact__brief:hover i { color: var(--accent); transform: rotate(45deg); }
 .contact__cta {
   position: relative; flex-shrink: 0;
   width: clamp(8.5rem, 6rem + 6vw, 12rem); aspect-ratio: 1; border-radius: 50%;
@@ -1688,9 +1694,9 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
 }
 .menu-open { overflow: hidden; }
 
-/* phones: nothing follows the reader around — no floating contact bar, no scroll-progress line */
+/* phones: no scroll-progress line; the floating bar stays — it points to the price calculator */
 @media (max-width: 900px) {
-  .m-cta, .progress { display: none !important; }
+  .progress { display: none !important; }
 }
 
 /* phones: the project in view is full size, the others sit back a touch (one short transition per change) */
@@ -1784,3 +1790,42 @@ html:lang(bg) .sl .l-en, html:not(:lang(bg)) .sl .l-bg { display: none; }
       radial-gradient(60% 40% at 100% 45%, rgba(64,120,255,.4), rgba(64,120,255,0) 72%); }
   .plan--featured { box-shadow: inset 0 1px 0 rgba(255,255,255,.85), inset 0 0 0 1px rgba(255,255,255,.25), inset 0 -14px 30px -18px rgba(60,90,0,.45), 0 24px 60px -24px rgba(204,255,0,.55); }
 }
+
+/* floating price-calculator pill — desktop version of the phone CTA bar */
+@media (min-width: 901px) {
+  .m-cta {
+    display: flex; align-items: center; gap: 1rem; position: fixed; z-index: 96;
+    right: var(--gutter); bottom: 1.5rem; height: 3.75rem; padding: 0 .4375rem 0 1.375rem; border-radius: 100px;
+    background: rgba(20,20,20,.78); box-shadow: inset 0 0 0 1px var(--line-2), 0 10px 40px rgba(0,0,0,.5);
+    backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    transform: translateY(calc(100% + 2.5rem)); transition: transform .7s var(--ease);
+  }
+  .m-cta.is-on { transform: none; }
+  .m-cta__status { display: inline-flex; align-items: center; gap: .625rem; font-size: .875rem; color: var(--fg); }
+  .m-cta__btn {
+    display: inline-flex; align-items: center; gap: .5rem; height: 2.875rem; padding: 0 1.375rem; border-radius: 100px;
+    background: var(--accent); color: var(--ink); white-space: nowrap;
+    font-family: var(--f-display); font-size: .9375rem; font-weight: 700; letter-spacing: -.01em; line-height: 1; text-transform: none;
+    transition: background-color .3s;
+  }
+  .m-cta:hover .m-cta__btn { background: var(--fg); }
+}
+
+/* service cards link to their own pages (the whole card is clickable) */
+.svc { position: relative; }
+.svc__link { position: absolute; inset: 0; z-index: 2; border-radius: inherit; }
+.svc__link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* links to the service pages, above the footer (written by tools/build.mjs) */
+.seo-links { padding: 2.5rem var(--gutter) 2rem; border-top: 1px solid var(--line); }
+.seo-links__t { font-size: .6875rem; color: var(--muted); }
+.seo-links ul { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin: .875rem 0 0; padding: 0; }
+.seo-links a { font-size: .875rem; color: var(--fg-2); transition: color .25s; }
+.seo-links a:hover { color: var(--accent); }
+
+/* phone + Viber under the email in the contact section */
+.contact__phone { display: flex; flex-wrap: wrap; gap: .625rem; }
+.contact__pill { display: inline-flex; align-items: center; gap: .625rem; padding: .75rem 1.25rem; border-radius: 100px;
+  box-shadow: inset 0 0 0 1px var(--line-2); color: var(--fg); font-family: var(--f-mono); font-size: 1rem; letter-spacing: .02em; transition: color .3s, box-shadow .3s; }
+.contact__pill svg { width: 1.125rem; height: 1.125rem; stroke: var(--accent); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.contact__pill:hover { color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }

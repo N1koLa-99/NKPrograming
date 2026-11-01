@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="bg" data-lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Колко струва сайтът — NK Programming</title>
+  <meta name="description" content="Отговори на 6 кратки въпроса и виж ориентировъчна цена за сайта си. Точна оферта до 1–2 работни дни.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="Колко ще струва твоят сайт? — NK Programming">
+  <meta property="og:description" content="6 кратки въпроса, 2 минути — и виждаш цената веднага.">
+  <meta property="og:image" content="https://nkprograming.netlify.app/assets/og-image.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script>
+    /* same language as the main site (saved as nk-lang); ?lang=en|bg overrides */
+    (function () {
+      var l = 'bg';
+      try { l = localStorage.getItem('nk-lang') || 'bg'; } catch (e) {}
+      var q = new URLSearchParams(location.search).get('lang');
+      if (q === 'en' || q === 'bg') l = q;
+      document.documentElement.lang = l;
+      document.documentElement.dataset.lang = l;
+    })();
+  </script>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/legal.css">
+  <link rel="stylesheet" href="css/brief.css">
+  <link rel="stylesheet" href="css/brief-glass.css">
+  <style>html[data-lang="bg"] [data-l="en"], html[data-lang="en"] [data-l="bg"] { display: none !important; }</style>
+</head>
+<body class="legal-page wiz-page">
+  <div class="wbg" aria-hidden="true"><i></i><i></i><i></i></div>
+  <header class="legal-top">
+    <a href="./" class="legal-logo" aria-label="NK Programming">
+      <svg viewBox="0 0 160 110" fill="none" aria-hidden="true"><path d="M8 102 V8 L68 102 V8 M94 8 V102 M94 64 L152 8 M114 46 L154 102"/></svg>
+      <span><b>NK</b><br><i>Programming</i></span>
+    </a>
+    <div class="legal-top__right">
+      <a href="./" class="legal-back">← <span data-l="bg">Към сайта</span><span data-l="en">Back to site</span></a>
+      <div class="legal-lang" role="group" aria-label="Language">
+        <button type="button" data-set="bg">BG</button><span aria-hidden="true">/</span><button type="button" data-set="en">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wiz">
+    <div class="wiz__head">
+      <p class="wiz__kicker mono">// <span data-l="bg">калкулатор за сайт</span><span data-l="en">website calculator</span></p>
+      <h1 class="wiz__title"><span data-l="bg">Колко ще струва<br>твоят сайт?</span><span data-l="en">How much will<br>your website cost?</span></h1>
+      <p class="wiz__intro"><span data-l="bg">6 кратки въпроса, около 2 минути. Всеки сайт е със собствен дизайн, не шаблон — затова цената зависи от това какво ти трябва. Накрая виждаш ориентировъчна цена и от какво се събира, а точната оферта ти я пращам до 1–2 работни дни.</span><span data-l="en">6 short questions, about 2 minutes. Every site gets its own design, not a template — so the price depends on what you need. At the end you see an estimated price and what it is made of, and I send the exact offer within 1–2 working days.</span></p>
+    </div>
+
+    <div class="wpanel">
+    <div class="wprog" aria-hidden="true">
+      <div class="wprog__track"><i class="wprog__fill"></i></div>
+      <p class="wprog__txt mono"><span class="wprog__n">01</span> / <span class="wprog__all">06</span> · <span class="wprog__name"></span></p>
+    </div>
+
+    <form class="wform" id="brief" novalidate>
+
+      <!-- ============ G1. business (guided) ============ -->
+      <fieldset class="wstep" data-mode="guided" data-name-bg="Бизнес" data-name-en="Business" data-req="biz">
+        <legend class="wq"><span data-l="bg">С какво се занимаваш?</span><span data-l="en">What does your business do?</span></legend>
+        <p class="wh"><span data-l="bg">Избери най-близкото — после ти предлагам какво да има на сайта и колко ще струва.</span><span data-l="en">Pick the closest — then I suggest what the site should have and what it costs.</span></p>
+        <div class="opts opts--biz">
+          <label class="opt opt--tile"><input type="radio" name="biz" value="Салон за красота / фризьор" data-key="salon" data-en="Beauty salon / hairdresser" data-auto>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" /> <path d="M8.12 8.12 12 12" /> <path d="M20 4 8.12 15.88" /> <circle cx="6" cy="18" r="3" /> <path d="M14.8 14.8 20 20" /></svg></span><b class="opt__t"><span data-l="bg">Салон за красота</span><span data-l="en">Beauty salon</span></b><span class="opt__d"><span data-l="bg">Коса, нокти, мигли, козметика</span><span data-l="en">Hair, nails, lashes, cosmetics</span></span></span></label>
+          <label class="opt opt--tile"><input type="radio" name="biz" value="Ресторант / кафе" data-key="food" data-en="Restaurant / café" data-auto>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" /> <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" /> <path d="m2.1 21.8 6.4-6.3" /> <path d="m19 5-7 7" /></svg></span><b class="opt__t"><span data-l="bg">Ресторант / кафе</span><span data-l="en">Restaurant / café</span></b><span class="opt__d"><span data-l="bg">Заведение, бар, сладкарница</span><span data-l="en">Eatery, bar, bakery</span></span></span></label>
+          <label class="opt opt--tile"><input type="radio" name="biz" value="Автосервиз / автокъща" data-key="auto" data-en="Car service / dealer" data-auto>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8" /> <path d="M7 14h.01" /> <path d="M17 14h.01" /> <rect width="18" height="8" x="3" y="10" rx="2" /> <path d="M5 18v2" /> <path d="M19 18v2" /></svg></span><b class="opt__t"><span data-l="bg">Автосервиз / автокъща</span><span data-l="en">Car service / dealer</span></b><span class="opt__d"><span data-l="bg">Ремонт, гуми, продажба на коли</span><span data-l="en">Repairs, tyres, car sales</span></span></span></label>
+          <label class="opt opt--tile"><input type="radio" name="biz" value="Майстор / ремонти" data-key="trade" data-en="Tradesperson / repairs" data-auto>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9" /> <path d="m18 15 4-4" /> <path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5" /></svg></span><b class="opt__t"><span data-l="bg">Майстор / ремонти</span><span data-l="en">Tradesperson</span></b><span class="opt__d"><span data-l="bg">Строителство, ВиК, ел., монтажи</span><span data-l="en">Building, plumbing, electrics</span></span></span></label>
+          <label class="opt opt--tile"><input type="radio" name="biz" value="Почистване / услуги" data-key="clean" data-en="Cleaning / services" data-auto>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></svg></span><b class="opt__t"><span data-l="bg">Почистване / услуги</span><span data-l="en">Cleaning / services</span></b><span class="opt__d"><span data-l="bg">Домове, офиси, пране, градини</span><span data-l="en">Homes, offices, gardens</span></span></span></label>
+          <label class="opt opt--tile"><input type="radio" name="biz" value="Клиника / кабинет" data-key="health" data-en="Clinic / practice" data-auto>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M11 2v2" /> <path d="M5 2v2" /> <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" /> <path d="M8 15a6 6 0 0 0 12 0v-3" /> <circle cx="20" cy="10" r="2" /></svg></span><b class="opt__t"><span data-l="bg">Клиника / кабинет</span><span data-l="en">Clinic / practice</span></b><span class="opt__d"><span data-l="bg">Лекар, зъболекар, психолог</span><span data-l="en">Doctor, dentist, therapist</span></span></span></label>
+          <label class="opt opt--tile"><input type="radio" name="biz" value="Хотел / къща за гости" data-key="stay" data-en="Hotel / guest house" data-auto>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" /> <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" /> <path d="M12 4v6" /> <path d="M2 18h20" /></svg></span><b class="opt__t"><span data-l="bg">Хотел / къща за гости</span><span data-l="en">Hotel / guest house</span></b><span class="opt__d"><span data-l="bg">Стаи, апартаменти, вили</span><span data-l="en">Rooms, apartments, villas</span></span></span></label>
+          <label class="opt opt--tile"><input type="radio" name="biz" value="Спорт / фитнес" data-key="sport" data-en="Sport / fitness" data-auto>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /> <path d="m2.5 21.5 1.4-1.4" /> <path d="m20.1 3.9 1.4-1.4" /> <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /> <path d="m9.6 14.4 4.8-4.8" /></svg></span><b class="opt__t"><span data-l="bg">Спорт / фитнес</span><span data-l="en">Sport / fitness</span></b><span class="opt__d"><span data-l="bg">Клуб, зала, треньор, школа</span><span data-l="en">Club, gym, coach, school</span></span></span></label>
+          <label class="opt opt--tile"><input type="radio" name="biz" value="Продавам продукти" data-key="shop" data-en="I sell products" data-auto>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M16 10a4 4 0 0 1-8 0" /> <path d="M3.103 6.034h17.794" /> <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z" /></svg></span><b class="opt__t"><span data-l="bg">Продавам продукти</span><span data-l="en">I sell products</span></b><span class="opt__d"><span data-l="bg">Искам онлайн магазин</span><span data-l="en">I want an online shop</span></span></span></label>
+          <label class="opt opt--tile"><input type="radio" name="biz" value="Друго" data-key="other" data-en="Something else">
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M17 12h.01" /> <path d="M12 12h.01" /> <path d="M7 12h.01" /></svg></span><b class="opt__t"><span data-l="bg">Друго</span><span data-l="en">Something else</span></b><span class="opt__d"><span data-l="bg">Разкажи ми с две думи</span><span data-l="en">Tell me in a few words</span></span></span></label>
+        </div>
+        <div class="wsub" data-if="biz:Друго">
+          <label class="wf"><span><span data-l="bg">С какво се занимаваш?</span><span data-l="en">What do you do?</span></span><input type="text" name="biz_other" maxlength="200" placeholder="Напр. счетоводна кантора, фотограф, детска градина…"></label>
+        </div>
+        <button type="button" class="wmode js-expert"><span data-l="bg">Знам какъв сайт искам — направо към избора</span><span data-l="en">I know what I want — go straight to the options</span> <i aria-hidden="true">→</i></button>
+      </fieldset>
+
+      <!-- ============ G2. goals (guided) ============ -->
+      <fieldset class="wstep" data-mode="guided" data-name-bg="Цели" data-name-en="Goals">
+        <legend class="wq"><span data-l="bg">Какво искаш да ти донесе сайтът?</span><span data-l="en">What should the site do for you?</span></legend>
+        <p class="wh"><span data-l="bg">Отбележи всичко, което е важно за теб.</span><span data-l="en">Tick everything that matters to you.</span></p>
+        <div class="opts opts--goals">
+          <label class="opt opt--check"><input type="checkbox" name="goals" value="Да ме намират в Google" data-goal="google" data-en="Be found on Google">
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span><b class="opt__t"><span data-l="bg">Да ме намират в Google</span><span data-l="en">Be found on Google</span></b><span class="opt__d"><span data-l="bg">Повече хора те откриват, когато търсят това, което предлагаш.</span><span data-l="en">More people find you when they search for what you offer.</span></span></span></label>
+          <label class="opt opt--check"><input type="checkbox" name="goals" value="Клиентите да си записват час сами" data-goal="book" data-en="Customers book on their own">
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></span><b class="opt__t"><span data-l="bg">Клиентите да си записват час сами</span><span data-l="en">Customers book on their own</span></b><span class="opt__d"><span data-l="bg">Без да ти звънят — денонощно, от телефона.</span><span data-l="en">No phone calls — 24/7, from their phone.</span></span></span></label>
+          <label class="opt opt--check"><input type="checkbox" name="goals" value="Повече обаждания и съобщения" data-goal="calls" data-en="More calls and messages">
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><b class="opt__t"><span data-l="bg">Повече обаждания и съобщения</span><span data-l="en">More calls and messages</span></b><span class="opt__d"><span data-l="bg">Видими бутони за обаждане и Viber, карта и отзиви.</span><span data-l="en">Clear call and Viber buttons, a map and reviews.</span></span></span></label>
+          <label class="opt opt--check"><input type="checkbox" name="goals" value="Да покажа работата си" data-goal="show" data-en="Show my work">
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></span><b class="opt__t"><span data-l="bg">Да покажа работата си</span><span data-l="en">Show my work</span></b><span class="opt__d"><span data-l="bg">Снимки, галерия, преди и след.</span><span data-l="en">Photos, a gallery, before and after.</span></span></span></label>
+          <label class="opt opt--check"><input type="checkbox" name="goals" value="Да продавам онлайн" data-goal="sell" data-en="Sell online">
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></span><b class="opt__t"><span data-l="bg">Да продавам онлайн</span><span data-l="en">Sell online</span></b><span class="opt__d"><span data-l="bg">Поръчки с количка, плащане и доставка.</span><span data-l="en">Orders with a cart, payment and delivery.</span></span></span></label>
+          <label class="opt opt--check"><input type="checkbox" name="goals" value="Да изглеждам по-професионално" data-goal="pro" data-en="Look more professional">
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg></span><b class="opt__t"><span data-l="bg">Да изглеждам по-професионално</span><span data-l="en">Look more professional</span></b><span class="opt__d"><span data-l="bg">По-добре от конкуренцията — първото впечатление е важно.</span><span data-l="en">Better than the competition — first impressions count.</span></span></span></label>
+          <label class="opt opt--check"><input type="checkbox" name="goals" value="Да ме намират и чужденци" data-goal="tourists" data-en="Reach foreigners too">
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span><b class="opt__t"><span data-l="bg">Да ме намират и чужденци</span><span data-l="en">Reach foreigners too</span></b><span class="opt__d"><span data-l="bg">Сайтът и на английски — за туристи и чужди клиенти.</span><span data-l="en">The site in English too — for tourists and foreign clients.</span></span></span></label>
+          <label class="opt opt--check"><input type="checkbox" name="goals" value="Сам да сменям цени и снимки" data-goal="self" data-en="Change prices and photos myself">
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></span><b class="opt__t"><span data-l="bg">Сам да сменям цени и снимки</span><span data-l="en">Change prices and photos myself</span></b><span class="opt__d"><span data-l="bg">От лесен панел, без да викаш програмист.</span><span data-l="en">From a simple panel, no developer needed.</span></span></span></label>
+        </div>
+
+        <label class="wf wf--gap"><span><span data-l="bg">Разкажи с няколко думи какво искаш</span><span data-l="en">Tell me in a few words what you want</span> <em class="wopt"><span data-l="bg">по желание</span><span data-l="en">optional</span></em></span><textarea name="story" rows="3" maxlength="2000" placeholder="Напр. Искам повече клиенти, да си записват час онлайн и да има карта как да ни намерят."></textarea></label>
+      </fieldset>
+
+      <!-- ============ G3. what's on the site + recommendation (guided) ============ -->
+      <fieldset class="wstep" data-mode="guided" data-name-bg="Сайтът" data-name-en="The site">
+        <legend class="wq"><span data-l="bg">Какви страници и секции искаш?</span><span data-l="en">Which pages and sections do you want?</span></legend>
+        <p class="wh"><span data-l="bg">Отбелязах ти най-честото за <b class="js-bizname">твоя бизнес</b>. Махни или добави каквото искаш.</span><span data-l="en">I ticked the usual for <b class="js-bizname">your business</b>. Remove or add whatever you like.</span></p>
+        <div class="pills pills--secs js-secs"></div>
+        <p class="wincl"><span data-l="bg">Винаги включено: собствен дизайн · изглежда добре на телефон · SEO за Google · бутони за обаждане и Viber · https</span><span data-l="en">Always included: your own design · looks great on phones · Google SEO · call &amp; Viber buttons · https</span></p>
+
+        <div class="wsub" data-if="type:Онлайн магазин">
+          <p class="wq2"><span data-l="bg">Колко продукта ще има горе-долу?</span><span data-l="en">Roughly how many products?</span></p>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="g_products" value="До 50"><span><span data-l="bg">До 50</span><span data-l="en">Up to 50</span></span></label>
+            <label class="pill"><input type="radio" name="g_products" value="50–300 продукта"><span><span data-l="bg">50–300</span><span data-l="en">50–300</span></span></label>
+            <label class="pill"><input type="radio" name="g_products" value="Над 300 продукта"><span><span data-l="bg">Над 300</span><span data-l="en">300+</span></span></label>
+          </div>
+        </div>
+
+        <div class="wrec">
+          <p class="wrec__k mono js-rec-k">Препоръчвам ти</p>
+          <p class="wrec__t js-rec-t">—</p>
+          <p class="wrec__why js-rec-why"></p>
+          <div class="wrec__rows js-rec-rows"></div>
+        </div>
+        <div class="wsug js-sug" data-step="2" hidden></div>
+      </fieldset>
+
+      <!-- ============ 2. type ============ -->
+      <fieldset class="wstep" data-mode="expert" data-name-bg="Какъв сайт" data-name-en="Type" data-req="type">
+        <legend class="wq"><span data-l="bg">Какво ти трябва?</span><span data-l="en">What do you need?</span></legend>
+        <p class="wh"><span data-l="bg">Избери най-близкото до това, което искаш.</span><span data-l="en">Pick the closest to what you want.</span></p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="type" value="Сайт на една страница" data-key="one" data-en="One-page site" data-auto>
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Сайт на една страница</span><span data-l="en">One-page site</span></b><span class="opt__d"><span data-l="bg">Всичко важно на една страница.</span><span data-l="en">Everything important on one page.</span></span><span class="opt__fit"><em><span data-l="bg">Подходящ за</span><span data-l="en">Good for</span></em><span class="opt__chips" data-l="bg"><i>Салони и фризьори</i><i>Кафенета и заведения</i><i>Майстори и ремонти</i><i>Треньори</i><i>Фотографи</i></span><span class="opt__chips" data-l="en"><i>Salons &amp; hairdressers</i><i>Cafés &amp; restaurants</i><i>Tradespeople</i><i>Coaches</i><i>Photographers</i></span></span><span class="opt__p mono"></span></span></label>
+          <label class="opt"><input type="radio" name="type" value="Бизнес сайт" data-key="biz" data-en="Business website" data-auto>
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Бизнес сайт</span><span data-l="en">Business website</span></b><span class="opt__d"><span data-l="bg">До 5 страници — за нас, услуги, галерия, контакти.</span><span data-l="en">Up to 5 pages — about, services, gallery, contact.</span></span><span class="opt__fit"><em><span data-l="bg">Подходящ за</span><span data-l="en">Good for</span></em><span class="opt__chips" data-l="bg"><i>Фирми за услуги</i><i>Автосервизи и автокъщи</i><i>Почистващи фирми</i><i>Клиники и кабинети</i><i>Хотели и къщи за гости</i><i>Спортни клубове</i></span><span class="opt__chips" data-l="en"><i>Service companies</i><i>Car services &amp; dealers</i><i>Cleaning companies</i><i>Clinics</i><i>Hotels &amp; guest houses</i><i>Sports clubs</i></span></span><span class="opt__p mono"></span></span></label>
+          <label class="opt"><input type="radio" name="type" value="Онлайн магазин" data-key="shop" data-en="Online shop" data-auto>
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Онлайн магазин</span><span data-l="en">Online shop</span></b><span class="opt__d"><span data-l="bg">Количка и поръчки. Продуктите ги добавяш сам.</span><span data-l="en">Cart and orders. You add the products yourself.</span></span><span class="opt__fit"><em><span data-l="bg">Подходящ за</span><span data-l="en">Good for</span></em><span class="opt__chips" data-l="bg"><i>Цветя и подаръци</i><i>Дрехи и козметика</i><i>Храни и напитки</i><i>Части и аксесоари</i><i>Ръчно изработени неща</i></span><span class="opt__chips" data-l="en"><i>Flowers &amp; gifts</i><i>Clothes &amp; cosmetics</i><i>Food &amp; drinks</i><i>Parts &amp; accessories</i><i>Handmade goods</i></span></span><span class="opt__p mono"></span></span></label>
+          <label class="opt"><input type="radio" name="type" value="Платформа по поръчка" data-key="app" data-en="Custom platform" data-auto>
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Платформа по поръчка</span><span data-l="en">Custom platform</span></b><span class="opt__d"><span data-l="bg">Профили, обяви, админ панел — като moto-zona.</span><span data-l="en">Accounts, listings, admin panel — like moto-zona.</span></span><span class="opt__fit"><em><span data-l="bg">Подходящ за</span><span data-l="en">Good for</span></em><span class="opt__chips" data-l="bg"><i>Сайтове за обяви</i><i>Резервации и графици</i><i>Клиентски профили</i><i>Вътрешна система за фирма</i></span><span class="opt__chips" data-l="en"><i>Listing sites</i><i>Bookings &amp; schedules</i><i>Customer accounts</i><i>Internal company tools</i></span></span></span></label>
+          <label class="opt"><input type="radio" name="type" value="Не е сигурен — бизнес сайт" data-key="help" data-en="Business website (my suggestion)" data-note-bg="Ще ти предложа най-подходящия вариант" data-note-en="I'll suggest the option that fits best" data-auto>
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Не съм сигурен</span><span data-l="en">Not sure</span></b><span class="opt__d"><span data-l="bg">Смятаме го като бизнес сайт, а след кратък разговор ти предлагам правилния вариант.</span><span data-l="en">We'll count it as a business site, and after a short chat I'll suggest the right option.</span></span><span class="opt__p mono"></span></span></label>
+        </div>
+        <button type="button" class="wmode js-guided"><i aria-hidden="true">←</i> <span data-l="bg">Не съм сигурен — помогни ми да избера според бизнеса</span><span data-l="en">Not sure — help me choose by my business</span></button>
+      </fieldset>
+
+      <!-- ============ 3. features ============ -->
+      <fieldset class="wstep" data-mode="expert" data-name-bg="Функции" data-name-en="Features">
+        <legend class="wq"><span data-l="bg">Какво още да може?</span><span data-l="en">What else should it do?</span></legend>
+        <p class="wh"><span data-l="bg">Отбележи само това, което ти трябва.</span><span data-l="en">Tick only what you need.</span></p>
+
+        <div class="winc">
+          <p class="winc__t mono"><span data-l="bg">Включено във всеки сайт — без доплащане</span><span data-l="en">Included in every site — no extra cost</span></p>
+          <ul>
+            <li class="winc__key"><span data-l="bg">Собствен дизайн — не шаблон</span><span data-l="en">Your own design — not a template</span></li>
+            <li><span data-l="bg">Изглежда добре на телефон</span><span data-l="en">Looks great on phones</span></li>
+            <li><span data-l="bg">SEO, за да те намират в Google</span><span data-l="en">SEO so Google finds you</span></li>
+            <li><span data-l="bg">Бутони за обаждане и Viber</span><span data-l="en">Call &amp; Viber buttons</span></li>
+            <li><span data-l="bg">Карта и работно време</span><span data-l="en">Map &amp; opening hours</span></li>
+            <li><span data-l="bg">Форма за контакт</span><span data-l="en">Contact form</span></li>
+            <li><span data-l="bg">Защитена връзка (https)</span><span data-l="en">Secure connection (https)</span></li>
+          </ul>
+        </div>
+
+        <div class="wsub wsub--flat" data-if="type:Платформа по поръчка">
+          <label class="wf"><span><span data-l="bg">Опиши с няколко изречения какво трябва да прави</span><span data-l="en">Describe in a few sentences what it should do</span></span><textarea name="app_desc" rows="4" maxlength="3000" placeholder="Напр. потребителите публикуват обяви, търсят по филтри, пишат си съобщения…"></textarea></label>
+        </div>
+
+        <p class="wgroup mono" data-if="type:Сайт на една страница|Бизнес сайт|Онлайн магазин|Не е сигурен — бизнес сайт"><span data-l="bg">Добави, ако ти трябва</span><span data-l="en">Add if you need it</span></p>
+        <div class="opts opts--extras" data-if="type:Сайт на една страница|Бизнес сайт|Онлайн магазин|Не е сигурен — бизнес сайт">
+          <label class="opt opt--check" data-if="type:Сайт на една страница|Бизнес сайт|Не е сигурен — бизнес сайт"><input type="checkbox" name="extras" value="Онлайн записване на час" data-en="Online booking">
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Онлайн записване на час</span><span data-l="en">Online booking</span></b><span class="opt__d"><span data-l="bg">Клиентите си записват час сами, ти получаваш известие.</span><span data-l="en">Clients book a slot themselves and you get notified.</span></span><span class="opt__p mono"></span></span></label>
+          <label class="opt opt--check" data-if="type:Сайт на една страница|Бизнес сайт|Не е сигурен — бизнес сайт"><input type="checkbox" name="extras" value="Сам да сменя текстове и снимки (админ панел)" data-en="Edit texts &amp; photos yourself (admin panel)">
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Сам да сменяш текстове и снимки</span><span data-l="en">Edit texts &amp; photos yourself</span></b><span class="opt__d"><span data-l="bg">Лесен админ панел — без да викаш програмист.</span><span data-l="en">A simple admin panel — no developer needed.</span></span><span class="opt__p mono"></span></span></label>
+          <label class="opt opt--check" data-if="type:Бизнес сайт|Не е сигурен — бизнес сайт"><input type="checkbox" name="extras" value="Повече от 5 страници" data-en="More than 5 pages">
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Повече от 5 страници</span><span data-l="en">More than 5 pages</span></b><span class="opt__d"><span data-l="bg">Отделна страница за всяка услуга, продукт или обект.</span><span data-l="en">A separate page for each service, product or location.</span></span><span class="opt__p mono"></span></span></label>
+          <label class="opt opt--check" data-if="type:Онлайн магазин"><input type="checkbox" name="extras" value="Плащане с карта онлайн" data-en="Online card payments">
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Плащане с карта онлайн</span><span data-l="en">Online card payments</span></b><span class="opt__d"><span data-l="bg">Освен наложен платеж — плащане с карта в сайта.</span><span data-l="en">On top of cash on delivery — pay by card on the site.</span></span><span class="opt__p mono"></span></span></label>
+          <label class="opt opt--check" data-if="type:Онлайн магазин"><input type="checkbox" name="extras" value="Доставка с Еконт / Спиди" data-en="Econt / Speedy delivery">
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Доставка с Еконт / Спиди</span><span data-l="en">Econt / Speedy delivery</span></b><span class="opt__d"><span data-l="bg">Клиентът избира офис или адрес още в количката.</span><span data-l="en">The customer picks an office or address right in the cart.</span></span><span class="opt__p mono"></span></span></label>
+          <label class="opt opt--check" data-if="type:Бизнес сайт|Онлайн магазин|Не е сигурен — бизнес сайт"><input type="checkbox" name="extras" value="Блог / новини" data-en="Blog / news">
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Блог / новини</span><span data-l="en">Blog / news</span></b><span class="opt__d"><span data-l="bg">Пишеш статии и новини — помага и за Google.</span><span data-l="en">Post articles and news — good for Google too.</span></span><span class="opt__p mono"></span></span></label>
+          <label class="opt opt--check"><input type="checkbox" name="extras" value="Втори език" data-en="Second language">
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Втори език</span><span data-l="en">Second language</span></b><span class="opt__d"><span data-l="bg">Например английски за туристи и чужди клиенти.</span><span data-l="en">E.g. English for tourists and foreign clients.</span></span><span class="opt__p mono"></span></span></label>
+        </div>
+
+        <div class="wtip js-econt-tip" hidden>
+          <p><b><span data-l="bg">Съвет: добави и плащане с карта.</span><span data-l="en">Tip: add card payments too.</span></b>
+            <span data-l="bg">С Еконт/Спиди без карта клиентът може да плати само с наложен платеж. Повечето хора днес очакват да платят с карта още в сайта — така губиш по-малко поръчки.</span><span data-l="en">With Econt/Speedy and no card payments, buyers can only pay cash on delivery. Most people now expect to pay by card on the site — you lose fewer orders.</span></p>
+          <button type="button" class="wtip__btn js-add-card"><span data-l="bg">Добави плащане с карта</span><span data-l="en">Add card payments</span></button>
+        </div>
+
+        <div class="wsug js-sug" data-step="2" hidden></div>
+
+        <div class="wsub wsub--flat" data-if="type:Онлайн магазин">
+          <p class="wq2"><span data-l="bg">Колко продукта ще има горе-долу?</span><span data-l="en">Roughly how many products?</span></p>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="products" value="До 50"><span><span data-l="bg">До 50</span><span data-l="en">Up to 50</span></span></label>
+            <label class="pill"><input type="radio" name="products" value="50–300 продукта" data-en="50–300 products"><span>50–300 <em class="pill__p mono"></em></span></label>
+            <label class="pill"><input type="radio" name="products" value="Над 300 продукта" data-en="300+ products"><span><span data-l="bg">Над 300</span><span data-l="en">300+</span> <em class="pill__p mono"></em></span></label>
+          </div>
+        </div>
+
+        <label class="wf wf--gap"><span><span data-l="bg">Нещо друго, което задължително трябва да има? (по желание)</span><span data-l="en">Anything else it must have? (optional)</span></span><textarea name="must" rows="2" maxlength="2000" data-note-bg="Допълнителните неща ги оценявам отделно" data-note-en="Extra wishes are quoted separately"></textarea></label>
+      </fieldset>
+
+      <!-- ============ 4. materials ============ -->
+      <fieldset class="wstep" data-name-bg="Материали" data-name-en="Materials">
+        <legend class="wq"><span data-l="bg">Какво имаш готово?</span><span data-l="en">What do you have ready?</span></legend>
+        <p class="wh"><span data-l="bg">Каквото нямаш — мога да помогна.</span><span data-l="en">Whatever you don't have — I can help.</span></p>
+
+
+        <p class="wq2"><span data-l="bg">Текстове</span><span data-l="en">Texts</span></p>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="texts" value="Текстовете са негови"><span><span data-l="bg">Имам ги / ще ги напиша</span><span data-l="en">I have them / I'll write them</span></span></label>
+          <label class="pill"><input type="radio" name="texts" value="Помощ с текстовете" data-en="Help with the texts"><span><span data-l="bg">Трябва ми помощ</span><span data-l="en">I need help</span> <em class="pill__p mono"></em></span></label>
+        </div>
+
+        <p class="wq2"><span data-l="bg">Снимки</span><span data-l="en">Photos</span></p>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="photos" value="Има снимки"><span><span data-l="bg">Имам хубави снимки</span><span data-l="en">I have good photos</span></span></label>
+          <label class="pill"><input type="radio" name="photos" value="Няма снимки" data-note-bg="Професионалните снимки не са включени в цената" data-note-en="Professional photos are not included in the price"><span><span data-l="bg">Нямам</span><span data-l="en">I don't</span></span></label>
+        </div>
+
+        <p class="wq2"><span data-l="bg">Как да изглежда?</span><span data-l="en">What feel are you after?</span></p>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="style" value="Семпло и изчистено"><span><span data-l="bg">Семпло и изчистено</span><span data-l="en">Clean and simple</span></span></label>
+          <label class="pill"><input type="radio" name="style" value="Луксозно"><span><span data-l="bg">Луксозно</span><span data-l="en">Premium</span></span></label>
+          <label class="pill"><input type="radio" name="style" value="Весело и цветно"><span><span data-l="bg">Весело и цветно</span><span data-l="en">Bright and playful</span></span></label>
+          <label class="pill"><input type="radio" name="style" value="По негова преценка"><span><span data-l="bg">По твоя преценка</span><span data-l="en">Your call</span></span></label>
+        </div>
+
+        <p class="wq2"><span data-l="bg">Анимации</span><span data-l="en">Animations</span></p>
+        <div class="opts opts--3">
+          <label class="opt"><input type="radio" name="anim" value="Без анимации">
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Без анимации</span><span data-l="en">No animations</span></b><span class="opt__d"><span data-l="bg">Чист и бърз сайт.</span><span data-l="en">Clean and fast.</span></span></span></label>
+          <label class="opt"><input type="radio" name="anim" value="Леки анимации">
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Леки анимации</span><span data-l="en">Light animations</span></b><span class="opt__d"><span data-l="bg">Плавно появяване при скрол, ефекти при посочване.</span><span data-l="en">Smooth reveals on scroll, hover effects.</span></span></span></label>
+          <label class="opt"><input type="radio" name="anim" value="Много анимации" data-anim-last>
+            <span class="opt__body"><b class="opt__t"><span data-l="bg">Много анимации</span><span data-l="en">Lots of animation</span></b><span class="opt__d"><span data-l="bg">3D, сложни преходи и ефекти — като този сайт.</span><span data-l="en">3D, complex transitions and effects — like this site.</span></span></span></label>
+        </div>
+        <div class="wsug js-sug" data-step="3" hidden></div>
+
+        <label class="wf wf--gap"><span><span data-l="bg">Сайтове, които харесваш (по желание)</span><span data-l="en">Sites you like (optional)</span></span><textarea name="likes" rows="2" maxlength="2000"></textarea></label>
+      </fieldset>
+
+      <!-- ============ 5. domain + support ============ -->
+      <fieldset class="wstep" data-name-bg="Подробности" data-name-en="Details">
+        <legend class="wq"><span data-l="bg">Сайт, домейн и поддръжка</span><span data-l="en">Site, domain and support</span></legend>
+        <p class="wh"><span data-l="bg">Последни подробности — и виждаш цената.</span><span data-l="en">A few last details — then you see the price.</span></p>
+
+        <p class="wq2"><span data-l="bg">Имаш ли сайт в момента?</span><span data-l="en">Do you have a website right now?</span></p>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="has" value="Не"><span><span data-l="bg">Нямам</span><span data-l="en">No</span></span></label>
+          <label class="pill"><input type="radio" name="has" value="Да"><span><span data-l="bg">Имам</span><span data-l="en">Yes</span></span></label>
+        </div>
+        <div class="wsub wsub--site" data-if="has:Да">
+          <label class="wf"><span><span data-l="bg">Адрес на сайта</span><span data-l="en">Website address</span></span><input type="text" name="site_url" placeholder="www.primer.bg" maxlength="200" inputmode="url"></label>
+          <p class="wq2"><span data-l="bg">Какво искаш да направим с него?</span><span data-l="en">What should we do with it?</span></p>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="site_plan" value="Нов сайт на мястото на стария"><span><span data-l="bg">Нов сайт на мястото на стария</span><span data-l="en">A new site in place of the old one</span></span></label>
+            <label class="pill"><input type="radio" name="site_plan" value="Да обновя сегашния" data-note-bg="При обновяване цената често е по-ниска — зависи от сегашния сайт" data-note-en="Updating often costs less — it depends on the current site"><span><span data-l="bg">Да обновя сегашния</span><span data-l="en">Update the current one</span></span></label>
+          </div>
+        </div>
+
+        <p class="wq2 wq2--domain"><span data-l="bg">Имаш ли домейн?</span><span data-l="en">Do you have a domain?</span> <em class="wopt"><span data-l="bg">адресът, напр. salon-iva.com</span><span data-l="en">the address, e.g. salon-iva.com</span></em></p>
+
+        <div class="pills">
+          <label class="pill"><input type="radio" name="domain" value="Има домейн"><span><span data-l="bg">Имам</span><span data-l="en">Yes</span></span></label>
+          <label class="pill"><input type="radio" name="domain" value="Трябва домейн" data-note-bg="Домейн — около 10–20 €/год., плаща се отделно. Аз го регистрирам." data-note-en="Domain — about €10–20/year, paid separately. I register it for you."><span><span data-l="bg">Нямам — трябва ми</span><span data-l="en">No — I need one</span></span></label>
+        </div>
+        <div class="wsub wsub--flat" data-if="domain:Има домейн">
+          <label class="wf"><span><span data-l="bg">Кой е домейнът?</span><span data-l="en">What is it?</span></span><input type="text" name="domain_name" maxlength="200" placeholder="salon-iva.com"></label>
+        </div>
+
+        <p class="wq2"><span data-l="bg">Месечна поддръжка</span><span data-l="en">Monthly support</span></p>
+        <p class="wh wh--sm"><span data-l="bg">Държи сайта жив и подреден. Без нея никой не следи дали работи.</span><span data-l="en">Keeps the site alive and tidy. Without it, nobody checks that it works.</span></p>
+        <div class="opts opts--2">
+          <label class="opt"><input type="radio" name="support" value="Поддръжка" data-plan="basic" checked>
+            <span class="opt__body"><b class="opt__t js-plan-t">Поддръжка</b><span class="opt__p mono js-plan-p"></span>
+              <ul class="opt__ul js-plan-ul"></ul></span></label>
+          <label class="opt"><input type="radio" name="support" value="Без поддръжка" data-plan="none">
+            <span class="opt__body"><b class="opt__t js-plan-t">Без поддръжка</b><span class="opt__p mono js-plan-p"></span>
+              <ul class="opt__ul js-plan-ul"></ul></span></label>
+        </div>
+        <p class="wh wh--sm"><span data-l="bg">Хостингът и домейнът са на твое име и ги плащаш ти — за обикновен сайт хостингът обикновено е безплатен, за магазин е около 12–27 €/мес. Нови страници, функции и качване на продукти не влизат в поддръжката — тях ги оценявам отделно.</span><span data-l="en">Hosting and domain are in your name and you pay for them — for a normal site hosting is usually free, for a shop it's about €12–27/month. New pages, features and uploading products aren't part of support — I quote them separately.</span></p>
+
+        <div class="wsug js-sug" data-step="4" hidden></div>
+
+        <p class="wq2"><span data-l="bg">Кога ти трябва?</span><span data-l="en">When do you need it?</span></p>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="deadline" value="Колкото по-скоро"><span><span data-l="bg">Колкото по-скоро</span><span data-l="en">As soon as possible</span></span></label>
+          <label class="pill"><input type="radio" name="deadline" value="До месец"><span><span data-l="bg">До месец</span><span data-l="en">Within a month</span></span></label>
+          <label class="pill"><input type="radio" name="deadline" value="Няма бързане"><span><span data-l="bg">Няма бързане</span><span data-l="en">No rush</span></span></label>
+        </div>
+      </fieldset>
+
+      <!-- ============ 6. contact + summary ============ -->
+      <fieldset class="wstep" data-name-bg="Контакт" data-name-en="Contact" data-req="contact">
+        <legend class="wq"><span data-l="bg">Последно — как да се свържа с теб?</span><span data-l="en">Last one — how do I reach you?</span></legend>
+
+        <div class="wrev js-rev" hidden>
+          <div class="wrev__head">
+            <p class="wrev__t"><span data-l="bg">Твоят избор</span><span data-l="en">Your choices</span></p>
+            <p class="wrev__s"><span data-l="bg">Провери всичко. Ако нещо не е както искаш — натисни „Промени“.</span><span data-l="en">Check everything. If something isn't right — press "Change".</span></p>
+          </div>
+          <ul class="wrev__list"></ul>
+        </div>
+
+        <div class="wsum">
+          <p class="wsum__k mono"><span data-l="bg">Твоята ориентировъчна цена</span><span data-l="en">Your estimated price</span></p>
+          <p class="wsum__v"><span class="js-sum wsum__sum">—</span> <span class="wsum__m js-mo"></span></p>
+          <div class="wsum__calc" aria-hidden="true"><i></i><i></i><i></i><span><span data-l="bg">Смятам цената…</span><span data-l="en">Calculating…</span></span></div>
+          <ul class="wlist js-list"></ul>
+          <p class="wsum__note"><span data-l="bg">Точната цена я потвърждавам след кратък разговор — до 1–2 работни дни.</span><span data-l="en">I confirm the exact price after a short chat — within 1–2 working days.</span></p>
+          <div class="wsum__go">
+            <a class="wsum__viber js-viber" href="viber://chat?number=%2B359893951260" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C7 3 3.5 5.6 3.5 10.6c0 2.9 1.2 4.8 3 5.9V20l3-2.3c.8.1 1.6.2 2.5.2 5 0 8.5-2.6 8.5-7.3S17 3 12 3Z"/></svg>
+              <span data-l="bg">Копирай офертата и пиши във Viber</span><span data-l="en">Copy the offer &amp; message on Viber</span>
+            </a>
+            <span class="wsum__or"><span data-l="bg">Копирам ти всичко — в чата само го поставяш и пращаш. Или попълни отдолу и ще ти пиша аз.</span><span data-l="en">I copy everything for you — just paste it in the chat and send. Or fill in below and I'll write to you.</span></span>
+          </div>
+          <p class="wsum__copied" role="status" aria-live="polite" hidden><span data-l="bg">✓ Копирах офертата. Във Viber задръж в полето за писане → „Постави“ → прати.</span><span data-l="en">✓ Offer copied. In Viber, long-press the message box → "Paste" → send.</span></p>
+        </div>
+
+        <div class="wgrid">
+          <label class="wf"><span><span data-l="bg">Име *</span><span data-l="en">Name *</span></span><input type="text" name="name" maxlength="200" autocomplete="name"></label>
+          <label class="wf"><span><span data-l="bg">Име на бизнеса</span><span data-l="en">Business name</span></span><input type="text" name="business" maxlength="200" autocomplete="organization"></label>
+          <label class="wf"><span><span data-l="bg">Телефон</span><span data-l="en">Phone</span></span><input type="tel" name="phone" maxlength="40" autocomplete="tel" inputmode="tel"></label>
+          <label class="wf"><span><span data-l="bg">Имейл</span><span data-l="en">Email</span></span><input type="email" name="email" maxlength="200" autocomplete="email" inputmode="email"></label>
+          <label class="wf"><span><span data-l="bg">С какво се занимаваш?</span><span data-l="en">What does the business do?</span></span><input type="text" name="activity" maxlength="200" placeholder="Салон за маникюр, автосервиз…"></label>
+          <label class="wf"><span><span data-l="bg">Град</span><span data-l="en">City</span></span><input type="text" name="city" maxlength="100"></label>
+          <label class="wf wf--wide"><span><span data-l="bg">Нещо друго, което трябва да знам? (по желание)</span><span data-l="en">Anything else I should know? (optional)</span></span><textarea name="notes" rows="2" maxlength="2000"></textarea></label>
+        </div>
+        <p class="wh wh--sm"><span data-l="bg">Остави телефон или имейл — поне едно.</span><span data-l="en">Leave a phone or an email — at least one.</span></p>
+
+        <p class="wq2"><span data-l="bg">Плащаш като</span><span data-l="en">You'll pay as</span></p>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="payer" value="Физическо лице"><span><span data-l="bg">Физическо лице</span><span data-l="en">A private person</span></span></label>
+          <label class="pill"><input type="radio" name="payer" value="Фирма"><span><span data-l="bg">Фирма</span><span data-l="en">A company</span></span></label>
+        </div>
+
+        <label class="wconsent">
+          <input type="checkbox" name="consent">
+          <i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5 L6.5 11.5 L12.5 4.5"/></svg></i>
+          <span><span data-l="bg">Съгласен съм данните ми да бъдат използвани, за да получа оферта.</span><span data-l="en">I agree that my details may be used to send me an offer.</span> <a href="privacy.html" target="_blank" rel="noopener"><span data-l="bg">Поверителност</span><span data-l="en">Privacy</span></a></span>
+        </label>
+        <input type="text" name="_honey" class="cform__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      </fieldset>
+
+      <!-- ============ sticky price bar ============ -->
+      <div class="wbar">
+        <div class="wbar__in">
+          <div class="wbar__info">
+            <span class="wbar__k mono"><span data-l="bg">Стъпка</span><span data-l="en">Step</span> <b class="wbar__n">1</b> / <span class="wbar__all">6</span></span>
+            <span class="wbar__hint"><span data-l="bg">Цената — накрая</span><span data-l="en">Price at the end</span></span>
+          </div>
+          <div class="wbar__nav">
+            <button type="button" class="wbtn wbtn--back" aria-label="Назад">←</button>
+            <button type="submit" class="wbtn wbtn--next"><span class="wbtn__t"></span> <i aria-hidden="true">→</i></button>
+          </div>
+        </div>
+        <p class="wbar__msg" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+    </div>
+
+    <div class="wdone" hidden>
+      <svg class="wdone__check" viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="32" cy="32" r="29"/><path d="M20 33 L29 42 L45 24"/></svg>
+      <h2 class="wdone__t"><span data-l="bg">Получих го!</span><span data-l="en">Got it!</span></h2>
+      <p class="wdone__p"><span data-l="bg">Ориентировъчно:</span><span data-l="en">Estimate:</span> <b class="js-sum"></b> <span class="js-mo"></span></p>
+      <p class="wdone__p"><span data-l="bg">Ще ти пиша или звънна до 1–2 работни дни с точна оферта.</span><span data-l="en">I'll get back to you within 1–2 working days with an exact offer.</span></p>
+      <a class="btn btn--accent" href="./"><span class="btn__txt"><span data-l="bg">Към сайта</span><span data-l="en">Back to site</span></span><span class="btn__arrow" aria-hidden="true">↗</span></a>
+    </div>
+
+    <p class="wiz__alt mono"><span data-l="bg">Предпочиташ да си пишем? Viber:</span><span data-l="en">Rather chat? Viber:</span> <a href="viber://chat?number=%2B359893951260">Viber</a> · <a href="mailto:nikola.klimentow@gmail.com">nikola.klimentow@gmail.com</a></p>
+  </main>
+
+  <footer class="legal-foot">
+    <span>© 2026 NK Programming</span>
+    <nav><a href="privacy.html"><span data-l="bg">Поверителност</span><span data-l="en">Privacy</span></a><a href="terms.html"><span data-l="bg">Общи условия</span><span data-l="en">Terms</span></a></nav>
+  </footer>
+
+  <script>
+    /* language switch */
+    (function () {
+      var r = document.documentElement, bs = document.querySelectorAll('[data-set]');
+      function set(l) {
+        r.lang = l; r.dataset.lang = l;
+        bs.forEach(function (b) { b.classList.toggle('is-active', b.dataset.set === l); });
+        try { localStorage.setItem('nk-lang', l); } catch (e) {}
+      }
+      bs.forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.set); }); });
+      set(r.dataset.lang);
+    })();
+
+    /* =========================================================
+       Calculator wizard.
+       ALL PRICES ARE IN THE PRICE TABLE BELOW — edit them there.
+       data-if="name:value|value" shows a block only for those answers.
+       ========================================================= */
+    (function () {
+      var FORM_ID = 'mnpnrqpb'; // Formspree, same as the contact form on index.html
+      var form = document.getElementById('brief');
+      var steps = [].slice.call(form.querySelectorAll('.wstep'));
+      var cur = 0;
+      var $ = function (s, c) { return (c || document).querySelector(s); };
+      var $$ = function (s, c) { return [].slice.call((c || document).querySelectorAll(s)); };
+      var lang = function () { return document.documentElement.dataset.lang === 'en' ? 'en' : 'bg'; };
+
+      var T = {
+        bg: { next: 'Напред', send: 'Изпрати', sending: 'Изпращам…', mo: ' €/мес', pick: 'Избери тип сайт', quote: 'По оферта',
+              need: 'Избери отговор, за да продължиш.', needBiz: 'Избери с какво се занимаваш.', name: 'Напиши името си.', contact: 'Остави телефон или имейл, за да ти отговоря.',
+              email: 'Имейлът не изглежда правилен.', phone: 'Телефонът не изглежда правилен.', consent: 'Отметни съгласието, за да изпратиш.',
+              err: 'Нещо се обърка. Опитай пак или ми пиши на имейла.', quoteNote: 'Платформите ги оценявам след разговор — цената и поддръжката зависят от функциите' },
+        en: { next: 'Next', send: 'Send', sending: 'Sending…', mo: ' €/mo', pick: 'Pick a site type', quote: 'Custom quote',
+              need: 'Pick an answer to continue.', needBiz: 'Pick what your business does.', name: 'Please enter your name.', contact: 'Leave a phone or email so I can reply.',
+              email: "That email doesn't look right.", phone: "That phone number doesn't look right.", consent: 'Tick the consent box to send.',
+              err: 'Something went wrong. Try again or email me.', quoteNote: 'Platforms are quoted after a chat — price and support depend on the features' }
+      };
+      var t = function (k) { return T[lang()][k]; };
+      var range = function (r) { var p = r.split('-'); return [+p[0], +p[1]]; };
+      var fmt = function (a, b) { return a + '–' + b + ' €'; };
+
+      /* ---------- conditional blocks ---------- */
+      function checked(name) { var i = form.querySelector('input[name="' + name + '"]:checked'); return i ? i.value : ''; }
+      function applyIf() {
+        $$('[data-if]', form).forEach(function (el) {
+          var p = el.dataset.if.split(':'), ok = p[1].split('|').indexOf(checked(p[0])) > -1;
+          el.classList.toggle('is-off', !ok);
+        });
+      }
+      function active(el) { var b = el.closest('.is-off'); return !b; }
+
+      /* =========================================================
+         PRICE TABLE (EUR). Ranges are [min, max]. Where in the range each item lands
+         depends on the LEVEL (0 = bottom, 1 = top), worked out from the answers below.
+         Everything is added up and the total is shown ±SPREAD, rounded.
+         ========================================================= */
+      var PRICE = {
+        spread: 0.25,                        // shown range: from the total (rounded) up to total +25%
+        minGap: [[300, 30], [1000, 100], [Infinity, 200]],   // the range is at least this wide (by total)
+        level: {                             // how far up its range every price goes: 0 = min, 1 = max
+          start: 0,                          // the simplest site lands exactly on the minimum
+          anim: {                            // animations — the real extra work (style is just taste, no price)
+            'Без анимации': 0,
+            'Леки анимации': 0.3,
+            'Много анимации': 0.6
+          },
+          noAnim: 0.15,                      // if they skipped the animation question
+          perFeature: 0.05,                  // each extra feature / bigger catalogue…
+          maxFeatures: 0.25,                 // …up to this much
+          noPhotos: 0.15                     // no photos = more design work
+          /* max possible: 0.6 + 0.25 + 0.15 = 1 → the top of every range */
+        },
+        type: {                              // base price by site type (key = data-key)
+          one:  [50, 150],
+          biz:  [150, 350],
+          help: [150, 350],
+          shop: [1000, 1100]
+          /* app: always "custom quote" */
+        },
+        pages: { one: 1, biz: 5, help: 5, shop: 5 },   // how many pages each type has (for per-page prices)
+        add: {                               // fixed add-ons, by option value
+          'Онлайн записване на час': [300, 500],
+          'Сам да сменя текстове и снимки (админ панел)': [100, 200],
+          'Повече от 5 страници': [100, 250],
+          'Плащане с карта онлайн': [50, 150],
+          'Доставка с Еконт / Спиди': [150, 250],
+          'Блог / новини': [50, 100],
+          '50–300 продукта': [100, 250],
+          'Над 300 продукта': [250, 500]
+        },
+        morePages: { 'Повече от 5 страници': 3 },      // extra pages these add (for per-page prices)
+        perPage: { 'Помощ с текстовете': [15, 25] },   // price per page
+        percent: { 'Втори език': 30 },                  // % of the site itself (type + features, without texts)
+        rush: { 'Колкото по-скоро': 20 },               // % on top of everything
+        booking: ['Онлайн записване на час'],           // these put a site on the "booking" support tier
+        support: {                                      // EUR / month, by tier: site / booking / shop (hosting is paid by the client)
+          site:    { basic: 25, none: 0 },
+          booking: { basic: 35, none: 0 },
+          shop:    { basic: 55, none: 0 }
+        }
+      };
+      var NAME = {                           // nicer Bulgarian labels for the breakdown
+        'Не е сигурен — бизнес сайт': 'Бизнес сайт (ще го уточним)', 'Колкото по-скоро': 'Спешен срок',
+        'Сам да сменя текстове и снимки (админ панел)': 'Админ панел за текстове и снимки'
+      };
+      var EN = {                             // English labels for the breakdown
+        'Онлайн записване на час': 'Online booking', 'Сам да сменя текстове и снимки (админ панел)': 'Admin panel for texts & photos',
+        'Повече от 5 страници': 'More than 5 pages', 'Плащане с карта онлайн': 'Online card payments', 'Доставка с Еконт / Спиди': 'Econt / Speedy delivery',
+        'Блог / новини': 'Blog / news', '50–300 продукта': '50–300 products', 'Над 300 продукта': '300+ products',
+        'Помощ с текстовете': 'Help with the texts', 'Втори език': 'Second language', 'Колкото по-скоро': 'Rush deadline',
+        'Сайт на една страница': 'One-page site', 'Бизнес сайт': 'Business website', 'Онлайн магазин': 'Online shop', 'Не е сигурен — бизнес сайт': 'Business website (to be confirmed)'
+      };
+
+      /* what each support plan includes — by tier (site / booking / shop) */
+      var NONE = { t: { bg: 'Без поддръжка', en: 'No support' },
+        bg: ['Сайтът е твой и го пазиш сам', 'Ако нещо се счупи — поправката е по оферта'],
+        en: ['The site is yours and you look after it', 'If something breaks — the fix is quoted separately'] };
+      var FIX_BG = ['Поправка на бъгове до 1 работен ден', 'Дребни корекции по дизайна и текста'];
+      var FIX_EN = ['Bug fixes within 1 working day', 'Small design &amp; text fixes'];
+      var PLANS = {
+        site: { none: NONE, basic: { t: { bg: 'Поддръжка', en: 'Support' },
+          bg: ['Архив на сайта всяка седмица', 'Обновления и защита', 'Следя дали сайтът работи'].concat(FIX_BG),
+          en: ['Weekly site backup', 'Updates &amp; security', 'I monitor that the site is up'].concat(FIX_EN) } },
+        booking: { none: NONE, basic: { t: { bg: 'Поддръжка', en: 'Support' },
+          bg: ['Архив на сайта всяка седмица', 'Обновления и защита', 'Следя записването и известията да работят'].concat(FIX_BG),
+          en: ['Weekly site backup', 'Updates &amp; security', 'I check that booking &amp; notifications work'].concat(FIX_EN) } },
+        shop: { none: NONE, basic: { t: { bg: 'Поддръжка', en: 'Support' },
+          bg: ['Архив всеки ден (поръчките са важни)', 'Обновления на магазина и плъгините', 'Следя плащанията и Еконт/Спиди да работят'].concat(FIX_BG),
+          en: ['Daily backup (orders matter)', 'Shop &amp; plugin updates', 'I check that payments &amp; couriers work'].concat(FIX_EN) } }
+      };
+
+      /* steps: 10 € under 300, 50 € up to 1000, 100 € above */
+      var stepOf = function (x) { return x < 300 ? 10 : x < 1000 ? 50 : 100; };
+      var nice = function (x) { var st = stepOf(x); return Math.max(st, Math.round(x / st) * st); };
+      var niceUp = function (x) { var st = stepOf(x); return Math.ceil(x / st) * st; };
+      var at = function (r, k) { return r[0] + (r[1] - r[0]) * k; };   // a point inside [min, max]
+
+      /* ---------- the estimate ---------- */
+      function estimate(l) {
+        syncGuided();
+        l = l || lang();
+        var L = function (bg) { return l === 'en' ? (EN[bg] || bg) : (NAME[bg] || bg); };
+        var type = form.querySelector('input[name="type"]:checked');
+        var res = { lines: [], notes: [], min: 0, max: 0, total: 0, mo: 0, plan: '', quote: false, none: !type };
+        if (!type) { res.sum = '—'; res.moText = ''; return res; }
+        var key = type.dataset.key;
+        var on = $$('input:checked', form).filter(active).filter(function (i) { return SKIPN.indexOf(i.name) < 0; });
+        var vals = on.map(function (i) { return i.value; });
+        /* level: where in each range the prices land */
+        var LV = PRICE.level, anim = form.querySelector('input[name="anim"]:checked');
+        var feats = vals.filter(function (v) { return PRICE.add[v]; }).length
+          + vals.filter(function (v) { return PRICE.percent[v]; }).length;
+        var k = LV.start + (anim ? (LV.anim[anim.value] || 0) : LV.noAnim)
+          + Math.min(LV.maxFeatures, feats * LV.perFeature)
+          + (vals.indexOf('Няма снимки') > -1 ? LV.noPhotos : 0);
+        k = Math.max(0, Math.min(1, k));
+        res.level = k;
+        if (key !== 'app') {
+          var lvName = k < 0.35 ? ['ниска', 'low'] : k < 0.65 ? ['средна', 'medium'] : ['висока', 'high'];
+          res.notes.unshift(l === 'en'
+            ? 'Complexity: ' + lvName[1] + ' — based on the animations and features you picked'
+            : 'Сложност: ' + lvName[0] + ' — смятам я според анимациите и функциите, които избра');
+        }
+        var mid = function (r) { return at(r, k); };
+        var line = function (bg, v, extra) { res.lines.push({ label: L(bg) + (extra || ''), bg: (NAME[bg] || bg) + (extra || ''), v: v }); return v; };
+
+        /* notes (domain, photos, updating an old site, extra wishes…) */
+        on.forEach(function (i) { var n = i.dataset[l === 'en' ? 'noteEn' : 'noteBg']; if (n) res.notes.push(n); });
+        $$('textarea', form).filter(active).forEach(function (i) {
+          var n = i.dataset[l === 'en' ? 'noteEn' : 'noteBg']; if (i.value.trim() && n) res.notes.push(n);
+        });
+
+        /* support plan: site / booking / shop tier */
+        var tier = key === 'shop' ? 'shop' : vals.some(function (v) { return PRICE.booking.indexOf(v) > -1; }) ? 'booking' : 'site';
+        res.tier = tier;
+        var plan = form.querySelector('input[name="support"]:checked');
+        res.plan = plan ? plan.value : '';
+        res.planName = plan ? PLANS[tier][plan.dataset.plan].t.bg : '';
+        res.mo = plan ? PRICE.support[tier][plan.dataset.plan] : 0;
+        res.moText = res.mo ? '+ ' + res.mo + T[l].mo : '';
+
+        if (key === 'app') { res.quote = true; res.mo = 0; res.moText = ''; res.sum = T[l].quote; res.notes.unshift(T[l].quoteNote); return res; }
+
+        /* the site itself */
+        var site = line(type.value, mid(PRICE.type[key]));
+        var pages = PRICE.pages[key] || 1;
+        vals.forEach(function (v) {
+          if (PRICE.add[v]) site += line(v, mid(PRICE.add[v]));
+          if (PRICE.morePages[v]) pages += PRICE.morePages[v];
+        });
+        var total = site;
+        /* second language: % of the site */
+        vals.forEach(function (v) { if (PRICE.percent[v]) total += line(v, site * PRICE.percent[v] / 100, ' (+' + PRICE.percent[v] + '%)'); });
+        /* materials */
+        vals.forEach(function (v) {
+          if (PRICE.perPage[v]) total += line(v, mid(PRICE.perPage[v]) * pages, ' (' + pages + (l === 'en' ? ' p.' : ' стр.') + ')');
+        });
+        /* rush: % on top of everything */
+        vals.forEach(function (v) { if (PRICE.rush[v]) total += line(v, total * PRICE.rush[v] / 100, ' (+' + PRICE.rush[v] + '%)'); });
+
+        res.total = total;
+        res.min = nice(total);
+        res.max = niceUp(total * (1 + PRICE.spread));
+        var gap = PRICE.minGap.filter(function (g) { return total < g[0]; })[0][1];
+        if (res.max - res.min < gap) res.max = res.min + gap;
+        res.sum = fmt(res.min, res.max);
+        return res;
+      }
+
+      /* ---------- final summary: everything they picked, with "Промени" back to that step ---------- */
+      function renderRev(S) {
+        var box = $('.js-rev'); if (!box) return;
+        var en = lang() === 'en', ul = box.querySelector('.wrev__list');
+        ul.innerHTML = '';
+        S.filter(function (x) { return x.n !== '-'; }).forEach(function (x) {   /* "-" = only for Viber */
+          var li = document.createElement('li'); li.className = 'wrev__row';
+          var k = document.createElement('span'); k.className = 'wrev__k'; k.textContent = x.k;
+          var v = document.createElement('span'); v.className = 'wrev__v';
+          if (Array.isArray(x.v)) x.v.forEach(function (c) { var i = document.createElement('i'); i.textContent = c; v.appendChild(i); });
+          else v.textContent = x.v;
+          li.appendChild(k); li.appendChild(v);
+          { var b = document.createElement('button'); b.type = 'button'; b.className = 'wrev__edit'; b.dataset.n = x.n; b.textContent = en ? 'Change' : 'Промени'; li.appendChild(b); }
+          ul.appendChild(li);
+        });
+        box.hidden = !S.length;
+      }
+      form.addEventListener('click', function (ev) {
+        var b = ev.target.closest('.wrev__edit'); if (!b) return;
+        var f = form.querySelector('[name="' + b.dataset.n + '"]'), st = f && f.closest('.wstep'), i = flow().indexOf(st);
+        if (i > -1) show(i, true);
+      });
+
+      function render() {
+        var e = estimate();
+        $$('.js-sum').forEach(function (el) { el.textContent = e.none ? t('pick') : e.sum; el.classList.toggle('is-empty', e.none); });
+        $$('.js-mo').forEach(function (el) { el.textContent = e.none ? '' : e.moText; });
+        $$('.js-list').forEach(function (ul) {
+          ul.innerHTML = '';
+          e.lines.forEach(function (x) {
+            var li = document.createElement('li'); li.innerHTML = '<span></span><i class="mono"></i>';
+            li.firstChild.textContent = x.label; li.lastChild.textContent = '✓'; ul.appendChild(li);
+          });
+          if (e.mo) { var li = document.createElement('li'); li.innerHTML = '<span></span><i class="mono"></i>'; var pl = form.querySelector('input[name="support"]:checked'); li.firstChild.textContent = lang() === 'en' ? 'Monthly support' : 'Месечна поддръжка'; li.lastChild.textContent = e.mo + t('mo'); ul.appendChild(li); }
+          e.notes.forEach(function (n) { var li = document.createElement('li'); li.className = 'wlist__n'; li.textContent = n; ul.appendChild(li); });
+        });
+
+        /* support cards: title, price and what's included for this tier */
+        var tr = e.tier || 'site', L2 = lang();
+        $$('input[name="support"]', form).forEach(function (inp) {
+          var P2 = PLANS[tr][inp.dataset.plan], body = inp.nextElementSibling;
+          body.querySelector('.js-plan-t').textContent = P2.t[L2];
+          body.querySelector('.js-plan-p').textContent = inp.dataset.plan === 'none' ? (L2 === 'en' ? 'no monthly fee' : 'без месечна такса') : e.quote ? (L2 === 'en' ? 'quoted with the project' : 'по договаряне') : PRICE.support[tr][inp.dataset.plan] + T[L2].mo;
+          body.querySelector('.js-plan-ul').innerHTML = P2[L2].map(function (x) { return '<li>' + x + '</li>'; }).join('');
+        });
+        /* Econt/Speedy without card payments → suggest cards */
+        var econt = form.querySelector('input[value="Доставка с Еконт / Спиди"]'), card = form.querySelector('input[value="Плащане с карта онлайн"]');
+        $('.js-econt-tip').hidden = !(econt && econt.checked && active(econt) && !card.checked);
+
+        /* Viber: everything they picked, numbered, then the price (also copied on click) */
+        var en = lang() === 'en', txt;
+        var lab = function (i) {                           // the text they saw on the button
+          var root = i.nextElementSibling, t = root.querySelector('.opt__t') || root, sp = t.querySelector('[data-l="' + lang() + '"]');
+          return sp ? sp.textContent.trim() : (en && i.dataset.en ? i.dataset.en : i.value);
+        };
+        var pick = function (n) { return $$('input[name="' + n + '"]:checked', form).filter(active).map(lab); };
+        var val = function (n) { var f = form.elements[n]; return f && active(f) ? f.value.trim() : ''; };
+        /* everything they picked — one list for the on-page summary and for Viber */
+        var S = [], add = function (k, v, n) { if (v && (!Array.isArray(v) || v.length)) S.push({ k: k, v: v, n: n }); };
+        if (MODE === 'guided') {
+          add(en ? 'Business' : 'Бизнес', (pick('biz')[0] || '') + (val('biz_other') ? ' — ' + val('biz_other') : ''), 'biz');
+          add(en ? 'I want' : 'Искам', pick('goals'), 'goals');
+          add(en ? 'What bothers me now' : 'Сега ме затруднява', pick('pains'), 'pains');
+          add(en ? 'In my words' : 'С мои думи', val('story'), 'story');
+          add(en ? 'On the site' : 'На сайта да има', pick('sections'), 'sections');
+        }
+        var has = pick('has')[0];
+        add(en ? 'Current site' : 'Сегашен сайт', has ? has + (val('site_url') ? ' — ' + val('site_url') : '') + (pick('site_plan')[0] ? ' (' + pick('site_plan')[0] + ')' : '') : '', 'has');
+        add(MODE === 'guided' ? (en ? 'Suggested type' : 'Препоръчан тип') : (en ? 'Type' : 'Тип'), pick('type')[0], MODE === 'guided' ? 'g_type' : 'type');
+        var ex = pick('extras').concat(pick('products'));
+        if (MODE === 'guided') { var gp = pick('g_products'); if (gp.length) add(en ? 'Products' : 'Продукти', gp, 'g_products'); }   /* paid add-ons are already in "На сайта да има" */
+        else add(en ? 'Extras' : 'Добавки', ex.length ? ex : (en ? 'none' : 'без'), 'extras');
+        add(en ? 'Texts' : 'Текстове', pick('texts')[0], 'texts');
+        add(en ? 'Photos' : 'Снимки', pick('photos')[0], 'photos');
+        add(en ? 'Style' : 'Стил', pick('style')[0], 'style');
+        add(en ? 'Animations' : 'Анимации', pick('anim')[0], 'anim');
+        if (!e.none && e.level != null && !e.quote) add(en ? 'Complexity' : 'Сложност', e.level < 0.35 ? (en ? 'low' : 'ниска') : e.level < 0.65 ? (en ? 'medium' : 'средна') : (en ? 'high' : 'висока'), '-');
+        add(en ? 'Domain' : 'Домейн', pick('domain')[0] ? pick('domain')[0] + (val('domain_name') ? ' — ' + val('domain_name') : '') : '', 'domain');
+        add(en ? 'Support' : 'Поддръжка', e.mo ? pick('support')[0] + ' — ' + e.mo + T[lang()].mo : pick('support')[0], 'support');
+        add(en ? 'Deadline' : 'Срок', pick('deadline')[0], 'deadline');
+        renderRev(S);
+        if (e.none) txt = en ? 'Hi! I want a website.' : 'Здравей! Искам сайт.';
+        else {
+          var R = S.map(function (x, n) { return (n + 1) + '. ' + x.k + ': ' + (Array.isArray(x.v) ? x.v.join(', ') : x.v); });
+          txt = (en ? 'Hi! I used the calculator on your site:' : 'Здравей! Сметнах в калкулатора на сайта ти:') + '\n\n'
+            + R.join('\n') + '\n\n'
+            + (en ? 'Estimate: ' : 'Ориентировъчна цена: ') + e.sum + (e.mo ? ' + ' + e.mo + T[lang()].mo : '')
+            + '\n' + (en ? 'Can we talk?' : 'Може ли да поговорим?');
+        }
+        VIBER_TXT = txt;
+        layoutOpts();
+        if (MODE === 'guided') renderRec();
+        $$('.js-viber').forEach(function (a) { a.href = 'viber://chat?number=%2B359893951260&draft=' + encodeURIComponent(txt); });
+        renderSug();
+      }
+
+      /* =========================================================
+         GENTLE SUGGESTIONS — "А мислил ли си за…?"
+         One at a time per step, only when it really fits the answers,
+         with the real price difference. Add it with one click or hide it.
+         The order in SUGS is the priority.
+         ========================================================= */
+      var SKIP = {}, TOOK = [], VIBER_TXT = '';
+      var inp = function (v) { return form.querySelector('input[value="' + v + '"]'); };
+      var isOn = function (v) { var i = inp(v); return !!(i && i.checked && active(i)); };
+      /* actions change the form and return an "undo" (used to price the idea before it's added) */
+      var tickIt = function (v) { return function () { var i = inp(v), was = i.checked; i.checked = true; return function () { i.checked = was; }; }; };
+      var pickIt = function (name, v) { return function () {
+        var cur = form.querySelector('input[name="' + name + '"]:checked'), i = form.querySelector('input[name="' + name + '"][value="' + v + '"]');
+        i.checked = true; return function () { i.checked = false; if (cur) cur.checked = true; }; }; };
+      var nExtras = function () { return $$('input[name="extras"]:checked', form).filter(active).length; };
+
+      var SUGS = [
+        { id: 'biz', step: 2, when: function (k) { return MODE !== 'guided' && k === 'one' && (isOn('Онлайн записване на час') || isOn('Сам да сменя текстове и снимки (админ панел)') || isOn('Втори език')); },
+          act: pickIt('type', 'Бизнес сайт'),
+          bg: ['Мислил ли си за бизнес сайт?', 'Добавяш доста неща към една страница. В бизнес сайт всяка услуга има своя страница — по-подредено е и Google те намира по-лесно.'],
+          en: ['Have you thought about a business website?', "You're adding quite a lot to one page. On a business site every service gets its own page — tidier, and easier to find on Google."],
+          btn: ['Смени на бизнес сайт', 'Switch to a business site'] },
+        { id: 'econt', step: 2, when: function (k) { return k === 'shop' && isOn('Плащане с карта онлайн') && !isOn('Доставка с Еконт / Спиди'); },
+          act: tickIt('Доставка с Еконт / Спиди'),
+          bg: ['А доставка с Еконт / Спиди?', 'Клиентът избира офис или адрес още в количката и вижда колко струва доставката. Ти не пишеш товарителници на ръка.'],
+          en: ['What about Econt / Speedy delivery?', 'Buyers pick an office or address right in the cart and see the delivery price. No more writing waybills by hand.'],
+          btn: ['Добави Еконт / Спиди', 'Add Econt / Speedy'] },
+        { id: 'card', step: 2, when: function (k) { return MODE === 'guided' && k === 'shop' && isOn('Доставка с Еконт / Спиди') && !isOn('Плащане с карта онлайн'); },
+          act: tickIt('Плащане с карта онлайн'),
+          bg: ['А плащане с карта?', 'С Еконт/Спиди без карта клиентът може да плати само с наложен платеж. Повечето хора днес очакват да платят с карта още в сайта — така губиш по-малко поръчки.'],
+          en: ['What about card payments?', 'With Econt/Speedy and no card, buyers can only pay cash on delivery. Most people expect to pay by card on the site — you lose fewer orders.'],
+          btn: ['Добави плащане с карта', 'Add card payments'] },
+        { id: 'blog', step: 2, when: function (k) { return (k === 'biz' || k === 'help') && !isOn('Блог / новини') && nExtras() < 2; },
+          act: tickIt('Блог / новини'),
+          bg: ['А блог?', 'Една статия на месец — „Как да изберем…“, „5 грешки при…“ — води хора от Google, без да плащаш за реклама.'],
+          en: ['What about a blog?', 'One article a month — "How to choose…", "5 mistakes when…" — brings people from Google without paying for ads.'],
+          btn: ['Добави блог', 'Add a blog'] },
+        { id: 'shop', step: 2, noDelta: true, when: function (k) { return MODE !== 'guided' && (k === 'biz' || k === 'help') && nExtras() >= 2 && !isOn('Онлайн записване на час'); },
+          act: pickIt('type', 'Онлайн магазин'),
+          bg: ['Ще продаваш ли продукти?', 'Ако искаш хората да поръчват направо от сайта — с количка, плащане с карта и Еконт/Спиди — по-добре е магазин. Започва от 1000 €.'],
+          en: ['Will you sell products?', 'If you want people to order straight from the site — with a cart, card payments and Econt/Speedy — a shop is the better fit. From €1000.'],
+          btn: ['Виж го като магазин', 'Try it as a shop'] },
+        { id: 'anim', step: 3, when: function (k) { return k !== 'app' && isOn('Без анимации'); },
+          act: pickIt('anim', 'Леки анимации'),
+          bg: ['А леки анимации?', 'Плавно появяване при скрол и ефекти при посочване. Сайтът изглежда по-жив и по-скъп, а не става по-бавен.'],
+          en: ['What about light animations?', 'Smooth reveals on scroll and hover effects. The site feels more alive and premium — and no slower.'],
+          btn: ['Сложи леки анимации', 'Add light animations'] },
+        { id: 'support', step: 4, monthly: true, when: function (k) { return k !== 'app' && isOn('Без поддръжка'); },
+          act: pickIt('support', 'Поддръжка'),
+          bg: ['Сигурен ли си без поддръжка?', 'Ако нещо се счупи или падне след обновление, някой трябва да го оправи. С поддръжка го оправям до 1 работен ден, без да плащаш отделно.'],
+          en: ['Sure you want no support?', 'If something breaks or goes down after an update, someone has to fix it. With support I fix it within 1 working day, at no extra cost.'],
+          btn: ['Искам поддръжка', 'I want support'] }
+      ];
+
+      function renderSug() {
+        var type = form.querySelector('input[name="type"]:checked'), key = type ? type.dataset.key : '', l = lang(), ix = l === 'en' ? 1 : 0;
+        $$('.js-sug', form).forEach(function (box) {
+          var step = +box.dataset.step, base = estimate(), sug = null;
+          if (type) SUGS.some(function (x) { if (x.step === step && !SKIP[x.id] && x.when(key)) { sug = x; return true; } });
+          if (!sug) { box.hidden = true; box.innerHTML = ''; return; }
+          var pick = function (v) { return typeof v === 'function' ? v(base.tier) : v; };
+          var txt = pick(sug[l]), btn = pick(sug.btn)[ix], delta = '';
+          if (!sug.noDelta) {
+            var undo = sug.act(), after = estimate(); undo();
+            var d = sug.monthly ? after.mo - base.mo : nice(after.total - base.total);
+            if (d > 0 && sug.monthly) delta = '+' + d + T[l].mo;
+          }
+          var isNew = box.dataset.shown !== sug.id; box.dataset.shown = sug.id;
+          box.hidden = false;
+          box.innerHTML = '<p class="wsug__k mono">' + (l === 'en' ? 'Idea' : 'Идея') + '</p>'
+            + '<p class="wsug__p"><b></b><span></span></p>'
+            + '<div class="wsug__act"><button type="button" class="wsug__add"><span></span>' + (delta ? ' <i class="mono">' + delta + '</i>' : '') + '</button>'
+            + '<button type="button" class="wsug__no">' + (l === 'en' ? 'No, thanks' : 'Не, благодаря') + '</button></div>';
+          box.querySelector('b').textContent = txt[0];
+          box.querySelector('.wsug__p span').textContent = txt[1];
+          box.querySelector('.wsug__add span').textContent = btn;
+          box.querySelector('.wsug__add').onclick = function () { sug.act(); TOOK.push(pick(sug.bg)[0]); SKIP[sug.id] = 1; applyIf(); render(); };
+          box.querySelector('.wsug__no').onclick = function () { SKIP[sug.id] = 1; render(); };
+          /* a new idea that lands under the sticky bar gets scrolled into view */
+          if (isNew && box.offsetParent) requestAnimationFrame(function () {
+            var r = box.getBoundingClientRect(), bar = window.innerHeight;
+            if (r.bottom > bar - 16) window.scrollBy({ top: r.bottom - bar + 32, behavior: 'smooth' });
+          });
+        });
+      }
+
+      /* ---------- the price appears only on the last step: a short "calculating", then it counts up ---------- */
+      var revealT, revealRaf;
+      function reveal() {
+        var card = $('.wsum'), el = $('.wsum__sum'), e = estimate();
+        clearTimeout(revealT); cancelAnimationFrame(revealRaf);
+        render();
+        if (e.none || e.quote || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        card.classList.add('is-calc');
+        revealT = setTimeout(function () {
+          card.classList.remove('is-calc');
+          var t0 = performance.now(), D = 900;
+          (function tick(now) {
+            var k = Math.min(1, (now - t0) / D), q = 1 - Math.pow(1 - k, 3);
+            el.textContent = fmt(Math.round(e.min * q / 10) * 10, Math.round(e.max * q / 10) * 10);
+            if (k < 1) revealRaf = requestAnimationFrame(tick); else el.textContent = e.sum;
+          })(t0);
+        }, 1300);
+      }
+
+      /* =========================================================
+         GUIDED MODE — business → goals → sections → recommendation.
+         The answers are turned into the same type + extras the price
+         engine already uses, so pricing stays exactly the same.
+         ========================================================= */
+      var MODE = 'guided', REC = { auto: 'one', key: 'one' };
+      var SKIPN = ['biz', 'biz_other', 'goals', 'pains', 'sections', 'g_products', 'g_type'];   /* guided-only inputs, never priced directly */
+      /* sections: [bg, en, extras value if it is a paid add-on] */
+      var SECS = {
+        services: ['Услуги и цени', 'Services & prices'], menu: ['Меню и цени', 'Menu & prices'], gallery: ['Галерия със снимки', 'Photo gallery'],
+        about: ['За нас', 'About us'], team: ['Екип', 'Team'], reviews: ['Отзиви от клиенти', 'Customer reviews'],
+        contacts: ['Контакти, карта и работно време', 'Contacts, map & opening hours'], areas: ['Райони, където работиш', 'Areas you cover'],
+        beforeafter: ['Снимки преди и след', 'Before & after photos'], rooms: ['Стаи и цени', 'Rooms & prices'], cars: ['Автомобили за продажба', 'Cars for sale'],
+        schedule: ['График на тренировките', 'Training schedule'], faq: ['Въпроси и отговори', 'Questions & answers'], offers: ['Промоции', 'Offers'],
+        pages: ['Отделна страница за всяка услуга', 'A page for every service'], products: ['Продукти с количка и поръчки', 'Products with cart & orders'],
+        booking: ['Онлайн записване на час', 'Online booking', 'Онлайн записване на час'],
+        admin: ['Сам да сменям текстове, снимки и цени', 'Edit texts, photos & prices myself', 'Сам да сменя текстове и снимки (админ панел)'],
+        blog: ['Блог / новини', 'Blog / news', 'Блог / новини'], lang: ['Втори език (напр. английски)', 'Second language (e.g. English)', 'Втори език'],
+        card: ['Плащане с карта', 'Card payments', 'Плащане с карта онлайн'], econt: ['Доставка с Еконт / Спиди', 'Econt / Speedy delivery', 'Доставка с Еконт / Спиди']
+      };
+      /* what each business usually needs: show = chips offered, on = ticked at start */
+      var BIZ = {
+        salon:  { show: ['services', 'gallery', 'contacts', 'about', 'team', 'reviews', 'offers', 'pages', 'booking', 'admin', 'blog', 'lang'], on: ['services', 'gallery', 'contacts', 'booking'] },
+        food:   { show: ['menu', 'gallery', 'contacts', 'about', 'reviews', 'offers', 'pages', 'admin', 'blog', 'lang'], on: ['menu', 'gallery', 'contacts'] },
+        auto:   { show: ['services', 'cars', 'gallery', 'about', 'contacts', 'reviews', 'faq', 'pages', 'booking', 'admin', 'blog'], on: ['services', 'about', 'contacts', 'pages'] },
+        trade:  { show: ['services', 'beforeafter', 'areas', 'contacts', 'about', 'reviews', 'faq', 'pages', 'blog'], on: ['services', 'beforeafter', 'areas', 'contacts'] },
+        clean:  { show: ['services', 'areas', 'beforeafter', 'contacts', 'about', 'reviews', 'faq', 'pages', 'booking', 'blog'], on: ['services', 'areas', 'contacts', 'reviews'] },
+        health: { show: ['services', 'team', 'contacts', 'about', 'reviews', 'faq', 'pages', 'booking', 'blog', 'lang'], on: ['services', 'team', 'contacts', 'about', 'booking'] },
+        stay:   { show: ['rooms', 'gallery', 'contacts', 'about', 'reviews', 'faq', 'offers', 'pages', 'lang', 'blog'], on: ['rooms', 'gallery', 'contacts', 'lang'] },
+        sport:  { show: ['schedule', 'services', 'team', 'gallery', 'contacts', 'about', 'reviews', 'pages', 'booking', 'blog'], on: ['schedule', 'services', 'team', 'contacts'] },
+        shop:   { show: ['products', 'about', 'contacts', 'reviews', 'faq', 'offers', 'card', 'econt', 'blog', 'lang'], on: ['products', 'contacts', 'card', 'econt'] },
+        other:  { show: ['services', 'gallery', 'about', 'team', 'contacts', 'reviews', 'faq', 'pages', 'booking', 'admin', 'blog', 'lang'], on: ['services', 'about', 'contacts'] }
+      };
+      /* what a goal (or a "what bothers you") ticks on the site */
+      function goalSecs(g, k) {
+        return { google: ['pages'], book: ['booking'], calls: ['reviews', 'contacts'], show: [k === 'trade' || k === 'clean' ? 'beforeafter' : 'gallery'],
+          sell: ['products', 'card', 'econt'], tourists: ['lang'], self: ['admin'], pro: [] }[g] || [];
+      }
+      var PAID = ['booking', 'admin', 'blog', 'lang', 'card', 'econt'];
+      var bizKey = function () { var i = form.querySelector('input[name="biz"]:checked'); return i ? i.dataset.key : ''; };
+      function labelOf(i) {                                   /* the text the visitor saw on the button / card */
+        var root = i.nextElementSibling, t = root.querySelector('.opt__t') || root, sp = t.querySelector('[data-l="' + lang() + '"]');
+        return sp ? sp.textContent.trim() : (lang() === 'en' && i.dataset.en ? i.dataset.en : i.value);
+      }
+      function impliedSecs() {
+        var k = bizKey(), out = [];
+        $$('input[name="goals"]:checked, input[name="pains"]:checked', form).forEach(function (i) {
+          goalSecs(i.dataset.goal, k).forEach(function (s) { if (out.indexOf(s) < 0) out.push(s); });
+        });
+        return out;
+      }
+      function buildSections(reset) {
+        var k = bizKey() || 'other', P = BIZ[k], box = $('.js-secs'), was = {}, imp = impliedSecs();
+        $$('input[name="sections"]', box).forEach(function (i) { was[i.dataset.sec] = i.checked; });
+        var list = P.show.slice(); imp.forEach(function (s) { if (list.indexOf(s) < 0) list.push(s); });
+        list.sort(function (a, b) { return (SECS[a][2] ? 1 : 0) - (SECS[b][2] ? 1 : 0); });          /* free sections first, add-ons last */
+        if (reset) {
+          $$('input[name="extras"]', form).forEach(function (x) { x.checked = false; });
+          var g = form.querySelector('input[name="g_type"][data-key="auto"]'); if (g) g.checked = true;
+        }
+        box.innerHTML = '';
+        list.forEach(function (id) {
+          var d = SECS[id], paid = !!d[2], on = reset ? (P.on.indexOf(id) > -1 || imp.indexOf(id) > -1) : (id in was ? was[id] : imp.indexOf(id) > -1);
+          var l = document.createElement('label'); l.className = 'pill pill--sec' + (paid ? ' is-paid' : '');
+          l.innerHTML = '<input type="checkbox" name="sections"><span><i class="pill__box" aria-hidden="true"></i><span data-l="bg"></span><span data-l="en"></span>'
+            + (paid ? '<em class="pill__tag"><span data-l="bg">добавка</span><span data-l="en">add-on</span></em>' : '') + '</span>';
+          var x = l.querySelector('input'); x.value = paid ? d[2] : d[0]; x.dataset.sec = id; x.dataset.en = d[1]; x.checked = on;
+          l.querySelector('[data-l="bg"]').textContent = d[0]; l.querySelector('[data-l="en"]').textContent = d[1];
+          if (paid && typeof INFO !== 'undefined' && INFO[d[2]]) l.dataset.tip = INFO[d[2]][lang()][0];
+          box.appendChild(l);
+        });
+      }
+      /* answers → type + extras for the price engine */
+      function syncGuided() {
+        if (MODE !== 'guided') return;
+        var k = bizKey(), secs = $$('input[name="sections"]:checked', form).map(function (i) { return i.dataset.sec; });
+        var has = function (s) { return secs.indexOf(s) > -1; };
+        var goal = function (g) { return !!form.querySelector('input[name="goals"][data-goal="' + g + '"]:checked'); };
+        var free = secs.filter(function (s) { return !SECS[s][2] && s !== 'pages' && s !== 'products'; }).length;
+        var auto = (k === 'shop' || goal('sell') || has('products') || has('card') || has('econt')) ? 'shop' : (has('pages') || free > 5) ? 'biz' : 'one';
+        var ov = form.querySelector('input[name="g_type"]:checked'), key = ov && ov.dataset.key !== 'auto' ? ov.dataset.key : auto;
+        REC = { auto: auto, key: key };
+        var tr = form.querySelector('input[name="type"][data-key="' + key + '"]'); if (tr) tr.checked = true;
+        PAID.forEach(function (id) {                              /* a chip mirrors its add-on; no chip → leave it as it is */
+          var chip = form.querySelector('input[name="sections"][data-sec="' + id + '"]'), x = form.querySelector('input[name="extras"][value="' + SECS[id][2] + '"]');
+          if (chip && x) x.checked = chip.checked;
+        });
+        var more = form.querySelector('input[name="extras"][value="Повече от 5 страници"]'); if (more) more.checked = key === 'biz' && free >= 7;
+        var gp = form.querySelector('input[name="g_products"]:checked');
+        $$('input[name="products"]', form).forEach(function (r) { r.checked = !!gp && r.value === gp.value; });
+        applyIf();
+      }
+      /* the recommendation card on the "what's on the site" step */
+      var REC_TXT = {
+        one: [['Сайт на една страница', 'One-page site'], ['Всичко, което искаш, се събира на една добре подредена страница. Излиза по-евтино и по-бързо, а клиентите виждат всичко с един скрол.', 'Everything you want fits on one well-organised page. It costs less, it is faster, and customers see it all in one scroll.']],
+        biz: [['Бизнес сайт', 'Business website'], ['Искаш повече раздели или отделна страница за всяка услуга. Така сайтът е по-подреден, а Google те намира по повече думи.', 'You want more sections or a page for every service. The site stays tidy and Google finds you for more searches.']],
+        shop: [['Онлайн магазин', 'Online shop'], ['Искаш хората да поръчват направо от сайта — трябва ти количка, поръчки и доставка.', 'You want people to order straight from the site — you need a cart, orders and delivery.']],
+        app: [['Платформа по поръчка', 'Custom platform'], ['Това е повече от сайт — профили, обяви или система. Ще го оценя след кратък разговор.', 'This is more than a website — accounts, listings or a system. I will quote it after a short chat.']]
+      };
+      function renderRec() {
+        if (!$('.wrec')) return;
+        var ix = lang() === 'en' ? 1 : 0, k = REC.key, mine = REC.key !== REC.auto;
+        $('.js-rec-k').textContent = mine ? (ix ? 'Your choice' : 'Ти избра') : (ix ? 'My suggestion' : 'Препоръчвам ти');
+        var adds = $$('input[name="extras"]:checked', form).filter(active).map(labelOf);
+        $('.js-rec-t').textContent = REC_TXT[k][0][ix] + (adds.length ? ' + ' + adds.join(' + ') : '');
+        $('.js-rec-why').textContent = REC_TXT[k][1][ix];
+        var secs = $$('input[name="sections"]:checked', form).filter(function (i) { return !SECS[i.dataset.sec][2]; }).map(labelOf);
+        var row = function (label, items) {
+          return '<div class="wrec__row"><span class="wrec__lab mono">' + label + '</span><span class="wrec__chips">'
+            + (items.length ? items.map(function (x) { return '<i></i>'; }).join('') : '<b>—</b>') + '</span></div>';
+        };
+        var box = $('.js-rec-rows');
+        box.innerHTML = row(ix ? 'Sections' : 'Раздели', secs) + row(ix ? 'Add-ons' : 'Добавки', adds);
+        var rows = $$('.wrec__row', box);
+        [secs, adds].forEach(function (items, n) { $$('i', rows[n]).forEach(function (el, m) { el.textContent = items[m]; }); });
+        $$('.js-bizname').forEach(function (el) { var b = form.querySelector('input[name="biz"]:checked'); el.textContent = b ? labelOf(b).toLowerCase() : (ix ? 'your business' : 'твоя бизнес'); });
+      }
+      /* business / goals change the chips (before the main change handler re-renders) */
+      form.addEventListener('change', function (e) {
+        var n = e.target.name;
+        if (n === 'biz') {
+          buildSections(true);
+          var a = form.elements.activity; if (a && (!a.value || a.dataset.auto === '1')) { a.value = e.target.dataset.key === 'other' ? '' : labelOf(e.target); a.dataset.auto = '1'; }
+        }
+        if (n === 'goals' || n === 'pains') {
+          buildSections(false);
+          if (e.target.checked) {
+            goalSecs(e.target.dataset.goal, bizKey()).forEach(function (s) { var c = form.querySelector('input[name="sections"][data-sec="' + s + '"]'); if (c) c.checked = true; });
+            if (e.target.dataset.goal === 'pro' && !form.querySelector('input[name="anim"]:checked')) { var an = form.querySelector('input[name="anim"][value="Леки анимации"]'); if (an) an.checked = true; }
+          }
+        }
+        if (n === 'activity') e.target.dataset.auto = '';
+      });
+      function flow() { return steps.filter(function (s) { return !s.dataset.mode || s.dataset.mode === MODE; }); }
+      function setMode(m) { MODE = m; render(); show(0, true); }
+
+      /* ---------- steps ---------- */
+      var msg = $('.wbar__msg');
+      function say(k) { msg.textContent = k ? t(k) : ''; msg.classList.toggle('is-err', !!k); }
+      function show(i, focus) {
+        var F = flow();
+        cur = Math.max(0, Math.min(F.length - 1, i));
+        steps.forEach(function (s) { s.classList.toggle('is-on', s === F[cur]); });
+        $('.wprog__fill').style.transform = 'scaleX(' + ((cur + 1) / F.length) + ')';
+        $('.wprog__n').textContent = ('0' + (cur + 1)).slice(-2);
+        $('.wprog__all').textContent = ('0' + F.length).slice(-2);
+        $('.wprog__name').textContent = F[cur].dataset[lang() === 'en' ? 'nameEn' : 'nameBg'];
+        $('.wbtn--back').disabled = cur === 0;
+        $('.wbtn__t').textContent = cur === F.length - 1 ? t('send') : t('next');
+        $('.wbar__n').textContent = cur + 1;
+        $('.wbar__all').textContent = F.length;
+        var wasLast = form.classList.contains('is-last');
+        form.classList.toggle('is-last', cur === F.length - 1);
+        if (cur === F.length - 1 && !wasLast) reveal();
+        say('');
+        if (focus) {
+          var top = $('.wprog').getBoundingClientRect().top + window.scrollY - 90;
+          if (window.scrollY > top) window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      }
+      function valid() {
+        var req = flow()[cur].dataset.req;
+        if (req === 'biz' && !checked('biz')) { say('needBiz'); return false; }
+        if (req === 'type' && !checked('type')) { say('need'); return false; }
+        if (req === 'contact') {
+          var v = function (n) { return form.elements[n].value.trim(); };
+          var bad = function (n) { var f = form.elements[n].closest('.wf'); f.classList.add('is-bad'); form.elements[n].focus(); };
+          var phone = v('phone'), email = v('email'), digits = phone.replace(/\D/g, '');
+          if (v('name').length < 2) { bad('name'); say('name'); return false; }
+          if (!phone && !email) { bad('phone'); say('contact'); return false; }
+          if (phone && (!/^\+?[\d\s().-]+$/.test(phone) || digits.length < 7 || digits.length > 15)) { bad('phone'); say('phone'); return false; }
+          if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { bad('email'); say('email'); return false; }
+          if (!form.elements.consent.checked) { $('.wconsent').classList.add('is-bad'); say('consent'); return false; }
+        }
+        return true;
+      }
+
+      $('.wbtn--back').addEventListener('click', function () { show(cur - 1, true); });
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!valid()) return;
+        if (cur < flow().length - 1) show(cur + 1, true); else send();
+      });
+
+      var autoT;
+      form.addEventListener('change', function (e) {
+        applyIf(); render(); say('');
+        var w = e.target.closest('.is-bad'); if (w) w.classList.remove('is-bad');
+        /* no auto-advance: the visitor always moves on with "Напред" */
+      });
+      form.addEventListener('input', function (e) {
+        var w = e.target.closest('.is-bad'); if (w) w.classList.remove('is-bad');
+        if (e.target.tagName === 'TEXTAREA') render();
+      });
+
+      /* ---------- send ---------- */
+      var K = { biz: 'Вид бизнес', biz_other: 'Бизнес (друго)', goals: 'Цели', pains: 'Затруднява го', story: 'С негови думи', sections: 'На сайта', g_type: 'Тип (ръчно избран)', has: 'Има ли сайт', site_url: 'Сегашен сайт', site_plan: 'Какво с него', type: 'Тип', extras: 'Допълнително', products: 'Продукти',
+        app_desc: 'Описание на платформата', must: 'Задължително да има', texts: 'Текстове', photos: 'Снимки', style: 'Стил', anim: 'Анимации',
+        likes: 'Харесвани сайтове', domain: 'Домейн', domain_name: 'Име на домейн', support: 'Поддръжка', deadline: 'Срок',
+        name: 'Име', business: 'Име на бизнеса', activity: 'Дейност', city: 'Град', phone: 'Телефон', notes: 'Бележки', payer: 'Плаща като' };
+      function send() {
+        if (form.elements._honey.value) return;
+        var body = { _subject: 'Калкулатор — ' + form.elements.name.value.trim() + (form.elements.business.value.trim() ? ' (' + form.elements.business.value.trim() + ')' : '') };
+        var e = estimate('bg');
+        body['Ориентировъчна цена'] = e.sum + (e.mo ? ' + ' + e.mo + ' €/мес' : '');
+        body['Разбивка'] = e.lines.map(function (x) { return x.bg + ': ~' + nice(x.v) + ' €'; }).join(' | ') || '—';
+        Object.keys(K).forEach(function (n) {
+          var els = $$('[name="' + n + '"]', form).filter(active), v;
+          if (!els.length) { body[K[n]] = '—'; return; }
+          v = (els[0].type === 'radio' || els[0].type === 'checkbox')
+            ? els.filter(function (i) { return i.checked; }).map(function (i) { return i.value; }).join(', ')
+            : els[0].value.trim();
+          body[K[n]] = v || '—';
+        });
+        var email = form.elements.email.value.trim(); if (email) body.email = email;
+        body['Поддръжка'] = e.quote ? (e.planName || '—') + ' — по договаряне' : !e.mo ? (e.planName || '—') : e.plan ? e.planName + ' (' + ({ site: 'сайт', booking: 'сайт със записване', shop: 'магазин' }[e.tier]) + ') — ' + e.mo + ' €/мес' : '—';
+        body['Бележки към цената'] = e.notes.join(' | ') || '—';
+        body['Език'] = lang();
+        body['Източник'] = SRC || 'директно';
+        body['Път'] = MODE === 'guided' ? 'насочван (по бизнес)' : 'знае какво иска';
+        body['Приети предложения'] = TOOK.join(' | ') || '—';
+
+        var btn = $('.wbtn--next'); btn.disabled = true; $('.wbtn__t').textContent = t('sending');
+        fetch('https://formspree.io/f/' + FORM_ID, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body)
+        }).then(function (res) {
+          if (!res.ok) throw new Error(res.status);
+          form.hidden = true; $('.wprog').hidden = true; $('.wdone').hidden = false;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }).catch(function (err) { console.error('calculator:', err); say('err'); })
+          .finally(function () { btn.disabled = false; if (!form.hidden) $('.wbtn__t').textContent = t('send'); });
+      }
+
+      /* ---------- where they came from (ad links: ?utm_source=facebook&utm_campaign=…) ---------- */
+      var SRC = '';
+      try {
+        var qs = new URLSearchParams(location.search), parts = [];
+        ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (n) { if (qs.get(n)) parts.push(qs.get(n)); });
+        if (!parts.length && qs.get('fbclid')) parts.push('facebook');
+        if (parts.length) sessionStorage.setItem('nk-src', parts.join(' / '));
+        SRC = sessionStorage.getItem('nk-src') || (document.referrer && document.referrer.indexOf(location.host) < 0 ? document.referrer : '');
+      } catch (err) {}
+
+      /* ---------- start ---------- */
+      /* ?type=one|biz|shop|app from the pricing cards preselects the type */
+      var pre = new URLSearchParams(location.search).get('type');
+      if (pre) { var i = form.querySelector('input[name="type"][data-key="' + pre + '"]'); if (i) i.checked = true; }
+      MODE = pre ? 'expert' : 'guided';
+      buildSections(true);
+      $('.js-expert').addEventListener('click', function () { setMode('expert'); });
+      $('.js-guided').addEventListener('click', function () { setMode('guided'); });
+      new MutationObserver(function () { buildSections(false); render(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+      $('.js-add-card').addEventListener('click', function () {
+        var c = form.querySelector('input[value="Плащане с карта онлайн"]'); c.checked = true; c.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+      /* Viber button: copy the offer first, then open the chat */
+      function copyText(t) {
+        if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t).catch(function () { return legacyCopy(t); });
+        return Promise.resolve(legacyCopy(t));
+      }
+      function legacyCopy(t) {
+        var ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (err) {} ta.remove();
+      }
+      $$('.js-viber').forEach(function (a) {
+        a.addEventListener('click', function (ev) {
+          ev.preventDefault(); var href = a.href;
+          copyText(VIBER_TXT).then(function () {
+            var note = $('.wsum__copied'); note.hidden = false;
+            TOOK.push('Писа във Viber');
+            setTimeout(function () { location.href = href; }, 500);
+          });
+        });
+      });
+
+      /* ---------- grid without orphans: 3 cards → one row of 3; otherwise 2 per row, an odd last card goes full width ---------- */
+      function layoutOpts() {
+        var wide = matchMedia('(min-width: 760px)').matches, two = matchMedia('(min-width: 601px)').matches;
+        $$('.opts', form).forEach(function (g) {
+          if (g.classList.contains('opts--biz')) return;
+          var cards = [].slice.call(g.children).filter(function (c) { return c.classList.contains('opt') && !c.classList.contains('is-off'); });
+          cards.forEach(function (c) { c.classList.remove('is-wide'); });
+          var row3 = wide && cards.length === 3 && !g.classList.contains('opts--extras');   /* add-ons have longer titles — they stay 2 per row */
+          g.classList.toggle('is-3', row3);
+          if (two && !row3 && cards.length % 2 === 1 && cards.length > 1) cards[cards.length - 1].classList.add('is-wide');
+        });
+      }
+      var layoutT; window.addEventListener('resize', function () { clearTimeout(layoutT); layoutT = setTimeout(layoutOpts, 120); });
+
+      /* ---------- "what is this?" — detailed info for every add-on ---------- */
+      var INFO = {
+        'Онлайн записване на час': {
+          bg: ['Клиентът си записва час сам — денонощно, без да ти звъни.', ['Избира услуга, ден и свободен час направо в сайта', 'Ти получаваш известие по имейл за всяко записване', 'Клиентът получава потвърждение по имейл', 'Задаваш работно време, почивни дни и колко трае всяка услуга', 'Виждаш графика си от телефона'], 'Не включва: SMS известия и онлайн плащане на капаро — по договаряне.'],
+          en: ['Customers book on their own — 24/7, no phone calls.', ['They pick a service, day and free slot right on the site', 'You get an email for every booking', 'The customer gets an email confirmation', 'You set opening hours, days off and how long each service takes', 'You see your schedule from your phone'], 'Not included: SMS reminders and online deposits — by agreement.'] },
+        'Сам да сменя текстове и снимки (админ панел)': {
+          bg: ['Вход с парола към прост панел, без да пипаш код.', ['Сменяш текстовете на местата, които уговорим', 'Качваш и сменяш снимки', 'Обновяваш цени, услуги и работно време', 'Показвам ти как, преди да предам сайта'], 'Не включва: смяна на дизайна или нови раздели — за тях ми пишеш.'],
+          en: ['A password-protected panel — no code.', ['Edit the texts in the places we agree on', 'Upload and replace photos', 'Update prices, services and opening hours', 'I show you how before handover'], 'Not included: design changes or new sections — just message me.'] },
+        'Повече от 5 страници': {
+          bg: ['Бизнес сайтът включва до 5 страници. Това добавя още до 3.', ['Отделна страница за всяка услуга, продукт или обект', 'Всяка страница има собствено заглавие и описание за Google', 'Повече страници = повече начини да те намерят в търсачката'], 'Ако ти трябват още повече страници — ще ги оценя отделно.'],
+          en: ['A business site has up to 5 pages. This adds up to 3 more.', ['A separate page for every service, product or location', 'Each page gets its own Google title and description', 'More pages = more ways to be found on Google'], 'Need even more pages? I quote them separately.'] },
+        'Плащане с карта онлайн': {
+          bg: ['Клиентът плаща с карта още в количката.', ['Visa и Mastercard, а често и Apple Pay / Google Pay', 'Свързвам магазина с твоя доставчик — напр. myPOS или банката ти', 'Парите идват по сметката ти', 'Наложеният платеж остава като вариант'], 'Доставчикът на плащания взема малка такса от всяка поръчка — тя е отделно.'],
+          en: ['Customers pay by card right in the cart.', ['Visa and Mastercard, often Apple Pay / Google Pay too', 'I connect the shop to your provider — e.g. myPOS or your bank', 'The money goes to your account', 'Cash on delivery stays available'], 'The payment provider charges a small fee per order — that is separate.'] },
+        'Доставка с Еконт / Спиди': {
+          bg: ['Доставката се избира и смята сама в количката.', ['Клиентът избира офис, автомат или адрес', 'Цената на доставката се смята автоматично', 'Товарителницата я правиш от админ панела с едно цъкане', 'Клиентът получава номер за проследяване'], 'Трябва ти договор с Еконт или Спиди — той е безплатен.'],
+          en: ['Delivery is chosen and priced right in the cart.', ['Customers pick an office, locker or address', 'The delivery price is calculated automatically', 'You create the waybill from the admin panel in one click', 'Customers get a tracking number'], 'You need a contract with Econt or Speedy — it is free.'] },
+        'Блог / новини': {
+          bg: ['Раздел със статии и новини, който пишеш сам.', ['Публикуваш от админ панела — текст, снимки, категории', 'Всяка статия е отделна страница за Google', 'Бутони за споделяне във Facebook и Viber', 'Последните статии излизат и на началната страница'], 'Писането на статиите не е включено — пишеш ги ти.'],
+          en: ['A section for articles and news that you write yourself.', ['Publish from the admin panel — text, photos, categories', 'Every article is its own page on Google', 'Share buttons for Facebook and Viber', 'Latest posts also appear on the home page'], 'Writing the articles is not included — you write them.'] },
+        'Втори език': {
+          bg: ['Целият сайт и на втори език — напр. английски.', ['Бутон за смяна на езика във всеки момент', 'Отделни заглавия и описания за Google на всеки език', 'Формите, бутоните и менюто също са преведени'], 'Преведените текстове ги даваш ти. Ако нямаш — превода го уговаряме отделно.'],
+          en: ['The whole site in a second language — e.g. English.', ['A language switch at any time', 'Separate Google titles and descriptions for each language', 'Forms, buttons and menu are translated too'], 'You provide the translated texts. If you don\'t have them — we agree on translation separately.'] }
+      };
+      /* goals: what the visitor actually gets for each one */
+      var GINFO = {
+        google: { bg: ['Сайтът е направен така, че Google да го разбира и показва.', ['Отделна страница за всяка услуга — повече шансове да излезеш в търсенето', 'Правилни заглавия и описания на всяка страница', 'Бърз сайт, който се отваря мигновено на телефон', 'Текстове с думите, които хората реално търсят'], 'Ще ти отбележа: отделна страница за всяка услуга. Резултатите в Google идват постепенно — обикновено след няколко седмици.'],
+                  en: ['The site is built so Google understands and shows it.', ['A separate page for every service — more chances to show up', 'Proper titles and descriptions on every page', 'A fast site that opens instantly on phones', 'Texts with the words people actually search for'], 'I\'ll tick: a page for every service. Google results come gradually — usually after a few weeks.'] },
+        book:   { bg: ['Клиентът си записва час сам, денонощно — без да ти звъни.', ['Избира услуга, ден и свободен час', 'Ти получаваш имейл за всяко записване', 'Клиентът получава потвърждение по имейл', 'Задаваш работно време, почивни дни и колко трае всяка услуга'], 'Ще ти отбележа: онлайн записване на час.'],
+                  en: ['Customers book on their own, 24/7 — no phone calls.', ['They pick a service, day and free slot', 'You get an email for every booking', 'They get an email confirmation', 'You set hours, days off and how long each service takes'], 'I\'ll tick: online booking.'] },
+        calls:  { bg: ['Хората да ти пишат и звънят с едно докосване.', ['Видими бутони „Обади се“ и Viber на всяка страница', 'Карта как да те намерят и работно време', 'Отзиви от доволни клиенти — за повече доверие'], 'Ще ти отбележа: отзиви и контакти с карта.'],
+                  en: ['People call and message you in one tap.', ['Clear Call and Viber buttons on every page', 'A map to find you and opening hours', 'Reviews from happy customers — for more trust'], 'I\'ll tick: reviews and contacts with a map.'] },
+        show:   { bg: ['Работата ти да говори вместо теб.', ['Галерия, която се отваря на цял екран', 'Снимки „преди и след“ — ако правиш ремонти или почистване', 'Бързо зареждане дори с много снимки'], 'Ще ти отбележа: галерия (или „преди и след“).'],
+                  en: ['Let your work speak for you.', ['A gallery that opens full screen', 'Before & after photos — for repairs or cleaning', 'Fast loading even with many photos'], 'I\'ll tick: a gallery (or before & after).'] },
+        sell:   { bg: ['Пълен онлайн магазин — клиентът поръчва сам.', ['Продукти с категории, снимки и цени', 'Количка и поръчка за минута', 'Плащане с карта или наложен платеж', 'Доставка с Еконт / Спиди, сметната автоматично', 'Панел, от който следиш поръчките'], 'Ще ти отбележа: продукти, плащане с карта и доставка.'],
+                  en: ['A full online shop — customers order on their own.', ['Products with categories, photos and prices', 'Cart and checkout in a minute', 'Card payment or cash on delivery', 'Econt / Speedy delivery, priced automatically', 'A panel to follow your orders'], 'I\'ll tick: products, card payments and delivery.'] },
+        pro:    { bg: ['Собствен дизайн, направен за твоя бизнес — не шаблон.', ['В твоите цветове и стил', 'Изглежда отлично на телефон', 'Подредени, ясни текстове', 'Плавни анимации, ако искаш'], 'Това е включено във всеки сайт.'],
+                  en: ['Your own design, made for your business — not a template.', ['In your colours and style', 'Looks great on phones', 'Clear, well-ordered texts', 'Smooth animations if you want'], 'This is included in every site.'] },
+        tourists: { bg: ['Целият сайт и на втори език — напр. английски.', ['Бутон за смяна на езика', 'Отделни заглавия за Google на всеки език', 'Менюто, формите и бутоните също са преведени'], 'Ще ти отбележа: втори език.'],
+                  en: ['The whole site in a second language — e.g. English.', ['A language switch', 'Separate Google titles for each language', 'Menu, forms and buttons are translated too'], 'I\'ll tick: a second language.'] },
+        self:   { bg: ['Вход с парола към прост панел — без код и без програмист.', ['Сменяш текстове на уговорените места', 'Качваш и сменяш снимки', 'Обновяваш цени и работно време', 'Показвам ти как, преди да предам сайта'], 'Ще ти отбележа: админ панел.'],
+                  en: ['A password-protected panel — no code, no developer.', ['Edit texts in the agreed places', 'Upload and replace photos', 'Update prices and opening hours', 'I show you how before handover'], 'I\'ll tick: an admin panel.'] }
+      };
+      function buildInfo() {
+        $$('input[name="extras"], input[name="goals"]', form).forEach(function (i) {
+          var isG = i.name === 'goals', d = isG ? GINFO[i.dataset.goal] : INFO[i.value], body = i.nextElementSibling; if (!d) return;
+          var old = body.querySelector('.opt__pop'); if (old) old.remove();
+          var btn = body.querySelector('.opt__info');
+          if (!btn) { btn = document.createElement('span'); btn.className = 'opt__info'; btn.setAttribute('role', 'button'); btn.setAttribute('tabindex', '0'); btn.textContent = 'i'; body.appendChild(btn); }
+          var x = d[lang()], pop = document.createElement('span'); pop.className = 'opt__pop';
+          pop.innerHTML = '<b></b><ul>' + x[1].map(function () { return '<li></li>'; }).join('') + '</ul><em></em>';
+          pop.querySelector('b').textContent = x[0];
+          $$('li', pop).forEach(function (li, n) { li.textContent = x[1][n]; });
+          pop.querySelector('em').textContent = x[2];
+          body.appendChild(pop);
+          btn.setAttribute('aria-label', lang() === 'en' ? (isG ? 'What you get' : 'What is included') : (isG ? 'Какво получаваш' : 'Какво включва'));
+        });
+      }
+      form.addEventListener('click', function (ev) {
+        if (ev.target.closest('.opt__pop')) { ev.preventDefault(); ev.stopPropagation(); return; }   /* reading the info never ticks the box */
+        var b = ev.target.closest('.opt__info');
+        $$('.opt__body.is-info', form).forEach(function (o) { if (!b || o !== b.parentNode) o.classList.remove('is-info'); });
+        if (b) { ev.preventDefault(); ev.stopPropagation(); b.parentNode.classList.toggle('is-info'); }
+      }, true);
+      document.addEventListener('click', function (ev) { if (!ev.target.closest('.opt__body')) $$('.opt__body.is-info', form).forEach(function (o) { o.classList.remove('is-info'); }); });
+      buildInfo();
+      new MutationObserver(buildInfo).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+
+      /* soft spotlight that follows the pointer on the cards */
+      form.addEventListener('pointermove', function (e) {
+        var c = e.target.closest && e.target.closest('.opt__body'); if (!c) return;
+        var r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+      applyIf(); render(); show(0);
+      new MutationObserver(function () { render(); show(cur); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+    })();
+  </script>
+</body>
+</html>
