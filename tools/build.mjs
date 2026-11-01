@@ -259,7 +259,7 @@ ${p.faq.map(([q, a]) => `        <details><summary>${esc(q)}</summary><p>${esc(a
 
     <section class="sp-cta">
       <h2>Колко ще струва твоят сайт?</h2>
-      <p>6 кратки въпроса, около 2 минути — и виждаш цената веднага.</p>
+      <p>4 кратки стъпки, около минута — и виждаш цената веднага.</p>
       <a href="${calcUrl(p.calc)}" class="btn btn--accent"><span class="btn__txt">Сметни цената</span>${arrow}</a>
       <p class="sp-cta__alt mono">или пиши ми във <a href="${VIBER}">Viber</a> · <a href="mailto:${EMAIL}">${EMAIL}</a></p>
     </section>

@@ -665,3 +665,34 @@ details.wrev .wrev__list { margin-bottom: 0; padding-bottom: 1.25rem; }
   .opts--goals .opt__d { grid-column: 1 / -1; grid-row: 3; margin-top: .375rem; font-size: .9375rem; line-height: 1.5; }
   .opts--goals .opt__pop { grid-column: 1 / -1; grid-row: 4; margin-top: 1rem; }
 }
+
+/* =========================================================
+   One path (Nov 2026): yes/no rows — "имам" always left, "нямам / трябва ми помощ" right
+   ========================================================= */
+.wyn { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); align-items: center; gap: .75rem 1.5rem;
+  margin-top: .75rem; padding: 1rem 1rem 1rem 1.25rem; border-radius: 1.125rem; background: #121212; box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); }
+.wh + .wyn { margin-top: 1.75rem; }
+.wyn .wq2 { margin: 0; }
+.wyn .wh--sm { grid-column: 1; grid-row: 2; margin: -.5rem 0 0; font-size: .875rem; color: var(--muted); }
+.wyn .pills--yn { grid-column: 2; grid-row: 1 / span 2; }
+.pills--yn { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.pills--yn .pill > span { width: 100%; justify-content: center; text-align: center; min-height: 2.875rem; white-space: normal; line-height: 1.2; }
+.pills--yn .pill__p { display: block; margin-left: .375rem; font-size: .75rem; opacity: .8; }
+.wyn + .wsub { margin-top: .5rem; }
+.wyn.is-bad, .wsub.is-bad { box-shadow: inset 0 0 0 1.5px #ff5a3c; }
+.pills.is-bad .pill > span { box-shadow: inset 0 0 0 1.5px #ff5a3c; }
+.opts--feat + .wsub, .wsub + .wsub, .wsub + .winc { margin-top: 1rem; }
+.opts--feat ~ .winc { margin-top: 1.5rem; }
+@media (max-width: 600px) {
+  .wyn { grid-template-columns: 1fr; padding: 1rem; gap: .625rem; }
+  .wyn .wh--sm { grid-row: auto; margin: -.25rem 0 0; }
+  .wyn .pills--yn { grid-column: 1; grid-row: auto; }
+}
+.pills--yn .pill > span { flex-wrap: wrap; column-gap: .375rem; row-gap: 0; }
+.pills--yn .pill__p { display: block; flex-basis: 100%; margin: 0; font-size: .6875rem; white-space: nowrap; }
+.pills--yn .pill__p:empty { display: none; }
+.pills--yn.pills--3 { grid-template-columns: repeat(3, 1fr); }
+.wsub .pills--yn { max-width: 26rem; margin-top: .75rem; }
+.pills--yn .pill > span { padding-left: .625rem; padding-right: .625rem; }
+.pills--3 .pill > span { white-space: nowrap; }
+.wyn .wq2 { align-self: center; }
