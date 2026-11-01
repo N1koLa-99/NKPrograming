@@ -456,6 +456,7 @@
          Everything is added up and the total is shown ±SPREAD, rounded.
          ========================================================= */
       var PRICE = {
+        floor: 50,                           // the shown price never starts under this
         spread: 0.25,                        // shown range: from the total (rounded) up to total +25%
         minGap: [[300, 30], [1000, 100], [Infinity, 200]],   // the range is at least this wide (by total)
         level: {                             // how far up its range every price goes: 0 = min, 1 = max
@@ -495,9 +496,9 @@
         rush: { 'Колкото по-скоро': 20 },               // % on top of everything
         booking: ['Онлайн записване на час'],           // these put a site on the "booking" support tier
         support: {                                      // EUR / month, by tier: site / booking / shop (hosting is paid by the client)
-          site:    { basic: 25, none: 0 },
-          booking: { basic: 35, none: 0 },
-          shop:    { basic: 55, none: 0 }
+          site:    { basic: 35, none: 0 },
+          booking: { basic: 50, none: 0 },
+          shop:    { basic: 60, none: 0 }
         }
       };
       var NAME = {                           // nicer Bulgarian labels for the breakdown
@@ -583,27 +584,35 @@
         if (key === 'app') { res.quote = true; res.mo = 0; res.moText = ''; res.sum = T[l].quote; res.notes.unshift(T[l].quoteNote); return res; }
 
         /* the site itself */
-        var site = line(type.value, mid(PRICE.type[key]));
+        /* cap = the same sum, but with every range at its top (what the price cards promise) */
+        var site = line(type.value, mid(PRICE.type[key])), siteCap = PRICE.type[key][1];
         var pages = PRICE.pages[key] || 1;
         vals.forEach(function (v) {
-          if (PRICE.add[v]) site += line(v, mid(PRICE.add[v]));
+          if (PRICE.add[v]) { site += line(v, mid(PRICE.add[v])); siteCap += PRICE.add[v][1]; }
           if (PRICE.morePages[v]) pages += PRICE.morePages[v];
         });
-        var total = site;
+        var total = site, cap = siteCap;
         /* second language: % of the site */
-        vals.forEach(function (v) { if (PRICE.percent[v]) total += line(v, site * PRICE.percent[v] / 100, ' (+' + PRICE.percent[v] + '%)'); });
+        vals.forEach(function (v) { if (PRICE.percent[v]) { total += line(v, site * PRICE.percent[v] / 100, ' (+' + PRICE.percent[v] + '%)'); cap += siteCap * PRICE.percent[v] / 100; } });
         /* materials */
         vals.forEach(function (v) {
-          if (PRICE.perPage[v]) total += line(v, mid(PRICE.perPage[v]) * pages, ' (' + pages + (l === 'en' ? ' p.' : ' стр.') + ')');
+          if (PRICE.perPage[v]) { total += line(v, mid(PRICE.perPage[v]) * pages, ' (' + pages + (l === 'en' ? ' p.' : ' стр.') + ')'); cap += PRICE.perPage[v][1] * pages; }
         });
         /* rush: % on top of everything */
-        vals.forEach(function (v) { if (PRICE.rush[v]) total += line(v, total * PRICE.rush[v] / 100, ' (+' + PRICE.rush[v] + '%)'); });
+        vals.forEach(function (v) { if (PRICE.rush[v]) { total += line(v, total * PRICE.rush[v] / 100, ' (+' + PRICE.rush[v] + '%)'); cap += cap * PRICE.rush[v] / 100; } });
 
         res.total = total;
         res.min = nice(total);
         res.max = niceUp(total * (1 + PRICE.spread));
         var gap = PRICE.minGap.filter(function (g) { return total < g[0]; })[0][1];
         if (res.max - res.min < gap) res.max = res.min + gap;
+        /* never above the top of the price cards on the home page (e.g. one page: 50–150 €) for the same choices */
+        /* always a range: if the cap squeezed it, open it one step downwards (150 → 130–150, 350 → 300–350, 1100 → 1000–1100),
+           but never under the card's minimum or 50 € */
+        res.max = Math.min(res.max, nice(cap));
+        var need = Math.max(stepOf(res.max), 20);
+        if (res.max - res.min < need) res.min = Math.max(PRICE.floor, PRICE.type[key][0], res.max - need);
+        if (res.max <= res.min) res.max = res.min + need;
         res.sum = fmt(res.min, res.max);
         return res;
       }

@@ -202,8 +202,8 @@ export const FAQ = [
   },
   {
     q: { en: 'What happens after launch?', bg: 'Какво става след пускането?' },
-    a: { en: "I don't disappear. Monthly support is €25 for a website, €35 for a site with online booking and €55 for a shop. It covers backups, updates, monitoring, fixing bugs within 1 working day and small design and text fixes. New pages, new features and uploading products aren't included — I quote them separately. Hosting and domain are in your name and you pay for them.",
-         bg: 'Не изчезвам. Месечната поддръжка е 25 € за сайт, 35 € за сайт с онлайн записване и 55 € за магазин. В нея влизат архиви, обновления, следене дали сайтът работи, поправка на бъгове до 1 работен ден и дребни корекции по дизайна и текста. Нови страници, нови функции и качване на продукти не влизат — тях ги оценявам отделно. Хостингът и домейнът са на твое име и ги плащаш ти.' },
+    a: { en: "I don't disappear. Monthly support is €35 for a website, €50 for a site with online booking and €60 for a shop. It covers backups, updates, monitoring, fixing bugs within 1 working day and small design and text fixes. New pages, new features and uploading products aren't included — I quote them separately. Hosting and domain are in your name and you pay for them.",
+         bg: 'Не изчезвам. Месечната поддръжка е 35 € за сайт, 50 € за сайт с онлайн записване и 60 € за магазин. В нея влизат архиви, обновления, следене дали сайтът работи, поправка на бъгове до 1 работен ден и дребни корекции по дизайна и текста. Нови страници, нови функции и качване на продукти не влизат — тях ги оценявам отделно. Хостингът и домейнът са на твое име и ги плащаш ти.' },
   },
 ];
 
