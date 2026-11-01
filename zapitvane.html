@@ -194,6 +194,16 @@
         </div>
 
         <div class="wyn" data-hide="app">
+          <p class="wq2"><span data-l="bg">Анимации</span><span data-l="en">Animations</span></p>
+          <p class="wh wh--sm"><span data-l="bg">Неща, които се движат, докато разглеждаш сайта.</span><span data-l="en">Things that move as you browse the site.</span></p>
+          <div class="pills pills--yn pills--3">
+            <label class="pill"><input type="radio" name="anim" value="Без анимации" data-en="No animations"><span><span data-l="bg">Без</span><span data-l="en">None</span></span></label>
+            <label class="pill"><input type="radio" name="anim" value="Леки анимации" data-en="Light animations"><span><span data-l="bg">Леки</span><span data-l="en">Light</span></span></label>
+            <label class="pill"><input type="radio" name="anim" value="Много анимации" data-en="Lots of animations"><span><span data-l="bg">Много</span><span data-l="en">Lots</span></span></label>
+          </div>
+        </div>
+
+        <div class="wyn" data-hide="app">
           <p class="wq2"><span data-l="bg">Месечна поддръжка</span><span data-l="en">Monthly support</span></p>
           <p class="wh wh--sm"><span data-l="bg">Архив, обновления и поправки до 1 работен ден.</span><span data-l="en">Backups, updates and fixes within 1 working day.</span></p>
           <div class="pills pills--yn">
@@ -339,13 +349,16 @@
          ========================================================= */
       var PRICE = {
         floor: 50,                           // the shown price never starts under this
-        spread: 0.25,                        // shown range: from the total up to total +25%
-        minGap: [[300, 30], [1000, 100], [Infinity, 200]],   // the range is at least this wide (by total)
+        spread: 0.10,                        // shown range: from the total up to total +10%
+        minGap: [[300, 30], [600, 50], [1000, 100], [Infinity, 200]],   // the range is at least this wide (by total)
         level: {
           start: 0.3,                        // every site: custom design, mobile, SEO
-          perFeature: 0.07,                  // each extra feature…
+          perFeature: 0,                     // extra features are paid on their own line — they don't make the site itself dearer
           maxFeatures: 0.35,                 // …up to this much
-          noPhotos: 0.15                     // no photos = more design work
+          noPhotos: 0.15,                    // no photos = more design work
+          anim: { 'Без анимации': 0, 'Леки анимации': 0.15, 'Много анимации': 0.4 },   // the real extra design work
+          addons: 0.3                        // add-ons always sit here in their range — complexity moves only the site itself,
+                                             // so ticking more things doesn't make every line dearer (base follows the cards on index.html)
         },
         type: {                              // base price by site type
           one:  [50, 150],                   // nothing ticked → one page
@@ -357,23 +370,23 @@
         add: {                               // add-ons, by option value
           'Онлайн записване на час': [300, 500],
           'Сам да сменя текстове и снимки (админ панел)': [100, 200],
-          'Повече от 5 страници': [100, 250],
+          'Повече от 5 страници': [40, 100],          // 3 more pages on the design that's already done
           'Плащане с карта онлайн': [50, 150],
           'Доставка с Еконт / Спиди': [150, 250],
           '50–300 продукта': [100, 250],
           'Над 300 продукта': [250, 500]
         },
         morePages: { 'Повече от 5 страници': 3 },
-        perPage: { 'Помощ с текстовете': [15, 25] },   // per page
-        percent: { 'Втори език': 30 },                  // % of the site itself
+        perPage: { 'Помощ с текстовете': [4, 8] },     // per page
+        percent: { 'Втори език': 20 },                  // % of the site itself
         support: { site: 35, booking: 50, shop: 60 }    // EUR / month by tier (hosting is paid by the client)
       };
       var TYPE_NAME = { one: ['Сайт на една страница', 'One-page site'], biz: ['Бизнес сайт', 'Business website'], shop: ['Онлайн магазин', 'Online shop'], app: ['Платформа по поръчка', 'Custom platform'] };
       var EN = { 'Сам да сменя текстове и снимки (админ панел)': 'Admin panel for texts & photos' };
       var NAME = { 'Сам да сменя текстове и снимки (админ панел)': 'Админ панел' };
 
-      /* rounding: 10 € under 300, 50 € up to 1000, 100 € above */
-      var stepOf = function (x) { return x < 300 ? 10 : x < 1000 ? 50 : 100; };
+      /* rounding: 10 € under 500, 50 € up to 1000, 100 € above */
+      var stepOf = function (x) { return x < 500 ? 10 : x < 1000 ? 50 : 100; };
       var nice = function (x) { var st = stepOf(x); return Math.max(st, Math.round(x / st) * st); };
       var niceUp = function (x) { var st = stepOf(x); return Math.ceil(x / st) * st; };
       var at = function (r, k) { return r[0] + (r[1] - r[0]) * k; };
@@ -418,22 +431,22 @@
           .concat(['pages', 'products', 'card', 'econt', 'texts'].map(val)).filter(function (v, n, a) { return v && active(form.querySelector('input[value="' + v + '"]')); });
         var LV = PRICE.level;
         var feats = vals.filter(function (v) { return PRICE.add[v] || PRICE.percent[v]; }).length;
-        var k = Math.min(1, LV.start + Math.min(LV.maxFeatures, feats * LV.perFeature) + (val('photos') === 'Няма снимки' ? LV.noPhotos : 0));
+        var k = Math.min(1, LV.start + Math.min(LV.maxFeatures, feats * LV.perFeature) + (val('photos') === 'Няма снимки' ? LV.noPhotos : 0) + (LV.anim[val('anim')] || 0));
         res.level = k;
         res.notes.unshift((en ? 'Complexity: ' : 'Сложност: ') + (k < 0.4 ? (en ? 'low' : 'ниска') : k < 0.65 ? (en ? 'medium' : 'средна') : (en ? 'high' : 'висока')));
-        var mid = function (r) { return at(r, k); };
+        var mid = function (r) { return at(r, k); }, addAt = function (r) { return at(r, LV.addons); };
         var line = function (bg, label, v) { res.lines.push({ label: label, bg: bg, v: v }); return v; };
 
         var site = line(TYPE_NAME[key][0], TYPE_NAME[key][ix], mid(PRICE.type[key])), cap = PRICE.type[key][1];
         var pages = PRICE.pages[key];
         vals.forEach(function (v) {
-          if (PRICE.add[v]) { site += line(NAME[v] || v, L(v), mid(PRICE.add[v])); cap += PRICE.add[v][1]; }
+          if (PRICE.add[v]) { site += line(NAME[v] || v, L(v), addAt(PRICE.add[v])); cap += PRICE.add[v][1]; }
           if (PRICE.morePages[v]) pages += PRICE.morePages[v];
         });
         var total = site, siteCap = cap;
         vals.forEach(function (v) { if (PRICE.percent[v]) { total += line(v + ' (+' + PRICE.percent[v] + '%)', L(v) + ' (+' + PRICE.percent[v] + '%)', site * PRICE.percent[v] / 100); cap += siteCap * PRICE.percent[v] / 100; } });
         vals.forEach(function (v) {
-          if (PRICE.perPage[v]) { var pp = ' (' + pages + (en ? ' p.' : ' стр.') + ')'; total += line(v + ' (' + pages + ' стр.)', L(v) + pp, mid(PRICE.perPage[v]) * pages); cap += PRICE.perPage[v][1] * pages; }
+          if (PRICE.perPage[v]) { var pp = ' (' + pages + (en ? ' p.' : ' стр.') + ')'; total += line(v + ' (' + pages + ' стр.)', L(v) + pp, addAt(PRICE.perPage[v]) * pages); cap += PRICE.perPage[v][1] * pages; }
         });
 
         res.total = total;
@@ -470,6 +483,7 @@
         row(en ? 'Domain' : 'Домейн', 'domain');
         row(en ? 'Texts' : 'Текстове', 'texts');
         row(en ? 'Photos' : 'Снимки', 'photos');
+        row(en ? 'Animations' : 'Анимации', 'anim');
         var e = estimate();
         row(en ? 'Support' : 'Поддръжка', 'support', e.mo ? ' — ' + e.mo + T[lang()].mo : '');
         return S;
@@ -627,6 +641,7 @@
         body['Домейн'] = val('domain');
         body['Текстове'] = val('texts');
         body['Снимки'] = val('photos');
+        if (e.key !== 'app') body['Анимации'] = val('anim') || '—';
         body['Поддръжка'] = e.key === 'app' ? 'по договаряне' : e.mo ? 'Да — ' + e.mo + ' €/мес' : 'Не';
         body['Бележки към цената'] = e.notes.join(' | ') || '—';
         ['name', 'business', 'phone', 'city', 'notes'].forEach(function (n) { body[{ name: 'Име', business: 'Име на бизнеса', phone: 'Телефон', city: 'Град', notes: 'Бележки' }[n]] = v(n) || '—'; });
