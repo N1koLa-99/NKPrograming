@@ -1111,6 +1111,7 @@ function initContactForm() {
     say('form.hint');
     try {
       const body = { name: v.name, phone: v.phone || '—', message: v.message, consent: 'yes', _subject: `NK Programming — ${v.name}` };
+      body._gotcha = field('_honey').value; // Formspree's own bot trap: real people leave it empty
       if (v.email) body.email = v.email;
       const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
         method: 'POST',
