@@ -6,9 +6,19 @@
   <title>Колко струва сайтът — NK Programming</title>
   <meta name="description" content="5 кратки стъпки и виждаш ориентировъчна цена за сайта си. Точна оферта до 1–2 работни дни.">
   <meta name="theme-color" content="#0a0a0a">
-  <meta property="og:title" content="Колко ще струва твоят сайт? — NK Programming">
-  <meta property="og:description" content="5 кратки стъпки — и виждаш цената веднага.">
-  <meta property="og:image" content="https://nkprogramming.com/assets/og-image.jpg">
+  <link rel="canonical" href="https://nkprogramming.com/zapitvane.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NK Programming">
+  <meta property="og:locale" content="bg_BG">
+  <meta property="og:url" content="https://nkprogramming.com/zapitvane.html">
+  <meta property="og:title" content="Колко ще струва твоят сайт?">
+  <meta property="og:description" content="Сайт от 50 €. Отговори на 5 кратки стъпки и виж цената веднага — без обаждания, без чакане.">
+  <meta property="og:image" content="https://nkprogramming.com/assets/og-kalkulator.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Калкулатор за цена на сайт — NK Programming">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nkprogramming.com/assets/og-kalkulator.jpg">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <script>
     /* same language as the main site (saved as nk-lang); ?lang=en|bg overrides */
@@ -112,8 +122,17 @@
         <div class="wsub wsub--flat" data-show="pages">
           <p class="wq2"><span data-l="bg">Колко страници горе-долу?</span><span data-l="en">Roughly how many pages?</span></p>
           <div class="pills pills--yn">
-            <label class="pill"><input type="radio" name="pages" value="До 5 страници" data-en="Up to 5 pages"><span><span data-l="bg">До 5</span><span data-l="en">Up to 5</span></span></label>
-            <label class="pill"><input type="radio" name="pages" value="Повече от 5 страници" data-en="More than 5 pages"><span><span data-l="bg">Повече от 5</span><span data-l="en">More than 5</span></span></label>
+            <label class="pill"><input type="radio" name="pages" value="До 5 страници" data-en="Up to 5 pages"><span><span data-l="bg">До 5 страници</span><span data-l="en">Up to 5 pages</span></span></label>
+            <label class="pill"><input type="radio" name="pages" value="Повече от 5 страници" data-en="More than 5 pages"><span><span data-l="bg">Повече от 5 страници</span><span data-l="en">More than 5 pages</span></span></label>
+          </div>
+        </div>
+
+        <div class="wsub wsub--flat" data-show="booking">
+          <p class="wq2"><span data-l="bg">Какво записване?</span><span data-l="en">What kind of booking?</span></p>
+          <div class="pills pills--book">
+            <label class="pill pill--book"><input type="radio" name="booktier" value="Готова система за записване (Fresha / Booksy / Calendly)" data-en="Ready-made system (Fresha / Booksy / Calendly)"><span><b><span data-l="bg">Готова система</span><span data-l="en">Ready-made system</span></b> <em class="pill__p mono">50–100 €</em><small><span data-l="bg">Вграждам Fresha, Booksy или Calendly. Графикът се води там.</span><span data-l="en">I embed Fresha, Booksy or Calendly. The schedule lives there.</span></small></span></label>
+            <label class="pill pill--book"><input type="radio" name="booktier" value="Собствено онлайн записване" data-en="Your own online booking"><span><b><span data-l="bg">Собствено записване</span><span data-l="en">Your own booking</span></b> <em class="pill__p mono">200–350 €</em><small><span data-l="bg">Клиентът избира услуга, ден и час. Ти получаваш имейл, той — потвърждение.</span><span data-l="en">The client picks a service, day and time. You get an email, they get a confirmation.</span></small></span></label>
+            <label class="pill pill--book"><input type="radio" name="booktier" value="Записване + график за целия екип" data-en="Booking + a schedule for the whole team"><span><b><span data-l="bg">Записване + график</span><span data-l="en">Booking + schedule</span></b> <em class="pill__p mono">450–650 €</em><small><span data-l="bg">Като Beauty House: календар по специалист, добавяш часове по телефона, местиш, блокираш почивни дни.</span><span data-l="en">Like Beauty House: a calendar per specialist, add phone bookings, move, block days off.</span></small></span></label>
           </div>
         </div>
 
@@ -134,6 +153,7 @@
             <label class="pill"><input type="radio" name="econt" value="Без куриер в количката" data-en="No courier in the cart"><span><span data-l="bg">Не</span><span data-l="en">No</span></span></label>
             <label class="pill"><input type="radio" name="econt" value="Доставка с Еконт / Спиди" data-en="Econt / Speedy delivery"><span><span data-l="bg">Да</span><span data-l="en">Yes</span></span></label>
           </div>
+          <p class="wh wh--sm wshop-hint js-shop-hint" hidden></p>
         </div>
 
         <div class="wsub wsub--flat" data-show="app">
@@ -236,14 +256,6 @@
         <legend class="wq"><span data-l="bg">Как да се свържа с теб?</span><span data-l="en">How do I reach you?</span></legend>
 
 
-        <details class="wrev js-rev" open hidden>
-          <summary class="wrev__head">
-            <p class="wrev__t"><span data-l="bg">Твоят избор</span><span data-l="en">Your choices</span></p>
-            <p class="wrev__s"><span data-l="bg">Провери и промени, ако трябва</span><span data-l="en">Check and change if needed</span></p>
-          </summary>
-          <ul class="wrev__list"></ul>
-        </details>
-
         <div class="wsum">
           <p class="wsum__k mono"><span data-l="bg">Твоята ориентировъчна цена</span><span data-l="en">Your estimated price</span></p>
           <p class="wsum__v"><span class="js-sum wsum__sum">—</span> <span class="wsum__m js-mo"></span></p>
@@ -260,6 +272,14 @@
           <p class="wsum__copied" role="status" aria-live="polite" hidden><span data-l="bg">✓ Копирано. Във Viber: задръж → „Постави“ → прати.</span><span data-l="en">✓ Copied. In Viber: long-press → "Paste" → send.</span></p>
         </div>
 
+        <details class="wrev js-rev" open hidden>
+          <summary class="wrev__head">
+            <p class="wrev__t"><span data-l="bg">Твоят избор</span><span data-l="en">Your choices</span></p>
+            <p class="wrev__s"><span data-l="bg">Провери и промени, ако трябва</span><span data-l="en">Check and change if needed</span></p>
+          </summary>
+          <ul class="wrev__list"></ul>
+        </details>
+
         <div class="wproj js-proj" hidden>
           <p class="wproj__k mono"><span data-l="bg">Подобен проект, който съм правил</span><span data-l="en">A similar project I've built</span></p>
           <div class="wproj__list"></div>
@@ -269,7 +289,7 @@
         <div class="wgrid">
           <label class="wf"><span><span data-l="bg">Име *</span><span data-l="en">Name *</span></span><input type="text" name="name" maxlength="200" autocomplete="name"></label>
           <label class="wf"><span><span data-l="bg">Име на бизнеса</span><span data-l="en">Business name</span></span><input type="text" name="business" maxlength="200" autocomplete="organization"></label>
-          <label class="wf"><span><span data-l="bg">Телефон</span><span data-l="en">Phone</span></span><input type="tel" name="phone" maxlength="40" autocomplete="tel" inputmode="tel"></label>
+          <label class="wf"><span><span data-l="bg">Телефон / Viber</span><span data-l="en">Phone / Viber</span></span><input type="tel" name="phone" maxlength="40" autocomplete="tel" inputmode="tel"></label>
           <label class="wf"><span><span data-l="bg">Имейл</span><span data-l="en">Email</span></span><input type="email" name="email" maxlength="200" autocomplete="email" inputmode="email"></label>
           <label class="wf"><span><span data-l="bg">Град</span><span data-l="en">City</span></span><input type="text" name="city" maxlength="100"></label>
           <label class="wf wf--wide"><span><span data-l="bg">Нещо друго? (по желание)</span><span data-l="en">Anything else? (optional)</span></span><textarea name="notes" rows="2" maxlength="2000"></textarea></label>
@@ -373,10 +393,10 @@
       var PRICE = {
         floor: 50,                           // the shown price never starts under this
         quoteAbove: 2000,                    // above this the client sees "По оферта" (big numbers scare people); you still get the price by email
-        spread: 0.10,                        // shown range: from the total up to total +10%
-        minGap: [[300, 30], [600, 50], [1000, 100], [Infinity, 200]],   // the range is at least this wide (by total)
+        spread: 0.25,                        // shown range: from the total up to total +25%
+        gap: [[300, 30, 75], [1000, 100, 200], [Infinity, 200, 200]],   // by total: [under, at least, at most] € wide — never narrow like 500–560, never huge for shops
         level: {
-          start: 0.3,                        // every site: custom design, mobile, SEO
+          start: 0,                          // the simplest site lands on the bottom of its range — "сайт от 50 €" is real
           perFeature: 0,                     // extra features are paid on their own line — they don't make the site itself dearer
           maxFeatures: 0.35,                 // …up to this much
           noPhotos: 0.15,                    // no photos = more design work
@@ -387,24 +407,29 @@
         type: {                              // base price by site type
           one:  [50, 150],                   // nothing ticked → one page
           biz:  [150, 350],                  // "a page for every service"
-          shop: [1000, 1100]                 // "online shop"
+          shop: [1000, 1300]                 // "online shop" — design (animations, no photos) moves it inside this range
           /* app: always a custom quote */
         },
         pages: { one: 1, biz: 5, shop: 5 },  // pages per type (for the per-page text help)
         add: {                               // add-ons, by option value
-          'Онлайн записване на час': [300, 500],
+          /* online booking — three levels (step 2 asks which one) */
+          'Готова система за записване (Fresha / Booksy / Calendly)': [50, 100],
+          'Собствено онлайн записване': [200, 350],
+          'Записване + график за целия екип': [450, 650],
           'Сам да сменя текстове и снимки (админ панел)': [100, 200],
           'Повече от 5 страници': [40, 100],          // 3 more pages on the design that's already done
-          'Плащане с карта онлайн': [50, 150],
-          'Доставка с Еконт / Спиди': [150, 250],
+          'Плащане с карта онлайн': [30, 80],
+          'Доставка с Еконт / Спиди': [60, 120],
           '50–300 продукта': [100, 250],
           'Над 300 продукта': [250, 500]
         },
         morePages: { 'Повече от 5 страници': 3 },
         perPage: { 'Помощ с текстовете': [4, 8] },     // per page
         percent: { 'Втори език': 20 },                  // % of the site itself
-        support: { site: 35, booking: 50, shop: 60 }    // EUR / month by tier (hosting is paid by the client)
+        support: { site: 35, booking: 50, shop: 60 },   // EUR / month by tier (hosting is paid by the client)
+        widen: { 'Записване + график за целия екип': 120 } // extra € on top of the range — a team schedule varies a lot from salon to salon
       };
+      var BOOK_READY = 'Готова система за записване (Fresha / Booksy / Calendly)';
       var TYPE_NAME = { one: ['Сайт на една страница', 'One-page site'], biz: ['Бизнес сайт', 'Business website'], shop: ['Онлайн магазин', 'Online shop'], app: ['Платформа по поръчка', 'Custom platform'] };
       var EN = { 'Сам да сменя текстове и снимки (админ панел)': 'Admin panel for texts & photos' };
       var NAME = { 'Сам да сменя текстове и снимки (админ панел)': 'Админ панел' };
@@ -607,8 +632,8 @@
           biz: ['sport'], feat: ['app', 'booking'], secs: ['signup', 'schedule'] }
       ];
 
-      /* rounding: 10 € under 500, 50 € up to 1000, 100 € above */
-      var stepOf = function (x) { return x < 500 ? 10 : x < 1000 ? 50 : 100; };
+      /* rounding: 10 € under 1000, 50 € up to 2000, 100 € above */
+      var stepOf = function (x) { return x < 1000 ? 10 : x < 2000 ? 50 : 100; };
       var nice = function (x) { var st = stepOf(x); return Math.max(st, Math.round(x / st) * st); };
       var niceUp = function (x) { var st = stepOf(x); return Math.ceil(x / st) * st; };
       var at = function (r, k) { return r[0] + (r[1] - r[0]) * k; };
@@ -617,9 +642,12 @@
       var feat = function (k) { var i = form.querySelector('input[name="feat"][data-key="' + k + '"]'); return !!(i && i.checked); };
       var val = function (n) { var i = form.querySelector('input[name="' + n + '"]:checked'); return i ? i.value : ''; };
       function typeKey() { return feat('app') ? 'app' : feat('shop') ? 'shop' : feat('pages') ? 'biz' : 'one'; }
+      /* own booking system (not an embedded Fresha / Booksy) — that's what covers table / service / date bookings */
+      var ownBooking = function () { return feat('booking') && !!val('booktier') && val('booktier') !== BOOK_READY; };
+      var featOn = function (k) { return k === 'booking' ? ownBooking() : feat(k); };
       function tierOf(key) {
         if (key === 'shop' || paidSecs().some(function (i) { return secOf(i.dataset.key).via === 'shop'; })) return 'shop';
-        return feat('booking') || paidSecs().some(function (i) { return secOf(i.dataset.key).via === 'booking'; }) ? 'booking' : 'site';
+        return ownBooking() || paidSecs().some(function (i) { return secOf(i.dataset.key).via === 'booking'; }) ? 'booking' : 'site';
       }
 
       /* blocks that depend on answers: data-show="feat key", data-hide="type key", data-if="radio:value" */
@@ -631,7 +659,7 @@
         card.classList.toggle('is-inc', shop);
         var n = shop ? (en ? 'Included with the online shop — edited from the same panel.' : 'Включено с онлайн магазина — сменя се от същия панел.')
           : feat('app') ? (en ? 'The panel for listings and users is already in the platform. This one is for the site texts and photos.' : 'Панелът за обявите и потребителите вече е в платформата. Това е за текстовете и снимките на сайта.')
-          : feat('booking') ? (en ? 'The bookings panel is already in "Online booking". This one is for the site texts and photos.' : 'Панелът за записванията вече е в „Онлайн записване“. Това е за текстовете и снимките на сайта.')
+          : feat('booking') ? (en ? 'The bookings are managed in the booking system. This one is for the site texts and photos.' : 'Записванията се управляват в системата за записване. Това е за текстовете и снимките на сайта.')
           : '';
         var el = card.querySelector('.js-admin-note'); el.textContent = n; el.hidden = !n;
       }
@@ -648,7 +676,7 @@
       /* ---------- sections: build the chips, then keep "included" vs "add" in sync with the plan ---------- */
       var secOf = function (k) { return SECS.filter(function (x) { return x.key === k; })[0]; };
       var bizKey = function () { var i = form.querySelector('input[name="biz"]:checked'); return i ? i.dataset.key : ''; };
-      var secInc = function (s, key) { return s.feat ? feat(s.feat) : (s.via && feat(s.via)) || s.inc === 'all' || (s.inc || []).indexOf(key) >= 0; };
+      var secInc = function (s, key) { return s.feat ? feat(s.feat) : (s.via && featOn(s.via)) || s.inc === 'all' || (s.inc || []).indexOf(key) >= 0; };
       /* paid sections the client ticked themselves (not included through a feature) */
       var paidSecs = function () { return $$('input[name="sec"]:checked', form).filter(active).filter(function (i) { return !i.disabled && secOf(i.dataset.key).price; }); };
       function buildSecs() {
@@ -757,12 +785,12 @@
 
         /* everything that is priced */
         var vals = $$('input[name="feat"]:checked', form).filter(function (i) { return !i.disabled; }).map(function (i) { return i.value; })
-          .concat(['pages', 'products', 'card', 'econt', 'texts'].map(val)).filter(function (v, n, a) { return v && active(form.querySelector('input[value="' + v + '"]')); });
+          .concat(['booktier', 'pages', 'products', 'card', 'econt', 'texts'].map(val)).filter(function (v, n, a) { return v && active(form.querySelector('input[value="' + v + '"]')); });
         var LV = PRICE.level;
         var feats = vals.filter(function (v) { return PRICE.add[v] || PRICE.percent[v]; }).length;
         var k = Math.min(1, LV.start + Math.min(LV.maxFeatures, feats * LV.perFeature) + (val('photos') === 'Няма снимки' ? LV.noPhotos : 0) + (LV.anim[val('anim')] || 0));
         res.level = k;
-        res.notes.unshift((en ? 'Complexity: ' : 'Сложност: ') + (k < 0.4 ? (en ? 'low' : 'ниска') : k < 0.65 ? (en ? 'medium' : 'средна') : (en ? 'high' : 'висока')));
+        res.notes.unshift((en ? 'Design: ' : 'Дизайн: ') + (k < 0.15 ? (en ? 'clean and simple' : 'изчистен') : k < 0.4 ? (en ? 'with more detail' : 'с повече детайли') : (en ? 'rich, lots of motion' : 'богат, с много движение')));
         var mid = function (r) { return at(r, k); }, addAt = function (r) { return at(r, LV.addons); };
         var line = function (bg, label, v) { res.lines.push({ label: label, bg: bg, v: v }); return v; };
 
@@ -782,14 +810,16 @@
         });
 
         res.total = total;
-        res.min = nice(total);
-        res.max = niceUp(total * (1 + PRICE.spread));
-        var gap = PRICE.minGap.filter(function (g) { return total < g[0]; })[0][1];
-        if (res.max - res.min < gap) res.max = res.min + gap;
-        res.max = Math.min(res.max, nice(cap));               /* never above the top of the price cards */
-        var need = Math.max(stepOf(res.max), 20);
-        if (res.max - res.min < need) res.min = Math.max(PRICE.floor, PRICE.type[key][0], res.max - need);
-        if (res.max <= res.min) res.max = res.min + need;
+        var G = PRICE.gap.filter(function (g) { return total < g[0]; })[0];
+        res.min = Math.max(PRICE.floor, nice(total));
+        var width = Math.min(G[2], Math.max(G[1], total * PRICE.spread));
+        vals.forEach(function (v) { if (PRICE.widen[v]) { width += PRICE.widen[v]; cap += PRICE.widen[v]; } });
+        res.max = niceUp(res.min + width);
+        if (res.max > nice(cap)) {                            /* never above the top of the price cards — then slide the range down, same width */
+          res.max = nice(cap);
+          res.min = Math.max(PRICE.floor, PRICE.type[key][0], res.max - niceUp(width));
+          if (res.max - res.min < G[1]) res.max = res.min + G[1];
+        }
         res.sum = fmt(res.min, res.max);
         if (res.max > PRICE.quoteAbove) {   /* big project: the client sees "По оферта", the real range goes only to the email */
           res.realSum = res.sum; res.quote = true; res.sum = T[l].quote;
@@ -810,7 +840,7 @@
         var add = function (k, v, n) { if (v && (!Array.isArray(v) || v.length)) S.push({ k: k, v: v, n: n }); };
         var b = pick('biz')[0];
         add(en ? 'Business' : 'Бизнес', b ? b + (txt('biz_other') ? ' — ' + txt('biz_other') : '') : '', 'biz');
-        var f = pick('feat').concat(pick('pages'), pick('products'));
+        var f = pick('feat').concat(pick('booktier'), pick('pages'), pick('products'));
         if (val('card') === 'Плащане с карта онлайн') f.push(en ? 'Card payments' : 'Плащане с карта');
         if (val('econt') === 'Доставка с Еконт / Спиди') f.push(en ? 'Econt / Speedy' : 'Еконт / Спиди');
         add(en ? 'Features' : 'Функции', f.length ? f : (en ? 'Just the basics' : 'Само основното'), 'feat');
@@ -857,6 +887,13 @@
           if (e.mo) li(en ? 'Monthly support' : 'Месечна поддръжка', e.mo + t('mo'));
           e.notes.forEach(function (n) { var x = document.createElement('li'); x.className = 'wlist__n'; x.textContent = n; ul.appendChild(x); });
         });
+        /* card + courier go together: say it when only one of them is picked */
+        var hint = $('.js-shop-hint'), c = val('card'), ec = val('econt'), hTxt = '';
+        if (feat('shop') && ec === 'Доставка с Еконт / Спиди' && c === 'Само наложен платеж')
+          hTxt = en ? 'With Econt / Speedy most buyers also want to pay by card. Without it, it is cash on delivery only.' : 'С Еконт / Спиди повечето купувачи искат да платят и с карта. Без нея остава само наложен платеж.';
+        else if (feat('shop') && c === 'Плащане с карта онлайн' && ec === 'Без куриер в количката')
+          hTxt = en ? 'Without Econt / Speedy in the cart, you arrange every delivery by hand.' : 'Без Еконт / Спиди в количката ще уреждаш всяка доставка на ръка.';
+        hint.textContent = hTxt; hint.hidden = !hTxt;
         /* support price on the "Искам" button, for this site's tier */
         $$('.js-sup-p').forEach(function (el) { el.textContent = PRICE.support[tierOf(e.key)] + t('mo'); });
 
@@ -904,9 +941,10 @@
       /* ---------- steps ---------- */
       var msg = $('.wbar__msg');
       function say(k) { msg.textContent = k ? t(k) : ''; msg.classList.toggle('is-err', !!k); }
-      function show(i, focus) {
+      function show(i, focus, fromHistory) {
         var N = steps.length;
         cur = Math.max(0, Math.min(N - 1, i));
+        try { if (!fromHistory && !(history.state && history.state.wstep === cur)) history.pushState({ wstep: cur }, ''); } catch (err) {}
         steps.forEach(function (s, n) { s.classList.toggle('is-on', n === cur); });
         $('.wprog__fill').style.transform = 'scaleX(' + ((cur + 1) / N) + ')';
         $('.wprog__n').textContent = ('0' + (cur + 1)).slice(-2);
@@ -933,18 +971,22 @@
         miss.forEach(function (n) { var w = groups[n][0].closest('.wyn, .wsub, .pills'); if (w) w.classList.add('is-bad'); });
         return miss;
       }
+      function toBad(st) {
+        var b = st.querySelector('.is-bad'); if (!b) return;
+        b.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+      }
       function valid() {
         var st = steps[cur], req = st.dataset.req;
         if (req === 'biz' && !val('biz')) { say('needBiz'); return false; }
-        if (req === 'feat' && unanswered(st).length) { say('needShop'); return false; }
-        if (req === 'have' && unanswered(st).length) { say('need'); return false; }
+        if (req === 'feat' && unanswered(st).length) { say('needShop'); toBad(st); return false; }
+        if (req === 'have' && unanswered(st).length) { say('need'); toBad(st); return false; }
         if (req === 'contact') {
           var v = function (n) { return form.elements[n].value.trim(); };
           var bad = function (n) { form.elements[n].closest('.wf').classList.add('is-bad'); form.elements[n].focus(); };
           var phone = v('phone'), email = v('email'), digits = phone.replace(/\D/g, '');
           if (v('name').length < 2) { bad('name'); say('name'); return false; }
           if (!phone && !email) { bad('phone'); say('contact'); return false; }
-          if (phone && (!/^\+?[\d\s().-]+$/.test(phone) || digits.length < 7 || digits.length > 15)) { bad('phone'); say('phone'); return false; }
+          if (phone && (!/^\+?[\d\s().\/-]+$/.test(phone) || digits.length < 7 || digits.length > 15)) { bad('phone'); say('phone'); return false; }
           if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { bad('email'); say('email'); return false; }
           if (!form.elements.consent.checked) { $('.wconsent').classList.add('is-bad'); say('consent'); return false; }
         }
@@ -962,10 +1004,21 @@
           var s = secOf(t.dataset.key);
           [].concat((s && s.pair) || []).forEach(function (k) { var tw = form.querySelector('input[name="sec"][data-key="' + k + '"]'); if (tw && !tw.disabled) tw.checked = false; });
         }
-        render(); say('');
+        /* "Продавам продукти" = they want a shop: tick it for them (and untick it again if they change their mind) */
+        if (t.name === 'biz') {
+          var si = form.querySelector('input[name="feat"][data-key="shop"]');
+          if (t.dataset.key === 'shop' && !si.checked) { si.checked = true; si.dataset.auto = '1'; }
+          else if (t.dataset.key !== 'shop' && si.dataset.auto === '1') { si.checked = false; si.dataset.auto = ''; }
+          /* the old business's own sections don't come along */
+          $$('input[name="sec"]', form).forEach(function (i) { var s = secOf(i.dataset.key); if (s.biz && s.biz.indexOf(t.dataset.key) < 0 && !i.disabled) { i.checked = false; i.dataset.user = ''; } });
+        }
+        if (t.name === 'feat' && t.dataset.key === 'shop') t.dataset.auto = '';
+        render();
+        if (!/^(text|email|tel|textarea)$/.test(t.type)) say('');
         var w = e.target.closest('.is-bad'); if (w) w.classList.remove('is-bad');
+        save();
       });
-      form.addEventListener('input', function (e) { var w = e.target.closest('.is-bad'); if (w) w.classList.remove('is-bad'); });
+      form.addEventListener('input', function (e) { var w = e.target.closest('.is-bad'); if (w) w.classList.remove('is-bad'); if (msg.classList.contains('is-err')) say(''); save(); });
 
       /* ---------- send ---------- */
       function send() {
@@ -983,7 +1036,8 @@
         }
         body['Вид бизнес'] = val('biz') + (v('biz_other') ? ' — ' + v('biz_other') : '');
         body['Функции'] = $$('input[name="feat"]:checked', form).map(function (i) { return i.value + (i.disabled ? ' (включено)' : ''); }).join(', ') || 'Само основното';
-        body['Секции'] = $$('input[name="sec"]:checked', form).filter(active).map(function (i) { return i.value + (i.disabled ? '' : ' (+)'); }).join(', ') || '—';
+        body['Секции'] = $$('input[name="sec"]:checked', form).filter(active).map(function (i) { return i.value + (i.disabled ? ' (включено)' : secOf(i.dataset.key).price ? ' (доплаща се)' : ''); }).join(', ') || '—';
+        if (feat('booking')) body['Записване'] = val('booktier') || '—';
         body['Подобен проект'] = matchProjects().map(function (m) { return m.p.name; }).join(', ') || '—';
         if (feat('pages')) body['Страници'] = val('pages') || '—';
         if (feat('shop')) { body['Продукти'] = val('products') || '—'; body['Плащане'] = val('card') || '—'; body['Доставка'] = val('econt') || '—'; }
@@ -1008,6 +1062,7 @@
         }).then(function (res) {
           if (!res.ok) throw new Error(res.status);
           form.hidden = true; $('.wprog').hidden = true; $('.wdone').hidden = false;
+          try { sessionStorage.removeItem(KEY); } catch (err) {}
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }).catch(function (err) { console.error('calculator:', err); say('err'); })
           .finally(function () { btn.disabled = false; if (!form.hidden) $('.wbtn__t').textContent = t('send'); });
@@ -1064,8 +1119,8 @@
           bg: ['Отделна страница за всяка услуга.', ['Всяка страница излиза отделно в Google', 'Подредено меню', 'До 5 страници в цената'], 'Повече от 5 — избираш отдолу.'],
           en: ['A separate page for every service.', ['Every page shows up on Google', 'A tidy menu', 'Up to 5 pages included'], 'More than 5 — pick below.'] },
         'Онлайн записване на час': {
-          bg: ['Клиентът си записва час сам, денонощно.', ['Избира услуга, ден и час', 'Ти получаваш имейл за всяко записване', 'Панел за записванията, графика и почивните дни'], 'Панелът е включен. SMS и капаро — по договаряне.'],
-          en: ['Customers book on their own, 24/7.', ['They pick a service, day and time', 'You get an email for every booking', 'A panel for bookings, schedule and days off'], 'The panel is included. SMS and deposits — by agreement.'] },
+          bg: ['Клиентът си записва час сам, денонощно.', ['Избира услуга, ден и час', 'Ти получаваш имейл за всяко записване', 'Три нива — от готова система до график за целия екип'], 'Нивото го избираш отдолу. SMS и капаро — по договаряне.'],
+          en: ['Customers book on their own, 24/7.', ['They pick a service, day and time', 'You get an email for every booking', 'Three levels — from a ready-made system to a schedule for the whole team'], 'Pick the level below. SMS and deposits — by agreement.'] },
         'Сам да сменя текстове и снимки (админ панел)': {
           bg: ['Панел за съдържанието на сайта — без код.', ['Услуги, цени и работно време', 'Галерия и снимки', 'Промоции и новини', 'Показвам ти как, преди да предам сайта'], 'Без него ми пишеш и аз ги сменям. При онлайн магазин е включен.'],
           en: ['A panel for the content of the site — no code.', ['Services, prices and hours', 'Gallery and photos', 'Offers and news', 'I show you how at handover'], "Without it you message me and I change things. Included with an online shop."] },
@@ -1109,7 +1164,31 @@
         var r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
       });
 
-      buildSecs(); buildInfo(); render(); show(0);
+      /* ---------- keep the answers if the page is refreshed (this tab only) ---------- */
+      var KEY = 'nk-calc';
+      function save() {
+        try {
+          var d = { c: $$('input:checked', form).filter(function (i) { return !i.disabled; }).map(function (i) { return [i.name, i.value]; }), t: {}, s: cur };
+          $$('input[type="text"], input[type="tel"], input[type="email"], textarea', form).forEach(function (i) { if (i.name && i.name !== '_honey' && i.value) d.t[i.name] = i.value; });
+          sessionStorage.setItem(KEY, JSON.stringify(d));
+        } catch (err) {}
+      }
+      function restore() {
+        try {
+          var d = JSON.parse(sessionStorage.getItem(KEY) || 'null'); if (!d) return 0;
+          d.c.forEach(function (x) { var i = $$('input[name="' + x[0] + '"]', form).filter(function (i) { return i.value === x[1]; })[0]; if (i) { i.checked = true; if (i.name === 'sec') i.dataset.user = '1'; } });
+          Object.keys(d.t).forEach(function (n) { if (form.elements[n]) form.elements[n].value = d.t[n]; });
+          return d.s || 0;
+        } catch (err) { return 0; }
+      }
+      window.addEventListener('popstate', function (e) { if (e.state && typeof e.state.wstep === 'number') show(e.state.wstep, true, true); });
+
+      buildSecs(); buildInfo();
+      var start = restore();
+      render();
+      if (matchMedia('(max-width: 600px)').matches) $('.js-rev').open = false;   /* on phones the price comes first, the list stays folded */
+      try { history.replaceState({ wstep: start }, ''); } catch (err) {}
+      show(start, false, true);
       new MutationObserver(function () { buildInfo(); render(); show(cur); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
     })();
   </script>
