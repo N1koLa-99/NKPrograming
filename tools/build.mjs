@@ -20,7 +20,7 @@ import { I18N, FAQ } from '../js/data.js';
 import { cardsHTML, pricingHTML, faqHTML } from '../js/render.js';
 import { PAGES } from './pages.mjs';
 
-const BASE = 'https://nkprograming.netlify.app'; // ← no trailing slash
+const BASE = 'https://nkprogramming.com'; // ← no trailing slash
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const TODAY = new Date().toISOString().slice(0, 10);
 const EMAIL = 'nikola.klimentow@gmail.com';

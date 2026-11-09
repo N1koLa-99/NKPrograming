@@ -3,4 +3,4 @@ Allow: /
 Disallow: /tools/
 Disallow: /reklama/
 
-Sitemap: https://nkprograming.netlify.app/sitemap.xml
+Sitemap: https://nkprogramming.com/sitemap.xml
