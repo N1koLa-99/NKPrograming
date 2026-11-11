@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="bg"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../css/fonts.css">
+<!-- Facebook: #logo (1080×1080 профилна снимка, реже се в кръг) и #cover (1640×624 корица). -->
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--fg:#f2f2ee;--mut:#8f8f88;--ac:#ccff00}
+html,body{background:var(--bg)}
+body{font-family:"Geologica",sans-serif;color:var(--fg);overflow:hidden;-webkit-font-smoothing:antialiased}
+.mono{stroke:var(--ac);fill:none;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:1;overflow:visible}
+
+/* ---------- logo: NK only, sits inside the circle Facebook cuts ---------- */
+#logo{display:none;width:1080px;height:1080px;position:relative;overflow:hidden;
+ background:radial-gradient(50% 50% at 50% 46%,#161a0c 0%,#0d0e0a 55%,#0a0a0a 100%)}
+#logo .ring{position:absolute;left:50%;top:50%;width:820px;height:820px;transform:translate(-50%,-50%);border-radius:50%;box-shadow:inset 0 0 0 2px rgba(204,255,0,.22)}
+#logo .ring::after{content:"";position:absolute;inset:34px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(242,242,238,.06)}
+#logo .lock{position:absolute;left:50%;top:50%;width:560px;transform:translate(-50%,-50%);overflow:visible;filter:drop-shadow(0 0 18px rgba(204,255,0,.22))}
+#logo .lock text{font-family:"JetBrains Mono";font-weight:500;font-size:14.5px}
+
+/* ---------- cover ---------- */
+#cover{display:none;width:1640px;height:624px;position:relative;overflow:hidden;
+ background:radial-gradient(45% 70% at 80% 40%,rgba(204,255,0,.14),transparent 70%),radial-gradient(30% 50% at 15% 0%,rgba(204,255,0,.05),transparent 70%),var(--bg)}
+#cover::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(242,242,238,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(242,242,238,.035) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(70% 90% at 60% 40%,#000,transparent)}
+/* text: inside the part phones still show (≈265–1375px wide), above the profile circle */
+.txt{position:absolute;left:280px;top:50%;transform:translateY(-54%);width:580px}
+.tag{display:flex;align-items:center;gap:12px;font-family:"JetBrains Mono";font-size:16px;font-weight:500;letter-spacing:.16em;color:var(--mut);text-transform:uppercase;line-height:1}
+.tag b{width:8px;height:8px;border-radius:50%;background:var(--ac);box-shadow:0 0 12px var(--ac)}
+h1{margin-top:28px;font-weight:800;font-size:60px;line-height:1.06;letter-spacing:-.04em;white-space:nowrap}
+h1 em{font-style:normal;color:var(--ac)}
+.sub{margin-top:28px;font-size:20px;line-height:1.6;color:#b9b9b2;letter-spacing:-.005em}
+.sub span{color:var(--ac);margin:0 10px;font-weight:600}
+.url{margin-top:36px;display:inline-flex;align-items:center;gap:14px;font-family:"JetBrains Mono";font-size:18px;letter-spacing:.01em;line-height:1;color:var(--fg);padding:14px 22px 14px 18px;border-radius:999px;box-shadow:inset 0 0 0 1.5px rgba(204,255,0,.45);background:rgba(204,255,0,.04)}
+.url i{font-style:normal;color:var(--ac)}
+/* lots of work: an endless tilted wall of sites, fading into the dark */
+.stage{position:absolute;inset:0;z-index:0;perspective:2200px;
+ mask-image:linear-gradient(90deg,transparent 0%,transparent 44%,#000 66%,#000 100%),linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent);mask-composite:intersect;-webkit-mask-composite:source-in}
+.wall{position:absolute;left:1220px;top:300px;display:flex;gap:22px;transform:translate(-50%,-50%) rotateX(42deg) rotateZ(-30deg);transform-origin:50% 50%}
+.col{display:flex;flex-direction:column;gap:22px;width:330px}
+.col:nth-child(even){margin-top:-150px}
+.win{border-radius:14px;overflow:hidden;background:#151515;box-shadow:0 30px 50px rgba(0,0,0,.55),0 0 0 1px rgba(242,242,238,.08)}
+.col:nth-child(3) .win:nth-child(2){box-shadow:0 30px 50px rgba(0,0,0,.55),0 0 0 3px rgba(204,255,0,.7),0 0 60px rgba(204,255,0,.35)}
+.win .bar{height:22px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#1b1b1b}
+.win .bar i{width:7px;height:7px;border-radius:50%;background:#3a3a38}
+.win img{display:block;width:100%;height:190px;object-fit:cover;object-position:top;filter:brightness(.62) saturate(.85)}
+.col:nth-child(3) .win:nth-child(2) img{filter:brightness(.85)}
+.txt{z-index:2}
+#cover::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(10,10,10,.92) 0%,rgba(10,10,10,.75) 42%,transparent 62%)}
+
+/* ---------- hello: first post 1080×1350 ---------- */
+#hello{display:none;width:1080px;height:1350px;position:relative;overflow:hidden;
+ background:radial-gradient(55% 35% at 92% 4%,rgba(204,255,0,.13),transparent 70%),radial-gradient(40% 30% at 0% 60%,rgba(204,255,0,.04),transparent 70%),var(--bg)}
+#hello::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(242,242,238,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(242,242,238,.03) 1px,transparent 1px);background-size:60px 60px;background-position:-12px -12px;mask-image:radial-gradient(90% 55% at 40% 20%,#000,transparent)}
+#hello .h{position:absolute;left:108px;right:108px;top:96px;z-index:2}
+#hello .top{display:flex;align-items:center;justify-content:space-between;padding-bottom:28px;border-bottom:1px solid rgba(242,242,238,.1)}
+#hello .mark{height:46px;width:auto;overflow:visible}
+#hello .top span{font-family:"JetBrains Mono";font-size:19px;font-weight:500;letter-spacing:.14em;color:var(--mut);text-transform:uppercase;display:flex;align-items:center;gap:12px}
+#hello .top span b{width:9px;height:9px;border-radius:50%;background:var(--ac);box-shadow:0 0 14px var(--ac)}
+#hello h2{margin-top:76px;font-weight:800;font-size:140px;line-height:.92;letter-spacing:-.055em;margin-left:-6px}
+#hello .lead{margin-top:36px;font-size:52px;font-weight:700;line-height:1.1;color:var(--ac);letter-spacing:-.035em;max-width:860px;text-wrap:balance}
+#hello ul{list-style:none;margin-top:56px;width:600px;border-top:1px solid rgba(242,242,238,.1)}
+#hello li{display:flex;align-items:center;gap:26px;padding:20px 0;border-bottom:1px solid rgba(242,242,238,.1);font-size:31px;font-weight:500;letter-spacing:-.015em;color:#e9e9e3}
+#hello li i{flex:none;width:44px;font-style:normal;font-family:"JetBrains Mono";font-size:20px;font-weight:500;color:var(--ac);letter-spacing:.02em}
+#hello .stage{mask-image:linear-gradient(180deg,transparent 0%,transparent 68%,#000 86%,#000 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0%,transparent 68%,#000 86%,#000 100%)}
+#hello .wall{left:600px;top:1240px}
+#hello .col{width:300px}
+#hello .win img{height:175px}
+#hello::after{content:"";position:absolute;left:0;right:0;bottom:0;height:320px;z-index:1;background:linear-gradient(0deg,rgba(10,10,10,.94) 10%,transparent)}
+#hello .foot{position:absolute;left:108px;right:108px;bottom:88px;z-index:3;display:flex;align-items:center;justify-content:space-between}
+#hello .url{margin:0;font-size:28px;padding:20px 32px 20px 26px;gap:18px;background:rgba(10,10,10,.88);backdrop-filter:blur(6px)}
+#hello .foot small{font-size:22px;color:#b9b9b2;text-shadow:0 2px 12px #000;letter-spacing:-.005em}
+
+#hello .va,#hello .vb{display:none}
+#hello.A .va,#hello.B .vb{display:block}
+#hello.A .lead,#hello.B .lead{display:none}
+#hello .va{margin-top:44px;display:none;width:max-content;max-width:864px;background:var(--ac);color:#0a0a0a;border-radius:22px;padding:30px 40px 32px;font-size:44px;font-weight:700;line-height:1.16;letter-spacing:-.03em;box-shadow:0 20px 60px rgba(204,255,0,.18)}
+#hello.A .va{display:block}
+#hello .va em{font-style:normal;display:block;margin-top:6px;font-size:30px;font-weight:500;opacity:.7;letter-spacing:-.015em}
+#hello .vb{margin-top:40px}
+#hello .vb p{font-size:60px;font-weight:700;line-height:1.08;letter-spacing:-.04em;display:flex;align-items:baseline;gap:22px}
+#hello .vb p i{font-style:normal;font-family:"JetBrains Mono";font-weight:500;font-size:40px;color:var(--ac)}
+#hello .vb small{display:block;margin-top:22px;font-size:32px;color:#a9a9a2;letter-spacing:-.01em}
+#hello .vb small b{color:var(--ac);font-weight:600}
+
+#hello .vc{display:none;margin-top:40px}
+#hello.C .vc{display:block}
+#hello.C .lead{display:none}
+#hello .vc .q{font-size:52px;font-weight:700;line-height:1.1;letter-spacing:-.035em;color:var(--fg);max-width:860px}
+#hello .vc .a{margin-top:26px;font-size:52px;font-weight:700;line-height:1.1;letter-spacing:-.035em;color:var(--ac);display:flex;align-items:baseline;gap:20px}
+#hello .vc .a i{font-style:normal;font-family:"JetBrains Mono";font-weight:500;font-size:40px}
+#hello .vc small{display:block;margin-top:20px;font-size:28px;color:#a9a9a2;letter-spacing:-.01em}
+
+#hello.D .hi{margin-top:64px;font-size:36px;font-weight:600;letter-spacing:-.02em;color:#a9a9a2;display:flex;align-items:center;gap:16px}
+#hello.D .hi::before{content:"";width:48px;height:2px;background:var(--ac)}
+#hello.D h2.hero{margin:20px 0 0 -4px;font-size:92px;font-weight:800;line-height:.98;letter-spacing:-.05em;text-wrap:balance;max-width:880px}
+#hello.D h2.hero em{font-style:normal;color:var(--ac);position:relative}
+#hello.D .ans{margin-top:44px;padding:26px 36px 28px;border-radius:26px;background:linear-gradient(135deg,rgba(204,255,0,.10),rgba(204,255,0,.03));box-shadow:inset 0 0 0 1.5px rgba(204,255,0,.38),0 24px 60px rgba(0,0,0,.4);width:max-content;max-width:864px}
+#hello.D .ans p{font-size:48px;font-weight:700;letter-spacing:-.035em;line-height:1.05;color:var(--ac);display:flex;align-items:baseline;gap:18px}
+#hello.D .ans p i{font-style:normal;font-family:"JetBrains Mono";font-weight:500;font-size:36px}
+#hello.D .ans small{display:block;margin-top:14px;padding-left:58px;font-size:26px;color:#b9b9b2;letter-spacing:-.01em}
+#hello.D .chips{margin-top:28px;display:flex;gap:14px}
+#hello.D .chips span{display:inline-flex;align-items:center;gap:12px;padding:14px 22px 14px 16px;border-radius:999px;background:rgba(242,242,238,.05);box-shadow:inset 0 0 0 1px rgba(242,242,238,.12);font-size:24px;font-weight:500;letter-spacing:-.01em;color:#e9e9e3}
+#hello.D .chips i{font-style:normal;width:30px;height:30px;border-radius:50%;background:var(--ac);color:#0a0a0a;display:grid;place-items:center;font-size:16px;font-weight:800}
+
+#hello.E .e1{margin-top:96px;font-size:56px;font-weight:800;letter-spacing:-.04em;color:var(--ac)}
+#hello.E .e2{margin-top:28px;font-size:78px;font-weight:800;line-height:1.04;letter-spacing:-.045em;max-width:864px;text-wrap:balance}
+#hello.E .e3{margin-top:28px;font-size:78px;font-weight:800;line-height:1.04;letter-spacing:-.045em;color:var(--ac)}
+#hello.E .e4{margin-top:52px;padding-top:30px;border-top:1px solid rgba(242,242,238,.12);font-size:28px;color:#b9b9b2;letter-spacing:-.01em}
+#hello.E .e4 span{color:var(--ac);margin:0 14px;font-weight:700}
+
+#hello.F .f1{margin:84px 0 0 -6px;font-size:144px;font-weight:800;line-height:.92;letter-spacing:-.055em}
+#hello.F .f2{margin-top:64px;font-size:76px;font-weight:800;line-height:1.02;letter-spacing:-.045em}
+#hello.F .f3{margin-top:6px;font-size:76px;font-weight:800;line-height:1.02;letter-spacing:-.045em;color:var(--ac)}
+#hello.F .f4{margin-top:48px;padding-top:32px;border-top:1px solid rgba(242,242,238,.12);font-size:32px;line-height:1.4;color:#b9b9b2;letter-spacing:-.012em;max-width:820px;text-wrap:balance}
+
+#hello .vG,#hello .vH,#hello .vI{display:none;margin-top:64px}
+#hello.G .vG,#hello.H .vH,#hello.I .vI{display:block}
+#hello.G .f1,#hello.H .f1,#hello.I .f1{margin:84px 0 0 -6px;font-size:144px;font-weight:800;line-height:.92;letter-spacing:-.055em}
+/* H browser */
+#hello .br{border-radius:22px;overflow:hidden;background:#141414;box-shadow:0 0 0 1px rgba(242,242,238,.1),0 30px 70px rgba(0,0,0,.5)}
+#hello .brbar{height:58px;display:flex;align-items:center;gap:10px;padding:0 22px;background:#1b1b1b}
+#hello .brbar i{width:13px;height:13px;border-radius:50%;background:#3a3a38}
+#hello .brbar span{margin-left:18px;flex:1;height:36px;border-radius:999px;background:#0f0f0f;display:flex;align-items:center;padding:0 20px;font-family:"JetBrains Mono";font-size:20px;color:#bdbdb6}
+#hello .brbody{padding:52px 48px 48px;background:radial-gradient(60% 80% at 90% 0%,rgba(204,255,0,.1),transparent 70%)}
+#hello .brbody p{font-size:72px;font-weight:800;line-height:1;letter-spacing:-.045em}
+#hello .brbody em{font-style:normal;color:var(--ac)}
+#hello .sk{margin-top:34px;display:flex;gap:14px}
+#hello .sk b{height:14px;border-radius:7px;background:rgba(242,242,238,.1)}
+#hello .sk b:nth-child(1){width:240px}#hello .sk b:nth-child(2){width:160px}#hello .sk b:nth-child(3){width:90px;background:var(--ac);opacity:.7}
+#hello .cap{margin-top:34px;font-size:32px;line-height:1.35;color:#b9b9b2;letter-spacing:-.012em}
+#hello .cap em{font-style:normal;color:var(--fg);font-weight:600}
+/* I flow */
+#hello .flow{display:flex;align-items:center;gap:30px}
+#hello .st{display:flex;flex-direction:column;align-items:center;gap:20px}
+#hello .ic{width:220px;height:220px;border-radius:40px;display:grid;place-items:center;background:#151515;box-shadow:inset 0 0 0 1.5px rgba(242,242,238,.12)}
+#hello .ic svg{width:110px;height:110px;fill:none;stroke:#e9e9e3;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+#hello .st.on .ic{background:rgba(204,255,0,.08);box-shadow:inset 0 0 0 2px rgba(204,255,0,.6),0 0 60px rgba(204,255,0,.2)}
+#hello .st.on svg{stroke:var(--ac)}
+#hello .st p{font-size:30px;font-weight:600;letter-spacing:-.015em}
+#hello .st.on p{color:var(--ac)}
+#hello .ar{flex:1;height:2px;margin-bottom:56px;background:repeating-linear-gradient(90deg,var(--ac) 0 14px,transparent 14px 26px);position:relative}
+#hello .ar::after{content:"";position:absolute;right:-2px;top:-9px;border:10px solid transparent;border-left:16px solid var(--ac)}
+#hello .vI .cap{margin-top:52px;font-size:44px;font-weight:700;line-height:1.15;letter-spacing:-.03em;color:#e9e9e3}
+#hello .vI .cap em{color:var(--ac);font-weight:700}
+
+/* G chat v3 */
+#hello.G .stage,#hello.G::after{display:none}
+#hello.G{background:radial-gradient(50% 30% at 50% 62%,rgba(204,255,0,.07),transparent 70%),radial-gradient(55% 35% at 92% 4%,rgba(204,255,0,.10),transparent 70%),var(--bg)}
+#hello.G .f1{margin:56px 0 0 -4px;font-size:80px;font-weight:800;line-height:1.02;letter-spacing:-.048em}
+#hello.G .f1 em{font-style:normal;color:var(--ac)}
+#hello .vG{margin-top:44px;position:relative}
+#hello .vG .glow{position:absolute;left:10%;right:10%;top:20%;bottom:0;background:rgba(204,255,0,.10);filter:blur(80px);border-radius:50%}
+#hello .chat{position:relative;border-radius:36px;padding:1.5px;background:linear-gradient(160deg,rgba(242,242,238,.18),rgba(242,242,238,.04) 40%,rgba(204,255,0,.25));box-shadow:0 50px 100px rgba(0,0,0,.6)}
+#hello .chat>*{background:#121211}
+#hello .ch{display:flex;align-items:center;gap:18px;padding:22px 28px;border-radius:34.5px 34.5px 0 0;border-bottom:1px solid rgba(242,242,238,.06)}
+#hello .who{flex:1}
+#hello .who b{display:block;font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+#hello .who span{display:block;margin-top:5px;font-size:20px;color:var(--mut)}
+#hello .ico{display:flex;gap:26px}
+#hello .ico svg{width:32px;height:32px;fill:var(--ac);stroke:var(--ac)}
+#hello .av{flex:none;border-radius:50%;display:grid;place-items:center;position:relative}
+#hello .av.nk{width:66px;height:66px;background:var(--ac)}
+#hello .av.nk svg{width:42px}
+#hello .av.nk i{position:absolute;right:0;bottom:0;width:18px;height:18px;border-radius:50%;background:#31d158;box-shadow:0 0 0 4px #121211}
+#hello .av.u{width:46px;height:46px;background:#262624}
+#hello .av.u svg{width:25px;fill:#8a8a84}
+#hello .av.u.sm{width:24px;height:24px}
+#hello .av.u.sm svg{width:14px}
+#hello .cb{padding:20px 28px 16px}
+#hello .day{text-align:center;font-size:18px;color:#66665f;font-weight:500;margin-bottom:18px;letter-spacing:.01em}
+#hello .row{display:flex;align-items:flex-end;gap:12px}
+#hello .row+.row{margin-top:12px}
+#hello .row.me{justify-content:flex-end}
+#hello .bub{max-width:620px;padding:19px 26px;border-radius:28px;font-size:29px;line-height:1.36;letter-spacing:-.01em;font-weight:500}
+#hello .them .bub{background:#232321;color:#ecece6;border-bottom-left-radius:8px}
+#hello .me .bub{background:var(--ac);color:#0a0a0a;font-weight:600;border-bottom-right-radius:8px}
+#hello .seen{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:8px;font-size:17px;color:#66665f}
+#hello .typing{margin-top:10px!important}
+#hello .typing .bub{display:flex;gap:9px;padding:22px 24px}
+#hello .typing .bub i{width:12px;height:12px;border-radius:50%;background:#8a8a84}
+#hello .typing .bub i:nth-child(2){opacity:.7}#hello .typing .bub i:nth-child(3){opacity:.45}
+#hello .cf{display:flex;align-items:center;gap:18px;padding:16px 22px 22px;border-radius:0 0 34.5px 34.5px}
+#hello .cf em{font-style:normal;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:var(--ac);font-size:36px;font-weight:400;line-height:1}
+#hello .cf span{flex:1;height:58px;display:flex;align-items:center;padding:0 24px;border-radius:999px;background:#1d1d1b;font-size:23px;color:#66665f}
+#hello .cf b{width:56px;height:56px;border-radius:50%;background:var(--ac);display:grid;place-items:center}
+#hello .cf b svg{width:24px;height:24px;fill:#0a0a0a}
+#hello.G .foot{bottom:84px}
+
+#hello .ch{gap:16px;padding:20px 26px 20px 18px}
+#hello .back{width:34px;height:34px;fill:none;stroke:var(--ac);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#hello .who span{display:flex!important;align-items:center;gap:9px;font-size:20px;color:#9a9a93}
+
+#hello .ico svg{width:34px;height:34px}
+#hello .cf{gap:20px;padding:14px 24px 22px}
+#hello .cf .ci{flex:none;width:36px;height:36px;fill:none;stroke:var(--ac);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#hello .cf span{height:56px;font-size:24px;color:#77776f}
+#hello .cf .send{flex:none;width:36px;height:36px;fill:var(--ac)}
+#hello .them .bub{background:#262624}
+#hello .day{font-size:17px;color:#77776f;font-weight:600;letter-spacing:.02em}
+
+#hello .typing2{margin-top:10px!important}#hello .typing2 .bub{border-radius:28px!important}
+#hello .typing2 .bub{display:flex;gap:9px;padding:21px 24px;background:rgba(204,255,0,.12);box-shadow:inset 0 0 0 1.5px rgba(204,255,0,.35)}
+#hello .typing2 .bub i{width:12px;height:12px;border-radius:50%;background:var(--ac)}
+#hello .typing2 .bub i:nth-child(2){opacity:.65}#hello .typing2 .bub i:nth-child(3){opacity:.35}
+#hello.G .f1{margin-top:48px}
+#hello .vG{margin-top:38px}
+#hello .day{margin-bottom:14px}
+#hello .cb{padding:16px 28px 10px}
+
+#hello .av.u.gap{background:none}
+#hello .typing3{margin-top:12px!important}
+#hello .typing3 .bub{display:flex;gap:9px;padding:21px 24px;border-radius:28px!important}
+#hello .typing3 .bub i{width:12px;height:12px;border-radius:50%;background:#9a9a93}
+#hello .typing3 .bub i:nth-child(2){opacity:.65}#hello .typing3 .bub i:nth-child(3){opacity:.35}
+
+/* chat focus */
+#hello.G .f1{margin:0 0 0 -3px;font-size:66px;line-height:1.06;letter-spacing:-.045em}
+#hello.G .h{top:100px}
+#hello .vG{margin:64px -36px 0}
+#hello .vG .glow{background:rgba(204,255,0,.13);filter:blur(90px)}
+#hello .ch{padding:26px 32px 26px 22px;gap:18px}
+#hello .back{width:40px;height:40px}
+#hello .av.nk{width:78px;height:78px}#hello .av.nk svg{width:50px}
+#hello .av.nk i{width:20px;height:20px}
+#hello .who b{font-size:32px}
+#hello .who span{font-size:22px}
+#hello .ico svg{width:38px;height:38px}
+#hello .cb{padding:24px 32px 18px}
+#hello .day{font-size:19px;margin-bottom:20px}
+#hello .bub{max-width:680px;font-size:33px;padding:22px 30px;border-radius:32px}
+#hello .row+.row{margin-top:14px}
+#hello .av.u{width:52px;height:52px}#hello .av.u svg{width:28px}
+#hello .typing3{margin-top:16px!important}
+#hello .typing3 .bub{padding:25px 28px;gap:10px}
+#hello .typing3 .bub i{width:14px;height:14px}
+#hello .cf{padding:18px 28px 28px;gap:22px}
+#hello .cf .ci,#hello .cf .send{width:40px;height:40px}
+#hello .cf span{height:64px;font-size:26px}
+#hello.G .f1{font-size:62px;white-space:nowrap;max-width:none}#hello.G .h{top:158px}#hello .vG{margin-top:72px}
+
+/* icons */
+#hello .ico{gap:30px;align-items:center}
+#hello .ico .vid{fill:none;stroke:var(--ac);stroke-width:1.9;stroke-linejoin:round;width:40px;height:40px}
+#hello .bub.rx{position:relative;margin-bottom:22px}
+#hello .react{position:absolute;left:20px;bottom:-24px;width:46px;height:46px;border-radius:50%;background:#262624;box-shadow:0 0 0 4px #121211;display:grid;place-items:center}
+#hello .react svg{width:24px;height:24px;fill:#ff4d6d}
+#hello .cf{gap:18px}
+#hello .cf span{position:relative;justify-content:space-between;padding:0 18px 0 26px}
+#hello .cf .emo{width:34px;height:34px;fill:none;stroke:var(--ac);stroke-width:1.8;stroke-linecap:round}
+#hello .cf .emo circle:not(:first-child){fill:var(--ac)}
+#hello .cf .like{flex:none;width:42px;height:42px;fill:var(--ac)}
+
+#hello .foot small.msgr{display:flex;align-items:center;gap:12px;font-size:24px;font-weight:600;color:var(--fg)}
+#hello .foot small.msgr svg{width:34px;height:34px;fill:var(--ac)}
+/* ---------- carousel slides 2/3 ---------- */
+.sl{display:none;width:1080px;height:1350px;position:relative;overflow:hidden;background:radial-gradient(55% 35% at 92% 4%,rgba(204,255,0,.10),transparent 70%),var(--bg)}
+.sl::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(242,242,238,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(242,242,238,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(90% 55% at 40% 20%,#000,transparent)}
+.sl .in{position:absolute;left:108px;right:108px;top:120px;z-index:2}
+.sl .kick{font-family:"JetBrains Mono";font-size:20px;font-weight:500;letter-spacing:.14em;color:var(--mut);text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.sl .kick b{width:9px;height:9px;border-radius:50%;background:var(--ac);box-shadow:0 0 14px var(--ac)}
+.sl h2{margin-top:26px;font-size:66px;font-weight:800;line-height:1.04;letter-spacing:-.045em}
+.sl h2 em{font-style:normal;color:var(--ac)}
+.sl .foot{position:absolute;left:108px;right:108px;bottom:84px;z-index:3;display:flex;align-items:center;justify-content:space-between}
+.sl .url{margin:0;font-size:28px;padding:20px 32px 20px 26px;gap:18px;background:rgba(10,10,10,.88)}
+.sl .pg{font-family:"JetBrains Mono";font-size:22px;color:var(--mut);letter-spacing:.1em}
+.sl .pg b{color:var(--ac);font-weight:500}
+/* slide 2 grid */
+#s2 .grid{margin:56px -36px 0;display:grid;grid-template-columns:1fr 1fr;gap:26px}
+#s2 .card{border-radius:22px;overflow:hidden;background:#141413;box-shadow:0 0 0 1px rgba(242,242,238,.09),0 24px 50px rgba(0,0,0,.45)}
+#s2 .card .bar{height:30px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#1b1b1a}
+#s2 .card .bar i{width:9px;height:9px;border-radius:50%;background:#3a3a38}
+#s2 .card img{display:block;width:100%;height:208px;object-fit:cover;object-position:top}
+#s2 .card p{padding:16px 20px 18px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+#s2 .card b{font-size:25px;font-weight:700;letter-spacing:-.02em}
+#s2 .card span{font-size:19px;color:var(--mut);white-space:nowrap}
+/* slide 3 */
+#s3 .big{margin-top:70px;display:flex;align-items:baseline;gap:22px}
+#s3 .big small{font-size:34px;color:#b9b9b2;font-weight:500}
+#s3 .big b{font-size:150px;font-weight:800;letter-spacing:-.06em;line-height:.9;color:var(--ac)}
+#s3 ol{list-style:none;margin-top:72px;border-top:1px solid rgba(242,242,238,.1)}
+#s3 li{display:flex;align-items:center;gap:30px;padding:30px 0;border-bottom:1px solid rgba(242,242,238,.1);font-size:36px;font-weight:600;letter-spacing:-.02em}
+#s3 li i{font-style:normal;font-family:"JetBrains Mono";font-size:22px;color:var(--ac);width:40px}
+#s3 li span{margin-left:auto;font-size:22px;color:var(--mut);font-weight:500}
+#s3 .cta{margin-top:64px;display:inline-flex;align-items:center;gap:18px;padding:28px 40px;border-radius:999px;background:var(--ac);color:#0a0a0a;font-size:34px;font-weight:700;letter-spacing:-.02em;box-shadow:0 20px 60px rgba(204,255,0,.25)}
+#s3 .cta i{font-style:normal;font-family:"JetBrains Mono";font-weight:500}
+#s2 .in{top:104px}#s2 h2{font-size:60px;margin-top:22px}
+#s2 .grid{margin-top:46px;gap:22px}
+#s2 .card img{height:158px}
+#s2 .card .bar{height:26px}
+#s2 .card p{padding:13px 18px 15px}#s2 .card b{font-size:23px}#s2 .card span{font-size:18px}
+#s3 .cta2{margin-top:60px;padding:30px 36px;border-radius:24px;background:rgba(204,255,0,.06);box-shadow:inset 0 0 0 1.5px rgba(204,255,0,.35)}
+#s3 .cta2 span{display:block;font-size:26px;color:#b9b9b2}
+#s3 .cta2 b{display:block;margin-top:8px;font-family:"JetBrains Mono";font-size:38px;font-weight:500;color:var(--ac);letter-spacing:-.01em}
+#s3 .cta2 small{display:block;margin-top:14px;font-size:22px;color:var(--mut)}
+</style></head>
+<body>
+<div id="logo"><div class="ring"></div>
+  <svg class="lock" viewBox="-30 -9 220 168">
+    <g fill="#ccff00">
+      <path d="M0 0H15L58 79V0H72V108H57L14 29V108H0Z"/>
+      <path d="M92 0H106V108H92Z"/>
+      <path d="M101 54L142 0H159L119 57L160 108H143L110 66L101 78Z"/>
+      <rect x="169" y="100" width="26" height="8"/>
+    </g>
+    <text x="1" y="150" textLength="158" lengthAdjust="spacing" fill="#e4e4de">PROGRAMMING</text>
+  </svg>
+</div>
+
+<div id="cover">
+  <div class="txt">
+    <p class="tag"><b></b>NK Programming</p>
+    <h1>Ти даваш идеята<br><em>Аз създавам сайта</em></h1>
+    <p class="sub">Сайтове<span>·</span>онлайн магазини<span>·</span>платформи по поръчка<br>Собствен дизайн и ясни цени.</p>
+    <p class="url"><i>→</i>nkprogramming.com</p>
+  </div>
+  <div class="stage"><div class="wall">
+    <div class="col"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/atlantic-drive.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/stefanovi-cleaning.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/moto-zona.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/pchelichka.jpg"></div></div>
+    <div class="col"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/stefanovi-cleaning.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/atlantic-drive.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/swim-with-smile.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/beauty-house.jpg"></div></div>
+    <div class="col"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/moto-zona.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/florea.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/atlantic-drive.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/stefanovi-cleaning.jpg"></div></div>
+    <div class="col"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/swim-with-smile.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/beauty-house.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/pk-lokomotiv-go.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/pchelichka.jpg"></div></div>
+    <div class="col"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/stefanovi-cleaning.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/swim-with-smile.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/atlantic-drive.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/moto-zona.jpg"></div></div>
+  </div></div>
+  </div>
+</div>
+
+<div id="hello" class="G">
+  <div class="h">
+    
+    <h2 class="f1">Всяка идея става реалност<br><em>с едно съобщение.</em></h2>
+    <div class="vG"><div class="glow"></div><div class="chat">
+      <div class="ch"><svg class="back" viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg><div class="av nk"><svg viewBox="-20 -14 216 136"><g fill="#0a0a0a"><path d="M0 0H15L58 79V0H72V108H57L14 29V108H0Z"/><path d="M92 0H106V108H92Z"/><path d="M101 54L142 0H159L119 57L160 108H143L110 66L101 78Z"/><rect x="169" y="100" width="26" height="8"/></g></svg><i></i></div><div class="who"><b>NK Programming</b><span>Активен сега</span></div>
+        <div class="ico"><svg class="vid" viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="3"/><path d="M15.5 10.5 21 7.5v9l-5.5-3z"/></svg><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke-width="2"/><path d="M11 10.5h2V17h-2zM11 7h2v2h-2z"/></svg></div></div>
+      <div class="cb">
+        <p class="day">Днес 20:41</p>
+        <div class="row them"><div class="av u gap"></div><div class="bub">Здравейте! Имам идея за сайт, но не знам откъде да започна…</div></div>
+        <div class="row me"><div class="bub rx">Здравейте! Разкажете ми каква е идеята, а за всичко останало ще се погрижа аз 🙂<span class="react"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3 1.7-1.8 3.2-3 5.3-3 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg></span></div></div>
+        
+        <div class="row them typing3"><div class="av u"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6z"/></svg></div><div class="bub"><i></i><i></i><i></i></div></div>
+      </div>
+      <div class="cf">
+        <svg class="ci" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 7.5v9M7.5 12h9"/></svg>
+        <svg class="ci" viewBox="0 0 24 24"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2.2L9.3 5h5.4l1.6 2h2.2A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z"/><circle cx="12" cy="12.5" r="3.3"/></svg>
+        <svg class="ci" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="m5 17 4.5-4.5 3 3L15 13l4 4"/></svg>
+        <svg class="ci" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>
+        <span>Aa<svg class="emo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M8 14.5c1 1.4 2.3 2 4 2s3-.6 4-2"/><circle cx="9" cy="10" r=".6"/><circle cx="15" cy="10" r=".6"/></svg></span>
+        <svg class="like" viewBox="0 0 24 24"><path d="M7 21H4.5A1.5 1.5 0 0 1 3 19.5v-7A1.5 1.5 0 0 1 4.5 11H7zM7 11l4-8c1.7 0 2.8 1.3 2.5 3L13 9h5.6a2 2 0 0 1 2 2.4l-1.4 7.5A2.6 2.6 0 0 1 16.6 21H7z"/></svg>
+      </div>
+    </div></div>
+    <div class="vH">
+      <div class="br"><div class="brbar"><i></i><i></i><i></i><span>вашата-идея.bg</span></div>
+        <div class="brbody"><p>Тук може да е<br><em>вашият сайт.</em></p><div class="sk"><b></b><b></b><b></b></div></div></div>
+      <p class="cap">Сайтове, онлайн магазини и платформи по поръчка.</p>
+    </div>
+    <div class="vI">
+      <div class="flow">
+        <div class="st"><div class="ic"><svg viewBox="0 0 48 48"><path d="M24 6a13 13 0 0 0-8 23.3V35h16v-5.7A13 13 0 0 0 24 6z"/><path d="M18 41h12"/></svg></div><p>Вашата идея</p></div>
+        <div class="ar"></div>
+        <div class="st on"><div class="ic"><svg viewBox="0 0 48 48"><rect x="5" y="9" width="38" height="30" rx="4"/><path d="M5 17h38M11 13h.01M15 13h.01"/></svg></div><p>Готов сайт</p></div>
+      </div>
+      <p class="cap">Вие идвате с идеята.<br><em>За всичко останало се грижа аз.</em></p>
+    </div>
+  </div>
+  <div class="stage"><div class="wall"><div class="col"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/florea.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/atlantic-drive.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/moto-zona.jpg"></div></div><div class="col"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/beauty-house.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/stefanovi-cleaning.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/florea.jpg"></div></div><div class="col"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/atlantic-drive.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/pk-lokomotiv-go.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/beauty-house.jpg"></div></div><div class="col"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/moto-zona.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/florea.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/stefanovi-cleaning.jpg"></div></div><div class="col"><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/stefanovi-cleaning.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/beauty-house.jpg"></div><div class="win"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/atlantic-drive.jpg"></div></div></div></div>
+  <div class="foot"><p class="url"><i>→</i>nkprogramming.com</p><small class="msgr"><svg viewBox="0 0 24 24"><path d="M12 2.5C6.5 2.5 2.5 6.5 2.5 11.6c0 2.8 1.3 5.2 3.4 6.8v3.1l3-1.7c1 .3 2 .4 3.1.4 5.5 0 9.5-4 9.5-9.1S17.5 2.5 12 2.5zm1 12.1-2.4-2.6-4.7 2.6 5.2-5.5 2.5 2.6 4.6-2.6z"/></svg>Пишете ми в Messenger</small></div>
+</div>
+
+<div id="s2" class="sl"><div class="in">
+  <p class="kick"><b></b>Проекти</p>
+  <h2>Идеи, които вече<br>са <em>реалност.</em></h2>
+  <div class="grid"><div class="card"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/atlantic-drive.jpg"><p><b>Atlantic Drive</b><span>Автокъща</span></p></div><div class="card"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/florea.jpg"><p><b>Floréa</b><span>Онлайн магазин</span></p></div><div class="card"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/beauty-house.jpg"><p><b>Beauty House</b><span>Салон + записване</span></p></div><div class="card"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/stefanovi-cleaning.jpg"><p><b>Стефанови</b><span>Почистваща фирма</span></p></div><div class="card"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/moto-zona.jpg"><p><b>moto-zona.com</b><span>Платформа за обяви</span></p></div><div class="card"><div class="bar"><i></i><i></i><i></i></div><img src="../assets/projects/pk-lokomotiv-go.jpg"><p><b>ПК Локомотив</b><span>Спортен клуб</span></p></div></div>
+</div><div class="foot"><p class="url"><i>→</i>nkprogramming.com</p><p class="pg"><b>02</b> / 03</p></div></div>
+
+<div id="s3" class="sl"><div class="in">
+  <p class="kick"><b></b>Цени</p>
+  <h2>Колко ще струва<br><em>вашият сайт?</em></h2>
+  <div class="big"><small>Сайтове от</small><b>50 €</b></div>
+  <ol><li><i>01</i>Отговаряте на няколко въпроса<span>~2 мин</span></li><li><i>02</i>Виждате цената веднага<span>без ангажимент</span></li><li><i>03</i>Пишете ми и започваме<span>Messenger</span></li></ol>
+  <p class="cta2"><span>Изчислете цената на</span><b>nkprogramming.com/zapitvane</b><small>Линкът е и в първия коментар ↓</small></p>
+</div><div class="foot"><p></p><p class="pg"><b>03</b> / 03</p></div></div>
+<script>document.getElementById(location.hash.slice(1)||'cover').style.display='block'</script>
+</body></html>

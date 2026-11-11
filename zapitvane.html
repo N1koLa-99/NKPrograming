@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="css/legal.css">
   <link rel="stylesheet" href="css/brief.css">
   <link rel="stylesheet" href="css/brief-glass.css">
+  <link rel="stylesheet" href="css/brief-air.css">
   <style>html[data-lang="bg"] [data-l="en"], html[data-lang="en"] [data-l="bg"] { display: none !important; }</style>
 </head>
 <body class="legal-page wiz-page">
@@ -55,9 +56,7 @@
 
   <main class="wiz">
     <div class="wiz__head">
-      <p class="wiz__kicker mono">// <span data-l="bg">калкулатор за сайт</span><span data-l="en">website calculator</span></p>
       <h1 class="wiz__title"><span data-l="bg">Колко ще струва<br>твоят сайт?</span><span data-l="en">How much will<br>your website cost?</span></h1>
-      <p class="wiz__intro"><span data-l="bg">5 кратки стъпки. Накрая виждаш цената.</span><span data-l="en">5 short steps. You see the price at the end.</span></p>
     </div>
 
     <div class="wpanel">
@@ -71,28 +70,27 @@
       <!-- ============ 1. business ============ -->
       <fieldset class="wstep" data-name-bg="Бизнес" data-name-en="Business" data-req="biz">
         <legend class="wq"><span data-l="bg">С какво се занимаваш?</span><span data-l="en">What does your business do?</span></legend>
-        <p class="wh"><span data-l="bg">Избери най-близкото.</span><span data-l="en">Pick the closest one.</span></p>
         <div class="opts opts--biz">
           <label class="opt opt--tile"><input type="radio" name="biz" value="Салон за красота / фризьор" data-key="salon" data-en="Beauty salon / hairdresser" data-auto>
-            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" /> <path d="M8.12 8.12 12 12" /> <path d="M20 4 8.12 15.88" /> <circle cx="6" cy="18" r="3" /> <path d="M14.8 14.8 20 20" /></svg></span><b class="opt__t"><span data-l="bg">Салон за красота</span><span data-l="en">Beauty salon</span></b><span class="opt__d"><span data-l="bg">Коса, нокти, мигли, козметика</span><span data-l="en">Hair, nails, lashes, cosmetics</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" /><circle cx="6" cy="18" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><path d="M14.8 14.8 20 20" /></svg></span><b class="opt__t"><span data-l="bg">Красота</span><span data-l="en">Beauty</span></b></span></label>
           <label class="opt opt--tile"><input type="radio" name="biz" value="Ресторант / кафе" data-key="food" data-en="Restaurant / café" data-auto>
-            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" /> <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" /> <path d="m2.1 21.8 6.4-6.3" /> <path d="m19 5-7 7" /></svg></span><b class="opt__t"><span data-l="bg">Ресторант / кафе</span><span data-l="en">Restaurant / café</span></b><span class="opt__d"><span data-l="bg">Заведение, бар, сладкарница</span><span data-l="en">Eatery, bar, bakery</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z" /><path d="M17 10h1a3 3 0 0 1 0 6h-1.5" /><path d="M8.5 2.5v3.5" /><path d="M12.5 2.5v3.5" /></svg></span><b class="opt__t"><span data-l="bg">Заведение</span><span data-l="en">Food &amp; drink</span></b></span></label>
           <label class="opt opt--tile"><input type="radio" name="biz" value="Автосервиз / автокъща" data-key="auto" data-en="Car service / dealer" data-auto>
-            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8" /> <path d="M7 14h.01" /> <path d="M17 14h.01" /> <rect width="18" height="8" x="3" y="10" rx="2" /> <path d="M5 18v2" /> <path d="M19 18v2" /></svg></span><b class="opt__t"><span data-l="bg">Автосервиз / автокъща</span><span data-l="en">Car service / dealer</span></b><span class="opt__d"><span data-l="bg">Ремонт, гуми, продажба на коли</span><span data-l="en">Repairs, tyres, car sales</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M5 17v2" /><path d="M19 17v2" /><path d="m4 11 1.6-4.5A2 2 0 0 1 7.5 5h9a2 2 0 0 1 1.9 1.5L20 11" /><rect x="3" y="11" width="18" height="6" rx="2" /><path d="M7 14h.01" /><path d="M17 14h.01" /></svg></span><b class="opt__t"><span data-l="bg">Автомобили</span><span data-l="en">Cars</span></b></span></label>
           <label class="opt opt--tile"><input type="radio" name="biz" value="Майстор / ремонти" data-key="trade" data-en="Tradesperson / repairs" data-auto>
-            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9" /> <path d="m18 15 4-4" /> <path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5" /></svg></span><b class="opt__t"><span data-l="bg">Майстор / ремонти</span><span data-l="en">Tradesperson</span></b><span class="opt__d"><span data-l="bg">Строителство, ВиК, ел., монтажи</span><span data-l="en">Building, plumbing, electrics</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z" /></svg></span><b class="opt__t"><span data-l="bg">Майстор</span><span data-l="en">Trades</span></b></span></label>
           <label class="opt opt--tile"><input type="radio" name="biz" value="Почистване / услуги" data-key="clean" data-en="Cleaning / services" data-auto>
-            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></svg></span><b class="opt__t"><span data-l="bg">Почистване / услуги</span><span data-l="en">Cleaning / services</span></b><span class="opt__d"><span data-l="bg">Домове, офиси, пране, градини</span><span data-l="en">Homes, offices, gardens</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M8 11h6l1 2v7a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-7z" /><path d="M9 11V7h4v4" /><path d="M8 7V4h7l2 2" /><path d="M20 4h.01" /><path d="M21.5 7h.01" /><path d="M20 10h.01" /></svg></span><b class="opt__t"><span data-l="bg">Почистване</span><span data-l="en">Cleaning</span></b></span></label>
           <label class="opt opt--tile"><input type="radio" name="biz" value="Клиника / кабинет" data-key="health" data-en="Clinic / practice" data-auto>
-            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M11 2v2" /> <path d="M5 2v2" /> <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" /> <path d="M8 15a6 6 0 0 0 12 0v-3" /> <circle cx="20" cy="10" r="2" /></svg></span><b class="opt__t"><span data-l="bg">Клиника / кабинет</span><span data-l="en">Clinic / practice</span></b><span class="opt__d"><span data-l="bg">Лекар, зъболекар, психолог</span><span data-l="en">Doctor, dentist, therapist</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z" /><path d="M3.5 12h6l1-2 2 4.5 1.5-3h6" /></svg></span><b class="opt__t"><span data-l="bg">Здраве</span><span data-l="en">Health</span></b></span></label>
           <label class="opt opt--tile"><input type="radio" name="biz" value="Хотел / къща за гости" data-key="stay" data-en="Hotel / guest house" data-auto>
-            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" /> <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" /> <path d="M12 4v6" /> <path d="M2 18h20" /></svg></span><b class="opt__t"><span data-l="bg">Хотел / къща за гости</span><span data-l="en">Hotel / guest house</span></b><span class="opt__d"><span data-l="bg">Стаи, апартаменти, вили</span><span data-l="en">Rooms, apartments, villas</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" /><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" /><path d="M12 4v6" /><path d="M2 18h20" /></svg></span><b class="opt__t"><span data-l="bg">Нощувки</span><span data-l="en">Stays</span></b></span></label>
           <label class="opt opt--tile"><input type="radio" name="biz" value="Спорт / фитнес" data-key="sport" data-en="Sport / fitness" data-auto>
-            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /> <path d="m2.5 21.5 1.4-1.4" /> <path d="m20.1 3.9 1.4-1.4" /> <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /> <path d="m9.6 14.4 4.8-4.8" /></svg></span><b class="opt__t"><span data-l="bg">Спорт / фитнес</span><span data-l="en">Sport / fitness</span></b><span class="opt__d"><span data-l="bg">Клуб, зала, треньор, школа</span><span data-l="en">Club, gym, coach, school</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M6.5 7v10" /><path d="M17.5 7v10" /><path d="M3.5 9.5v5" /><path d="M20.5 9.5v5" /><path d="M6.5 12h11" /></svg></span><b class="opt__t"><span data-l="bg">Спорт</span><span data-l="en">Sport</span></b></span></label>
           <label class="opt opt--tile"><input type="radio" name="biz" value="Продавам продукти" data-key="shop" data-en="I sell products" data-auto>
-            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M16 10a4 4 0 0 1-8 0" /> <path d="M3.103 6.034h17.794" /> <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z" /></svg></span><b class="opt__t"><span data-l="bg">Продавам продукти</span><span data-l="en">I sell products</span></b><span class="opt__d"><span data-l="bg">Искам онлайн магазин</span><span data-l="en">I want an online shop</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M6 7h12l1 13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z" /><path d="M9 10V6a3 3 0 0 1 6 0v4" /></svg></span><b class="opt__t"><span data-l="bg">Магазин</span><span data-l="en">Shop</span></b></span></label>
           <label class="opt opt--tile"><input type="radio" name="biz" value="Друго" data-key="other" data-en="Something else">
-            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M17 12h.01" /> <path d="M12 12h.01" /> <path d="M7 12h.01" /></svg></span><b class="opt__t"><span data-l="bg">Друго</span><span data-l="en">Something else</span></b><span class="opt__d"><span data-l="bg">Разкажи ми с две думи</span><span data-l="en">Tell me in a few words</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M12 7v10" /><path d="M7 12h10" /></svg></span><b class="opt__t"><span data-l="bg">Друго</span><span data-l="en">Other</span></b></span></label>
         </div>
         <div class="wsub" data-if="biz:Друго">
           <label class="wf"><span><span data-l="bg">С какво се занимаваш?</span><span data-l="en">What do you do?</span></span><input type="text" name="biz_other" maxlength="200" placeholder="Напр. счетоводна кантора, фотограф, детска градина…"></label>
@@ -102,21 +100,21 @@
       <!-- ============ 2. features ============ -->
       <fieldset class="wstep" data-name-bg="Функции" data-name-en="Features" data-req="feat">
         <legend class="wq"><span data-l="bg">Какво трябва да може сайтът?</span><span data-l="en">What should the site do?</span></legend>
-        <p class="wh"><span data-l="bg">Отбележи само каквото ти трябва. Ако не ти трябва нищо от това — продължи.</span><span data-l="en">Tick only what you need. Need none of it? Just continue.</span></p>
+        <p class="wh"><span data-l="bg">Отбележи каквото ти трябва — или продължи.</span><span data-l="en">Tick what you need — or just continue.</span></p>
 
         <div class="opts opts--extras opts--feat">
           <label class="opt opt--check"><input type="checkbox" name="feat" value="Отделна страница за всяка услуга" data-key="pages" data-en="A page for every service">
-            <span class="opt__body"><b class="opt__t"><span data-l="bg">Страница за всяка услуга</span><span data-l="en">A page for every service</span></b><span class="opt__d"><span data-l="bg">Повече страници — по-лесно намиране на сайта в Google.</span><span data-l="en">More pages — your site is easier to find on Google.</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><rect x="8" y="3" width="12" height="15" rx="2" /> <path d="M16 21H6a2 2 0 0 1-2-2V7" /> <path d="M11 8h6" /> <path d="M11 12h6" /></svg></span><b class="opt__t"><span data-l="bg">Страница за всяка услуга</span><span data-l="en">A page for every service</span></b><span class="opt__d"><span data-l="bg">По-лесно те намират в Google.</span><span data-l="en">Easier to find on Google.</span></span></span></label>
           <label class="opt opt--check"><input type="checkbox" name="feat" value="Онлайн записване на час" data-key="booking" data-en="Online booking">
-            <span class="opt__body"><b class="opt__t"><span data-l="bg">Онлайн записване на час</span><span data-l="en">Online booking</span></b><span class="opt__d"><span data-l="bg">Клиентите си записват сами.</span><span data-l="en">Clients book on their own.</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2" /> <path d="M8 2v4" /> <path d="M16 2v4" /> <path d="M3 10h18" /> <path d="m9 15.5 2 2 4-4" /></svg></span><b class="opt__t"><span data-l="bg">Онлайн записване на час</span><span data-l="en">Online booking</span></b><span class="opt__d"><span data-l="bg">Клиентите си записват сами.</span><span data-l="en">Clients book on their own.</span></span></span></label>
           <label class="opt opt--check"><input type="checkbox" name="feat" value="Сам да сменя текстове и снимки (админ панел)" data-key="admin" data-en="Edit texts &amp; photos myself">
-            <span class="opt__body"><b class="opt__t"><span data-l="bg">Сам да сменям текстове, снимки и цени</span><span data-l="en">Edit texts, photos &amp; prices myself</span></b><span class="opt__d"><span data-l="bg">Услуги, цени, галерия — без програмист.</span><span data-l="en">Services, prices, gallery — no developer.</span></span><span class="opt__note js-admin-note" hidden></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><path d="M12 20h9" /> <path d="M16.4 3.6a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg></span><b class="opt__t"><span data-l="bg">Сам сменям текстове и снимки</span><span data-l="en">I edit texts &amp; photos myself</span></b><span class="opt__d"><span data-l="bg">Без да търсиш програмист.</span><span data-l="en">No developer needed.</span></span><span class="opt__note js-admin-note" hidden></span></span></label>
           <label class="opt opt--check"><input type="checkbox" name="feat" value="Втори език" data-key="lang" data-en="Second language">
-            <span class="opt__body"><b class="opt__t"><span data-l="bg">Втори език</span><span data-l="en">Second language</span></b><span class="opt__d"><span data-l="bg">Например английски.</span><span data-l="en">E.g. English.</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /> <path d="M3 12h18" /> <path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18" /></svg></span><b class="opt__t"><span data-l="bg">Втори език</span><span data-l="en">Second language</span></b><span class="opt__d"><span data-l="bg">Например английски.</span><span data-l="en">E.g. English.</span></span></span></label>
           <label class="opt opt--check"><input type="checkbox" name="feat" value="Онлайн магазин" data-key="shop" data-en="Online shop">
-            <span class="opt__body"><b class="opt__t"><span data-l="bg">Онлайн магазин</span><span data-l="en">Online shop</span></b><span class="opt__d"><span data-l="bg">Продукти, количка, поръчки.</span><span data-l="en">Products, cart, orders.</span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.25" /> <circle cx="18" cy="20" r="1.25" /> <path d="M2.5 3h2.2l2.4 11.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.5L21.5 8H5.6" /></svg></span><b class="opt__t"><span data-l="bg">Онлайн магазин</span><span data-l="en">Online shop</span></b><span class="opt__d"><span data-l="bg">Продукти, количка, поръчки.</span><span data-l="en">Products, cart, orders.</span></span></span></label>
           <label class="opt opt--check"><input type="checkbox" name="feat" value="Платформа по поръчка" data-key="app" data-en="Custom platform">
-            <span class="opt__body"><b class="opt__t"><span data-l="bg">Сайт с потребители и профили</span><span data-l="en">A site with users &amp; accounts</span></b><span class="opt__d"><span data-l="bg">Хората си правят профил и публикуват сами — като OLX или <a class="opt__link" href="https://moto-zona.com" target="_blank" rel="noopener">moto-zona.com ↗</a></span><span data-l="en">People sign up and post on their own — like OLX or <a class="opt__link" href="https://moto-zona.com" target="_blank" rel="noopener">moto-zona.com ↗</a></span></span></span></label>
+            <span class="opt__body"><span class="opt__ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" /> <path d="M2.5 20a6.5 6.5 0 0 1 13 0" /> <path d="M16 4.6a3.5 3.5 0 0 1 0 6.8" /> <path d="M18.5 14.6A6.5 6.5 0 0 1 21.5 20" /></svg></span><b class="opt__t"><span data-l="bg">Профили и обяви</span><span data-l="en">Accounts &amp; listings</span></b><span class="opt__d"><span data-l="bg">Като OLX или <a class="opt__link" href="https://moto-zona.com" target="_blank" rel="noopener">moto-zona.com ↗</a></span><span data-l="en">Like OLX or <a class="opt__link" href="https://moto-zona.com" target="_blank" rel="noopener">moto-zona.com ↗</a></span></span></span></label>
         </div>
 
         <div class="wsub wsub--flat" data-show="pages">
@@ -130,9 +128,9 @@
         <div class="wsub wsub--flat" data-show="booking">
           <p class="wq2"><span data-l="bg">Какво записване?</span><span data-l="en">What kind of booking?</span></p>
           <div class="pills pills--book">
-            <label class="pill pill--book"><input type="radio" name="booktier" value="Готова система за записване (Fresha / Booksy / Calendly)" data-en="Ready-made system (Fresha / Booksy / Calendly)"><span><b><span data-l="bg">Готова система</span><span data-l="en">Ready-made system</span></b> <em class="pill__p mono">50–100 €</em><small><span data-l="bg">Вграждам Fresha, Booksy или Calendly. Графикът се води там.</span><span data-l="en">I embed Fresha, Booksy or Calendly. The schedule lives there.</span></small></span></label>
-            <label class="pill pill--book"><input type="radio" name="booktier" value="Собствено онлайн записване" data-en="Your own online booking"><span><b><span data-l="bg">Собствено записване</span><span data-l="en">Your own booking</span></b> <em class="pill__p mono">200–350 €</em><small><span data-l="bg">Клиентът избира услуга, ден и час. Ти получаваш имейл, той — потвърждение.</span><span data-l="en">The client picks a service, day and time. You get an email, they get a confirmation.</span></small></span></label>
-            <label class="pill pill--book"><input type="radio" name="booktier" value="Записване + график за целия екип" data-en="Booking + a schedule for the whole team"><span><b><span data-l="bg">Записване + график</span><span data-l="en">Booking + schedule</span></b> <em class="pill__p mono">450–650 €</em><small><span data-l="bg">Като Beauty House: календар по специалист, добавяш часове по телефона, местиш, блокираш почивни дни.</span><span data-l="en">Like Beauty House: a calendar per specialist, add phone bookings, move, block days off.</span></small></span></label>
+            <label class="pill pill--book"><input type="radio" name="booktier" value="Готова система за записване (Fresha / Booksy / Calendly)" data-en="Ready-made system (Fresha / Booksy / Calendly)"><span><b><span data-l="bg">Готова система</span><span data-l="en">Ready-made system</span></b> <em class="pill__p mono">50–100 €</em><small><span data-l="bg">Fresha, Booksy или Calendly в сайта.</span><span data-l="en">Fresha, Booksy or Calendly on your site.</span></small></span></label>
+            <label class="pill pill--book"><input type="radio" name="booktier" value="Собствено онлайн записване" data-en="Your own online booking"><span><b><span data-l="bg">Собствено записване</span><span data-l="en">Your own booking</span></b> <em class="pill__p mono">200–350 €</em><small><span data-l="bg">Услуга, ден и час — в твоя сайт.</span><span data-l="en">Service, day and time — on your own site.</span></small></span></label>
+            <label class="pill pill--book"><input type="radio" name="booktier" value="Записване + график за целия екип" data-en="Booking + a schedule for the whole team"><span><b><span data-l="bg">Записване + график</span><span data-l="en">Booking + schedule</span></b> <em class="pill__p mono">450–650 €</em><small><span data-l="bg">Календар за всеки от екипа, като Beauty House.</span><span data-l="en">A calendar for each person, like Beauty House.</span></small></span></label>
           </div>
         </div>
 
@@ -174,7 +172,6 @@
       <!-- ============ 3. sections — what will be on the site (chips are built in JS from SECS) ============ -->
       <fieldset class="wstep" data-name-bg="Секции" data-name-en="Sections" data-req="sec">
         <legend class="wq"><span data-l="bg">Какво да има на сайта?</span><span data-l="en">What should be on the site?</span></legend>
-        <p class="wh"><span data-l="bg">Част от секциите вече са в плана ти. Добави още, ако искаш.</span><span data-l="en">Some sections are already in your plan. Add more if you like.</span></p>
 
         <div class="wsecs">
           <p class="wsecs__t mono"><span data-l="bg">Включено в плана</span><span data-l="en">Included in your plan</span></p>
@@ -188,13 +185,12 @@
           <p class="wsecs__t mono"><span data-l="bg">Още секции</span><span data-l="en">More sections</span></p>
           <div class="pills pills--secs js-sec-opt"></div>
         </div>
-          <p class="wincl wincl--paid js-sec-paid"><span data-l="bg">Секциите с цена са системи — записване, календар, поръчки, плащания. Работят с база данни и панел, затова се доплащат. Където има безплатен вариант („само форма“, „само показва“), той е до тях.</span><span data-l="en">Sections with a price are systems — booking, calendar, orders, payments. They run on a database and a panel, so they cost extra. Where there is a free version ("form only", "view only"), it is right next to them.</span></p>
+          <p class="wincl wincl--paid js-sec-paid"><span data-l="bg">Секциите с цена работят с база данни и панел, затова се доплащат.</span><span data-l="en">Priced sections run on a database and a panel, so they cost extra.</span></p>
       </fieldset>
 
       <!-- ============ 4. what they already have — "have" always left, "don't have / need help" always right ============ -->
       <fieldset class="wstep" data-name-bg="Какво имаш" data-name-en="What you have" data-req="have">
         <legend class="wq"><span data-l="bg">Какво имаш?</span><span data-l="en">What do you have?</span></legend>
-        <p class="wh"><span data-l="bg">Каквото липсва, ще помогна.</span><span data-l="en">I'll help with what's missing.</span></p>
 
         <div class="wyn">
           <p class="wq2"><span data-l="bg">Сайт в момента</span><span data-l="en">A website right now</span></p>
@@ -204,7 +200,7 @@
           </div>
         </div>
         <div class="wsub wsub--flat" data-if="has:Има сайт">
-          <label class="wf"><span><span data-l="bg">Адрес на сайта (по желание)</span><span data-l="en">Website address (optional)</span></span><input type="text" name="site_url" placeholder="www.primer.bg" maxlength="200" inputmode="url"></label>
+          <label class="wf"><span><span data-l="bg">Адрес на сайта</span><span data-l="en">Website address</span></span><input type="text" name="site_url" placeholder="www.primer.bg" maxlength="200" inputmode="url"></label>
         </div>
 
         <div class="wyn">
@@ -233,7 +229,6 @@
 
         <div class="wyn" data-hide="app">
           <p class="wq2"><span data-l="bg">Анимации</span><span data-l="en">Animations</span></p>
-          <p class="wh wh--sm"><span data-l="bg">Неща, които се движат, докато разглеждаш сайта.</span><span data-l="en">Things that move as you browse the site.</span></p>
           <div class="pills pills--yn pills--3">
             <label class="pill"><input type="radio" name="anim" value="Без анимации" data-en="No animations"><span><span data-l="bg">Без</span><span data-l="en">None</span></span></label>
             <label class="pill"><input type="radio" name="anim" value="Леки анимации" data-en="Light animations"><span><span data-l="bg">Леки</span><span data-l="en">Light</span></span></label>
@@ -243,7 +238,7 @@
 
         <div class="wyn" data-hide="app">
           <p class="wq2"><span data-l="bg">Месечна поддръжка</span><span data-l="en">Monthly support</span></p>
-          <p class="wh wh--sm"><span data-l="bg">Архив, обновления и поправки до 1 работен ден.</span><span data-l="en">Backups, updates and fixes within 1 working day.</span></p>
+          <p class="wh wh--sm"><span data-l="bg">Архив, обновления, бързи поправки.</span><span data-l="en">Backups, updates, quick fixes.</span></p>
           <div class="pills pills--yn">
             <label class="pill"><input type="radio" name="support" value="Без поддръжка" data-en="No support"><span><span data-l="bg">Не ми трябва</span><span data-l="en">I don't need it</span></span></label>
             <label class="pill"><input type="radio" name="support" value="Поддръжка" data-en="Support"><span><span data-l="bg">Искам</span><span data-l="en">I want it</span> <em class="pill__p mono js-sup-p"></em></span></label>
@@ -265,9 +260,9 @@
           <div class="wsum__go">
             <a class="wsum__viber js-viber" href="viber://chat?number=%2B359893951260" rel="noopener">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C7 3 3.5 5.6 3.5 10.6c0 2.9 1.2 4.8 3 5.9V20l3-2.3c.8.1 1.6.2 2.5.2 5 0 8.5-2.6 8.5-7.3S17 3 12 3Z"/></svg>
-              <span data-l="bg">Копирай офертата и пиши във Viber</span><span data-l="en">Copy the offer &amp; message on Viber</span>
+              <span data-l="bg">Прати ми я във Viber</span><span data-l="en">Send it to me on Viber</span>
             </a>
-            <span class="wsum__or"><span data-l="bg">Или попълни отдолу и ще ти пиша аз.</span><span data-l="en">Or fill in below and I'll write to you.</span></span>
+            <span class="wsum__or"><span data-l="bg">или остави контакт отдолу</span><span data-l="en">or leave your contact below</span></span>
           </div>
           <p class="wsum__copied" role="status" aria-live="polite" hidden><span data-l="bg">✓ Копирано. Във Viber: задръж → „Постави“ → прати.</span><span data-l="en">✓ Copied. In Viber: long-press → "Paste" → send.</span></p>
         </div>
@@ -275,7 +270,7 @@
         <details class="wrev js-rev" open hidden>
           <summary class="wrev__head">
             <p class="wrev__t"><span data-l="bg">Твоят избор</span><span data-l="en">Your choices</span></p>
-            <p class="wrev__s"><span data-l="bg">Провери и промени, ако трябва</span><span data-l="en">Check and change if needed</span></p>
+            <p class="wrev__s"><span data-l="bg">Промени</span><span data-l="en">Edit</span></p>
           </summary>
           <ul class="wrev__list"></ul>
         </details>
@@ -292,9 +287,8 @@
           <label class="wf"><span><span data-l="bg">Телефон / Viber</span><span data-l="en">Phone / Viber</span></span><input type="tel" name="phone" maxlength="40" autocomplete="tel" inputmode="tel"></label>
           <label class="wf"><span><span data-l="bg">Имейл</span><span data-l="en">Email</span></span><input type="email" name="email" maxlength="200" autocomplete="email" inputmode="email"></label>
           <label class="wf"><span><span data-l="bg">Град</span><span data-l="en">City</span></span><input type="text" name="city" maxlength="100"></label>
-          <label class="wf wf--wide"><span><span data-l="bg">Нещо друго? (по желание)</span><span data-l="en">Anything else? (optional)</span></span><textarea name="notes" rows="2" maxlength="2000"></textarea></label>
+          <label class="wf wf--wide"><span><span data-l="bg">Нещо друго?</span><span data-l="en">Anything else?</span></span><textarea name="notes" rows="2" maxlength="2000"></textarea></label>
         </div>
-        <p class="wh wh--sm"><span data-l="bg">Телефон или имейл — поне едно.</span><span data-l="en">Phone or email — at least one.</span></p>
 
         <p class="wq2"><span data-l="bg">Плащаш като</span><span data-l="en">You'll pay as</span></p>
         <div class="pills">
@@ -335,7 +329,7 @@
       <a class="btn btn--accent" href="./"><span class="btn__txt"><span data-l="bg">Към сайта</span><span data-l="en">Back to site</span></span><span class="btn__arrow" aria-hidden="true">↗</span></a>
     </div>
 
-    <p class="wiz__alt mono"><span data-l="bg">Предпочиташ да си пишем? Viber:</span><span data-l="en">Rather chat? Viber:</span> <a href="viber://chat?number=%2B359893951260">Viber</a> · <a href="mailto:nikola.klimentow@gmail.com">nikola.klimentow@gmail.com</a></p>
+    <p class="wiz__alt mono"><span data-l="bg">Или пиши директно:</span><span data-l="en">Or write directly:</span> <a href="viber://chat?number=%2B359893951260">Viber</a> · <a href="mailto:nikola.klimentow@gmail.com">nikola.klimentow@gmail.com</a></p>
   </main>
 
   <footer class="legal-foot">
@@ -658,8 +652,8 @@
         else if (!shop && i.disabled) { i.disabled = false; i.checked = i.dataset.user === '1'; }
         card.classList.toggle('is-inc', shop);
         var n = shop ? (en ? 'Included with the online shop — edited from the same panel.' : 'Включено с онлайн магазина — сменя се от същия панел.')
-          : feat('app') ? (en ? 'The panel for listings and users is already in the platform. This one is for the site texts and photos.' : 'Панелът за обявите и потребителите вече е в платформата. Това е за текстовете и снимките на сайта.')
-          : feat('booking') ? (en ? 'The bookings are managed in the booking system. This one is for the site texts and photos.' : 'Записванията се управляват в системата за записване. Това е за текстовете и снимките на сайта.')
+          : feat('app') ? (en ? 'Only for texts and photos — listings have their own panel.' : 'Само за текстове и снимки — обявите са с отделен панел.')
+          : feat('booking') ? (en ? 'Only for texts and photos — bookings have their own panel.' : 'Само за текстове и снимки — записванията са с отделен панел.')
           : '';
         var el = card.querySelector('.js-admin-note'); el.textContent = n; el.hidden = !n;
       }
