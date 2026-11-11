@@ -63,34 +63,9 @@ html:has(.wiz-page), .wiz-page, .wbg { background: #070707 !important; }
 .opt--tile input:checked + .opt__body .opt__ico { color: var(--accent); }
 .opt--tile input:focus-visible + .opt__body { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-/* =========================================================
-   2. Features — a list, not cards: icon · text · tick
-   ========================================================= */
-.opts.opts--feat { display: block; margin-top: 1.75rem; border-top: 1px solid var(--line); }
-.opts--feat .opt { display: block; border-bottom: 1px solid var(--line); }
-.opts--feat .opt__body {
-  display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) auto auto; column-gap: 1rem; row-gap: .1875rem; align-items: center;
-  padding: 1.125rem .25rem; border-radius: 0; overflow: visible; background: none !important; box-shadow: none !important; }
-.opts--feat .opt__ico { grid-column: 1; grid-row: 1 / span 2; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: .75rem; background: var(--tap-2); color: var(--fg-2); transition: background-color .25s, color .25s; }
-.opts--feat .opt__ico svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.opts--feat .opt__t { grid-column: 2; grid-row: 1; align-self: end; padding-right: 0; font-size: 1.0625rem; font-weight: 600; }
-.opts--feat .opt__d { grid-column: 2; grid-row: 2; align-self: start; margin: 0; font-size: .9375rem; line-height: 1.45; color: var(--muted); }
-.opts--feat .opt__note { grid-column: 2 / -1; grid-row: 3; margin-top: .5rem; color: var(--fg-2); font-size: .8125rem; }
-.opts--feat .opt__info { position: static; grid-column: 3; grid-row: 1 / span 2; width: 1.625rem; height: 1.625rem; font-size: .75rem; background: none; box-shadow: inset 0 0 0 1px var(--line-2); color: var(--muted); }
-.opts--feat .opt:hover .opt__info, .opts--feat .opt__body.is-info .opt__info { background: var(--fg); color: var(--ink); box-shadow: none; }
-.opts--feat .opt__pop { grid-column: 1 / -1; }
-/* the tick: a square on the right */
-.opts--feat .opt__body::before { position: static; grid-column: 4; grid-row: 1 / span 2; width: 1.375rem; height: 1.375rem; border-radius: .4375rem; background: none; box-shadow: inset 0 0 0 1.5px rgba(242,242,238,.3); }
-.opts--feat .opt input:checked + .opt__body::before { background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230a0a0a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8.5 7 11.5 12.5 5'/%3E%3C/svg%3E") center / 72% no-repeat; box-shadow: none; animation: none; }
-.opts--feat .opt input:checked + .opt__body::after { display: none; }
-.opts--feat .opt input:checked + .opt__body .opt__ico { background: var(--accent); color: var(--ink); }
-.opts--feat .opt input:focus-visible + .opt__body { outline: 2px solid var(--accent); outline-offset: -2px; }
-@media (hover: hover) { .opts--feat .opt:hover .opt__ico { color: var(--fg); } }
-.opts--feat .opt.is-inc .opt__body { box-shadow: none !important; }
-
 /* follow-up questions: no box — a thin lime line on the left, indented under the list */
 .wsub, .wsub--flat { margin-top: 1.5rem; padding: .25rem 0 .25rem 1.25rem !important; border-radius: 0; background: none !important; box-shadow: inset 2px 0 0 rgba(204,255,0,.5) !important; }
-.wsub + .wsub, .opts--feat + .wsub { margin-top: 1.75rem; }
+.wsub + .wsub { margin-top: 1.75rem; }
 .wsub .wq2 + .pills { margin-top: .75rem; }
 .wsub .pills + .wq2 { margin-top: 1.5rem; }
 .wsub.is-bad { box-shadow: inset 2px 0 0 #ff5a3c !important; }
@@ -249,14 +224,6 @@ details.wrev .wrev__list { margin: 0 !important; border-top: 1px solid var(--lin
   .opt--tile .opt__t { font-size: .9375rem; }
   .opt.is-wide { grid-column: auto; }
 
-  /* features: drop the second line — the "i" has the details */
-  .opts--feat .opt__body { grid-template-columns: 2.25rem minmax(0, 1fr) auto auto; column-gap: .875rem; padding: 1rem 0; }
-  .opts--feat .opt__ico { width: 2.25rem; height: 2.25rem; border-radius: .625rem; }
-  .opts--feat .opt__ico svg { width: 1.125rem; height: 1.125rem; }
-  .opts--feat .opt__t { grid-row: 1 / span 2; align-self: center; font-size: 1rem; line-height: 1.3; }
-  .opts--feat .opt__d { display: none; }
-  .opts--feat .opt__pop { margin-top: .875rem; }
-
   .wsub, .wsub--flat { padding-left: 1rem !important; }
 
   /* sections: smaller chips */
@@ -284,9 +251,6 @@ details.wrev .wrev__list { margin: 0 !important; border-top: 1px solid var(--lin
 .wbar__info { display: none !important; }
 .wincl--paid { display: none !important; }
 .wiz__title { margin-top: 0; }
-/* features: title only — the details live behind "i" */
-.opts--feat .opt__d { display: none !important; }
-.opts--feat .opt__t { grid-row: 1 / span 2; align-self: center; }
 /* spacing when a question has no hint under it */
 .wq + .opts, .wq + .wsecs, .wq + .wyn, .wq + .wsum { margin-top: 1.75rem !important; }
 .wq + .wyn { border-top: 1px solid var(--line); }
@@ -325,3 +289,113 @@ details.wrev .wrev__list { margin: 0 !important; border-top: 1px solid var(--lin
   .opt--tile .opt__ico { width: 3rem !important; height: 3rem !important; }
   .opt--tile .opt__ico svg { width: 1.375rem !important; height: 1.375rem !important; }
 }
+
+
+/* =========================================================
+   3. Sections v2 — what's a button looks like one
+   ========================================================= */
+/* included: plain text with ticks — not buttons */
+.js-sec-inc.pills--secs { gap: .5rem 1.25rem; }
+.js-sec-inc .pill > span { min-height: 0 !important; padding: 0 !important; background: none !important; box-shadow: none !important; color: var(--fg-2) !important; cursor: default; font-size: .9375rem; }
+.js-sec-inc .pill__box { width: 1rem; height: 1rem; }
+
+/* free extras: real buttons with a "+" — they turn lime with a tick when on */
+.pills--secs .pill--sec:not(.is-inc) > span { cursor: pointer; gap: .5rem; }
+.pill--sec:not(.is-inc) .pill__box { width: 1.125rem; height: 1.125rem; border-radius: 50%; box-shadow: none !important;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23f2f2ee' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M8 3.5v9M3.5 8h9'/%3E%3C/svg%3E") center / 80% no-repeat !important; opacity: .55; }
+.pill--sec:not(.is-inc) input:checked + span .pill__box { opacity: 1; background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230a0a0a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8.5 7 11.5 12.5 5'/%3E%3C/svg%3E") center / 75% no-repeat !important; }
+@media (hover: hover) { .pills--secs .pill--sec:not(.is-inc):hover > span { background: var(--tap-2); box-shadow: inset 0 0 0 1px rgba(255,255,255,.28); } }
+.pill__g { display: none; }
+
+/* "pick one" groups: one chip; open = full row with its variants under it */
+.wgrp { display: contents; }
+.wgrp.is-open { display: block; flex: 1 1 100%; }
+.wgrp__panel { display: none; }
+.wgrp.is-open .wgrp__panel { display: block; margin: .625rem 0 .5rem; padding: 1rem 0 .25rem 1.125rem; box-shadow: inset 2px 0 0 rgba(204,255,0,.5); animation: wAir .35s var(--ease) both; }
+.wgrp__q { font-size: .9375rem; font-weight: 600; color: var(--fg); }
+.wgrp__q--plus { margin-top: 1.25rem; color: var(--fg-2); font-weight: 500; }
+.wgrp__opts { display: grid; gap: .5rem; margin-top: .75rem; }
+.wgrp__panel .pill { display: block; width: 100%; }
+.wgrp__panel .pill > span { display: grid !important; grid-template-columns: 1.25rem minmax(0, 1fr) auto; align-items: center; column-gap: .875rem; width: 100%;
+  min-height: 0 !important; padding: .875rem 1rem !important; border-radius: .875rem !important; text-align: left; white-space: normal;
+  background: var(--tap) !important; box-shadow: inset 0 0 0 1px var(--line) !important; color: var(--fg) !important; }
+.wgrp__panel .pill__t, .wgrp__panel .pill__tag:not(.pill__tag--p) { display: none !important; }
+.wgrp__panel .pill__g { display: grid; gap: .1875rem; grid-column: 2; }
+.wgrp__panel .pill__g b { font-size: .9375rem; font-weight: 600; line-height: 1.3; }
+.wgrp__panel .pill__g small { font-size: .8125rem; line-height: 1.4; color: var(--muted); }
+.wgrp__panel .pill__tag--p { grid-column: 3; justify-self: end; margin: 0; }
+.wgrp__panel .pill--sec:not(.is-paid) > span::after { content: "0 €"; grid-column: 3; justify-self: end; font: 500 .6875rem/1 var(--f-mono); color: var(--muted); }
+/* radio dot for "pick one", square-ish tick for the "also" row */
+.wgrp__panel .pill--sec:not(.is-inc) .pill__box { grid-column: 1; width: 1.25rem !important; height: 1.25rem !important; opacity: 1 !important; border-radius: 50% !important;
+  background: none !important; box-shadow: inset 0 0 0 1.5px rgba(242,242,238,.35) !important; }
+.wgrp__panel .pill--sec:not(.is-inc) input:checked + span .pill__box { background: radial-gradient(circle, var(--ink) 0 28%, var(--accent) 31%) !important; box-shadow: none !important; }
+.wgrp__panel .wgrp__opts--add .pill--sec:not(.is-inc) .pill__box { border-radius: .375rem !important; }
+.wgrp__panel .wgrp__opts--add .pill--sec:not(.is-inc) input:checked + span .pill__box { background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230a0a0a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8.5 7 11.5 12.5 5'/%3E%3C/svg%3E") center / 75% no-repeat !important; }
+.wgrp__panel .pill input:checked + span { background: rgba(204,255,0,.06) !important; box-shadow: inset 0 0 0 1.5px var(--accent) !important; }
+@media (hover: hover) { .wgrp__panel .pill:hover > span { box-shadow: inset 0 0 0 1px rgba(255,255,255,.28) !important; } .wgrp__panel .pill input:checked + span { box-shadow: inset 0 0 0 1.5px var(--accent) !important; } }
+.wgrp__panel .pill[data-tip]:hover::after, .wgrp__panel .pill[data-tip]:hover::before { display: none !important; }
+.wgrp__panel .pill input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* =========================================================
+   Price: "Индивидуална оферта" reads as its own thing
+   ========================================================= */
+.wsum__k--q, .wsum__why { display: none; }
+.wsum.is-quote .wsum__k:not(.wsum__k--q) { display: none; }
+.wsum.is-quote .wsum__k--q { display: block; }
+.wsum.is-quote .wsum__v { font-size: clamp(2rem, 1.4rem + 3vw, 3rem); line-height: 1.05; }
+.wsum.is-quote .wsum__why { display: block; margin-top: .75rem; font-size: 1.0625rem; line-height: 1.5; color: var(--fg); max-width: 32rem; }
+.wsum.is-quote .wsum__calc { display: none; }
+.wsum.is-quote .wsum__v, .wsum.is-quote .wsum__sum { white-space: normal; overflow-wrap: anywhere; }
+@media (max-width: 600px) { .wsum.is-quote .wsum__v { font-size: 2rem; } }
+
+@media (max-width: 600px) { .wgrp.is-open .wgrp__panel { padding-left: .875rem; } }
+
+/* =========================================================
+   4. What you have v2 — label + one line of help, then real buttons
+   ========================================================= */
+.wyn { display: block !important; padding: 1.5rem 0; }
+.wyn .wq2 { font-size: 1.0625rem; }
+.wyn .wh--sm { margin-top: .25rem !important; color: var(--muted); }
+.wyn .pills--yn { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; max-width: 30rem; margin-top: .875rem !important;
+  padding: 0; border-radius: 0; background: none; box-shadow: none !important; }
+.wyn .pills--yn.pills--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.wyn .pills--yn .pill > span { position: relative; display: flex; align-items: center; justify-content: flex-start; gap: .625rem; min-height: 3.25rem;
+  padding: .625rem .875rem; border-radius: .875rem; text-align: left; background: var(--tap) !important; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14) !important;
+  color: var(--fg); font-size: .9375rem; font-weight: 500; cursor: pointer; transition: box-shadow .2s, background-color .2s; }
+.wyn .pills--yn .pill > span::before { content: ""; flex: none; width: 1.125rem; height: 1.125rem; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(242,242,238,.4); transition: background .2s, box-shadow .2s; }
+@media (hover: hover) { .wyn .pills--yn .pill:hover > span { background: var(--tap-2) !important; box-shadow: inset 0 0 0 1px rgba(255,255,255,.3) !important; } }
+.wyn .pills--yn .pill input:checked + span { background: rgba(204,255,0,.07) !important; color: var(--fg); box-shadow: inset 0 0 0 1.5px var(--accent) !important; }
+.wyn .pills--yn .pill input:checked + span::before { background: radial-gradient(circle, var(--ink) 0 28%, var(--accent) 31%); box-shadow: none; }
+.wyn .pills--yn .pill input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wyn .pills--yn .pill__p { margin-left: auto; color: var(--muted); opacity: 1; }
+.wyn .pills--yn .pill input:checked + span .pill__p { color: var(--accent); }
+.wyn .pills--yn.is-bad .pill > span { box-shadow: inset 0 0 0 1.5px #ff5a3c !important; }
+
+.wyn .pills--yn .pill > span { flex-wrap: nowrap !important; white-space: normal; line-height: 1.25; }
+@media (max-width: 600px) { .wyn .pills--yn .pill > span { gap: .5rem; padding: .625rem .75rem; font-size: .875rem; } .wyn .pills--yn.pills--3 .pill > span { padding: .625rem .625rem; } }
+
+/* =========================================================
+   Step 2: features in one column; each follow-up question sits right under its card
+   ========================================================= */
+.opts.opts--feat { grid-template-columns: 1fr !important; }
+.opts--feat .opt.is-wide { grid-column: auto; }
+.opts--feat > .wsub { grid-column: 1 / -1; margin: .375rem 0 .75rem .75rem !important; }
+.opts--feat > .wsub .wq2:first-child { margin-top: .25rem; }
+
+/* same real buttons for the yes/no questions under the feature cards */
+.opts--feat > .wsub .pills.pills--yn { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; max-width: 30rem; margin-top: .875rem !important;
+  padding: 0; border-radius: 0; background: none; box-shadow: none !important; }
+.opts--feat > .wsub .pills.pills--yn.pills--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.opts--feat > .wsub .pills.pills--yn .pill > span { position: relative; display: flex; align-items: center; justify-content: flex-start; gap: .625rem; min-height: 3.25rem;
+  padding: .625rem .875rem; border-radius: .875rem; text-align: left; background: var(--tap) !important; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14) !important;
+  color: var(--fg); font-size: .9375rem; font-weight: 500; cursor: pointer; transition: box-shadow .2s, background-color .2s; }
+.opts--feat > .wsub .pills.pills--yn .pill > span::before { content: ""; flex: none; width: 1.125rem; height: 1.125rem; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(242,242,238,.4); transition: background .2s, box-shadow .2s; }
+@media (hover: hover) { .opts--feat > .wsub .pills.pills--yn .pill:hover > span { background: var(--tap-2) !important; box-shadow: inset 0 0 0 1px rgba(255,255,255,.3) !important; } }
+.opts--feat > .wsub .pills.pills--yn .pill input:checked + span { background: rgba(204,255,0,.07) !important; color: var(--fg); box-shadow: inset 0 0 0 1.5px var(--accent) !important; }
+.opts--feat > .wsub .pills.pills--yn .pill input:checked + span::before { background: radial-gradient(circle, var(--ink) 0 28%, var(--accent) 31%); box-shadow: none; }
+.opts--feat > .wsub .pills.pills--yn .pill input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.opts--feat > .wsub .pills.pills--yn .pill__p { margin-left: auto; color: var(--muted); opacity: 1; }
+.opts--feat > .wsub .pills.pills--yn .pill input:checked + span .pill__p { color: var(--accent); }
+.opts--feat > .wsub .pills.pills--yn.is-bad .pill > span { box-shadow: inset 0 0 0 1.5px #ff5a3c !important; }
+.opts--feat > .wsub .pills.pills--yn .pill > span { flex-wrap: nowrap !important; white-space: normal; line-height: 1.25; }
+@media (max-width: 600px) { .opts--feat > .wsub .pills.pills--yn .pill > span { gap: .5rem; padding: .625rem .75rem; font-size: .875rem; } .opts--feat > .wsub .pills.pills--yn.pills--3 .pill > span { padding: .625rem .625rem; } }
